@@ -66,11 +66,12 @@ core.directive("blCalibrate", function(CalibrateFactory, $state, $rootScope, Act
 
             let countInt;
             function countDelay () {
-                scope.countDown = 3;
+                scope.countDown = 1;
                 countInt = $interval(() => {
                     scope.countDown--
                     if(scope.countDown === 0) {
-                        moveToNav();
+                        moveToTutorial();
+                        // moveToNav();
                         $interval.cancel(countInt)
                     }
                 }, 1000)
@@ -89,11 +90,15 @@ core.directive("blCalibrate", function(CalibrateFactory, $state, $rootScope, Act
             }
 
 
+            function moveToTutorial() {
+                $state.go('tutorial');
+            }
+
+
             let blinkStart = true;
             $rootScope.$on('singleBlink', () => {
                 if(blinkStart) {
                     blinkStart = false;
-                    
                     //scope.start(); Starts calibration by blinking
                 }
                 if (CalibrateFactory.calibrationSet) {
