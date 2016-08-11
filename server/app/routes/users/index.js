@@ -41,6 +41,16 @@ router.put('/:id/friends', (req, res) => { // edit one
         .then(savedUser => res.send(savedUser))
 });
 
+
+router.put('/update', (req, res) => { // edit one
+    User.findById(req.body._id)
+        .then(user => {
+            console.log('user', user);
+            return user.update(user, req.body);
+        })
+        .then(updatedUser => res.send(updatedUser))
+    });
+
 // must be user or admin
 router.put('/:id?', ensure.authenticated, ensure.selfOrAdmin, (req, res) => { // edit one
     if (req.body.blinkZero) {req.session.calibrate = req.body}

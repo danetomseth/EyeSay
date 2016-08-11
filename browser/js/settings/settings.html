@@ -6,7 +6,7 @@
 			<p> {{setting.label}}: {{setting.value}} </p>
 			<md-icon ng-if="setting.number" md-font-set="material-icons" ng-click="adjustValue(true, setting, key)"> add </md-icon>
 			<md-icon ng-if="setting.number" md-font-set="material-icons" ng-click="adjustValue(false, setting, key)"> remove </md-icon>
-			<md-checkbox ng-if="!setting.number" class="md-secondary" ng-model="setting.value"></md-checkbox>
+			<md-checkbox ng-if="!setting.number" ng-click="toggle(key, setting.value)" class="md-secondary" ng-model="setting.value"></md-checkbox>
 		</md-list-item>
 	</md-list>
 

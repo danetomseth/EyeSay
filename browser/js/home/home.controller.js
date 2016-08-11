@@ -26,8 +26,4 @@ core.controller('HomeCtrl', function($scope, $rootScope, Session, ConstantsFacto
     }
 
 
-    $scope.getUser = () => {
-        console.log('session', Session.user);
-    }
-
 });

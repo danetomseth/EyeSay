@@ -2,7 +2,7 @@ app.config(function($stateProvider) {
 
     $stateProvider.state('login', {
         url: '/login',
-        templateUrl: 'js/login/login.html',
+        templateUrl: 'js/user/login/login.html',
         controller: 'LoginCtrl'
     });
 
@@ -22,7 +22,7 @@ app.config(function($stateProvider) {
 
 });
 
-app.controller('LoginCtrl', function($scope, AuthService, $state, SidebarFactory) {
+app.controller('LoginCtrl', function($scope, AuthService, $state, Session, ConstantsFactory) {
 
     $scope.login = {};
     $scope.error = null;
@@ -32,6 +32,7 @@ app.controller('LoginCtrl', function($scope, AuthService, $state, SidebarFactory
         $scope.error = null;
 
         AuthService.login(loginInfo).then(function() {
+            ConstantsFactory.setUser(Session.user);
             $state.go('home');
         }).catch(function() {
             $scope.error = 'Invalid login credentials.';

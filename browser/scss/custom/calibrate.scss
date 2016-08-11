@@ -3,7 +3,6 @@
 	top: 0;
 	width: 79%;
 	height: 100%;
-	color: nth($purple, 1);
 	font-weight: bold;
 	line-height: 100%;
 	text-align: center;
@@ -46,9 +45,7 @@
 		width: 20%;
 	}
 }
-.orange {
-	color: nth($purple, 1);
-}
+
 
 .message {
 	//background: nth($primary, 1);
@@ -59,7 +56,6 @@
 	padding: 10px;
 	div {
 		background: white;
-		color: nth($purple, 1);
 		width: 75%;
 		height: 350px;
 		text-align: center;
@@ -86,7 +82,6 @@
     padding-left: 75px;
     padding-right: 75px;
 	p {
-		color: nth($purple, 1);
 		font-size: 2em;
 		font-family: $keyboard;
 	}
