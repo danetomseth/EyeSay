@@ -1,7 +1,7 @@
 core.directive("blCalibrate", function(CalibrateFactory, $state, $rootScope, ActionFactory, $interval) {
     return {
         restrict: "E",
-        templateUrl: 'templates/calibrate.html',
+        templateUrl: 'js/calibrate/calibrate.html',
         link: function(scope, elem, attr) {
             let calibrationComplete = false;
             let debounce = true;

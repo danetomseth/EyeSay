@@ -1,0 +1,50 @@
+<md-content layout-padding layout-align="center center" layout="row" style="height: 100%">
+
+  <div layout="column" layout-padding ng-cloak flex=75>
+
+    <md-card>
+      <md-toolbar md-scroll-shrink ng-if="true">
+        <div class="md-toolbar-tools">
+          <h3>
+          <span>Signup</span>
+          </h3>
+        </div>
+      </md-toolbar>
+      <form name="userForm">
+      <md-card-content>
+       <md-content class="md-no-momentum">
+        <md-input-container class="md-icon-float md-block">
+          <!-- Use floating label instead of placeholder -->
+          <label>First Name</label>
+          <md-icon class="material-icons">person</md-icon>
+          <input ng-model="user.firstName" type="text">
+        </md-input-container>
+        <md-input-container class="md-icon-float md-block">
+          <!-- Use floating label instead of placeholder -->
+          <label>Last Name</label>
+          <md-icon class="material-icons">person</md-icon>
+          <input ng-model="user.lastName" type="text">
+        </md-input-container>
+        <md-input-container class="md-block md-icon-float">
+          <!-- Use floating placeholder instead of label -->
+          <md-icon class="material-icons">email</md-icon>
+
+          <input ng-model="user.email" type="email" placeholder="Email (required)" required="">
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+          <md-icon class="material-icons">lock</md-icon>
+          <input ng-model="user.password" type="text" placeholder="Password (required)" required="">
+        </md-input-container>
+
+      </md-content>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button type="submit" ng-click="submit()" class="md-raised md-primary">Sumbit</md-button>
+    </md-card-actions>
+    </form>
+  </md-card>
+  <br/>
+
+</div>
+
+</md-content>

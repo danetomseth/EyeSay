@@ -51,7 +51,6 @@
     app.service('AuthService', function ($http, Session, $rootScope, AUTH_EVENTS, $q, $state, ConstantsFactory) {
 
         function onSuccessfulLogin(response) {
-            console.log('login', response);
             var data = response.data;
             Session.create(data.id, data.user);
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
@@ -85,8 +84,7 @@
             .then((res) => {
                 if(res.data.user){ // if we get a logged in user back, then log them in
                     onSuccessfulLogin(res)
-                    console.log('user logged in');
-                    ConstantsFactory.setBlink(res.data.user.blinkRatio, res.data.user.blinkZero)
+                    ConstantsFactory.setUser(res.data.user);
                     // $state.go('type');
                 } 
                 else {
@@ -144,7 +142,6 @@
         this.create = function (sessionId, user) {
             this.id = sessionId;
             this.user = user;
-            console.log(user);
         };
 
         this.destroy = function () {

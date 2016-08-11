@@ -2,7 +2,7 @@ core.controller('SettingsCtrl', function($scope, SettingsFactory, Session, Const
    
 
     $scope.getUser = () => {
-       console.log(ConstantsFactory.settings);
+       console.log(Session.user);
     }
 
 
@@ -18,6 +18,7 @@ core.controller('SettingsCtrl', function($scope, SettingsFactory, Session, Const
         else {
             $scope.settings[key].value -= $scope.settings[key].value * .01;
         }
+        ConstantsFactory.saveUser(key, $scope.settings[key].value)
     }
 
 
@@ -26,27 +27,10 @@ core.controller('SettingsCtrl', function($scope, SettingsFactory, Session, Const
     }
 
 
+    $scope.toggle = (key, value) => {
+        ConstantsFactory.saveUser(key, value);
+        console.log('key', key);
+        console.log('value', value);
+    }
     
-    $scope.adjustZero = (add) => {
-        if (add) {
-            $scope.blinkZero = ConstantsFactory.increaseZero();
-        } else {
-            $scope.blinkZero = ConstantsFactory.decreaseZero();
-        }
-        ConstantsFactory.setBlink($scope.blinkRatio, $scope.blinkZero);
-
-    }
-
-    $scope.adjustRatio = (add) => {
-        if (add) {
-            $scope.blinkRatio = ConstantsFactory.increaseRatio();
-        } else {
-            $scope.blinkRatio = ConstantsFactory.decreaseRatio();
-        }
-
-        ConstantsFactory.setBlink($scope.blinkRatio, $scope.blinkZero);
-    }
-
-    $scope.blinkRatio = ConstantsFactory.blinkRatio;
-    $scope.blinkZero = ConstantsFactory.blinkZero;
 });

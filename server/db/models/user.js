@@ -43,13 +43,9 @@ var schema = new mongoose.Schema({
         enum: ['user', 'admin', 'caregiver'],
         default: 'user'
     },
-    keyboardSpeed : {
+    cursorDelay: {
         type: Number,
-        default: 3
-    },
-    trackingFeature: {
-        type: String,
-        default: 'eyebrows'
+        default: 750
     },
     blinkRatio: {
         type: Number,
@@ -58,6 +54,18 @@ var schema = new mongoose.Schema({
     blinkZero: {
         type: Number,
         default: 41
+    },
+    doubleBlink: {
+        type: Boolean,
+        default: false
+    },
+    blinkActive: {
+        type: Boolean,
+        default: true
+    },
+    webcamActive: {
+        type: Boolean,
+        default: true
     }
 });
 
@@ -78,6 +86,18 @@ schema.methods.addFriend = function(id) {
     }
     return this.save();
 };
+
+
+schema.methods.update = (user, updatedUser) => {
+    console.log('updated', updatedUser);
+    user.cursorDelay = updatedUser.cursorDelay;
+    user.blinkZero = updatedUser.blinkZero;
+    user.blinkRatio = updatedUser.blinkRatio;
+    user.doubleBlink = updatedUser.doubleBlink;
+    user.blinkActive = updatedUser.blinkActive;
+
+    return user.save();
+}
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
 // are all used for local authentication security.
