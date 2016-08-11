@@ -1,0 +1,58 @@
+#tutorialContainer {
+	md-tabs {
+		width: 75%;
+		min-height: 500px;
+		
+	}
+}
+
+
+#centerTabs {
+	md-tab {
+		height: 500px;
+	}
+	//background: $accent;
+}
+
+.tutorial-tab {
+	height: 500px;
+	md-card {
+		height: 90%;
+		width: 100%;
+		
+	}
+	md-card-content {
+		width: 100%;
+	}
+
+}
+
+
+.blink-progress {
+	height: 50px;
+	width: 95%;
+	padding: 50px 20px;
+}
+
+.card-text {
+	font-size: 2em;
+}
+
+
+md-progress-linear .md-container {
+	height: 15px !important;
+
+	}
+.md-bar2 {
+	height: 15px !important;
+}
+
+
+
+.tutorial-title {
+	font-size: 3em;
+}
+
+.tutorial-subTitle {
+
+}

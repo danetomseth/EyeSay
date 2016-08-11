@@ -1,0 +1,91 @@
+#content {
+	//padding: 0px 20px;
+	//margin-top: 30px;
+}
+
+.center-contents {
+	margin: 0 auto;
+}
+
+.box-elem {
+	padding: 5px 10px;
+}
+
+
+#scroll-table {
+}
+
+
+#page-content {
+	height: 100%;
+}
+
+
+
+#sidebar {
+	clear: both;
+}
+
+#bodyContainer {
+	height: 100%;
+}
+
+.full-height {
+	//height: 100%;
+}
+
+.full-width {
+	width: 100% !important;
+}
+
+.box-center {
+	margin: 0 auto;
+	//display: inline-block;
+}
+
+
+.boxA {
+	background: nth($background, 2);
+	min-height: 200px;
+	border: 1px solid black;
+	color: nth($text, 2);
+}
+
+#tutorial {
+	md-card {
+		min-height: 500px;
+	}
+}
+
+
+#flexCenter {
+	width: 100%;
+	height: 80vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+#flexRow {
+	display: flex;
+	justify-content: space-around;
+	// width: 100%;
+}
+
+#flexCol {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	// width: 100%;
+	// height: 100%;
+}
+
+#flexColRow {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}

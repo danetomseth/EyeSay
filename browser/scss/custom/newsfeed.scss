@@ -1,0 +1,16 @@
+
+
+.icon-user-plus:before {
+    content: "\e909";
+    color: nth($text, 1);;
+}
+
+
+
+.after-tabs-area > span {
+    margin-top: 25px;
+    padding-right: 15px;
+    vertical-align: middle;
+    line-height: 30px;
+    height: 100px;
+}

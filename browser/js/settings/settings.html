@@ -1,0 +1,17 @@
+<div layout-padding flex=75>
+
+	<md-list ng-cloak>
+		<md-subheader class="md-no-sticky">Blink Settings</md-subheader>
+		<md-list-item ng-repeat="(key, setting)  in settings" class="noright">
+			<p> {{setting.label}}: {{setting.value}} </p>
+			<md-icon ng-if="setting.number" md-font-set="material-icons" ng-click="adjustValue(true, setting, key)"> add </md-icon>
+			<md-icon ng-if="setting.number" md-font-set="material-icons" ng-click="adjustValue(false, setting, key)"> remove </md-icon>
+			<md-checkbox ng-if="!setting.number" class="md-secondary" ng-model="setting.value"></md-checkbox>
+		</md-list-item>
+	</md-list>
+
+	<md-button ng-click="getUser()">User</md-button>
+
+
+</div>
+

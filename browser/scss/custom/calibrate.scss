@@ -1,0 +1,201 @@
+#demo-overlay {
+	position: absolute;
+	top: 0;
+	width: 79%;
+	height: 100%;
+	color: nth($purple, 1);
+	font-weight: bold;
+	line-height: 100%;
+	text-align: center;
+	background: rgba(245,245,245, 0.8);
+	z-index: 500;
+}
+
+#demo-btn {
+	background: nth($purple, 1);
+	color: white;
+}
+
+.vertical-center {
+	//padding-top: 5%;
+	margin-top: 20%;
+
+}
+
+.main-title {
+	font-size: 4em;
+	font-weight: bold;
+	font-family: $keyboard; 
+}
+
+.center-align {
+	width: 100%;
+	margin: 10px 0px;
+	div {
+		margin: 5px 5px;
+	}
+}
+
+.calibrate-progress {
+
+}
+
+.center-div {
+	margin: 0 auto;
+	div {
+		width: 20%;
+	}
+}
+.orange {
+	color: nth($purple, 1);
+}
+
+.message {
+	//background: nth($primary, 1);
+	h2 {
+		font-size: 4em !important;
+		font-weight: bold !important;
+	}
+	padding: 10px;
+	div {
+		background: white;
+		color: nth($purple, 1);
+		width: 75%;
+		height: 350px;
+		text-align: center;
+		padding-top: 30px;
+	}
+}
+
+.blink-box {
+	height: 250px;
+	width: 250px;
+	// background: nth($purple, 1); 
+	background-image: url("templates/img/lightpaperfibers.png");
+	line-height: 250px;
+	padding: 0 10px;
+	margin: 0 20px;
+	text-align: center;
+	color: nth($text, 2);
+}
+
+.box-wrap {
+	height:250px;
+	position: relative;
+	text-align: center;
+    padding-left: 75px;
+    padding-right: 75px;
+	p {
+		color: nth($purple, 1);
+		font-size: 2em;
+		font-family: $keyboard;
+	}
+
+}
+
+md-progress-circular {
+	//background: nth($blue, 1) !important;
+	color: nth($blue, 1) !important;
+	border-left-color: nth($blue, 1) !important;
+	border-top-color: nth($blue, 1) !important;
+}
+
+#calibrate-progress {
+	//background: nth($blue, 1) !important;
+	color: nth($blue, 1) !important;
+	border-left-color: nth($blue, 1) !important;
+	border-top-color: nth($blue, 1) !important;
+}
+
+md-progress-circular.md-default-theme {
+
+  path {
+    stroke: nth($blue, 1) !important;
+  }
+
+  &.md-warn {
+    path {
+      stroke: nth($blue, 1) !important;
+    }
+  }
+
+  &.md-accent {
+    path {
+      stroke: nth($blue, 1) !important;
+    }
+  }
+
+}
+
+md-progress-circular.md-default-theme .md-inner .md-left .md-half-circle, md-progress-circular .md-inner .md-left .md-half-circle, md-progress-circular.md-default-theme .md-inner .md-right .md-half-circle, md-progress-circular .md-inner .md-right .md-half-circle {
+    border-top-color: nth($blue, 1);
+}
+
+md-progress-circular.md-default-theme .md-inner .md-right .md-half-circle, md-progress-circular .md-inner .md-right .md-half-circle {
+    border-right-color: nth($blue, 1);
+    //border-color: nth($blue, 1) !important;
+}
+
+md-progress-circular.md-default-theme .md-inner .md-left .md-half-circle, md-progress-circular .md-inner .md-left .md-half-circle {
+    border-left-color: nth($blue, 1);
+    border-bottom-color: nth($blue, 1);
+}
+
+md-progress-circular.md-default-theme .md-inner .md-gap, md-progress-circular .md-inner .md-gap {
+    border-top-color: nth($blue, 1);
+    border-bottom-color: nth($blue, 1);
+}
+
+.detail-info {
+	//text-align: left;
+	height: 50px;
+	width: 100%;
+	position: absolute;
+  	top: 50%;
+  	transform: translateY(-50%);
+	background: nth($blue, 1); 
+	line-height: 50px;
+	text-align: center;
+	padding: 0 10px;
+	color: white;
+	font-size: 1em;
+}
+
+.primary-info {
+	text-align: center;
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.center-box {
+	//min-height: 300px;
+	border: 3px solid nth($blue, 1);
+}
+
+.eye-reading {
+	height: 50px;
+	width: 75px;
+	margin: 10px;
+	padding: 10px;
+}
+
+.center-btn {
+	margin: 0 auto;
+	//padding-top: 125px;
+	//width: 20%;
+}
+
+.status-display {
+	font-weight: bold;
+	
+}
+
+.cal-display {
+	div {
+
+		border: 1px solid nth($purple, 1);
+	}
+	p {
+		color: nth($text, 1);
+	}
+}

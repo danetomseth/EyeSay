@@ -1,0 +1,31 @@
+#about {
+    margin: 0 auto;
+    width: 90%;
+
+    table, th {
+        border: none;
+        padding-top: 2em;
+    }
+    img {
+        max-width: 390px;
+        max-height: 30vh;
+    }
+    td {
+        font-size: 1.05em;
+        vertical-align: top;
+    }
+    h3 {
+        font-family: 'Belgrano', serif !important;
+        font-size: 26px;
+    }
+}
+
+
+.about-gif {
+    margin: 0 auto;
+    padding: 75px;
+    min-height: 200px;
+}
+.about-row {
+        height: 20vh;
+    }

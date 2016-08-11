@@ -1,0 +1,131 @@
+// #sidebar {
+//     // position: absolute;
+//     // left: 0;
+//     padding: 15px;
+//     padding-left: 15px;
+//     background: white;
+//     height: 100vh !important;
+//     box-shadow: 2px 3px 3px nth($background, 2);
+//     //width: 88%;
+// }
+
+bl-sidebar {
+  height: 100vh !important;
+}
+
+#sidebar-container {
+  height: 100%;
+  display: block;
+  // display: border-box;
+}
+
+#welcomeMessage {
+    margin-top: 0px;
+    font-style: italic;
+}
+
+logo {
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-family: 'Belgrano', serif !important;
+  font-size: 70px;
+  color: nth($blue, 2);
+  letter-spacing: 3px;
+}
+
+.nav-btn {
+    font-size: 1.5em;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: nth($text, 3);
+    margin-bottom: 5px;
+    width: 90%;
+    text-align: left;
+    padding-bottom: 10px;
+    background: none;
+    border: none;
+}
+
+
+
+.std-btn {
+    font-size: 2em;
+    color: nth($text, 3)!important;
+}
+
+.std-btn:focus {
+    color: nth($blue, 1)!important;
+    border-bottom: 1px solid nth($purple, 1);
+}
+
+#webcam-directive {
+    display: block;
+    //width: 90%;
+    //position: absolute;
+    //bottom: 20px;
+}
+#sidebar-webcam-container {
+    position: relative;
+    border: 1px solid nth($background, 4);
+    //width: 98%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+#sidebar-webcam {
+    position: absolute;
+    //top: -75px;
+    //left: -40%;
+}
+
+#sidebar-canvas {
+    position: absolute;
+    // left: -40%;
+    // top: -75px;
+    z-index: 10;
+}
+
+#canvas-overlay {
+    position: absolute;
+    // left: -40%;
+    // top: -75px;
+    z-index: 900;
+}
+.web-box {
+    width: 100%;
+    position: relative;
+    top: 15%;
+}
+
+.nav-highlight {
+    border-bottom: 1px solid nth($primary, 1);
+    background-color: rgba(158,158,158,0.2);
+}
+
+.nav-btn:hover {
+    border-bottom: 1px solid nth($primary, 1);
+    background-color: rgba(158,158,158,0.2);
+}
+
+a:focus {
+    outline: none;
+   outline: none !important;
+   outline-offset: none;
+}
+
+button:focus {
+   //  color: nth($blue, 1) !important;
+   //  border-bottom: 1px solid nth($purple, 1);
+   //  outline: none;
+   // outline: none !important;
+   // outline-offset: none;
+}
+
+
+.staticCam {
+  width: auto;
+              height: 162%;
+    top: -31px !important;
+    left: -317px !important;
+}
+

@@ -1,0 +1,86 @@
+
+
+
+
+<div ng-cloak id="tutorialContainer flexCenter">
+	<md-content>
+		<md-tabs id="centerTabs" md-dynamic-height md-border-bottom md-selected="selectedTab" md-autoselect>
+
+
+			<md-tab label="one">
+				<md-content class="md-padding tutorial-tab">
+					<md-card ng-style="activeBlink">
+						<md-card-content>
+						<md-card-title>
+							<md-card-title-text>
+								<span class="text-center tutorial-title">Test About to Start</span>
+							</md-card-title-text>
+						</md-card-title>
+							<h2 class="md-title text-center card-text">{{countDown}}</h2>
+
+						</md-card-content>
+					</md-card>
+				</md-content>
+			</md-tab>
+
+
+			<md-tab label="two">
+				<md-content class="md-padding tutorial-tab">
+					<md-card class="md-padding" ng-style="activeBlink" id="flexColRow">
+						<div>
+							<span class="text-center tutorial-title">Blink To Fill</span>
+						</div>
+
+						<div class="blink-progress">
+							<md-progress-linear style="height: 15px" md-mode="determinate" value="{{blinkFill}}"></md-progress-linear>
+						</div>
+						<div>
+							<h2 class="md-title text-center card-text">Count: {{blinkCount}}</h2>
+						</div>
+					</md-card>
+				</md-content>
+			</md-tab>
+
+
+
+			<md-tab label="three">
+				<md-content class="md-padding tutorial-tab">
+					<md-card ng-style="activeBlink">
+						<md-card-content>
+						<md-card-title>
+							<md-card-title-text>
+								<span class="text-center tutorial-title">Select The Correct Link</span>
+							</md-card-title-text>
+						</md-card-title>
+						<md-card-actions layout="column" layout-align="start">
+							<md-button  ng-class="{'text-selected': activeLink === 0}">Home</md-button>
+							<md-button  ng-class="{'text-selected': activeLink === 1}">Type</md-button>
+							<md-button  ng-class="{'text-selected': activeLink === 2}">Settings</md-button>
+						</md-card-actions>
+						</md-card-content>
+					</md-card>
+				</md-content>
+			</md-tab>
+
+
+			<md-tab label="four">
+				<md-content class="md-padding tutorial-tab">
+					<p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+				</md-content>
+			</md-tab>
+
+
+
+		</md-tabs>
+	</md-content>
+</div>
+
+
+
+
+
+
+
+ 
+    
+ 

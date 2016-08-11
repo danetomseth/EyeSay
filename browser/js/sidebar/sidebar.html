@@ -1,0 +1,24 @@
+
+
+
+
+<section layout="row" class="boxWithHeight">
+  <md-sidenav
+  class="md-sidenav-left"
+  md-component-id="left"
+  md-is-locked-open="true"
+  md-disable-backdrop
+  md-whiteframe="4">
+  <md-toolbar class="md-primary md-hue-2 clickable" ui-sref="home">
+    <div class="md-toolbar-tools">
+      <h2 class="bl-large">Blink</h2>
+    </div>
+  </md-toolbar>
+  <md-content layout-padding>
+    <md-button class="nav-btn" ng-repeat="item in items"  ui-sref="{{ item.state }}" ng-class="{'nav-highlight' : $index === selectedLink}">{{item.label}}</md-button>
+    <div class="web-box">
+     <bl-sidebar-webcam ng-style="webcamDir" id="webcam-directive"></bl-sidebar-webcam>
+   </div>
+ </md-content>
+</md-sidenav>
+</section>
