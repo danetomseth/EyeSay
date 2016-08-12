@@ -1,7 +1,7 @@
 core.config(function($stateProvider) {
     $stateProvider.state('tutorial', {
         url: '/tutorial',
-        templateUrl: '/templates/tutorial.html',
+        templateUrl: 'js/tutorial/tutorial.html',
         controller: 'TutorialCtrl'
     })
 });
@@ -107,7 +107,7 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
         if (ActionFactory.isActive('tutorial') && $scope.testStart) {
             currentTest();
             $scope.activeBlink = {
-            	'background' : 'rgba(21,101,192, 0.5)'
+            	'background' : 'rgba(105,240,174, 0.2)'
             }
             styleDelay()
         }

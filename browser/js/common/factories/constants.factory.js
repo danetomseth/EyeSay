@@ -114,6 +114,17 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
             obj.settings = guest;
         }
 
+        $rootScope.settings = obj.settings;
+
+    }
+
+    obj.getUser = () => {
+        if(Session.user) {
+            return Session.user
+        }
+        else {
+            return guest
+        }
     }
 
 
@@ -140,7 +151,19 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
     obj.saveUser = (key, value) => {
         let user = Session.user;
         user[key] = value;
-        $http.put('/api/users/update', user)
+        $http.put('/api/users/update', user).then(res => {
+            console.log('user', res.data.blinkActive);
+            obj.setUser(res.data);
+        })
+        // $http.put('/api/users/update', user).then(res => {
+        //         
+        //         return obj.settings;
+        //     });
+    }
+
+    obj.toggleTracking = () => {
+        Session.user.blinkActive = !Session.user.blinkActive
+        return Session.user.blinkActive
     }
 
 

@@ -21,11 +21,16 @@
     border: 2px solid nth($blue, 2);
 }
 
+// .text-selected {
+//     color: nth($blue, 1);
+//     text-shadow: 3px 3px nth($background, 1);
+//     text-decoration: underline;
+//     text-decoration-color: nth($purple, 1);
+// }
+
 .text-selected {
-    color: nth($blue, 1);
-    text-shadow: 3px 3px nth($background, 1);
-    text-decoration: underline;
-    text-decoration-color: nth($purple, 1);
+    color: green !important;
+    background: white !important;
 }
 
 .text-highlight {
