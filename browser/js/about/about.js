@@ -4,7 +4,7 @@ app.config(function ($stateProvider) {
     $stateProvider.state('about', {
         url: '/about',
         controller: 'AboutController',
-        templateUrl: 'templates/about.html'
+        templateUrl: 'js/about/about.html'
     });
 
 });

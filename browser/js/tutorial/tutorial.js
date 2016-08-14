@@ -8,7 +8,7 @@ core.config(function($stateProvider) {
 
 
 
-core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $interval, $timeout, $mdDialog) {
+core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $interval, $timeout, ConstantsFactory, $mdDialog) {
 
 
 	$scope.showAlert = function(ev) {
@@ -26,15 +26,17 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
         .targetEvent(ev)
     );
   };
+    $scope.settings = ConstantsFactory.settings;
     
-    $scope.testStart = false;
+    //$scope.testStart = false;
     $scope.stepOne = false;
     $scope.stepTwo = false;
     $scope.stepThree = false;
     $scope.activeLink = 0;
+    let currentTest;
 
 
-    $scope.selectedTab = 0
+    $scope.selectedTab = 0;
 
 
     $scope.active = {
@@ -98,20 +100,44 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
     		$scope.activeBlink = {
             	'background' : 'none'
             }
+            $scope.activeText = {
+                'font-size': '1em'
+            }
     	}, 500)
     }
 
-    let currentTest = fillTheBar
+
+    $scope.adjustValue = (add, key) => {
+        if(add) {
+            $scope.settings[key].value += $scope.settings[key].value * .01;
+        }
+        else {
+            $scope.settings[key].value -= $scope.settings[key].value * .01;
+        }
+        ConstantsFactory.saveUser(key, $scope.settings[key].value)
+    }
+
+
+    $scope.startTest = () => {
+        currentTest = fillTheBar;
+        $scope.testStart = true;
+        $scope.selectedTab = 1;
+    }
+
 
     $rootScope.$on('singleBlink', () => {
-        if (ActionFactory.isActive('tutorial') && $scope.testStart) {
-            currentTest();
+        if (ActionFactory.isActive('tutorial')) {
+            if(currentTest) {
+                currentTest();
+            }
             $scope.activeBlink = {
             	'background' : 'rgba(105,240,174, 0.2)'
+            }
+            $scope.activeText = {
+                'font-size': '2em'
             }
             styleDelay()
         }
     });
 
-    testCountDown()
 })
