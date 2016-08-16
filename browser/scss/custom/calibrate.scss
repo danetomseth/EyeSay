@@ -66,13 +66,10 @@
 .blink-box {
 	height: 250px;
 	width: 250px;
-	// background: nth($purple, 1); 
-	background-image: url("templates/img/lightpaperfibers.png");
 	line-height: 250px;
 	padding: 0 10px;
 	margin: 0 20px;
 	text-align: center;
-	color: nth($text, 2);
 }
 
 .box-wrap {

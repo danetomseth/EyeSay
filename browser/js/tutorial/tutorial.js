@@ -8,30 +8,11 @@ core.config(function($stateProvider) {
 
 
 
-core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $interval, $timeout, ConstantsFactory, $mdDialog) {
+core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $interval, $timeout, ConstantsFactory, $mdDialog, DialogFactory) {
 
-
-	$scope.showAlert = function(ev) {
-    // Appending dialog to document.body to cover sidenav in docs app
-    // Modal dialogs should fully cover application
-    // to prevent interaction outside of dialog
-    $mdDialog.show(
-      $mdDialog.alert()
-        .parent(angular.element(document.querySelector('#tutorialContainer')))
-        .clickOutsideToClose(true)
-        .title('Nice work!!')
-        .textContent('Blink to move to next test')
-        .ariaLabel('Alert Dialog Demo')
-        .ok('Got it!')
-        .targetEvent(ev)
-    );
-  };
     $scope.settings = ConstantsFactory.settings;
+
     
-    //$scope.testStart = false;
-    $scope.stepOne = false;
-    $scope.stepTwo = false;
-    $scope.stepThree = false;
     $scope.activeLink = 0;
     let currentTest;
 
@@ -45,39 +26,44 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
 
 
     $scope.blinkCount = 0;
-    $scope.countDown = 5;
-
-
-    let testCountDown = () => {
-    	$interval(() => {
-    		$scope.countDown--;
-    		if($scope.countDown === 0) {
-    			$scope.selectedTab = 1;
-    			$scope.testStart = true;
-    		}
-    	}, 1000, 5)
-    }
 
 
     let fillTheBar = () => {
     	$scope.blinkCount++
     	$scope.blinkFill = ($scope.blinkCount / 10) * 100;
-
-    	if($scope.blinkCount === 10) {
-    		$scope.showAlert();
-    		currentTest = linkTest;
-    		$scope.selectedTab = 2;
-    		navigateTiming();
+        if($scope.blinkCount === 10) {
+    		$scope.selectedTab++;
+            currentTest = null;
+            $scope.blinkCount = 0;
+            $scope.blinkFill = 0;
     	}
     }
 
-    let linkTest = () => {
-    	console.log('blink!!!', $scope.activeLink);
-    	if($scope.activeLink === 1) {
-    		$scope.showAlert();
-    		currentTest = sayHello;
-    		$scope.selectedTab = 3
+    $scope.continue = () => {
+        currentTest = linkTest;
+        $scope.selectedTab++;
+        navigateTiming();
+    }
 
+    $scope.adjust = () => {
+        currentTest = null;
+        $scope.selectedTab = 0;
+    }
+
+    $scope.changeIndex = () => {
+        $scope.selectedTab++;
+    }
+
+    let changeIndex = () => {
+        $scope.selectedTab--;
+    }
+
+    
+
+    let linkTest = () => {
+    	if($scope.activeLink === 1) {
+    		currentTest = sayHello;
+    		$scope.selectedTab++
     	}
     }
 
