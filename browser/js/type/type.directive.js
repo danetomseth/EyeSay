@@ -1,4 +1,4 @@
-core.directive('blLetterType', function(TypeFactory, SpeechFactory) {
+core.directive('blLetterType', function(TypeFactory, SpeechFactory, $mdDialog) {
     return {
         restrict: 'E',
         templateUrl: 'js/type/keyboard.html',
@@ -7,6 +7,7 @@ core.directive('blLetterType', function(TypeFactory, SpeechFactory) {
             scope.selected = [null, null];
             scope.speaking = false;
 
+
             //makes sure first element is highlighted on page load
             scope.keyboard = TypeFactory.alphabet;
 
@@ -14,12 +15,26 @@ core.directive('blLetterType', function(TypeFactory, SpeechFactory) {
                 return TypeFactory.selectedLetter;
             }, function(newVal) {
                 if (typeof newVal !== 'undefined') {
-                    if(TypeFactory.selectedLetter) {
+                    if (TypeFactory.selectedLetter) {
                         scope.selected = TypeFactory.selectedLetter;
-                    }
-                    else scope.selected = [null, null];
+                    } else scope.selected = [null, null];
                 }
             });
+
+
+            let showDialog = () => {
+                var parentEl = angular.element(document.body);
+                $mdDialog.show({
+                    parent: parentEl,
+                    controller: ($scope, TypeFactory) => {
+                        $scope.closeDialog = () => {
+                            $mdDialog.hide();
+                            TypeFactory.typeReady = true;
+                        }
+                    },
+                    templateUrl: 'js/type/dialog.html'
+                });
+            }
 
             scope.$watch(function() {
                 return TypeFactory.word
@@ -31,11 +46,15 @@ core.directive('blLetterType', function(TypeFactory, SpeechFactory) {
 
             scope.scopeValue = TypeFactory.scopeValue;
 
-            function togglePlay(){
+            function togglePlay() {
                 scope.speaking = !scope.speaking;
             }
 
-            scope.say = () => SpeechFactory.say(scope.wordInput, "UK English Male", {onstart: togglePlay, onend: togglePlay});
+            scope.say = () => SpeechFactory.say(scope.wordInput, "UK English Male", {
+                onstart: togglePlay,
+                onend: togglePlay
+            });
+            showDialog();
         }
 
     }

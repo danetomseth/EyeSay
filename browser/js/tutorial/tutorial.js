@@ -2,14 +2,17 @@ core.config(function($stateProvider) {
     $stateProvider.state('tutorial', {
         url: '/tutorial',
         templateUrl: 'js/tutorial/tutorial.html',
-        controller: 'TutorialCtrl'
+        controller: 'TutorialCtrl',
+        onEnter: (DialogFactory) => {
+            DialogFactory.hint();
+        }
     })
 });
 
 
 
 core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $interval, $timeout, ConstantsFactory, $mdDialog, DialogFactory) {
-
+  
     $scope.settings = ConstantsFactory.settings;
 
     
@@ -108,6 +111,10 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
         currentTest = fillTheBar;
         $scope.testStart = true;
         $scope.selectedTab = 1;
+    }
+
+    $scope.closeDialog = () => {
+        DialogFactory.hide();
     }
 
 

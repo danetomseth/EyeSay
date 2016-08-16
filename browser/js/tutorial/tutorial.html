@@ -68,14 +68,17 @@
 					<md-content class="md-padding">
 						<md-card ng-style="activeBlink">
 							<md-card-content>
-								<md-card-title>
+								<md-card-title layout="column" layout-align="center">
 									<md-card-title-text>
-										<span class="text-center tutorial-title">Blink To Select "Type"</span>
+										<span class="text-center tutorial-title">Blink To Select: </span>
 									</md-card-title-text>
+									<div layout="row" layout-align="center">
+										<md-button class="md-raised md-primary">Type</md-button>
+									</div>
 								</md-card-title>
 								<div layout="row" layout-align="center">
 									<md-button class="md-raised md-primary"  ng-class="{'text-selected': activeLink === 0}">Home</md-button>
-									<md-button class="md-raised md-warn"  ng-class="{'text-selected': activeLink === 1}">Type</md-button>
+									<md-button class="md-raised md-primary"  ng-class="{'text-selected': activeLink === 1}">Type</md-button>
 									<md-button class="md-raised md-primary"  ng-class="{'text-selected': activeLink === 2}">Settings</md-button>
 								</div>
 							</md-card-content>
@@ -86,8 +89,8 @@
 
 
 				<md-tab label="Five">
-					<md-content class="md-padding">
-						<p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+					<md-content layout="row" layout-align="center" class="md-padding">
+						<md-button class="md-primary" ui-sref="type">Let's Try Typing!</md-button>
 					</md-content>
 				</md-tab>
 
