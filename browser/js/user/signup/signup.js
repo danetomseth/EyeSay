@@ -14,7 +14,8 @@ core.controller('SignupCtrl', function($state, $scope, AuthService, SidebarFacto
 
     $scope.submit = () => {
         $scope.error = null;
-        console.log($scope.user);
+        $scope.user.blinkZero = 42.00;
+        $scope.user.blinkRatio = 0.68;
 
         AuthService.signup($scope.user)
         .then((user) => $state.go('home'))
