@@ -1,6 +1,6 @@
 module.exports = {
   //"DATABASE_URI": "mongodb://localhost:27017/blink",
-  "DATABASE_URI": "mongodb://blinkdb:blink1026@ds161295.mlab.com:61295/heroku_tt3psr38",
+  "DATABASE_URI": "mongodb://blinkdatabase:blink1026@ds161255.mlab.com:61255/heroku_n96s1l3g",
   "SESSION_SECRET": "Gabe is my real dad",
   "TWITTER": {
     "consumerKey": "INSERT_TWITTER_CONSUMER_KEY_HERE",
