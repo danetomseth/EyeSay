@@ -2,7 +2,7 @@
 
 core.factory("TypeFactory", function($rootScope, $state, ActionFactory, PredictFactory, SpeechFactory) {
 
-
+    let typeReady = false;
 
     let keyboard = {};
     let specialFunction;
@@ -46,7 +46,7 @@ core.factory("TypeFactory", function($rootScope, $state, ActionFactory, PredictF
     //     letters: ['SPACE', 'SAY', '<<', "PLACEHOLD", 'NAV', "ALT"]
     // }];
 
-    keyboard.alphabetA = [{
+    keyboard.alphabetB = [{
         row: 0,
         letters: ["I", "I'M", "CAN", "WE", "HELLO"]
     }, {
@@ -66,10 +66,10 @@ core.factory("TypeFactory", function($rootScope, $state, ActionFactory, PredictF
         letters: ["W", "X", "Y", "Z", "@", ".ORG"]
     }, {
         row: 6,
-        letters: ['SPACE', 'SAY', '<<', "PLACEHOLD", 'NAV', "ALT"]
+        letters: ['SPACE', 'SAY', 'BACK', "PLACEHOLD", 'NAV', "ALT"]
     }];
 
-    keyboard.alphabetB = [{
+    keyboard.alphabetA = [{
         row: 0,
         letters: ["I", "I'M", "CAN", "WE", "HELLO"]
     }, {
@@ -83,17 +83,17 @@ core.factory("TypeFactory", function($rootScope, $state, ActionFactory, PredictF
         letters: ["E", "N", "C", "U", "G"]
     }, {
         row: 4,
-        letters: ["H", "Y", "M", "Z", "ALT1"]
+        letters: ["H", "Y", "M", "Z", "."]
     }, {
         row: 5,
-        letters: ["K", "P", "F", "ALT2", "ALT3"]
+        letters: ["K", "P", "F", "?", "ALT1"]
     }, {
         row: 6,
-        letters: ['D', 'Q', 'V', "X", 'ALT4']
+        letters: ['D', 'Q', 'V', "X", 'ALT2']
     },
     {
         row: 7,
-        letters: ['SPACE', 'SAY', '<<', "PLACEHOLD", 'NAV', "ALT"]
+        letters: ['SPACE', 'SAY', 'BACK', "PLACEHOLD", 'NAV', "ALT"]
     }];
 
     keyboard.alphabet = keyboard.alphabetA;
@@ -184,7 +184,7 @@ core.factory("TypeFactory", function($rootScope, $state, ActionFactory, PredictF
                     setUndoState();
                     phrase = "";
                     return phrase;
-                case '<<':
+                case 'BACK':
                     setUndoState();
                     phrase = phrase.slice(0, phrase.length - 1);
                     return phrase;
@@ -290,20 +290,22 @@ core.factory("TypeFactory", function($rootScope, $state, ActionFactory, PredictF
         resetKeyboardPosition();
     }
 
+    keyboard.typeReady = false;
+
     $rootScope.$on('singleBlink', (event, data) => {
-        if (ActionFactory.isActive('type')) {
+        if (ActionFactory.isActive('type') && keyboard.typeReady) {
             selectAction();
         }
     });
 
     $rootScope.$on('doubleBlink', (event, data) => {
-        if (ActionFactory.isActive('type')) {
+        if (ActionFactory.isActive('type') && keyboard.typeReady) {
             keyboard.word = doubleBlink();
         }
     });
 
     $rootScope.$on('iterate', (event, data) => {
-        if (ActionFactory.isActive('type')) {
+        if (ActionFactory.isActive('type') && keyboard.typeReady) {
             moveKeyboard();
             console.log('iterate');
         }

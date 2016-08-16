@@ -7,7 +7,8 @@ core.config(function ($stateProvider) {
             TypeFactory.setSpecialFunction({
                 text: "STOP",
                 function: () =>{
-                    console.log("inside specialfunc")
+                    //console.log("inside specialfunc")
+                    //Stop typing
                 }
             })
         },

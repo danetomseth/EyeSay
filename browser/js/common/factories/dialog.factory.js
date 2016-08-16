@@ -10,14 +10,27 @@ core.factory('DialogFactory', function($http, $mdDialog) {
       });
 	}
 
+	let showHint = (scope) => {
+		var parentEl = angular.element(document.querySelector('#tutorialContainer'));
+       $mdDialog.show({
+         parent: parentEl,
+         controller: ($scope) => {
+                $scope.closeDialog = () => {
+                    $mdDialog.hide();
+                }
+            },
+         title: "Hello",
+         templateUrl: 'js/common/factories/hint.html'
+      });
+	}
+
 
 	return {
 		message: () => {
 			showDialog();
-			// $timeout(function() {
-			// 	console.log('closing');
-			// 	$mdDialog.hide();
-			// }, 1500)
+		},
+		hint: () => {
+			showHint();
 		},
 		hide: () => {
 			$mdDialog.hide();
@@ -27,3 +40,10 @@ core.factory('DialogFactory', function($http, $mdDialog) {
 
 
 });
+
+
+// core.controller("DialogCtrl", ($scope, $mdDialog) => {
+// 	$scope.closeDialog = () => {
+// 		$mdDialog.hide();
+// 	}
+// });
