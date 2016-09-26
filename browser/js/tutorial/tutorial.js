@@ -4,7 +4,7 @@ core.config(function($stateProvider) {
         templateUrl: 'js/tutorial/tutorial.html',
         controller: 'TutorialCtrl',
         onEnter: (DialogFactory) => {
-            DialogFactory.hint();
+            //DialogFactory.hint();
         }
     })
 });
@@ -12,10 +12,22 @@ core.config(function($stateProvider) {
 
 
 core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $interval, $timeout, ConstantsFactory, $mdDialog, DialogFactory) {
-  
+
     $scope.settings = ConstantsFactory.settings;
 
-    
+    $rootScope.$on('nextTab', function() {
+        $scope.selectedTab++;
+        console.log("tab", $scope.selectedTab);
+        if($scope.selectedTab === 2) {
+            currentTest = fillTheBar;
+        }
+        else if($scope.selectedTab === 3) {
+            currentTest = null;
+        }
+        console.log("next tab");
+    });
+
+
     $scope.activeLink = 0;
     let currentTest;
 
@@ -24,7 +36,7 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
 
 
     $scope.active = {
-    	'color' : 'red'
+        'color': 'red'
     }
 
 
@@ -32,14 +44,9 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
 
 
     let fillTheBar = () => {
-    	$scope.blinkCount++
-    	$scope.blinkFill = ($scope.blinkCount / 10) * 100;
-        if($scope.blinkCount === 10) {
-    		$scope.selectedTab++;
-            currentTest = null;
-            $scope.blinkCount = 0;
-            $scope.blinkFill = 0;
-    	}
+        console.log("here");
+        $rootScope.$emit("fillBar")
+        
     }
 
     $scope.continue = () => {
@@ -61,46 +68,41 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
         $scope.selectedTab--;
     }
 
-    
+
 
     let linkTest = () => {
-    	if($scope.activeLink === 1) {
-    		currentTest = sayHello;
-    		$scope.selectedTab++
-    	}
+        if ($scope.activeLink === 1) {
+            currentTest = sayHello;
+            $scope.selectedTab++
+        }
     }
 
     let navigateTiming = () => {
-    	$interval(() => {
-    		$scope.activeLink++
-    		if($scope.activeLink === 3) {
-    			$scope.activeLink = 0;
-    		}
-    	}, 1000)
-    }
-
-    let sayHello = () => {
-    	
+        $interval(() => {
+            $scope.activeLink++
+            if ($scope.activeLink === 3) {
+                $scope.activeLink = 0;
+            }
+        }, 1000)
     }
 
 
     let styleDelay = () => {
-    	$timeout(() => {
-    		$scope.activeBlink = {
-            	'background' : 'none'
+        $timeout(() => {
+            $scope.activeBlink = {
+                'background': 'none'
             }
             $scope.activeText = {
                 'font-size': '1em'
             }
-    	}, 500)
+        }, 500)
     }
 
 
     $scope.adjustValue = (add, key) => {
-        if(add) {
+        if (add) {
             $scope.settings[key].value += $scope.settings[key].value * .01;
-        }
-        else {
+        } else {
             $scope.settings[key].value -= $scope.settings[key].value * .01;
         }
         ConstantsFactory.saveUser(key, $scope.settings[key].value)
@@ -116,15 +118,21 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
     $scope.closeDialog = () => {
         DialogFactory.hide();
     }
+    $scope.nextTab = () => {
+        $rootScope.$emit("nextTab");
+
+    }
+
+    $scope.tictac = true;
 
 
     $rootScope.$on('singleBlink', () => {
         if (ActionFactory.isActive('tutorial')) {
-            if(currentTest) {
+            if (currentTest) {
                 currentTest();
             }
             $scope.activeBlink = {
-            	'background' : 'rgba(105,240,174, 0.2)'
+                'background': 'rgba(105,240,174, 0.2)'
             }
             $scope.activeText = {
                 'font-size': '2em'
