@@ -119,10 +119,9 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
     }
 
     obj.getUser = () => {
-        if(Session.user) {
+        if (Session.user) {
             return Session.user
-        }
-        else {
+        } else {
             return guest
         }
     }
@@ -135,30 +134,28 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
             user.blinkZero = zero;
             user.blinkRatio = ratio;
             $http.put('/api/users/update', user).then(res => {
-                console.log('resp', res.data);
                 obj.setUser(res.data);
             })
-        }
-        else {
-        	guest.blinkZero.value = zero;
-        	guest.blinkRatio.value = ratio;
-        	obj.setUser(false);
+        } else {
+            guest.blinkZero.value = zero;
+            guest.blinkRatio.value = ratio;
+            obj.setUser(false);
         }
 
     }
 
 
     obj.saveUser = (key, value) => {
-        let user = Session.user;
-        user[key] = value;
-        $http.put('/api/users/update', user).then(res => {
-            console.log('user', res.data.blinkActive);
-            obj.setUser(res.data);
-        })
-        // $http.put('/api/users/update', user).then(res => {
-        //         
-        //         return obj.settings;
-        //     });
+        if (!Session.user) {
+            guest[key].value = value;
+        } else {
+            let user = Session.user;
+            user[key] = value;
+            $http.put('/api/users/update', user).then(res => {
+                obj.setUser(res.data);
+            })
+        }
+
     }
 
     obj.toggleTracking = () => {

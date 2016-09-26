@@ -1,0 +1,27 @@
+<md-content class="md-padding">
+	<md-card>
+		<md-card-content>
+			<md-card-title>
+				<md-card-title-text>
+					<span class="text-center bl-title-sm">Adjust The Sensitivity of Blink Detection</span>
+				</md-card-title-text>
+			</md-card-title>
+			<div layout="column" layout-align="center center">
+				<div flex="50">
+					<p>The box will change colors when a blink is detected</p>
+				</div>
+				<div flex="50" class="blink-box" ng-style="activeBlink">
+					<p ng-style="activeText">Blink</p>
+				</div>
+				<div layout="row" layout-padding>
+					<md-button ng-click="adjustValue(true, 'blinkZero')" class="md-primary md-raised">Decrease</md-button>
+					<md-button ng-click="adjustValue(false, 'blinkZero')" class="md-primary md-raised">Increase</md-button>
+
+				</div>
+				<div layout="row" layout-padding>
+					<md-button ng-click="nextTab()" class="md-primary md-raised">Begin Tutorial</md-button>
+				</div>
+			</div>
+		</md-card-content>
+	</md-card>
+</md-content>

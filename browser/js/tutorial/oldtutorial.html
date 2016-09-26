@@ -1,0 +1,113 @@
+
+
+<!-- <bl-dialog message="dialogMessage"></bl-dialog> -->
+
+<div ng-cloak id="tutorialContainer flexCenter">
+	<md-content>
+		<md-tabs id="centerTabs" md-dynamic-height md-border-bottom md-selected="selectedTab" md-autoselect>
+			<md-tab label="One">
+				<md-content class="md-padding">
+					<md-card >
+						<md-card-content>
+							<md-card-title>
+								<md-card-title-text>
+									<span class="text-center tutorial-title">Adjust Sensitivity</span>
+								</md-card-title-text>
+							</md-card-title>
+							<div layout="column" layout-align="center center">
+								<div flex="50" class="blink-box" ng-style="activeBlink">
+									<p ng-style="activeText">Blink</p>
+								</div>
+								<div layout="row" layout-padding>
+									<md-button ng-click="adjustValue(true, 'blinkZero')" class="md-primary md-raised">Increase</md-button>
+									<md-button ng-click="adjustValue(false, 'blinkZero')" class="md-primary md-raised">Decrease</md-button>
+
+								</div>
+								<div layout="row" layout-padding>
+									<md-button ng-click="startTest()" class="md-primary md-raised">Begin Tutorial</md-button>
+								</div>
+							</div>
+
+						</md-card-content>
+					</md-card>
+				</md-content>
+			</md-tab>
+
+			<md-tab label="Two">
+				<md-content class="md-padding">
+					<md-card class="md-padding" ng-style="activeBlink" id="flexColRow">
+						<div>
+							<span class="text-center tutorial-title">Blink To Fill</span>
+						</div>
+
+						<div class="blink-progress">
+							<md-progress-linear style="height: 15px" md-mode="determinate" value="{{blinkFill}}"></md-progress-linear>
+						</div>
+						<div>
+							<h2 class="md-title text-center card-text">Count: {{blinkCount}}</h2>
+						</div>
+					</md-card>
+				</md-content>
+			</md-tab>
+			<md-tab label="Three">
+				<md-content class="md-padding">
+					<md-card class="md-padding" id="flexColRow">
+						<div>
+							<span class="text-center tutorial-title">Adjust Sensitivity?</span>
+						</div>
+						<div layout="row" layout-align="center">
+							<md-button class="md-primary md-raised" ng-click="continue()">No</md-button>
+							<md-button class="md-accent md-raised" ng-click="adjust()">Yes</md-button>
+						</div>
+					</md-card>
+				</md-content>
+			</md-tab>
+
+
+
+			<md-tab label="Four">
+				<md-content class="md-padding">
+					<md-card ng-style="activeBlink">
+						<md-card-content>
+							<md-card-title layout="column" layout-align="center">
+								<md-card-title-text>
+									<span class="text-center tutorial-title">Blink To Select: </span>
+								</md-card-title-text>
+								<div layout="row" layout-align="center">
+									<md-button class="md-raised md-primary">Type</md-button>
+								</div>
+							</md-card-title>
+							<div layout="row" layout-align="center">
+								<md-button class="md-raised md-primary"  ng-class="{'text-selected': activeLink === 0}">Home</md-button>
+								<md-button class="md-raised md-primary"  ng-class="{'text-selected': activeLink === 1}">Type</md-button>
+								<md-button class="md-raised md-primary"  ng-class="{'text-selected': activeLink === 2}">Settings</md-button>
+							</div>
+						</md-card-content>
+					</md-card>
+					
+				</md-content>
+			</md-tab>
+
+
+			<md-tab label="Five">
+				<md-content layout="row" layout-align="center" class="md-padding">
+					<md-button class="md-primary" ui-sref="type">Let's Try Typing!</md-button>
+				</md-content>
+			</md-tab>
+
+
+
+		</md-tabs>
+	</md-content>
+</div>
+
+
+
+
+
+
+
+
+
+
+
