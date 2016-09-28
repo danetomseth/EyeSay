@@ -1,4 +1,4 @@
-core.directive('blSidebar', function($rootScope, ActionFactory, AuthService, AUTH_EVENTS, SidebarFactory) {
+core.directive('blSidebar', function($rootScope, ActionFactory, SidebarFactory) {
     return {
         restrict: 'E',
         // scope: {
@@ -7,19 +7,12 @@ core.directive('blSidebar', function($rootScope, ActionFactory, AuthService, AUT
         templateUrl: 'js/sidebar/sidebar.html',
         controller: 'SidebarCtrl',
         link: function(scope) {
-            // scope.userLoggedIn = false;
-
             scope.items = SidebarFactory.getLinks(scope.userLoggedIn);
-
-
-
 
             var removeUser = function() {
                 $rootScope.user = null;
                 scope.items = SidebarFactory.getLinks(false);
             };
-
-           
 
 
             scope.items = SidebarFactory.getLinks(scope.userLoggedIn);

@@ -6,7 +6,7 @@ core.controller('SidebarCtrl', function($scope, $state, $rootScope, Session, Aut
                 $state.go('home');
             });
     }
-   
+
     let lastBlinkTime = 0;
     $scope.blink = () => {
         let blinkDt = Date.now() - lastBlinkTime;
@@ -25,7 +25,7 @@ core.controller('SidebarCtrl', function($scope, $state, $rootScope, Session, Aut
     }
 
 
-     AuthService.getLoggedInUser()
+    AuthService.getLoggedInUser()
         .then(user => {
             console.log('user logged in', user);
             console.log('session', Session.user);
@@ -60,5 +60,13 @@ core.controller('SidebarCtrl', function($scope, $state, $rootScope, Session, Aut
     $scope.toggleTracking = (val) => {
         ConstantsFactory.saveUser('blinkActive', $rootScope.settings.blinkActive.value)
     }
+
+   
+    $scope.$on('$viewContentLoaded',
+        function() {
+            $scope.currentState = $state.current.name;
+            console.log("loaded", $scope.currentState);
+
+        });
 
 });

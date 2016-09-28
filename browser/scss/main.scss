@@ -83,24 +83,7 @@ $accent: rgb(105, 240, 174);
 
 $keyboard: 'Roboto Slab', serif;
 
-@import 'home/main';
-@import 'about/main';
-@import 'login/main';
-@import 'custom/keyboard';
-@import 'custom/camera';
-@import 'custom/layout';
-@import 'custom/sidebar';
-@import 'custom/corners';
-@import 'custom/newsfeed';
-@import 'custom/settings';
-@import 'custom/buttons';
-@import 'custom/loading';
-@import 'custom/calibrate';
-@import 'custom/highlight';
-@import 'custom/animation';
-@import 'custom/admin';
-@import 'custom/tutorial';
-@import 'custom/_main';
+
 
 #content-padding {
   padding: 30px 15px;
@@ -192,3 +175,22 @@ md-icon.btn-1 {
     padding-right: 0;
     width: 4.8rem;
 }
+
+
+
+@import 'home/main';
+@import 'about/main';
+@import 'login/main';
+@import 'custom/keyboard';
+@import 'custom/sidebar';
+// @import 'custom/corners';
+// @import 'custom/newsfeed';
+@import 'custom/settings';
+@import 'custom/buttons';
+@import 'custom/loading';
+@import 'custom/calibrate';
+@import 'custom/highlight';
+@import 'custom/animation';
+// @import 'custom/admin';
+@import 'custom/tutorial';
+@import 'custom/_main';

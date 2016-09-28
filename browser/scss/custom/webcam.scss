@@ -1,0 +1,63 @@
+// .camera-window {
+//     padding: 0px;
+//     margin-left: -30px;
+//     display:inline-block;
+// }
+
+// .webcam-container {
+// 	width: 300px;
+// 	margin: 0 auto;
+// }
+
+// .video-center{
+//     position: absolute;
+//     display: block;
+// 	border: 2px solid nth($text, 1);
+// 	box-shadow: 2px 2px 3px 2px nth($text, 1);
+
+// }
+
+// .canvas-center{
+//     position: relative;
+// }
+
+
+
+
+
+#webcam-directive {
+    display: block;
+}
+
+
+#sidebar-webcam-container {
+    position: relative;
+    border: 1px solid nth($background, 4);
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+#sidebar-webcam {
+    position: absolute;
+    //top: -75px;
+    //left: -40%;
+}
+
+#sidebar-canvas {
+    position: absolute;
+    // left: -40%;
+    // top: -75px;
+    z-index: 10;
+}
+
+#canvas-overlay {
+    position: absolute;
+    // left: -40%;
+    // top: -75px;
+    z-index: 900;
+}
+.web-box {
+    width: 100%;
+    position: relative;
+    // top: 15%;
+}
