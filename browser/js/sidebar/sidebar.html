@@ -1,26 +1,42 @@
-<section layout="row" class="boxWithHeight">
-  <md-sidenav
-  class="md-sidenav-left"
-  md-component-id="left"
-  md-is-locked-open="true"
-  md-disable-backdrop
-  md-whiteframe="4">
-  <md-toolbar class="md-primary md-hue-2 clickable" ui-sref="home">
-    <div class="md-toolbar-tools">
-      <h2 class="bl-large">Blink</h2>
-    </div>
-  </md-toolbar>
-  <md-content layout-padding>
-    <md-button class="nav-btn" ng-repeat="item in items"  ui-sref="{{ item.state }}" ng-class="{'nav-highlight' : $index === selectedLink}">{{item.label}}</md-button>
-    <div class="web-box">
-     <bl-sidebar-webcam ng-style="webcamDir" id="webcam-directive"></bl-sidebar-webcam>
+<div layout="column" class="bl-vh-100" md-whiteframe="4">
+  <div layout="row"  flex="60" >
+    <!-- <div class="bl-nav-border">
+      <p>Men</p>
+    </div> -->
+    <div class="bl-vw-100" layout="column" layout-align="space-between center">
+      <md-toolbar flex="5" class="md-primary md-hue-2 clickable" ui-sref="home">
+        <div class="md-toolbar-tools">
+          <h2 class="bl-large">Blink</h2>
+        </div>
+      </md-toolbar>
+
+      <div flex="grow" class="bl-vw-100" layout="column">
+        <div id="bl-nav-item" ng-repeat="item in items" ng-class="{'bl-nav-current' : item.state === currentState }" ui-sref="{{ item.state }}">
+          <div>
+            <a ui-sref="{{ item.state }}" ng-class="{'nav-highlight' : $index === selectedLink}">{{item.label}}</a>
+          </div>
+        </div>
+      </div>
    </div>
-   <div layout="column" layout-align="center">
-   <md-switch ng-model="$root.settings.blinkActive.value" ng-change="toggleTracking()"  class="md-primary" aria-label="$root.settings.blinkActive.label">Tracking
-      </md-switch>
-      <md-button ng-show="loggedIn" ui-sref="logout" class="md-primary md-raised">Logout</md-button>
-      <md-button ng-hide="loggedIn" ui-sref="login" class="md-primary md-raised">Login</md-button>
-   </div>
- </md-content>
-</md-sidenav>
-</section>
+ </div>
+ <div flex="30">
+  <div class="web-box">
+       <bl-sidebar-webcam ng-style="webcamDir" id="webcam-directive"></bl-sidebar-webcam>
+       <div layout="column" layout-align="center center">
+         <md-switch ng-model="$root.settings.blinkActive.value" ng-change="toggleTracking()"  class="md-primary" aria-label="$root.settings.blinkActive.label">Tracking
+         </md-switch>
+         <md-button ng-show="loggedIn" ui-sref="logout" class="md-primary md-raised">Logout</md-button>
+         <md-button ng-hide="loggedIn" ui-sref="login" class="md-primary md-raised">Login</md-button>
+       </div>
+     </div>
+ </div>
+
+</div>
+
+
+
+<!-- <ul id="bl-nav">
+        <li id="bl-nav-item" ng-repeat="item in items">
+          <a ui-sref="{{ item.state }}" ng-class="{'nav-highlight' : $index === selectedLink}">{{item.label}}</a>
+        </li>
+      </ul> -->

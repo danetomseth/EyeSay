@@ -1,13 +1,8 @@
-// #sidebar {
-//     // position: absolute;
-//     // left: 0;
-//     padding: 15px;
-//     padding-left: 15px;
-//     background: white;
-//     height: 100vh !important;
-//     box-shadow: 2px 3px 3px nth($background, 2);
-//     //width: 88%;
-// }
+#bl-sidebar {
+  // max-width: 375px;
+  padding-right: 10px;
+}
+
 
 bl-sidebar {
   height: 100vh !important;
@@ -16,27 +11,13 @@ bl-sidebar {
 #sidebar-container {
   height: 100%;
   display: block;
-  // display: border-box;
 }
 
-#welcomeMessage {
-    margin-top: 0px;
-    font-style: italic;
-}
 
-logo {
-  width: 100%;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font-family: 'Belgrano', serif !important;
-  font-size: 70px;
-  color: nth($blue, 2);
-  letter-spacing: 3px;
-}
 
 .nav-btn {
     font-size: 1.5em;
-    font-family: 'Roboto Condensed', sans-serif;
+    // font-family: 'Roboto Condensed', sans-serif;
     color: nth($text, 3);
     margin-bottom: 5px;
     width: 90%;
@@ -47,55 +28,55 @@ logo {
 }
 
 
-
-.std-btn {
-    font-size: 2em;
-    color: nth($text, 3)!important;
+#bl-nav {
+  list-style-type: none;
+  padding: 0px;
 }
 
-.std-btn:focus {
-    color: nth($blue, 1)!important;
-    border-bottom: 1px solid nth($purple, 1);
+#bl-nav-item {
+  height: 50px;
+  border-left: 8px solid grey;
+  font-size: 1.25em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10px;
+  margin-top: 5px;
+  margin-left: 5px;
 }
 
-#webcam-directive {
-    display: block;
-    //width: 90%;
-    //position: absolute;
-    //bottom: 20px;
-}
-#sidebar-webcam-container {
-    position: relative;
-    border: 1px solid nth($background, 4);
-    //width: 98%;
-    margin: 0 auto;
-    overflow: hidden;
+
+#bl-nav-item:hover {
+  background: grey;
+  cursor: pointer;
+  border-left: 8px solid nth($primary, 1) !important;
+  a {
+    text-decoration: none;
+    color: white;
+  }
 }
 
-#sidebar-webcam {
-    position: absolute;
-    //top: -75px;
-    //left: -40%;
+
+.bl-nav-current {
+  border-left: 8px solid rgb(105,240,174) !important;
+  background: nth($primary, 1); 
 }
 
-#sidebar-canvas {
-    position: absolute;
-    // left: -40%;
-    // top: -75px;
-    z-index: 10;
+.bl-nav-current a {
+  color: white;
 }
 
-#canvas-overlay {
-    position: absolute;
-    // left: -40%;
-    // top: -75px;
-    z-index: 900;
+#bl-nav-item > a {
+  // font-size: 2em;
+  
 }
-.web-box {
-    width: 100%;
-    position: relative;
-    top: 15%;
+
+.bl-nav-border {
+  background: rgba(220, 220, 220, 0.8); 
 }
+
+
+
 
 .nav-highlight {
     border-bottom: 1px solid nth($primary, 1);
@@ -113,19 +94,4 @@ a:focus {
    outline-offset: none;
 }
 
-button:focus {
-   //  color: nth($blue, 1) !important;
-   //  border-bottom: 1px solid nth($purple, 1);
-   //  outline: none;
-   // outline: none !important;
-   // outline-offset: none;
-}
-
-
-.staticCam {
-  width: auto;
-              height: 162%;
-    top: -31px !important;
-    left: -317px !important;
-}
 

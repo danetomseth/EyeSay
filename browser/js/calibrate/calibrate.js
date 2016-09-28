@@ -70,8 +70,9 @@ core.directive("blCalibrate", function(CalibrateFactory, $state, $rootScope, Act
                 countInt = $interval(() => {
                     scope.countDown--
                     if(scope.countDown === 0) {
-                        moveToTutorial();
+                        //moveToTutorial();
                         // moveToNav();
+                        alert("move to nav stop")
                         $interval.cancel(countInt)
                     }
                 }, 1000)
