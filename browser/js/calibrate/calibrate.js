@@ -1,117 +1,69 @@
-core.directive("blCalibrate", function(CalibrateFactory, $state, $rootScope, ActionFactory, $interval) {
-    return {
-        restrict: "E",
-        templateUrl: 'js/calibrate/calibrate.html',
-        link: function(scope, elem, attr) {
-            let calibrationComplete = false;
-            let debounce = true;
-            scope.calStart = false;
-            scope.confirmBlink = 5;
-            scope.showMessage = false;
-
-            
-            //used for css changes on scope
-            scope.$watch(function() {
-                return CalibrateFactory.blinkStatus
-            }, function(newVal, oldVal) {
-                if (typeof newVal !== 'undefined') {
-                    scope.blinkStatus = CalibrateFactory.blinkStatus;
-                }
-            });
-
-            //used for % calibration
-            scope.$watch(function() {
-                return CalibrateFactory.blinkCounts
-            }, function(newVal, oldVal) {
-                if (typeof newVal !== 'undefined') {
-                    scope.blinkCounts = CalibrateFactory.blinkCounts;
-                }
-            });
-
-            function blinkDelay() {
-                if (scope.confirmBlink > 0) {
-                    scope.confirmBlink--;
-                }
-                if (scope.confirmBlink === 0) {
-                    scope.showMessage = true;
-                    countDelay()
-                    scope.confirmBlink = "--"
-                    return;
-                }
-                setTimeout(function() {
-                    scope.blinkStatus[1] = {
-                        'color': 'black'
-                    }
-                    scope.blinkStatus[3] = {
-                        'border': 'none'
-                    }
-                }, 400);
-            }
+core.config(function($stateProvider) {
+    $stateProvider.state('calibrate', {
+        url: '/calibrate',
+        templateUrl: '/js/calibrate/calibrate.html',
+        controller: 'CalibrateCtrl'
+    })
+});
 
 
-            let testBlink = () => {
-                console.log('confirm', scope.confirmBlink);
-                    if (scope.showMessage) {
-                        scope.blinkStatus[3] = {
-                            'border': '3px solid black'
-                        }
-                    } else {
-                        scope.blinkStatus[1] = {
-                            'color': 'red'
-                        }
-                    }
-                    blinkDelay()
-                
-            }
 
-            let countInt;
-            function countDelay () {
-                scope.countDown = 1;
-                countInt = $interval(() => {
-                    scope.countDown--
-                    if(scope.countDown === 0) {
-                        //moveToTutorial();
-                        // moveToNav();
-                        alert("move to nav stop")
-                        $interval.cancel(countInt)
-                    }
-                }, 1000)
-            }
+core.controller('CalibrateCtrl', ($scope, CalibrateFactory, $state, $rootScope, ActionFactory, $interval) => {
 
-            
-
-
-            function moveToNav() {
-                //set action factory here
-                CalibrateFactory.calibrationSet = false;
-                setTimeout(() => {
-                    ActionFactory.runEvents('nav');
-                }, 500);                
-
-            }
-
-
-            function moveToTutorial() {
-                $state.go('tutorial');
-            }
-
-
-            let blinkStart = true;
-            $rootScope.$on('singleBlink', () => {
-                if(blinkStart) {
-                    blinkStart = false;
-                    //scope.start(); Starts calibration by blinking
-                }
-                if (CalibrateFactory.calibrationSet) {
-                    testBlink();
-                }
-            });
-
-            scope.start = () => {
-                CalibrateFactory.runCalibration();
-                scope.calStart = true;
-            }
-        }
-
+    $scope.calibrateActive = false;
+    $scope.calibrating = {
+        open: false,
+        closed: false,
+        finished: false
     }
+
+
+    $scope.openCal = 50;
+
+
+    $scope.start = () => {
+        $scope.calibrateActive = true;
+        $scope.calibrating.open = true;
+        console.log($scope.calibrating);
+        CalibrateFactory.runOpenCalibration();
+    }
+
+
+
+    
+
+    //used for % calibration
+    $scope.$watch(function() {
+        return CalibrateFactory.openCount
+    }, function(newVal, oldVal) {
+        if (typeof newVal !== 'undefined') {
+            $scope.openCount = CalibrateFactory.openCount;
+            console.log("update", $scope.openCount);
+        }
+    });
+
+
+    $scope.$watch(function() {
+        return CalibrateFactory.closedCount
+    }, function(newVal, oldVal) {
+        if (typeof newVal !== 'undefined') {
+            $scope.closedCount = CalibrateFactory.closedCount;
+            console.log("update", $scope.closedCount);
+        }
+    });
+
+    $scope.$watch(function() {
+        return CalibrateFactory.openCalibrationComplete
+    }, function(newVal, oldVal) {
+        if (typeof newVal !== 'undefined') {
+            $scope.openCalibrationComplete = CalibrateFactory.openCalibrationComplete;
+            $scope.calibrating.open = false;
+            $scope.calibrating.closed = CalibrateFactory.openCalibrationComplete;
+            // CalibrateFactory.runClosedCalibration();
+        }
+    });
+
+
+
+
 });
