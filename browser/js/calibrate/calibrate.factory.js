@@ -17,6 +17,11 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
     calibrateObj.calibrationSet = false;
     calibrateObj.startCalibration = false;
 
+    calibrateObj.openCalibrationComplete = false;
+    calibrateObj.openCount = 0;
+
+    calibrateObj.closedCalibrationComplete = false;
+    calibrateObj.closedCount = 0;
 
 
 
@@ -83,6 +88,53 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
     };
 
 
+    calibrateObj.openCalibration = (total) => {
+        count++;
+        if (maxVals.length < 50) {
+            calibrateObj.openCount = (maxVals.length / 50) * 100;
+        } else {
+            calibrateObj.openCount = 100
+        }
+        
+        if (maxVals.length > 50) {
+            console.log("setting Value")
+            calibrateObj.setOpenValue();
+        }
+
+        //starting the array - with a little buffer
+        if (count > 40 && count < 50) {
+            maxVals.push(total);
+            minVals.push(total - 3);
+        }
+        if (count > 50) {
+            if (total) {
+                avgMaxMin(total);
+            }
+        }
+    }
+
+    calibrateObj.setOpenValue = () => {
+        maxVals.forEach(function(val) {
+            maxSum += val;
+        })
+        maxSum = maxSum / maxVals.length;
+        calibrateObj.openCalibrationComplete = true;
+        console.log("open val", maxSum);
+        return maxSum;
+    }
+
+    calibrateObj.runOpenCalibration = () => {
+        let positions = TrackingFactory.getPositions();
+        if(positions) {
+            calibrateObj.openCalibration(PositionFactory.getBlinkValue(positions));
+            //compareValues(PositionFactory.getBlinkValue(positions));
+        }
+        if(!calibrateObj.openCalibrationComplete) {
+            frameId = requestAnimationFrame(calibrateObj.runOpenCalibration);
+        }
+    }
+
+
     //once calibration arrays are full, set values
     let setValues = function() {
         maxVals.forEach(function(val) {
@@ -106,7 +158,8 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
     calibrateObj.runCalibration = () => {
     	let positions = TrackingFactory.getPositions();
     	if(positions) {
-    		compareValues(PositionFactory.getBlinkValue(positions));
+            calibrateObj.openCalibration(PositionFactory.getBlinkValue(positions));
+    		//compareValues(PositionFactory.getBlinkValue(positions));
     	}
     	if(!calibrateObj.calibrationSet) {
     		frameId = requestAnimationFrame(calibrateObj.runCalibration);

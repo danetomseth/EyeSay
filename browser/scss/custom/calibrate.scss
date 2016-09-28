@@ -10,6 +10,28 @@
 	z-index: 500;
 }
 
+
+
+#calibrate-overlay {
+
+}
+
+
+.bl-message {
+	background: $darkPrimary;
+	color: white;
+	padding: 15px;
+}
+
+.bl-cal-progress {
+	margin-top: 20px;
+}
+
+
+.calibrate-step {
+	margin-top: 50px;
+}
+
 #demo-btn {
 	background: nth($purple, 1);
 	color: white;
