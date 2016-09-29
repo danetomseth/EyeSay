@@ -17,11 +17,7 @@
 }
 
 
-.bl-message {
-	background: $darkPrimary;
-	color: white;
-	padding: 15px;
-}
+
 
 .bl-cal-progress {
 	margin-top: 20px;
@@ -141,24 +137,7 @@ md-progress-circular.md-default-theme {
 
 }
 
-md-progress-circular.md-default-theme .md-inner .md-left .md-half-circle, md-progress-circular .md-inner .md-left .md-half-circle, md-progress-circular.md-default-theme .md-inner .md-right .md-half-circle, md-progress-circular .md-inner .md-right .md-half-circle {
-    border-top-color: nth($blue, 1);
-}
 
-md-progress-circular.md-default-theme .md-inner .md-right .md-half-circle, md-progress-circular .md-inner .md-right .md-half-circle {
-    border-right-color: nth($blue, 1);
-    //border-color: nth($blue, 1) !important;
-}
-
-md-progress-circular.md-default-theme .md-inner .md-left .md-half-circle, md-progress-circular .md-inner .md-left .md-half-circle {
-    border-left-color: nth($blue, 1);
-    border-bottom-color: nth($blue, 1);
-}
-
-md-progress-circular.md-default-theme .md-inner .md-gap, md-progress-circular .md-inner .md-gap {
-    border-top-color: nth($blue, 1);
-    border-bottom-color: nth($blue, 1);
-}
 
 .detail-info {
 	//text-align: left;

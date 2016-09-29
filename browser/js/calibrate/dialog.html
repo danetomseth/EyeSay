@@ -1,0 +1,44 @@
+<md-dialog aria-label="List dialog"> 
+ <md-dialog-content layout="column" layout-align="center" layout-padding>
+ 	<md-toolbar layout="row" class="md-primary">
+    <div class="md-toolbar-tools">
+      <span><b>Weak Facial Tracking</b></span>
+    </div>
+  </md-toolbar>
+  <md-list flex>
+   <md-list-item>1. Double-check the green outline closely matches you face</md-list-item>
+   <md-list-item>2. Minimize head movement</md-list-item>
+   <md-list-item>3. Keep face parallel to screen</md-list-item>
+ </md-list>
+ <div class="text-center">
+   <img width="200" src="/assets/clm-converge.png" alt="Convergance Example">
+ </div>
+ <md-dialog-actions layout="row" layout-align="center" layout-padding> 
+   <md-button ng-click="closeDialog()" class="md-primary md-raised"> 
+     Got it 
+   </md-button> 
+ </md-dialog-actions> 
+</md-dialog-content>
+</md-dialog>
+
+
+
+<!-- <md-dialog aria-label="List dialog"> 
+ <md-dialog-content layout="column" layout-align="center" layout-padding>
+  <div>
+    <h3>Opps!! It looks like the facial recognition doesn't have a good lock on your face</h3>
+    <ul>
+      <li>Make sure the green outline on the webcam display closely fits to your face</li>
+      <li>Minimize head movement and keep face parallel to screen</li>
+    </ul>
+  </div>
+  <div class="text-center">
+    <img width="200" src="/assets/clm-converge.png" alt="Convergance Example">
+  </div>
+</md-dialog-content> 
+<md-dialog-actions layout="row" layout-align="center" layout-padding> 
+ <md-button ng-click="closeDialog()" class="md-primary md-raised"> 
+   Got it 
+ </md-button> 
+</md-dialog-actions> 
+</md-dialog> -->
