@@ -17,3 +17,46 @@
 	font-size: 2em;
 }
 
+
+.bl-message {
+    background: #2196f3;
+    color: white;
+    padding: 30px;
+    margin: 8px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: justify;
+    font-size: 1.5em;
+}
+
+.bl-message div {
+    margin-bottom: 10px;
+}
+
+.bl-message button {
+    margin-top: 20px;
+}
+
+
+.bl-vw-90 {
+    width: 90%;
+}
+
+.bl-vw-80 {
+    width: 80%;
+}
+
+.bl-vw-70 {
+    width: 70%;
+}
+
+.bl-vw-60 {
+    width: 60%;
+}
+
+.bl-vw-50 {
+    width: 50%;
+}

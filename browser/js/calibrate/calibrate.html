@@ -2,64 +2,46 @@
 	<div>
 		<h1 class="bl-title">Blink Calibration</h1>
 	</div>
-	<div>
-		<md-button class="md-raised md-primary" ng-click="start()">Ready?</md-button>
+	<div class="bl-message bl-vw-80">
+		<div>To accurately detect your blinks, the app needs to calculate the average area of your eye when open, and the threshold to register a blink. This "blink profile" is unique to each user.
+		</div>
+		<div>
+			<md-button class="md-raised md-accent" ng-click="start()">Ready?</md-button>
+		</div>
 	</div>
 </div>
 
 
 
-
+<!-- Open calibration -->
 <div flex layout="column" layout-align="center center" ng-show="calibrating.open" class="calibrate-step">
-	<!-- <div class="text-center bl-headline"> -->
-	<div class="text-center bl-message md-whiteframe-10dp">
-		<h2>Maintain a normal gaze with eyes open</h2>
-		<h2>Hold until progress meter fills</h2>
+	<div class="text-center bl-message bl-vw-80">
+		<h1 ng-show="success">GREAT!!!</h1>
+		<h2 ng-hide="success">Maintain a normal gaze with eyes open</h2>
+		<h2 ng-hide="success">Hold until progress meter fills</h2>
+		<div class="bl-cal-progress" ng-hide="success">
+			<md-progress-circular md-diameter="300" md-mode="determinate" value="{{openCount}}">Open</md-progress-circular>
+		</div>
+		
+		<div>
+			{{openCount.toFixed(0)}}% Complete
+		</div>
 	</div>
 
-	<div class="bl-cal-progress">
-	<md-progress-circular md-diameter="300" md-mode="determinate" value="{{openCount}}">Open</md-progress-circular>
-	</div>
+	
 </div>
 
 
-
+<!-- Closed calibration -->
 <div flex layout="column" layout-align="center center" ng-show="calibrating.closed" class="calibrate-step">
-	<md-card>
-	<div class="text-center bl-message md-whiteframe-10dp">
+	<div class="text-center bl-message bl-vw-80">
 		<h2>Maintain a normal gaze with eyes <b>CLOSED</b></h2>
 		<h2>Hold until progress meter fills</h2>
-	</div>
-	</md-card>
-</div>
-<!-- 
-
-<div flex layout="column" layout-align="center" class="vertical-center" ng-show="">
-	<div class="message" ng-show="showMessage" flex layout="row" layout-align="center">
-		<div ng-style="blinkStatus[3]" class="message md-whiteframe-20dp">
-			<h2>Calibration Finished</h2>
-
-			<h2>Blink To Select Navigation Links</h2>
+		<div class="bl-cal-progress">
+			<md-progress-circular md-diameter="300" md-mode="determinate" value="{{closedCount}}">Open</md-progress-circular>
+		</div>
+		<div>
+			{{closedCount.toFixed(0)}}% Complete
 		</div>
 	</div>
-	<div ng-hide="showMessage" flex layout="row" layout-align="center">
-		<div class="box-wrap">
-
-			<md-progress-circular md-diameter="150" class="calibrate-progress" md-mode="determinate" value="{{blinkCounts[0]}}">Open</md-progress-circular>
-			<p>Open</p>
-		</div>
-		<div ng-style="blinkStatus[1]" class="blink-box primary-info md-whiteframe-10dp">
-			<p>Blink: {{confirmBlink}}</p>
-		</div>
-		<div class="box-wrap">
-	<md-progress-circular md-diameter="150" id="calibrate-progress" md-mode="determinate" value="{{blinkCounts[1]}}">Closed</md-progress-circular>
-		<p>Closed</p>
-	</div>
 </div>
-
-</div>
-
-
-
-
- -->
