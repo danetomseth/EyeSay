@@ -1,4 +1,4 @@
-core.controller('SettingsCtrl', function($scope, SettingsFactory, Session, ConstantsFactory) {
+core.controller('SettingsCtrl', function($scope, SettingsFactory, Session, ConstantsFactory, DialogFactory) {
    
 
     $scope.getUser = () => {
@@ -31,6 +31,20 @@ core.controller('SettingsCtrl', function($scope, SettingsFactory, Session, Const
         ConstantsFactory.saveUser(key, value);
         console.log('key', key);
         console.log('value', value);
+    }
+
+    $scope.scopeText = "message";
+
+    $scope.sharedScope = () => {
+        DialogFactory.sharedScope($scope)
+    }
+
+    $scope.message = () => {
+        let message = {
+            title: "Settings",
+            listContent: ["1. First Step", "2. Second Step", "3. Third Step"]
+        }
+        DialogFactory.promptMessage(message)
     }
     
 });

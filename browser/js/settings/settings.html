@@ -1,40 +1,19 @@
-<!-- <div layout-padding flex=75>
 
-	<md-list ng-cloak>
-		<md-subheader class="md-no-sticky">Blink Settings</md-subheader>
-		<md-list-item ng-repeat="(key, setting)  in settings" class="noright">
-			<p> {{setting.label}}: {{setting.value}} </p>
-			<md-icon ng-if="setting.number" md-font-set="material-icons" ng-click="adjustValue(true, setting, key)"> add </md-icon>
-			<md-icon ng-if="setting.number" md-font-set="material-icons" ng-click="adjustValue(false, setting, key)"> remove </md-icon>
-			<md-checkbox ng-if="!setting.number" ng-click="toggle(key, setting.value)" class="md-secondary" ng-model="setting.value"></md-checkbox>
-		</md-list-item>
-	</md-list>
-
-	<md-button ng-click="getUser()">User</md-button>
-
-
-</div> -->
-
-
-<md-content class="md-padding" layout-padding flex=100>
-	<md-card >
+<md-content class="md-padding" layout-padding layout="column" layout-align="center">
+	<md-card>
 		<md-card-content>
-			<md-card-title>
-				<md-card-title-text>
-					<span class="tutorial-title">Blink Settings</span>
-				</md-card-title-text>
-			</md-card-title>
-			<div layout="row">
-				<md-list ng-cloak>
-					<md-list-item ng-repeat="(key, setting)  in settings" class="noright">
-						<p> {{setting.label}}: {{setting.value}} </p>
+			<div layout="column">
+				<div layout="row" ng-repeat="(key, setting)  in settings" class="setting-item">
+					<div flex="40">
+						{{setting.label}}: {{setting.value}}
+					</div>
+					<div flex="30">
 						<md-icon ng-if="setting.number" md-font-set="material-icons" ng-click="adjustValue(true, setting, key)"> add </md-icon>
 						<md-icon ng-if="setting.number" md-font-set="material-icons" ng-click="adjustValue(false, setting, key)"> remove </md-icon>
 						<md-checkbox ng-if="!setting.number" ng-click="toggle(key, setting.value)" class="md-secondary" ng-model="setting.value"></md-checkbox>
-					</md-list-item>
-				</md-list>
+					</div>
+				</div>
 			</div>
-
 		</md-card-content>
 	</md-card>
 </md-content>
