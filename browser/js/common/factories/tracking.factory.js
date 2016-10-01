@@ -1,6 +1,6 @@
 'use strict';
 
-core.factory('TrackingFactory', function($rootScope) {
+core.factory('TrackingFactory', function($rootScope, DialogFactory) {
     let canvas;
     let context;
     let tracker;
@@ -36,6 +36,13 @@ core.factory('TrackingFactory', function($rootScope) {
     trackObj.getPositions = () => {
         return tracker.getCurrentPosition();
     };
+    trackObj.checkTracking = () => {
+        if(tracker.getConvergence() > 75) {
+            DialogFactory.checkTracking();
+            return true;
+        }
+        else return false
+    }
 
     return trackObj;
 });

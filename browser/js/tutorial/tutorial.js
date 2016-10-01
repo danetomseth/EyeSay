@@ -5,6 +5,9 @@ core.config(function($stateProvider) {
         controller: 'TutorialCtrl',
         onEnter: (DialogFactory) => {
             //DialogFactory.hint();
+        },
+        onExit: (TicTacFactory) => {
+            TicTacFactory.resetGame();
         }
     })
 });
@@ -44,9 +47,7 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
 
 
     let fillTheBar = () => {
-        console.log("here");
         $rootScope.$emit("fillBar")
-        
     }
 
     $scope.continue = () => {
@@ -120,7 +121,6 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
     }
     $scope.nextTab = () => {
         $rootScope.$emit("nextTab");
-
     }
 
     $scope.tictac = true;

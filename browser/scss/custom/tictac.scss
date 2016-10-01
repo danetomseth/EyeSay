@@ -1,14 +1,22 @@
 .board-row {
 	height: 33%;
-	line-height: 200px;
-	font-size: 3em;
-	// border: 1px solid black;
-	// margin: 5px;
-	div {
-		border: 1px solid black;
-		margin: 5px;
-		color: red;
-	}
+	font-size: 10em;
+	
+}
+
+
+.tictac-box {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
+	border: 1px solid black;
+	margin: 5px;
+	color: red;
+}
+
+.tictac-box div {
+	width: 100%;
 }
 
 .tictac-board {
@@ -22,5 +30,6 @@
 
 
 .player-color {
-	color: blue;
+	color: blue !important;
+	// font-size: 4em !important;
 }

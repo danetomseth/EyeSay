@@ -4,6 +4,7 @@ core.factory('SidebarFactory', function($state) {
     let returnIndex = 0;
 
     let links = [
+        { label: 'Home', state: 'home'},
         { label: 'Tutorial', state: 'tutorial'},
         { label: 'Type', state: 'type'},
         { label: 'Calibrate', state: 'calibrate'},

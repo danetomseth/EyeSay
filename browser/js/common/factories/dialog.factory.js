@@ -26,8 +26,8 @@ core.factory('DialogFactory', function($http, $mdDialog) {
         });
     }
 
-    let sharedScope = () => {
-        let parentEl = angular.element(document.querySelector('#main-content'));
+    let checkTracking = () => {
+        var parentEl = angular.element(document.body);
         $mdDialog.show({
             parent: parentEl,
             controller: ($scope) => {
@@ -35,7 +35,7 @@ core.factory('DialogFactory', function($http, $mdDialog) {
                     $mdDialog.hide();
                 }
             },
-            templateUrl: 'js/common/factories/sharedScope.html'
+            templateUrl: 'js/calibrate/dialog.html'
         });
     }
 
@@ -52,7 +52,6 @@ core.factory('DialogFactory', function($http, $mdDialog) {
         },
         promptMessage: (text, func) => {
             let parentEl = angular.element(document.querySelector('#main-content'));
-            console.log("text passed", text);
             $mdDialog.show({
                 parent: parentEl,
                 locals: {
@@ -64,16 +63,19 @@ core.factory('DialogFactory', function($http, $mdDialog) {
                     $scope.title = dialogTitle;
                     $scope.list = dialogList;
                     $scope.closeDialog = () => {
-                        action();
+                        if(action) {
+                            action();
+                        };
                         $mdDialog.hide();
                     }
                 },
                 templateUrl: 'js/common/factories/custom-message.html'
             });
         },
-        sharedScope: () => {
-            sharedScope();
+        checkTracking: () => {
+            checkTracking();
         }
+
     }
 
 
@@ -81,8 +83,3 @@ core.factory('DialogFactory', function($http, $mdDialog) {
 });
 
 
-// core.controller("DialogCtrl", ($scope, $mdDialog) => {
-// 	$scope.closeDialog = () => {
-// 		$mdDialog.hide();
-// 	}
-// });
