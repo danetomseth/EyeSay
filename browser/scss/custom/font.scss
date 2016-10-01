@@ -6,6 +6,24 @@
     // padding-bottom: 10px;
 }
 
+
+.bl-page-title {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.15);
+    padding: 10px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // align-items: center;
+}
+
+.bl-page-title h1 {
+    // color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .bl-subtitle {
 	font-size: 2em;
     font-family: $keyboard;
@@ -41,22 +59,3 @@
 }
 
 
-.bl-vw-90 {
-    width: 90%;
-}
-
-.bl-vw-80 {
-    width: 80%;
-}
-
-.bl-vw-70 {
-    width: 70%;
-}
-
-.bl-vw-60 {
-    width: 60%;
-}
-
-.bl-vw-50 {
-    width: 50%;
-}

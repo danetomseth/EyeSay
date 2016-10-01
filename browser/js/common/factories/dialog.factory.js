@@ -26,9 +26,7 @@ core.factory('DialogFactory', function($http, $mdDialog) {
         });
     }
 
-
-
-    let noConvergance = (scope) => {
+    let sharedScope = () => {
         let parentEl = angular.element(document.querySelector('#main-content'));
         $mdDialog.show({
             parent: parentEl,
@@ -37,7 +35,7 @@ core.factory('DialogFactory', function($http, $mdDialog) {
                     $mdDialog.hide();
                 }
             },
-            templateUrl: 'js/common/factories/custom-message.html'
+            templateUrl: 'js/common/factories/sharedScope.html'
         });
     }
 
@@ -52,8 +50,29 @@ core.factory('DialogFactory', function($http, $mdDialog) {
         hide: () => {
             $mdDialog.hide();
         },
-        noConvergance: () => {
-            noConvergance();
+        promptMessage: (text, func) => {
+            let parentEl = angular.element(document.querySelector('#main-content'));
+            console.log("text passed", text);
+            $mdDialog.show({
+                parent: parentEl,
+                locals: {
+                    dialogTitle: text.title,
+                    dialogList: text.listContent,
+                    action: func
+                },
+                controller: ($scope, dialogList, dialogTitle, action) => {
+                    $scope.title = dialogTitle;
+                    $scope.list = dialogList;
+                    $scope.closeDialog = () => {
+                        action();
+                        $mdDialog.hide();
+                    }
+                },
+                templateUrl: 'js/common/factories/custom-message.html'
+            });
+        },
+        sharedScope: () => {
+            sharedScope();
         }
     }
 

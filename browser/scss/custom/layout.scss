@@ -1,5 +1,23 @@
 #main-content {
-	padding: 10px;
+	// padding: 10px;
+}
+
+
+.bl-header {
+    background: #2196f3;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 3px solid rgba(50, 50, 50, 1); 
+}
+
+
+.bl-header h1 {
+	color: white;
+	margin: 0px;
+	font-size: 4em;
 }
 
 .center-contents {
@@ -130,4 +148,51 @@
 
 .bl-expand {
     height: 100vh;
+}
+
+
+
+.bl-vw-90 {
+    width: 90%;
+}
+
+.bl-vw-80 {
+    width: 80%;
+}
+
+.bl-vw-70 {
+    width: 70%;
+}
+
+.bl-vw-60 {
+    width: 60%;
+}
+
+.bl-vw-50 {
+    width: 50%;
+}
+
+
+.bl-vh-100 {
+    height: 100%;
+}
+
+.bl-vh-90 {
+    height: 90%;
+}
+
+.bl-vh-80 {
+    height: 80%;
+}
+
+.bl-vh-70 {
+    height: 70%;
+}
+
+.bl-vh-60 {
+    height: 60%;
+}
+
+.bl-vh-50 {
+    height: 50%;
 }

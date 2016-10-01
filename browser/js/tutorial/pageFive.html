@@ -2,41 +2,22 @@
 	<md-card>
 		<div layout="column" class="tictac-board">
 			<div layout="row" flex class="text-center board-row">
-				<div flex="33" ng-class="{'box-highlight': currentBox === 0}">{{gameBoard[0]}}</div>
-				<div flex="33" ng-class="{'box-highlight': currentBox === 1}">{{gameBoard[1]}}</div>
-				<div flex="33" ng-class="{'box-highlight': currentBox === 2}">{{gameBoard[2]}}</div>
+				<div flex="33" ng-class="{'box-highlight': currentBox === 0, 'player-color': gameBoard[0] === 'X'}">{{gameBoard[0]}}</div>
+				<div flex="33" ng-class="{'box-highlight': currentBox === 1, 'player-color': gameBoard[1] === 'X'}">{{gameBoard[1]}}</div>
+				<div flex="33" ng-class="{'box-highlight': currentBox === 2, 'player-color': gameBoard[2] === 'X'}">{{gameBoard[2]}}</div>
 			</div>
 			<div layout="row" flex class="text-center board-row">
-				<div flex="33" ng-class="{'box-highlight': currentBox === 3}">{{gameBoard[3]}}</div>
-				<div flex="33" ng-class="{'box-highlight': currentBox === 4}">{{gameBoard[4]}}</div>
-				<div flex="33" ng-class="{'box-highlight': currentBox === 5}">{{gameBoard[5]}}</div>
+				<div flex="33" ng-class="{'box-highlight': currentBox === 3, 'player-color': gameBoard[3] === 'X'}">{{gameBoard[3]}}</div>
+				<div flex="33" ng-class="{'box-highlight': currentBox === 4, 'player-color': gameBoard[4] === 'X'}">{{gameBoard[4]}}</div>
+				<div flex="33" ng-class="{'box-highlight': currentBox === 5, 'player-color': gameBoard[5] === 'X'}">{{gameBoard[5]}}</div>
 			</div>
 			<div layout="row" flex class="text-center board-row">
-				<div flex="33" ng-class="{'box-highlight': currentBox === 6}">{{gameBoard[6]}}</div>
-				<div flex="33" ng-class="{'box-highlight': currentBox === 7}">{{gameBoard[7]}}</div>
-				<div flex="33" ng-class="{'box-highlight': currentBox === 8}">{{gameBoard[8]}}</div>
+				<div flex="33" ng-class="{'box-highlight': currentBox === 6, 'player-color': gameBoard[6] === 'X'}">{{gameBoard[6]}}</div>
+				<div flex="33" ng-class="{'box-highlight': currentBox === 7, 'player-color': gameBoard[7] === 'X'}">{{gameBoard[7]}}</div>
+				<div flex="33" ng-class="{'box-highlight': currentBox === 8, 'player-color': gameBoard[8] === 'X'}">{{gameBoard[8]}}</div>
 			</div>
 		</div>
 	</md-card>
 </md-content>
 
 
-<!-- <md-content class="md-padding">
-	<md-card ng-style="activeBlink">
-		<md-card-content>
-			<md-card-title layout="column" layout-align="center">
-				<md-card-title-text>
-					<span class="text-center tutorial-title">Blink To Select: </span>
-				</md-card-title-text>
-				<div layout="row" layout-align="center">
-					<md-button class="md-raised md-primary">Type</md-button>
-				</div>
-			</md-card-title>
-			<div layout="row" layout-align="center">
-				<md-button class="md-raised md-primary"  ng-class="{'text-selected': activeLink === 0}">Home</md-button>
-				<md-button class="md-raised md-primary"  ng-class="{'text-selected': activeLink === 1}">Type</md-button>
-				<md-button class="md-raised md-primary"  ng-class="{'text-selected': activeLink === 2}">Settings</md-button>
-			</div>
-		</md-card-content>
-	</md-card>
-</md-content> -->
