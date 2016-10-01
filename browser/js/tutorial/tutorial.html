@@ -1,6 +1,6 @@
-
-
-<!-- <bl-dialog message="dialogMessage"></bl-dialog> -->
+<div class="bl-page-title">
+    <h1>Tutorial</h1>
+</div>
 
 <div ng-cloak id="tutorialContainer flexCenter">
 	<md-content>
@@ -18,7 +18,7 @@
 				<bl-tutorial-four></bl-tutorial-four>
 			</md-tab>
 			<md-tab label="Five">
-				<bl-tutorial-five></bl-tutorial-five>
+				<bl-tutorial-five ng-if="selectedTab === 4"></bl-tutorial-five>
 			</md-tab>
 			<md-tab label="Six">
 				<md-content layout="row" layout-align="center" class="md-padding">

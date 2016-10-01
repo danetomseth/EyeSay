@@ -5,12 +5,17 @@
 
 
 bl-sidebar {
-  height: 100vh !important;
+  height: 100% !important;
 }
 
 #sidebar-container {
   height: 100%;
   display: block;
+}
+
+
+.bl-sidebar-content {
+  border-right: 1px solid black;
 }
 
 
@@ -22,14 +27,14 @@ bl-sidebar {
 
 #bl-nav-item {
   height: 50px;
-  border-left: 6px solid grey;
+  border-left: 6px solid rgba(0, 0, 0, 0.1);
   font-size: 1.25em;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-left: 10px;
-  margin-left: 5px;
-  background: rgba(0, 0, 0, 0.05);
+  // margin-left: 5px;
+  // background: rgba(0, 0, 0, 0.05);
 }
 
 
@@ -45,7 +50,7 @@ bl-sidebar {
 
 
 .bl-nav-current {
-  border-left: 8px solid rgb(105,240,174) !important;
+  border-left: 6px solid #000000 !important;
   background: nth($primary, 1) !important; 
 }
 

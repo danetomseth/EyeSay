@@ -1,15 +1,6 @@
-<div layout="column" class="bl-vh-100" md-whiteframe="4">
+<div layout="column" class="bl-vh-100 bl-sidebar-content">
   <div layout="row"  flex="60" >
-    <!-- <div class="bl-nav-border">
-      <p>Men</p>
-    </div> -->
     <div class="bl-vw-100" layout="column" layout-align="space-between center">
-      <md-toolbar flex="5" class="md-primary md-hue-2 clickable" ui-sref="home">
-        <div class="md-toolbar-tools">
-          <h2 class="bl-large">Blink</h2>
-        </div>
-      </md-toolbar>
-
       <div flex="grow" class="bl-vw-100" layout="column">
         <div id="bl-nav-item" ng-repeat="item in items" ng-class="{'bl-nav-current' : item.state === currentState }" ui-sref="{{ item.state }}">
           <div>

@@ -50,19 +50,21 @@ core.factory('DialogFactory', function($http, $mdDialog) {
         hide: () => {
             $mdDialog.hide();
         },
-        promptMessage: (text) => {
+        promptMessage: (text, func) => {
             let parentEl = angular.element(document.querySelector('#main-content'));
             console.log("text passed", text);
             $mdDialog.show({
                 parent: parentEl,
                 locals: {
                     dialogTitle: text.title,
-                    dialogList: text.listContent
+                    dialogList: text.listContent,
+                    action: func
                 },
-                controller: ($scope, dialogList, dialogTitle) => {
+                controller: ($scope, dialogList, dialogTitle, action) => {
                     $scope.title = dialogTitle;
                     $scope.list = dialogList;
                     $scope.closeDialog = () => {
+                        action();
                         $mdDialog.hide();
                     }
                 },
