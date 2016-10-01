@@ -1,13 +1,13 @@
 // Basic iteration and letter select/get
 
-core.factory("TypeFactory", function($rootScope, $state, ActionFactory, PredictFactory, SpeechFactory) {
+core.factory("TypeFactory", function($rootScope, $state, $timeout, ActionFactory, PredictFactory, SpeechFactory) {
 
     let typeReady = false;
 
     let keyboard = {};
     let specialFunction;
+    let debounce = true;
 
-    // keyboard.active = false;
     keyboard.scopeValue = [];
     keyboard.selectedLetter;
     keyboard.word = '';
@@ -17,36 +17,20 @@ core.factory("TypeFactory", function($rootScope, $state, ActionFactory, PredictF
     keyboard.setSpecialFunction = (specialFunc) => {
         specialFunction = specialFunc
         keyboard.alphabet[6].letters[3] = specialFunction.text;
-        console.log(specialFunc.function)
+    }
+
+
+    let keyDebounce = () => {
+        debounce = false;
+        $timeout(() => {
+            debounce = true;
+            keyboard.selectedLetter = null;
+        }, 500)
     }
 
 
 
-
-    // keyboard.alphabetA = [{
-    //     row: 0,
-    //     letters: ["I", "I'M", "CAN", "WE", "HELLO"]
-    // }, {
-    //     row: 1,
-    //     letters: ["A", "B", "C", "D", "E"]
-    // }, {
-    //     row: 2,
-    //     letters: ["F", "G", "H", "I", "J"]
-    // }, {
-    //     row: 3,
-    //     letters: ["K", "L", "M", "N", "O"]
-    // }, {
-    //     row: 4,
-    //     letters: ["P", "Q", "R", "S", "T"]
-    // }, {
-    //     row: 5,
-    //     letters: ["U", "V", "W", "X", "Y"]
-    // }, {
-    //     row: 6,
-    //     letters: ['SPACE', 'SAY', '<<', "PLACEHOLD", 'NAV', "ALT"]
-    // }];
-
-    keyboard.alphabetB = [{
+    keyboard.alphabetA = [{
         row: 0,
         letters: ["I", "I'M", "CAN", "WE", "HELLO"]
     }, {
@@ -69,7 +53,7 @@ core.factory("TypeFactory", function($rootScope, $state, ActionFactory, PredictF
         letters: ['SPACE', 'SAY', 'BACK', "PLACEHOLD", 'NAV', "ALT"]
     }];
 
-    keyboard.alphabetA = [{
+    keyboard.alphabetB = [{
         row: 0,
         letters: ["I", "I'M", "CAN", "WE", "HELLO"]
     }, {
@@ -145,11 +129,6 @@ core.factory("TypeFactory", function($rootScope, $state, ActionFactory, PredictF
         return phrase // send the current word back to the user
     }
 
-    const resetDelay = () => {
-        setTimeout(() => {
-            keyboard.selectedLetter = null;
-        }, 500)
-    }
 
     let iterateRow = () => {
         returnRow = rowIndex; // save the row we're at
@@ -221,22 +200,6 @@ core.factory("TypeFactory", function($rootScope, $state, ActionFactory, PredictF
         }
     }
 
-    let doubleBlink = () => {
-
-
-        if (selectingLetter) { // undo the select that just happened from the first blink
-            phrase = phrase.slice(0, phrase.length - 1);
-            resetKeyboardPosition();
-        }
-        else {
-            phrase = phrase.slice(0, phrase.length - 1);
-            resetKeyboardPosition();
-        }
-
-
-        return phrase;
-        
-    }
 
     let endOfRow = () => {
         letterIndex = 0;
@@ -265,10 +228,13 @@ core.factory("TypeFactory", function($rootScope, $state, ActionFactory, PredictF
             keyboard.selectedLetter = getCurrentLetter();
             keyboard.word = selectLetter();
             selectingLetter = false;
-            resetDelay();
+            keyDebounce(); //starts debounce when a letter is selected
         } else {
-            keyboard.scopeValue[1] = iterateLetter();
-            selectingLetter = true;
+            //Used to correct the problem of quick selects returning to the same row
+            if(debounce) {
+                keyboard.scopeValue[1] = iterateLetter();
+                selectingLetter = true;
+            }
         }
     }
 
@@ -287,6 +253,7 @@ core.factory("TypeFactory", function($rootScope, $state, ActionFactory, PredictF
         returnRow = 0;
         returnLetter = 0;
         keyboard.scopeValue = [];
+        keyboard.typeReady = false;
         resetKeyboardPosition();
     }
 
@@ -298,16 +265,10 @@ core.factory("TypeFactory", function($rootScope, $state, ActionFactory, PredictF
         }
     });
 
-    $rootScope.$on('doubleBlink', (event, data) => {
-        if (ActionFactory.isActive('type') && keyboard.typeReady) {
-            keyboard.word = doubleBlink();
-        }
-    });
 
     $rootScope.$on('iterate', (event, data) => {
         if (ActionFactory.isActive('type') && keyboard.typeReady) {
             moveKeyboard();
-            console.log('iterate');
         }
     })
 

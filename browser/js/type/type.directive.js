@@ -1,4 +1,4 @@
-core.directive('blLetterType', function(TypeFactory, SpeechFactory, $mdDialog) {
+core.directive('blLetterType', function(TypeFactory, SpeechFactory, $mdDialog, $rootScope) {
     return {
         restrict: 'E',
         templateUrl: 'js/type/keyboard.html',
@@ -21,20 +21,8 @@ core.directive('blLetterType', function(TypeFactory, SpeechFactory, $mdDialog) {
                 }
             });
 
-
-            let showDialog = () => {
-                var parentEl = angular.element(document.body);
-                $mdDialog.show({
-                    parent: parentEl,
-                    controller: ($scope, TypeFactory) => {
-                        $scope.closeDialog = () => {
-                            $mdDialog.hide();
-                            TypeFactory.typeReady = true;
-                        }
-                    },
-                    templateUrl: 'js/type/dialog.html'
-                });
-            }
+            
+           
 
             scope.$watch(function() {
                 return TypeFactory.word
@@ -54,6 +42,20 @@ core.directive('blLetterType', function(TypeFactory, SpeechFactory, $mdDialog) {
                 onstart: togglePlay,
                 onend: togglePlay
             });
+
+             let showDialog = () => {
+                var parentEl = angular.element(document.body);
+                $mdDialog.show({
+                    parent: parentEl,
+                    controller: ($scope, TypeFactory) => {
+                        $scope.closeDialog = () => {
+                            $mdDialog.hide();
+                            TypeFactory.typeReady = true;
+                        }
+                    },
+                    templateUrl: 'js/type/dialog.html'
+                });
+            }
             showDialog();
         }
 

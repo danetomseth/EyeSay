@@ -4,14 +4,17 @@ core.factory('TimerFactory', function($rootScope, Session, $state, PositionFacto
 
     let iterationTime = ConstantsFactory.settings.cursorDelay.value; //used directly down below (32)
     let startTime = 0;
+    let currentTimestamp
     let frameId = 0;
     let trackingStopped = false;
 
-
+    function resetBlinkTime () {
+        startTime = currentTimestamp;
+    }
   
 
     function loop (timestamp){
-
+        currentTimestamp = timestamp;
         // Always draw the face on the tracker
         if(!ConstantsFactory.settings.blinkActive.value) {
             frameId = requestAnimationFrame(loop);
@@ -38,8 +41,6 @@ core.factory('TimerFactory', function($rootScope, Session, $state, PositionFacto
                 startTime = timestamp;
                 $rootScope.$emit(blink) // emits "doubleBlink" or "singleBlink"
             }
-
-
         }
 
 
@@ -62,6 +63,7 @@ core.factory('TimerFactory', function($rootScope, Session, $state, PositionFacto
 
     return {
         start: loop,
+        resetBlinkTime: resetBlinkTime
     }
 
 });
