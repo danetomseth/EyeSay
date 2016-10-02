@@ -149,6 +149,19 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
     }
 
 
+    calibrateObj.reset = () => {
+        calibrateObj.openCalibrationComplete = false;
+        calibrateObj.openCount = 0;
+        calibrateObj.closedCalibrationComplete = false;
+        calibrateObj.closedCount = 0;
+        maxVals = [];
+        minVals = [];
+        maxSum = 0;
+        minSum = 0;
+        count = 0;
+    }
+
+
     //once calibration arrays are full, set values
     let setValues = function() {
         blinkZero = maxSum.toFixed(2);

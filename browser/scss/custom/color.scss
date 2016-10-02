@@ -1,0 +1,32 @@
+body {
+	// font-family: 'Source Sans Pro', sans-serif;
+  	// font-size: 18px;
+}
+
+$bl-primary: rgb(33,150,243);
+$bl-accent: rgb(105,240,174);
+
+
+
+.bl-primary {
+	color: rgb(255,255,255);
+	background-color: rgb(33,150,243);
+}
+
+.bl-primary-text {
+	color: rgb(33,150,243);
+}
+
+
+.bl-accent-text {
+	color: rgb(105,240,174);
+}
+
+.bl-accent {
+	color: rgba(0,0,0,0.87);
+	background-color: rgb(105,240,174);
+}
+
+.bl-warn {
+
+}

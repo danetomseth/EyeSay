@@ -9,8 +9,6 @@
 // }
 
 body {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 18px;
   height: 100vh;
  
 }
@@ -174,6 +172,7 @@ md-icon.btn-1 {
 
 
 @import 'home/main';
+@import 'custom/_main';
 @import 'about/main';
 @import 'login/main';
 @import 'custom/keyboard';
@@ -188,4 +187,3 @@ md-icon.btn-1 {
 @import 'custom/animation';
 // @import 'custom/admin';
 @import 'custom/tutorial';
-@import 'custom/_main';

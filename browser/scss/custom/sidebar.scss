@@ -37,31 +37,36 @@ bl-sidebar {
   // background: rgba(0, 0, 0, 0.05);
 }
 
+#bl-nav-item  a {
+  color: rgba(0,0,0,0.87);
+  
+}
+
 
 #bl-nav-item:hover {
-  background: rgba(0, 0, 0, 0.2);
+  // background: rgba(0, 0, 0, 0.2);
   cursor: pointer;
   border-left: 6px solid nth($primary, 1) !important;
   a {
     text-decoration: none;
-    color: white;
+    color: $bl-accent !important;
+    font-weight: bold;
   }
 }
 
 
 .bl-nav-current {
-  border-left: 6px solid #000000 !important;
-  background: nth($primary, 1) !important; 
+  border-left: 6px solid $bl-accent !important;
+  // background: nth($primary, 1) !important; 
+  // color: $bl-primary;
 }
 
 .bl-nav-current a {
-  color: white;
+  color: $bl-primary !important;
+  font-weight: bold;
 }
 
-#bl-nav-item > a {
-  // font-size: 2em;
-  
-}
+
 
 .bl-nav-border {
   background: rgba(220, 220, 220, 0.8); 
