@@ -1,55 +1,86 @@
 <div class="bl-page-title">
-    <h1>Calibrate</h1>
+	<h1>Calibrate</h1>
 </div>
 <md-content layout-padding>
-<div id="calibrate-overlay" flex layout="column" layout-align="center center" ng-if="!calibrateActive" class="calibrate-step">
-	<div class="bl-message bl-vw-100">
-		<div>
-			<p><b>The following actions are required to calibrate your blink profile</b></p>
-		
-		</div>
-		<div>
-			<p>To accurately detect your blinks, the app needs to calculate the average area of your eye when open, and the threshold to register a blink. This "blink profile" is unique to each user.</p>
-		</div>
-		<div>
-			<md-button class="md-raised md-accent" ng-click="start()">Ready?</md-button>
+	<div id="calibrate-overlay" flex layout="column" layout-align="center center" ng-if="!calibrateActive" class="calibrate-step bl-card">
+		<div class="bl-message bl-vw-100">
+			<div>
+				<h2>The following actions are required to calibrate your blink profile<h2>
+			</div>
+			<div>
+				<p>To accurately detect your blinks, the app needs to calculate the average area of your eye when open, and the threshold to register a blink. This "blink profile" is unique to each user.</p>
+			</div>
+			<div>
+				<md-button class="md-raised md-accent" ng-click="start()">Ready?</md-button>
+			</div>
 		</div>
 	</div>
-</div>
 
 
 
-<!-- Open calibration -->
-<div flex layout="column" layout-align="center center" ng-show="calibrating.open" class="calibrate-step">
-	<div class="text-center bl-message bl-vw-80">
-		<h1 ng-show="success">GREAT!!!</h1>
-		<h2 ng-hide="success">Maintain a normal gaze with eyes open</h2>
-		<h2 ng-hide="success">Hold until progress meter fills</h2>
-		<div class="bl-cal-progress" ng-hide="success">
-			<md-progress-circular md-diameter="300" md-mode="determinate" value="{{openCount}}">Open</md-progress-circular>
+	<!-- Open calibration -->
+	<div flex layout="column" layout-align="center center" ng-show="calibrating.open" class="calibrate-step bl-card">
+		<div class="text-center bl-message bl-vw-80">
+			<h2 ng-show="success">GREAT!!!</h2>
+			<h2 ng-hide="success">Maintain a normal gaze with eyes open</h2>
+			<h2 ng-hide="success">Hold until progress meter fills</h2>
+			<div class="bl-cal-progress" ng-hide="success">
+				<round-progress
+				max="100"
+				current="openCount"
+				color="#2196FD"
+				bgcolor="#eaeaea"
+				radius="150"
+				stroke="30"
+				responsive="false"
+				duration="0"
+				animation="linearEase"
+				animation-delay="0"></round-progress>
+				<!-- <md-progress-circular md-diameter="300" md-mode="determinate" value="{{openCount}}">Open</md-progress-circular> -->
+			</div>
+
+			<div>
+				{{openCount.toFixed(0)}}% Complete
+			</div>
 		</div>
-		
-		<div>
-			{{openCount.toFixed(0)}}% Complete
-		</div>
+
+
 	</div>
 
 	
-</div>
 
 
-<!-- Closed calibration -->
-<div flex layout="column" layout-align="center center" ng-show="calibrating.closed" class="calibrate-step">
-	<div class="text-center bl-message bl-vw-80">
-		<h2>Maintain a normal gaze with eyes <b>CLOSED</b></h2>
-		<h2>Hold until progress meter fills</h2>
-		<div class="bl-cal-progress">
-			<md-progress-circular md-diameter="300" md-mode="determinate" value="{{closedCount}}">Open</md-progress-circular>
-		</div>
-		<div>
-			{{closedCount.toFixed(0)}}% Complete
+
+	<!-- Closed calibration -->
+	<div flex layout="column" layout-align="center center" ng-show="calibrating.closed" class="calibrate-step bl-card">
+		<div class="text-center bl-message bl-vw-80">
+			<h2>Maintain a normal gaze with eyes <b>CLOSED</b></h2>
+			<h2>Hold until progress meter fills</h2>
+			<div class="bl-cal-progress">
+				<round-progress
+				max="100"
+				current="closedCount"
+				color="#2196FD"
+				bgcolor="#eaeaea"
+				radius="150"
+				stroke="30"
+				responsive="false"
+				duration="50"
+				animation="linearEase"
+				animation-delay="0"></round-progress>
+			</div>
+			<div>
+				{{closedCount.toFixed(0)}}% Complete
+			</div>
 		</div>
 	</div>
-</div>
 
 </md-content>
+
+
+
+
+
+
+
+

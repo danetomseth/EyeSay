@@ -11,11 +11,12 @@
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed|Roboto+Slab' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/angular-material/angular-material.css">
     <link src="/angular-material-icons/angular-material-icons.css"></link>
     <script src="/lodash/index.js"></script>
     <script src="/angular/angular.js"></script>
+    <script src="/angular-svg-round-progressbar/build/roundProgress.js"></script>
     <script src="/angular-animate/angular-animate.js"></script>
     <script src="/angular-aria/angular-aria.js"></script>
     <script src="/angular-material/angular-material.js"></script>
@@ -33,17 +34,18 @@
 </head>
 
 <body ng-app="BlinkApp" layout="column">
-        <div class="bl-header" flex="10">
-            <h1>Blink</h1>
+
+    <div layout="row" id="page-content" ng-model="sidebarActive">
+        <div flex="20" flex-gt-sm="15" id="bl-sidebar">
+            <bl-sidebar id="sidebar-container"></bl-sidebar>
         </div>
-        <div layout="row" id="page-content" ng-model="sidebarActive">
-            <div flex="20" flex-gt-sm="15" id="bl-sidebar">
-                <bl-sidebar id="sidebar-container"></bl-sidebar>
+        <div flex ng-class="{'blur-page': $root.zeroActive}">
+            <div class="bl-header">
+                <h1>Blink</h1>
             </div>
-            <div flex ng-class="{'blur-page': $root.zeroActive}">
-                <div flex id="main-content" ui-view></div>
-            </div>
+            <div flex id="main-content" ui-view></div>
         </div>
+    </div>
 </body>
 
 </html>

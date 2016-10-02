@@ -1,5 +1,5 @@
 'use strict';
-const core = angular.module('core', ['ui.router', 'ui.bootstrap', 'ngAnimate', 'ngMaterial', 'ngMdIcons'])
+const core = angular.module('core', ['ui.router', 'ui.bootstrap', 'ngAnimate', 'ngMaterial', 'ngMdIcons', 'angular-svg-round-progressbar'])
 
 window.app = angular.module('BlinkApp', ['blinkAuth', 'core']);
 
@@ -23,22 +23,6 @@ app.config(function($urlRouterProvider, $locationProvider, $mdThemingProvider, $
     $mdThemingProvider.theme('default')
     .primaryPalette('blue')
     .accentPalette('green')
-    .backgroundPalette('grey');
-
-
-    $mdThemingProvider.theme('myTheme')
-    .primaryPalette('purple')
-    .accentPalette('yellow')
-    .backgroundPalette('grey');
-
-
-    $mdThemingProvider.theme('altTheme')
-        .primaryPalette('purple');
-    
-
-    
-
-
 
 });
 

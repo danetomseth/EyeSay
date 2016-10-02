@@ -14,10 +14,14 @@
   <div class="web-box">
        <bl-sidebar-webcam ng-style="webcamDir" id="webcam-directive"></bl-sidebar-webcam>
        <div layout="column" layout-align="center center">
-         <md-switch ng-model="$root.settings.blinkActive.value" ng-change="toggleTracking()"  class="md-primary" aria-label="$root.settings.blinkActive.label">Tracking
+        <div>
+         <md-switch ng-model="$root.settings.blinkActive.value" ng-change="toggleTracking()"  class="md-accent md-hue-2" aria-label="$root.settings.blinkActive.label"><b>Tracking</b>
          </md-switch>
-         <md-button ng-show="loggedIn" ui-sref="logout" class="md-primary md-raised">Logout</md-button>
-         <md-button ng-hide="loggedIn" ui-sref="login" class="md-primary md-raised">Login</md-button>
+        </div>
+        <div>
+         <md-button ng-show="loggedIn" ui-sref="logout" class="md-accent md-hue-2 md-raised">Logout</md-button>
+         <md-button ng-hide="loggedIn" ui-sref="login" class="md-accent md-hue-2 md-raised">Login</md-button>
+        </div>
        </div>
      </div>
  </div>

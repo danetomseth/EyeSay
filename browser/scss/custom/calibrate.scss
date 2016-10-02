@@ -1,22 +1,3 @@
-#demo-overlay {
-	position: absolute;
-	top: 0;
-	width: 79%;
-	height: 100%;
-	font-weight: bold;
-	line-height: 100%;
-	text-align: center;
-	background: rgba(245,245,245, 0.8);
-	z-index: 500;
-}
-
-
-
-#calibrate-overlay {
-
-}
-
-
 
 
 .bl-cal-progress {
@@ -24,38 +5,29 @@
 }
 
 
+.bl-card {
+	box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+	margin: 15px 50px;
+	padding: 30px 20px !important;
+	border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+
+.bl-card h2 {
+	font-weight: bold;
+}
+
+.bl-card p {
+	text-align: justify;
+}
+
 .calibrate-step {
 
 }
 
-#demo-btn {
-	background: nth($purple, 1);
-	color: white;
-}
 
-.vertical-center {
-	//padding-top: 5%;
-	margin-top: 20%;
 
-}
 
-.main-title {
-	font-size: 4em;
-	font-weight: bold;
-	font-family: $keyboard; 
-}
-
-.center-align {
-	width: 100%;
-	margin: 10px 0px;
-	div {
-		margin: 5px 5px;
-	}
-}
-
-.calibrate-progress {
-
-}
 
 .center-div {
 	margin: 0 auto;
@@ -64,22 +36,6 @@
 	}
 }
 
-
-.message {
-	//background: nth($primary, 1);
-	h2 {
-		font-size: 2em !important;
-		font-weight: bold !important;
-	}
-	padding: 10px;
-	div {
-		background: white;
-		width: 75%;
-		height: 350px;
-		text-align: center;
-		padding-top: 30px;
-	}
-}
 
 .blink-box {
 	height: 250px;
@@ -117,8 +73,9 @@ md-progress-circular {
 	border-top-color: nth($blue, 1) !important;
 }
 
-md-progress-circular.md-default-theme {
 
+
+md-progress-circular {
   path {
     stroke: nth($blue, 1) !important;
   }
@@ -134,61 +91,38 @@ md-progress-circular.md-default-theme {
       stroke: nth($blue, 1) !important;
     }
   }
-
 }
 
 
 
-.detail-info {
-	//text-align: left;
-	height: 50px;
-	width: 100%;
-	position: absolute;
-  	top: 50%;
-  	transform: translateY(-50%);
-	background: nth($blue, 1); 
-	line-height: 50px;
-	text-align: center;
-	padding: 0 10px;
-	color: white;
-	font-size: 1em;
+md-progress-circular.md-default-theme {
+  path {
+    stroke: nth($blue, 1) !important;
+  }
+
+  &.md-warn {
+    path {
+      stroke: nth($blue, 1) !important;
+    }
+  }
+
+  &.md-accent {
+    path {
+      stroke: nth($blue, 1) !important;
+    }
+  }
 }
 
-.primary-info {
-	text-align: center;
-	font-size: 2em;
-	font-weight: bold;
-}
 
-.center-box {
-	//min-height: 300px;
-	border: 3px solid nth($blue, 1);
-}
 
-.eye-reading {
-	height: 50px;
-	width: 75px;
-	margin: 10px;
-	padding: 10px;
-}
 
-.center-btn {
-	margin: 0 auto;
-	//padding-top: 125px;
-	//width: 20%;
-}
 
-.status-display {
-	font-weight: bold;
-	
-}
 
-.cal-display {
-	div {
 
-		border: 1px solid nth($purple, 1);
-	}
-	p {
-		color: nth($text, 1);
-	}
-}
+
+
+
+
+
+
+

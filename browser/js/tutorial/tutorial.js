@@ -17,37 +17,37 @@ core.config(function($stateProvider) {
 core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $interval, $timeout, ConstantsFactory, $mdDialog, DialogFactory) {
 
     $scope.settings = ConstantsFactory.settings;
-
-    $rootScope.$on('nextTab', function() {
-        $scope.selectedTab++;
-        console.log("tab", $scope.selectedTab);
-        if($scope.selectedTab === 2) {
-            currentTest = fillTheBar;
-        }
-        else if($scope.selectedTab === 3) {
-            currentTest = null;
-        }
-        console.log("next tab");
-    });
-
-
-    $scope.activeLink = 0;
     let currentTest;
-
-
-    $scope.selectedTab = 0;
-
-
-    $scope.active = {
-        'color': 'red'
-    }
-
-
     $scope.blinkCount = 0;
 
 
+    let setVariables = () => {
+        $scope.selectedTab = 0;
+        $scope.blinkCount = 0;
+        $scope.blinkFill = 0;
+        currentTest = null;
+    }
+
+    $rootScope.$on('nextTab', function() {
+        $scope.selectedTab++;
+        if ($scope.selectedTab === 2) {
+            currentTest = fillTheBar;
+        } else if ($scope.selectedTab === 3) {
+            currentTest = null;
+        }
+    });
+
+
+
     let fillTheBar = () => {
-        $rootScope.$emit("fillBar")
+        $scope.blinkCount++
+        $scope.blinkFill = ($scope.blinkCount / 10) * 100;
+        if ($scope.blinkCount === 10) {
+            $scope.blinkCount = 0;
+            $scope.blinkFill = 0;
+            $rootScope.$emit("nextTab");
+        }
+        // $rootScope.$emit("fillBar")
     }
 
     $scope.continue = () => {
@@ -110,6 +110,20 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
     }
 
 
+    $scope.adjustBlink = (add) => {
+        if (add) {
+            $scope.settings.blinkZero.value -= $scope.settings.blinkZero.value * .05;
+            $scope.settings.blinkRatio.value += $scope.settings.blinkRatio.value * .05;
+        } else {
+            $scope.settings.blinkZero.value += $scope.settings.blinkZero.value * .05;
+            $scope.settings.blinkRatio.value -= $scope.settings.blinkRatio.value * .05;
+        }
+
+        ConstantsFactory.saveUser("blinkRatio", $scope.settings.blinkRatio.value)
+        ConstantsFactory.saveUser("blinkZero", $scope.settings.blinkZero.value)
+    }
+
+
     $scope.startTest = () => {
         currentTest = fillTheBar;
         $scope.testStart = true;
@@ -140,5 +154,12 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
             styleDelay()
         }
     });
+
+    $rootScope.$on('$stateChangeStart',
+        function(event, toState, toParams, fromState, fromParams, options) {
+            setVariables();
+            // transitionTo() promise will be rejected with 
+            // a 'transition prevented' error
+        })
 
 })

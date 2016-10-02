@@ -2,7 +2,10 @@ core.config(function($stateProvider) {
     $stateProvider.state('calibrate', {
         url: '/calibrate',
         templateUrl: '/js/calibrate/calibrate.html',
-        controller: 'CalibrateCtrl'
+        controller: 'CalibrateCtrl',
+        onExit: (CalibrateFactory) => {
+            CalibrateFactory.reset()
+        }
     })
 });
 
@@ -63,9 +66,6 @@ core.controller('CalibrateCtrl', ($scope, $mdDialog, CalibrateFactory, $state, $
     }
 
 
-    $scope.openCal = 50;
-
-
 
     $scope.start = () => {
         if (TrackingFactory.convergence() > 50) {
@@ -95,7 +95,6 @@ core.controller('CalibrateCtrl', ($scope, $mdDialog, CalibrateFactory, $state, $
         return CalibrateFactory.openCalibrationComplete
     }, function(newVal, oldVal) {
         if (newVal === true) {
-            console.log("Open cal complete");
             $scope.openCalibrationComplete = CalibrateFactory.openCalibrationComplete;
             $scope.success = true;
             $timeout(() => {
@@ -121,8 +120,14 @@ core.controller('CalibrateCtrl', ($scope, $mdDialog, CalibrateFactory, $state, $
         return CalibrateFactory.closedCalibrationComplete
     }, function(newVal, oldVal) {
         if (newVal === true) {
-            console.log("Finished");
-            alert("Finished");
+            let action = () => {
+                $state.go("tutorial");
+            }
+            let message = {
+                title: "Calibration Complete",
+                listContent: ["Proceed to tuorial"]
+            }
+            DialogFactory.promptMessage(message, action)
         }
     });
 

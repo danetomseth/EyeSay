@@ -13,13 +13,22 @@
 				<div flex="50" class="blink-box" ng-style="activeBlink">
 					<p ng-style="activeText">Blink</p>
 				</div>
-				<div layout="row" layout-padding>
-					<md-button ng-click="adjustValue(true, 'blinkZero')" class="md-primary md-raised">Decrease</md-button>
-					<md-button ng-click="adjustValue(false, 'blinkZero')" class="md-primary md-raised">Increase</md-button>
+				<p>Blink Ratio</p>
+				<!-- <div layout="row" layout-padding>
+					<md-button ng-click="adjustValue(true, 'blinkRatio')" class="md-warn md-raised">-5%</md-button>
+					<div class="bl-spacer-w"></div>
+					<div class="bl-spacer-w"></div>
+					<md-button ng-click="adjustValue(false, 'blinkRatio')" class="md-primary md-raised">+5%</md-button>
+				</div> -->
 
+				<div layout="row" layout-padding>
+					<md-button ng-click="adjustBlink(false)" class="md-warn md-raised">-5%</md-button>
+					<div class="bl-spacer-w"></div>
+					<div class="bl-spacer-w"></div>
+					<md-button ng-click="adjustBlink(false)" class="md-primary md-raised">+5%</md-button>
 				</div>
 				<div layout="row" layout-padding>
-					<md-button ng-click="nextTab()" class="md-primary md-raised">Begin Tutorial</md-button>
+					<md-button ng-click="nextTab()" class="md-accent md-raised">Begin Tutorial</md-button>
 				</div>
 			</div>
 		</md-card-content>
