@@ -12,7 +12,7 @@
  </div>
  <div flex="30">
   <div class="web-box">
-       <bl-sidebar-webcam ng-style="webcamDir" id="webcam-directive"></bl-sidebar-webcam>
+       <bl-sidebar-webcam ng-style="webcamDir" id="webcam-directive" ng-show="showWebcam"></bl-sidebar-webcam>
        <div layout="column" layout-align="center center">
         <div>
          <md-switch ng-model="$root.settings.blinkActive.value" ng-change="toggleTracking()"  class="md-accent md-hue-2" aria-label="$root.settings.blinkActive.label"><b>Tracking</b>

@@ -1,11 +1,11 @@
 <md-dialog aria-label="List dialog"> 
  <md-dialog-content layout="column" layout-align="center" layout-padding>
- 	<md-toolbar layout="row" class="md-primary">
+ 	<md-toolbar layout="row" class="md-warn">
     <div class="md-toolbar-tools">
       <span><b>Weak Facial Tracking</b></span>
     </div>
   </md-toolbar>
-  <md-list flex>
+  <md-list flex class="bl-dialog-list">
    <md-list-item>1. Double-check the green outline closely matches you face</md-list-item>
    <md-list-item>2. Minimize head movement</md-list-item>
    <md-list-item>3. Keep face parallel to screen</md-list-item>
@@ -14,7 +14,7 @@
    <img width="200" src="/assets/clm-converge.png" alt="Convergance Example">
  </div>
  <md-dialog-actions layout="row" layout-align="center" layout-padding> 
-   <md-button ng-click="closeDialog()" class="md-primary md-raised"> 
+   <md-button ng-click="closeDialog()" class="md-accent md-raised"> 
      Got it 
    </md-button> 
  </md-dialog-actions> 

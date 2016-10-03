@@ -1,20 +1,21 @@
 <md-dialog aria-label="List dialog"> 
  <md-dialog-content layout="column" layout-align="center" layout-padding>
  	<md-toolbar layout="row" class="md-primary">
-      <div class="md-toolbar-tools">
-        <span>Instructions</span>
-      </div>
-    </md-toolbar>
-    <md-list flex>
-    	<md-list-item>1. Blink to select desired row</md-list-item>
-    	<md-list-item>2. Blink again to select letter</md-list-item>
-    	<md-list-item>3. Watch top row for autocomplete suggestions</md-list-item>
-    	<md-list-item>4. Select "Say" to convert spelled words to speech and to clear input</md-list-item>
-    	<md-list-item><b>(The timing takes practice)</b></md-list-item>
- </md-dialog-content> 
- <md-dialog-actions layout="row" layout-align="center" layout-padding> 
-   <md-button ng-click="closeDialog()" class="md-primary md-raised"> 
-     Got it 
-   </md-button> 
- </md-dialog-actions> 
+    <div class="md-toolbar-tools">
+      <span>Instructions</span>
+    </div>
+  </md-toolbar>
+  <md-list flex class="bl-dialog-list">
+   <md-list-item>1. Blink to select desired row</md-list-item>
+   <md-list-item>2. Blink again to select letter</md-list-item>
+   <md-list-item>3. Watch top row for autocomplete suggestions</md-list-item>
+   <md-list-item>4. Select "Say" to convert spelled words to speech and to clear input</md-list-item>
+   <md-list-item><b>(The timing takes practice)</b></md-list-item>
+ </md-list>
+</md-dialog-content> 
+<md-dialog-actions layout="row" layout-align="center" layout-padding> 
+ <md-button ng-click="closeDialog()" class="md-accent md-raised"> 
+   Start 
+ </md-button> 
+</md-dialog-actions> 
 </md-dialog>
