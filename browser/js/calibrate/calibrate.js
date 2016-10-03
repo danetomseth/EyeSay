@@ -12,7 +12,7 @@ core.config(function($stateProvider) {
 
 
 
-core.controller('CalibrateCtrl', ($scope, $mdDialog, CalibrateFactory, $state, $rootScope, ActionFactory, DialogFactory, TrackingFactory, $interval, $timeout) => {
+core.controller('CalibrateCtrl', function($scope, $mdDialog, CalibrateFactory, $state, $rootScope, ActionFactory, DialogFactory, TrackingFactory, $interval, $timeout) {
     let noConvergance = () => {
         var parentEl = angular.element(document.body);
         $mdDialog.show({
