@@ -43,7 +43,7 @@
 
 .bl-message {
     // background: #2196f3;
-    color: black;
+    // color: black;
     // padding: 30px;
     // margin: 8px;
     // box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
@@ -57,6 +57,7 @@
 
 .bl-message h2 {
     font-weight: bold;
+    text-align: center;
 }
 
 .bl-message p {
@@ -65,10 +66,15 @@
 
 .bl-message div {
     margin-bottom: 10px;
+    max-width: 900px;
 }
 
 .bl-message button {
     margin-top: 20px;
+}
+
+.bl-dialog-list {
+    font-size: 18px;
 }
 
 

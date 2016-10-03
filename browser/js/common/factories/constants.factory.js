@@ -22,11 +22,11 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
             value: true,
             number: false
         },
-        doubleBlink: {
-            label: 'Double Blink Function',
-            value: false,
-            number: false
-        },
+        // doubleBlink: {
+        //     label: 'Double Blink Function',
+        //     value: false,
+        //     number: false
+        // },
         webcamActive: {
             label: 'Webcam Status',
             value: true,
@@ -57,11 +57,11 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
                 value: user.blinkActive,
                 number: false
             },
-            doubleBlink: {
-                label: 'Double Blink Function',
-                value: user.doubleBlink,
-                number: false
-            },
+            // doubleBlink: {
+            //     label: 'Double Blink Function',
+            //     value: user.doubleBlink,
+            //     number: false
+            // },
             webcamActive: {
                 label: 'Webcam Status',
                 value: user.webcamActive,
@@ -99,11 +99,11 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
                     value: user.blinkActive,
                     number: false
                 },
-                doubleBlink: {
-                    label: 'Double Blink Function',
-                    value: user.doubleBlink,
-                    number: false
-                },
+                // doubleBlink: {
+                //     label: 'Double Blink Function',
+                //     value: user.doubleBlink,
+                //     number: false
+                // },
                 webcamActive: {
                     label: 'Webcam Status',
                     value: user.webcamActive,
@@ -148,6 +148,7 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
     obj.saveUser = (key, value) => {
         if (!Session.user) {
             guest[key].value = value;
+            console.log(guest);
         } else {
             let user = Session.user;
             user[key] = value;

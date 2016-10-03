@@ -4,17 +4,17 @@
 
 
 <md-content class="md-padding" layout-padding layout="column" layout-align="center">
-	<md-card>
+	<md-card class="bl-vw-80">
 		<md-card-content>
-			<div layout="column">
-				<div layout="row" ng-repeat="(key, setting)  in settings" class="setting-item">
+			<div layout="column" class="bl-dialog-list">
+				<div layout="row" ng-repeat="(key, setting)  in settings" class="bl-setting-item" layout-align="start center">
 					<div flex="40">
 						{{setting.label}}: {{setting.value}}
 					</div>
 					<div flex="30">
 						<md-icon ng-if="setting.number" md-font-set="material-icons" ng-click="adjustValue(true, setting, key)"> add </md-icon>
 						<md-icon ng-if="setting.number" md-font-set="material-icons" ng-click="adjustValue(false, setting, key)"> remove </md-icon>
-						<md-checkbox ng-if="!setting.number" ng-click="toggle(key, setting.value)" class="md-secondary" ng-model="setting.value"></md-checkbox>
+						<md-checkbox ng-if="!setting.number" ng-click="toggle(key, setting.value)" class="md-secondary bl-no-margin bl-checkbox" ng-model="setting.value"></md-checkbox>
 					</div>
 				</div>
 			</div>

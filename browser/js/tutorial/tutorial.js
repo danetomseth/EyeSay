@@ -119,6 +119,9 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
             $scope.settings.blinkRatio.value -= $scope.settings.blinkRatio.value * .05;
         }
 
+        $scope.settings.blinkZero.value = Math.floor($scope.settings.blinkZero.value);
+        $scope.settings.blinkRatio.value = ($scope.settings.blinkRatio.value.toFixed(3)) / 1;
+
         ConstantsFactory.saveUser("blinkRatio", $scope.settings.blinkRatio.value)
         ConstantsFactory.saveUser("blinkZero", $scope.settings.blinkZero.value)
     }

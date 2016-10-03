@@ -61,6 +61,16 @@ core.controller('SidebarCtrl', function($scope, $state, $rootScope, Session, Aut
         ConstantsFactory.saveUser('blinkActive', $rootScope.settings.blinkActive.value)
     }
 
+    $scope.showWebcam = ConstantsFactory.settings.blinkActive.value;
+
+    $scope.$watch(function() {
+        return ConstantsFactory.settings.blinkActive.value
+    }, function(newVal, oldVal) {
+        if (typeof newVal !== 'undefined') {
+            $scope.showWebcam = ConstantsFactory.settings.blinkActive.value;
+        }
+    });
+
    
     $scope.$on('$viewContentLoaded',
         function() {
