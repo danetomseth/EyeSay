@@ -2,7 +2,7 @@
 	<h1>Calibrate</h1>
 </div>
 <md-content layout-padding>
-	<div id="calibrate-overlay" flex layout="column" layout-align="center center" ng-if="!calibrateActive" class="calibrate-step bl-card">
+	<div id="calibrate-overlay" flex layout="column" layout-align="center center" ng-if="!calibrateActive" class="calibrate-step bl-card" md-whiteframe="8">
 		<div class="bl-message bl-vw-100">
 			<div>
 				<h2>The following actions are required to calibrate your blink profile<h2>
@@ -11,7 +11,7 @@
 				<p>To accurately detect your blinks, the app needs to calculate the average area of your eye when open, and the threshold to register a blink. This "blink profile" is unique to each user.</p>
 			</div>
 			<div>
-				<md-button class="md-raised md-accent" ng-click="start()">Ready?</md-button>
+				<md-button class="md-raised md-accent" ng-click="start()">Start</md-button>
 			</div>
 		</div>
 	</div>
@@ -52,8 +52,8 @@
 	<!-- Closed calibration -->
 	<div flex layout="column" layout-align="center center" ng-show="calibrating.closed" class="calibrate-step bl-card">
 		<div class="text-center bl-message bl-vw-80">
-			<h2>Maintain a normal gaze with eyes <b>CLOSED</b></h2>
-			<h2>Hold until progress meter fills</h2>
+			<h2>Blink naturally every 2 seconds</h2>
+			<h2>Repeat until progress meter fills</h2>
 			<div class="bl-cal-progress">
 				<round-progress
 				max="100"

@@ -1,0 +1,35 @@
+@keyframes fadeOut {
+  to {
+    // background: rgba(256,256,256,0.8) !important;
+    background: blue;
+    // opacity: 0;
+  }
+}
+
+
+.bl-fade:hover {
+    -webkit-animation: fadeOut 1s 0s 1 linear;
+    -moz-animation: fadeOut 1s 0s 1 linear;
+    -ms-animation: fadeOut 1s 0s 1 linear;
+    -o-animation: fadeOut 1s 0s 1 linear;
+    animation: fadeOut 1s 0s 1 linear;
+}
+
+
+
+.bl-animate {
+  width: 200px;
+  height: 200px;
+  background: red;
+  -webkit-transition: background 2s; /* Safari */
+  transition: background 2s;
+}
+
+
+.bl-animate:hover {
+    background: blue;
+}
+
+
+
+
