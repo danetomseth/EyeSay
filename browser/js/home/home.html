@@ -1,20 +1,19 @@
 
 <div class="bl-home" layout="column"  layout-align="center center">
-    <div>
-        <h1>Welcome</h1>
-    </div>
     <div class="bl-home-text">
         <h2>"A low-cost assisted communication web-app for people suffering from locked-in syndrome"</h2>
     </div>
-    <div class="bl-home-space">
-        <md-button ui-sref="signup" class="md-accent md-raised">Create Account</md-button>
-    </div> 
-    <div layout="row" layout-align="center" class="bl-home-space">
-            <div class="home-btn">
-                <md-button  class="md-raised md-primary" ui-sref="tutorial">Tutorial</md-button>
-                <md-button  class="md-raised md-primary" ui-sref="calibrate">Calibrate</md-button>
-            </div>
+    <div class="bl-home-box">
+        <div ui-sref="signup" ng-if="!loggedIn">
+            <h2>Signup</h2>
+            <p>Create account to store blink profile settings</p>
         </div>
+        <div ui-sref="calibrate">
+            <h2>Calibrate</h2>
+            <p>Continue as a guest</p>
+        </div>
+    </div>
+  <md-button class="md-accent md-hue-2 bl-white-btn" ui-sref="login">Login</md-button>
 </div>
 
 

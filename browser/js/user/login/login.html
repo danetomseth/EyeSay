@@ -1,4 +1,4 @@
-<md-content layout="column" layout-align="center">
+<!-- <md-content layout="column" layout-align="center">
 
     <div flex="80">
         <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
@@ -19,10 +19,50 @@
         </form>
     </div>
 
+
     <div flex="50" layout="column" layout-align="center center">
        <p>Not a user?</p> <md-button class="md-raised md-primary" ui-sref="signup">Create Account</md-button>
     </div>
 
 
+
+</md-content> -->
+
+
+<md-content layout-padding layout-align="center center" layout="column">
+
+  <!-- <div flex=75> -->
+    <md-card class="bl-vw-70">
+    <md-toolbar layout="row" class="md-primary">
+        <div class="md-toolbar-tools">
+            <span><b>Login</b></span>
+        </div>
+    </md-toolbar>
+    <form name="userForm">
+      <md-card-content>
+       <md-content class="md-no-momentum">
+        <md-input-container class="md-icon-float md-block">
+          <!-- Use floating label instead of placeholder -->
+          <label>Email</label>
+          <md-icon class="material-icons">email</md-icon>
+          <input ng-model="login.email" type="text" required="">
+      </md-input-container>
+      <md-input-container class="md-icon-float md-block">
+          <!-- Use floating label instead of placeholder -->
+          <label>Password</label>
+          <md-icon class="material-icons">lock</md-icon>
+          <input ng-model="login.password" type="password" required="">
+      </md-input-container>
+  </md-content>
+</md-card-content>
+<md-card-actions layout="row" layout-align="end center">
+  <md-button type="submit" ng-click="sendLogin(login)" class="md-raised md-primary">Login</md-button>
+</md-card-actions>
+</form>
+</md-card>
+<!-- </div> -->
+<div flex="50" layout="column" layout-align="center center">
+       <p><b>Not a user?</b></p> <md-button class="md-raised md-accent" ui-sref="signup">Create Account</md-button>
+    </div>
 
 </md-content>

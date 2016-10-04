@@ -27,20 +27,15 @@ core.controller('SidebarCtrl', function($scope, $state, $rootScope, Session, Aut
 
     AuthService.getLoggedInUser()
         .then(user => {
-            console.log('user logged in', user);
-            console.log('session', Session.user);
             if (Session.user) {
                 $scope.loggedIn = true;
-                console.log('logged in', $scope.loggedIn);
             }
         })
 
     var setUser = function() {
         if (Session.user) {
-            console.log('user');
             $scope.loggedIn = true;
         } else {
-            console.log('no user');
             $scope.loggedIn = false;
         }
     };
@@ -75,7 +70,6 @@ core.controller('SidebarCtrl', function($scope, $state, $rootScope, Session, Aut
     $scope.$on('$viewContentLoaded',
         function() {
             $scope.currentState = $state.current.name;
-            console.log("loaded", $scope.currentState);
 
         });
 

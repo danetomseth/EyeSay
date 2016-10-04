@@ -74,13 +74,11 @@ core.factory('TicTacFactory', function($state, $timeout, $interval, DialogFactor
 
     tic.computerChoice = () => {
         let randomDelay = Math.floor(Math.random() * 300) + 250;
-        console.log("computer thinking");
         $timeout(() => {
             let randNum = Math.floor(Math.random() * (availableChoices.length))
             let randChoice = availableChoices[randNum];
             tic.gameBoard[randChoice] = "O";
             availableChoices.splice(randNum, 1);
-            console.log("computer choice");
         }, randomDelay);
 
     }
@@ -148,7 +146,6 @@ core.factory('TicTacFactory', function($state, $timeout, $interval, DialogFactor
             listContent: ["Proceed"],
         }
         let action = () => {
-            console.log("action");
             $state.go("type");
         }
         if (player === "X") {

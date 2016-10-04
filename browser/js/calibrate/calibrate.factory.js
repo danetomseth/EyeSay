@@ -116,7 +116,6 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
         })
         maxSum = maxSum / maxVals.length;
         calibrateObj.openCalibrationComplete = true;
-        console.log("open val", maxSum);
     }
 
     calibrateObj.setClosedValue = () => {
@@ -166,8 +165,6 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
     let setValues = function() {
         blinkZero = maxSum.toFixed(2);
         blinkRatio = (minSum / maxSum).toFixed(2);
-        console.log("Zero", blinkZero);
-        console.log("Ratio", blinkRatio);
         ConstantsFactory.setBlink(blinkRatio, blinkZero);
         calibrateObj.calibrationSet = true;
         // resetCalValues();
