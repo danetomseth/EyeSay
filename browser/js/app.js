@@ -39,15 +39,12 @@ app.run(function($rootScope, AuthService, $state, Session) {
             // (the second time, AuthService.isAuthenticated() will work)
             // otherwise, if no user is logged in, go to "login" state.
             if (user) {
-                console.log('auth sertvice get user', user);
                 let threshold = {
                     ratio: user.blinkRatio,
                     zero: user.blinkZero
                 }
                 $rootScope.$emit("userThreshold", threshold);
-            } else {
-                console.log("no user");;
-            }
+            } 
         });
 
     

@@ -1,17 +1,11 @@
-.primary-btn {
-	color: nth($text, 1) !important;
-	background-color: nth($background, 1) !important;
+.bl-border {
+	border: 1px solid rgba(0,0,0, 0.1);
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
 
 
-
-
-.calibrate-btn {
-	
-}
-
-
-.clickable:hover {
-	cursor: pointer;
-	opacity: 0.8;
-}
+.bl-white-btn {
+	border: 1px solid rgba(0,0,0, 0.1);
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	background: white;
+	}

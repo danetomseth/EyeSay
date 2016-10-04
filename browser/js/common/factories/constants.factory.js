@@ -148,7 +148,6 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
     obj.saveUser = (key, value) => {
         if (!Session.user) {
             guest[key].value = value;
-            console.log(guest);
         } else {
             let user = Session.user;
             user[key] = value;

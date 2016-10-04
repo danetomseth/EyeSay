@@ -3,9 +3,6 @@ core.directive("blTutorialFive", ($rootScope, ActionFactory, $timeout, $interval
         restrict: 'E',
         templateUrl: 'js/tutorial/pageFive.html',
         link: (scope, elem, attr) => {
-
-
-
             let startGame = () => {
                 if (TrackingFactory.checkTracking()) {
                     return
@@ -17,7 +14,7 @@ core.directive("blTutorialFive", ($rootScope, ActionFactory, $timeout, $interval
 
             let message = {
                 title: "Tic-Tac-Toe",
-                listContent: ["Play the god damn game"]
+                listContent: ["1. The goal is to beat the computer", "2. The highlighted box is the current selection", "3. Blink to select the current box"]
             }
             DialogFactory.promptMessage(message, startGame) //initial prompt message to start game
 

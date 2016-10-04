@@ -33,7 +33,7 @@ app.controller('LoginCtrl', function($scope, AuthService, $state, Session, Const
 
         AuthService.login(loginInfo).then(function() {
             ConstantsFactory.setUser(Session.user);
-            $state.go('home');
+            $state.go('calibrate');
         }).catch(function() {
             $scope.error = 'Invalid login credentials.';
         });
