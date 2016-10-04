@@ -36,7 +36,7 @@
 <body ng-app="BlinkApp" layout="column">
 
     <div layout="row" id="page-content" ng-model="sidebarActive">
-        <div flex="20" flex-gt-sm="15" id="bl-sidebar">
+        <div flex="20" flex-gt-sm="15" id="bl-sidebar" hide-xs>
             <bl-sidebar id="sidebar-container"></bl-sidebar>
         </div>
         <div flex ng-class="{'blur-page': $root.zeroActive}" id="bl-overflow">

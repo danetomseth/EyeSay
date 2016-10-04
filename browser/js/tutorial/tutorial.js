@@ -3,6 +3,7 @@ core.config(function($stateProvider) {
         url: '/tutorial',
         templateUrl: 'js/tutorial/tutorial.html',
         controller: 'TutorialCtrl',
+        cache: false,
         onEnter: (DialogFactory) => {
             //DialogFactory.hint();
         },
