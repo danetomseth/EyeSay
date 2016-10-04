@@ -19,7 +19,6 @@ core.controller('SidebarCtrl', function($scope, $state, $rootScope, Session, Aut
     var setUser = function() {
         if (Session.user) {
             $scope.loggedIn = true;
-            console.log("user",Session.user);
             $scope.username = Session.user.firstName;
         } else {
             $scope.loggedIn = false;

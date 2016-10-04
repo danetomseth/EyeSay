@@ -1,5 +1,5 @@
 'use strict';
-const core = angular.module('core', ['ui.router', 'ui.bootstrap', 'ngAnimate', 'ngMaterial', 'ngMdIcons', 'angular-svg-round-progressbar'])
+const core = angular.module('core', ['ui.router', 'ngAnimate', 'ngMaterial', 'ngMdIcons', 'angular-svg-round-progressbar'])
 
 window.app = angular.module('BlinkApp', ['blinkAuth', 'core']);
 
