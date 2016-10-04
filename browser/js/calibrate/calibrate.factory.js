@@ -1,4 +1,4 @@
-core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, SettingsFactory, TrackingFactory, PositionFactory) {
+core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, SettingsFactory, TrackingFactory, PositionFactory, ActionFactory) {
     let blinkZero = 0;
     let blinkRatio = 0;
     let maxVals = [];
@@ -132,7 +132,7 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
         if (positions) {
             calibrateObj.openCalibration(PositionFactory.getBlinkValue(positions));
         }
-        if (!calibrateObj.openCalibrationComplete) {
+        if (!calibrateObj.openCalibrationComplete && ActionFactory.isActive('calibrate')) {
             frameId = requestAnimationFrame(calibrateObj.runOpenCalibration);
         }
     }
@@ -141,8 +141,9 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
         let positions = TrackingFactory.getPositions();
         if (positions) {
             calibrateObj.closedCalibration(PositionFactory.getBlinkValue(positions));
+            console.log("running");
         }
-        if (!calibrateObj.closedCalibrationComplete) {
+        if (!calibrateObj.closedCalibrationComplete && ActionFactory.isActive('calibrate')) {
             frameId = requestAnimationFrame(calibrateObj.runClosedCalibration);
         }
     }

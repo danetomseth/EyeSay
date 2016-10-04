@@ -1,10 +1,13 @@
-
-<div class="bl-home" layout="column"  layout-align="center center">
+<div class="bl-home">
+<div class="bl-home-video">
+    <video loop="true" autoplay="true" name="Blink Home" src="assets/eye-video.mov"></video>
+</div>
+<div class="bl-home-content" layout="column"  layout-align="center center">
     <div class="bl-home-text">
         <h2>"A low-cost assisted communication web-app for people suffering from locked-in syndrome"</h2>
     </div>
-    <div class="bl-home-box">
-        <div ui-sref="signup" ng-if="!loggedIn">
+    <div class="bl-home-box" ng-if="!loggedIn">
+        <div ui-sref="signup">
             <h2>Signup</h2>
             <p>Create account to store blink profile settings</p>
         </div>
@@ -13,7 +16,7 @@
             <p>Continue as a guest</p>
         </div>
     </div>
-  <md-button class="md-accent md-hue-2 bl-white-btn" ui-sref="login">Login</md-button>
-</div>
 
+</div>
+</div>
 

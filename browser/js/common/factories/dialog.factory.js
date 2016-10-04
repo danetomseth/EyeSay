@@ -39,6 +39,49 @@ core.factory('DialogFactory', function($http, $mdDialog) {
         });
     }
 
+    let noConvergance = () => {
+        var parentEl = angular.element(document.body);
+        $mdDialog.show({
+            parent: parentEl,
+            focusOnOpen: true,
+            controller: ($scope, TypeFactory) => {
+                $scope.closeDialog = () => {
+                    $mdDialog.hide();
+                }
+            },
+            templateUrl: 'js/calibrate/dialog.html'
+        });
+    }
+    let closedInstructions = () => {
+        var parentEl = angular.element(document.body);
+        $mdDialog.show({
+            parent: parentEl,
+            controller: ($scope, CalibrateFactory) => {
+                $scope.closeDialog = () => {
+                    $mdDialog.hide();
+                    CalibrateFactory.runClosedCalibration();
+                }
+            },
+            templateUrl: 'js/calibrate/closedInstructions.html'
+        });
+    }
+
+
+
+    let openInstructions = () => {
+        var parentEl = angular.element(document.body);
+        $mdDialog.show({
+            parent: parentEl,
+            controller: ($scope, CalibrateFactory) => {
+                $scope.closeDialog = () => {
+                    $mdDialog.hide();
+                    CalibrateFactory.runOpenCalibration();
+                }
+            },
+            templateUrl: 'js/calibrate/openInstructions.html'
+        });
+    }
+
 
     return {
         message: () => {
@@ -74,6 +117,15 @@ core.factory('DialogFactory', function($http, $mdDialog) {
         },
         checkTracking: () => {
             checkTracking();
+        },
+        openInstructions: () => {
+            openInstructions();
+        },
+        closedInstructions: () => {
+            closedInstructions();
+        },
+        noConvergance: () => {
+            noConvergance();
         }
 
     }
