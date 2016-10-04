@@ -14,6 +14,38 @@ bl-sidebar {
 }
 
 
+.bl-sidebar-actions {
+  padding-top: 20px;
+  padding-left: 15px;
+}
+
+.bl-sidebar-actions div {
+  padding-left: 0px;
+}
+
+.bl-welcome {
+  margin: 8px 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+
+.bl-switch {
+    margin: 8px 0;
+}
+
+
+.bl-label {
+    font-size: 18px !important;
+  font-weight: 500;
+}
+
+.bl-sidebar-btn a {
+  // margin-left: 0px;
+  margin: 8px 0;
+}
+
+
 .bl-sidebar-content {
   border-right: 1px solid black;
 }

@@ -14,10 +14,19 @@
 					<p ng-style="activeText">{{blinkText}}</p>
 				</div>
 				<div layout="row" layout-padding>
-					<md-button ng-click="adjustBlink(false)" class="md-warn bl-border">-5%</md-button>
+					<md-button ng-click="adjustBlink(false)" class="md-warn bl-border">-5%
+						<md-tooltip>
+						Decrease the sensitivity of blink detection by 5%
+						</md-tooltip>
+					</md-button>
 					<div class="bl-spacer-w"></div>
 					<div class="bl-spacer-w"></div>
-					<md-button ng-click="adjustBlink(false)" class="md-primary bl-border">+5%</md-button>
+					<md-button ng-click="adjustBlink(false)" class="md-primary bl-border">+5%
+
+						<md-tooltip>
+						Increase the sensitivity of blink detection by 5%
+						</md-tooltip>
+					</md-button>
 				</div>
 				<div layout="row" layout-padding>
 					<md-button ng-click="nextTab()" class="md-accent md-raised">Next</md-button>
