@@ -31,16 +31,19 @@
     <link rel="stylesheet" type="text/css" href="/style.css" />
 </head>
 <body ng-app="BlinkApp" layout="column">
-    <div layout="row" id="page-content" ng-model="sidebarActive">
+    <div layout="row" id="page-content" ng-if="$root.isChrome">
         <div flex="20" flex-gt-sm="15" id="bl-sidebar" hide-xs>
             <bl-sidebar id="sidebar-container"></bl-sidebar>
         </div>
-        <div flex ng-class="{'blur-page': $root.zeroActive}" id="bl-overflow">
+        <div flex id="bl-overflow">
             <div class="bl-header">
                 <h1>Blink</h1>
             </div>
             <div flex id="main-content" ui-view></div>
         </div>
+    </div>
+    <div ng-if="!$root.isChrome">
+        <bl-browser class="bl-browser-support"></bl-browser>
     </div>
 </body>
 </html>
