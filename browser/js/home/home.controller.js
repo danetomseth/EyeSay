@@ -10,6 +10,8 @@ core.controller('HomeCtrl', function($scope, Session) {
 
 	run();
 
+	
+
 
 
 });
