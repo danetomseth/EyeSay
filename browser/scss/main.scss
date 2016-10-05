@@ -1,15 +1,10 @@
 
 
-// @mixin clearfix {
-//   &:after {
-//     content: "";
-//     display: table;
-//     clear: both;
-//   }
-// }
 
 body {
   height: 100vh;
+  min-height: 768px;
+  min-width: 1024px;
   color: rgba(0, 0, 0, 0.8);
  
 }
@@ -95,36 +90,6 @@ $keyboard: 'Roboto Slab', serif;
 
 
 
-
-
-
-
-// .material-icons {
-//   font-family: 'Material Icons';
-//   font-weight: normal;
-//   font-style: normal;
-//   // font-size: 24px;  /* Preferred icon size */
-//   // display: inline-block;
-//   // line-height: 1;
-//   // text-transform: none;
-//   // letter-spacing: normal;
-//   // word-wrap: normal;
-//   // white-space: nowrap;
-//   direction: ltr;
-
-//   /* Support for all WebKit browsers. */
-//   -webkit-font-smoothing: antialiased;
-//   /* Support for Safari and Chrome. */
-//   text-rendering: optimizeLegibility;
-
-//   /* Support for Firefox. */
-//   -moz-osx-font-smoothing: grayscale;
-
-//   /* Support for IE. */
-//   font-feature-settings: 'liga';
-// }
-
-
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-36 { font-size: 36px; }
@@ -176,19 +141,5 @@ md-icon.btn-1 {
 
 
 
-@import 'home/main';
 @import 'custom/_main';
-@import 'about/main';
-@import 'login/main';
-@import 'custom/keyboard';
-@import 'custom/sidebar';
-// @import 'custom/corners';
-// @import 'custom/newsfeed';
-@import 'custom/settings';
-@import 'custom/buttons';
-@import 'custom/loading';
-@import 'custom/calibrate';
-@import 'custom/highlight';
-@import 'custom/animation';
-// @import 'custom/admin';
-@import 'custom/tutorial';
+

@@ -1,20 +1,36 @@
-
-<div class="bl-home" layout="column"  layout-align="center center">
-    <div>
-        <h1>Welcome</h1>
-    </div>
+<div class="bl-home" hide-xs hide-sm>
+<div class="bl-home-video">
+    <video loop="true" autoplay="true" name="Blink Home" src="assets/eye-video.mov"></video>
+</div>
+<div class="bl-home-content" layout="column"  layout-align="center center">
     <div class="bl-home-text">
         <h2>"A low-cost assisted communication web-app for people suffering from locked-in syndrome"</h2>
     </div>
-    <div class="bl-home-space">
-        <md-button ui-sref="signup" class="md-accent md-raised">Create Account</md-button>
-    </div> 
-    <div layout="row" layout-align="center" class="bl-home-space">
-            <div class="home-btn">
-                <md-button  class="md-raised md-primary" ui-sref="tutorial">Tutorial</md-button>
-                <md-button  class="md-raised md-primary" ui-sref="calibrate">Calibrate</md-button>
-            </div>
+    <div class="bl-home-box" ng-if="!loggedIn">
+        <div ui-sref="signup">
+            <h2>Signup</h2>
+            <p>Create account to store blink profile settings</p>
         </div>
+        <div ui-sref="calibrate">
+            <h2>Calibrate</h2>
+            <p>Continue as a guest</p>
+        </div>
+    </div>
+
+</div>
 </div>
 
+
+<div layout="column" show-xs show-sm layout-align="center start" layout-padding>
+    <div>
+        <h2>The window size is too small!</h2>
+
+    </div>
+    <div>
+        <h4>If on a computer, please enlarge window</h4>
+        <h4>Note: The app is not currently compatiable with mobile devices</h4>    
+    </div>
+
+
+</div>
 

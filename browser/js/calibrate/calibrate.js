@@ -3,6 +3,7 @@ core.config(function($stateProvider) {
         url: '/calibrate',
         templateUrl: '/js/calibrate/calibrate.html',
         controller: 'CalibrateCtrl',
+        cache: false,
         onExit: (CalibrateFactory) => {
             CalibrateFactory.reset()
         }
@@ -13,49 +14,6 @@ core.config(function($stateProvider) {
 
 
 core.controller('CalibrateCtrl', function($scope, $mdDialog, CalibrateFactory, $state, $rootScope, ActionFactory, DialogFactory, TrackingFactory, $interval, $timeout) {
-    let noConvergance = () => {
-        var parentEl = angular.element(document.body);
-        $mdDialog.show({
-            parent: parentEl,
-            controller: ($scope, TypeFactory) => {
-                $scope.closeDialog = () => {
-                    $mdDialog.hide();
-                }
-            },
-            templateUrl: 'js/calibrate/dialog.html'
-        });
-    }
-    let closedInstructions = () => {
-        var parentEl = angular.element(document.body);
-        $mdDialog.show({
-            parent: parentEl,
-            controller: ($scope, CalibrateFactory) => {
-                $scope.closeDialog = () => {
-                    $mdDialog.hide();
-                    CalibrateFactory.runClosedCalibration();
-                }
-            },
-            templateUrl: 'js/calibrate/closedInstructions.html'
-        });
-    }
-
-
-
-    let openInstructions = () => {
-        var parentEl = angular.element(document.body);
-        $mdDialog.show({
-            parent: parentEl,
-            controller: ($scope, CalibrateFactory) => {
-                $scope.closeDialog = () => {
-                    $mdDialog.hide();
-                    CalibrateFactory.runOpenCalibration();
-                }
-            },
-            templateUrl: 'js/calibrate/openInstructions.html'
-        });
-    }
-
-
 
     $scope.calibrateActive = false;
     $scope.success = false;
@@ -69,11 +27,11 @@ core.controller('CalibrateCtrl', function($scope, $mdDialog, CalibrateFactory, $
 
     $scope.start = () => {
         if (TrackingFactory.convergence() > 50) {
-            noConvergance();
+            DialogFactory.noConvergance();
         } else {
             $scope.calibrateActive = true;
             $scope.calibrating.open = true;
-            openInstructions();
+            DialogFactory.openInstructions();
         }
     }
 
@@ -101,7 +59,7 @@ core.controller('CalibrateCtrl', function($scope, $mdDialog, CalibrateFactory, $
                 $scope.success = false;
                 $scope.calibrating.open = false;
                 $scope.calibrating.closed = CalibrateFactory.openCalibrationComplete;
-                closedInstructions();
+                DialogFactory.closedInstructions();
             }, 1000);
 
         }

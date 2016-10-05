@@ -2,7 +2,7 @@ core.config(function ($stateProvider) {
     $stateProvider.state('type', {
         url: '/type',
         controller: 'TypeCtrl',
-        templateUrl: 'templates/type.html',
+        templateUrl: 'js/type/type.html',
         onEnter: function(TypeFactory) {
             TypeFactory.setSpecialFunction({
                 text: "STOP",

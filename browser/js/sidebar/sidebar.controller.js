@@ -7,40 +7,20 @@ core.controller('SidebarCtrl', function($scope, $state, $rootScope, Session, Aut
             });
     }
 
-    let lastBlinkTime = 0;
-    $scope.blink = () => {
-        let blinkDt = Date.now() - lastBlinkTime;
-        lastBlinkTime = Date.now();
-        if (blinkDt < 250) {
-            return false
-        } else {
-            if (blinkDt <= 500) {
-                console.log('doubleeeee');
-                $rootScope.$broadcast('doubleBlink', 'Event');
-            } else {
-                console.log('singleee');
-                $rootScope.$broadcast('singleBlink', 'Event');
-            }
-        }
-    }
-
 
     AuthService.getLoggedInUser()
         .then(user => {
-            console.log('user logged in', user);
-            console.log('session', Session.user);
             if (Session.user) {
                 $scope.loggedIn = true;
-                console.log('logged in', $scope.loggedIn);
+
             }
         })
 
     var setUser = function() {
         if (Session.user) {
-            console.log('user');
             $scope.loggedIn = true;
+            $scope.username = Session.user.firstName;
         } else {
-            console.log('no user');
             $scope.loggedIn = false;
         }
     };
@@ -48,14 +28,6 @@ core.controller('SidebarCtrl', function($scope, $state, $rootScope, Session, Aut
     $rootScope.$on(AUTH_EVENTS.loginSuccess, setUser);
     $rootScope.$on(AUTH_EVENTS.logoutSuccess, setUser);
 
-
-    $scope.move = () => {
-        $rootScope.$broadcast('iterate', 'Event');
-    }
-
-    $scope.dblBlink = () => {
-        $rootScope.$broadcast('doubleBlink', 'Event');
-    }
 
     $scope.toggleTracking = (val) => {
         ConstantsFactory.saveUser('blinkActive', $rootScope.settings.blinkActive.value)
@@ -75,7 +47,6 @@ core.controller('SidebarCtrl', function($scope, $state, $rootScope, Session, Aut
     $scope.$on('$viewContentLoaded',
         function() {
             $scope.currentState = $state.current.name;
-            console.log("loaded", $scope.currentState);
 
         });
 

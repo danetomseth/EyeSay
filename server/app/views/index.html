@@ -12,20 +12,18 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed|Roboto+Slab' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
     rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/angular-material/angular-material.css">
+    <link rel="stylesheet" type="text/css" href="/angular-material/angular-material.min.css">
     <link src="/angular-material-icons/angular-material-icons.css"></link>
     <script src="/lodash/index.js"></script>
-    <script src="/angular/angular.js"></script>
-    <script src="/angular-svg-round-progressbar/build/roundProgress.js"></script>
-    <script src="/angular-animate/angular-animate.js"></script>
-    <script src="/angular-aria/angular-aria.js"></script>
-    <script src="/angular-material/angular-material.js"></script>
-    <script src="/angular-material-icons/angular-material-icons.js"></script>
-    <script src="/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="/angular-ui-bootstrap/ui-bootstrap.js"></script>
-    <script src="/angular-ui-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/angular/angular.min.js"></script>
+    <script src="/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
+    <script src="/angular-animate/angular-animate.min.js"></script>
+    <script src="/angular-aria/angular-aria.min.js"></script>
+    <script src="/angular-material/angular-material.min.js"></script>
+    <script src="/angular-material-icons/angular-material-icons.min.js"></script>
+    <script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="/socket.io-client/socket.io.js"></script>
-    <script src="/clm/clmtrackr.js"></script>
+    <script src="/clm/clmtrackr.min.js"></script>
     <script src="/clm/models/model_pca_20_svm.js"></script>
     <script src="/modernizr.js"></script>
     <!-- <script src="http://code.responsivevoice.org/responsivevoice.js"></script> -->
@@ -42,20 +40,20 @@
 
   </script>
 </head>
-
 <body ng-app="BlinkApp" layout="column">
-
-    <div layout="row" id="page-content" ng-model="sidebarActive">
-        <div flex="20" flex-gt-sm="15" id="bl-sidebar">
+    <div layout="row" id="page-content" ng-if="$root.isChrome">
+        <div flex="20" flex-gt-sm="15" id="bl-sidebar" hide-xs>
             <bl-sidebar id="sidebar-container"></bl-sidebar>
         </div>
-        <div flex ng-class="{'blur-page': $root.zeroActive}" id="bl-overflow">
+        <div flex id="bl-overflow">
             <div class="bl-header">
                 <h1>Blink</h1>
             </div>
             <div flex id="main-content" ui-view></div>
         </div>
     </div>
+    <div ng-if="!$root.isChrome">
+        <bl-browser class="bl-browser-support"></bl-browser>
+    </div>
 </body>
-
 </html>

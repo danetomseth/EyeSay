@@ -1,5 +1,5 @@
 'use strict';
-const core = angular.module('core', ['ui.router', 'ui.bootstrap', 'ngAnimate', 'ngMaterial', 'ngMdIcons', 'angular-svg-round-progressbar'])
+const core = angular.module('core', ['ui.router', 'ngAnimate', 'ngMaterial', 'ngMdIcons', 'angular-svg-round-progressbar'])
 
 window.app = angular.module('BlinkApp', ['blinkAuth', 'core']);
 
@@ -28,8 +28,7 @@ app.config(function($urlRouterProvider, $locationProvider, $mdThemingProvider, $
 
 // This app.run is for controlling access to specific states.
 app.run(function($rootScope, AuthService, $state, Session) {
-
-
+    $rootScope.isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
      //initially sets caregiver to false
     // The given state requires an authenticated user.
     AuthService.getLoggedInUser().then(function(user) {
@@ -39,15 +38,12 @@ app.run(function($rootScope, AuthService, $state, Session) {
             // (the second time, AuthService.isAuthenticated() will work)
             // otherwise, if no user is logged in, go to "login" state.
             if (user) {
-                console.log('auth sertvice get user', user);
                 let threshold = {
                     ratio: user.blinkRatio,
                     zero: user.blinkZero
                 }
                 $rootScope.$emit("userThreshold", threshold);
-            } else {
-                console.log("no user");;
-            }
+            } 
         });
 
     
@@ -86,6 +82,8 @@ app.run(function($rootScope, AuthService, $state, Session) {
             } else {
                 $state.go('login');
             }
+
+
         });
 
     });

@@ -3,6 +3,7 @@ core.config(function($stateProvider) {
         url: '/tutorial',
         templateUrl: 'js/tutorial/tutorial.html',
         controller: 'TutorialCtrl',
+        cache: false,
         onEnter: (DialogFactory) => {
             //DialogFactory.hint();
         },
@@ -19,6 +20,8 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
     $scope.settings = ConstantsFactory.settings;
     let currentTest;
     $scope.blinkCount = 0;
+
+    $scope.blinkText = "Waiting for a blink...."
 
 
     let setVariables = () => {
@@ -96,6 +99,7 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
             $scope.activeText = {
                 'font-size': '1em'
             }
+            $scope.blinkText = "Waiting for a blink...."
         }, 500)
     }
 
@@ -149,11 +153,13 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
                 currentTest();
             }
             $scope.activeBlink = {
-                'background': 'rgba(105,240,174, 0.2)'
+                'background': 'rgba(105,240,174, 0.2)',
+                'font-weight': 'bold'
             }
             $scope.activeText = {
                 'font-size': '2em'
             }
+            $scope.blinkText = "Blink!!"
             styleDelay()
         }
     });
