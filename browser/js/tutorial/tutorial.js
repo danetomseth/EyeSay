@@ -17,7 +17,7 @@ core.config(function($stateProvider) {
 
 core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $interval, $timeout, ConstantsFactory, $mdDialog, DialogFactory) {
 
-    $scope.settings = ConstantsFactory.settings;
+    $scope.user = ConstantsFactory.getUser();
     let currentTest;
     $scope.blinkCount = 0;
 
@@ -106,28 +106,28 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
 
     $scope.adjustValue = (add, key) => {
         if (add) {
-            $scope.settings[key].value += $scope.settings[key].value * .01;
+            ConstantsFactory.user[key] += ConstantsFactory.user[key] * .01;
         } else {
-            $scope.settings[key].value -= $scope.settings[key].value * .01;
+            ConstantsFactory.user[key] -= ConstantsFactory.user[key] * .01;
         }
-        ConstantsFactory.saveUser(key, $scope.settings[key].value)
+        ConstantsFactory.saveUser(key, ConstantsFactory.user[key])
     }
 
 
     $scope.adjustBlink = (add) => {
         if (add) {
-            $scope.settings.blinkZero.value -= $scope.settings.blinkZero.value * .05;
-            $scope.settings.blinkRatio.value += $scope.settings.blinkRatio.value * .05;
+            ConstantsFactory.user.blinkZero -= ConstantsFactory.user.blinkZero * .05;
+            ConstantsFactory.user.blinkRatio += ConstantsFactory.user.blinkRatio * .05;
         } else {
-            $scope.settings.blinkZero.value += $scope.settings.blinkZero.value * .05;
-            $scope.settings.blinkRatio.value -= $scope.settings.blinkRatio.value * .05;
+            ConstantsFactory.user.blinkZero += ConstantsFactory.user.blinkZero * .05;
+            ConstantsFactory.user.blinkRatio -= ConstantsFactory.user.blinkRatio * .05;
         }
 
-        $scope.settings.blinkZero.value = Math.floor($scope.settings.blinkZero.value);
-        $scope.settings.blinkRatio.value = ($scope.settings.blinkRatio.value.toFixed(3)) / 1;
+        ConstantsFactory.user.blinkZero = Math.floor(ConstantsFactory.user.blinkZero);
+        ConstantsFactory.user.blinkRatio = (ConstantsFactory.user.blinkRatio.toFixed(3)) / 1;
 
-        ConstantsFactory.saveUser("blinkRatio", $scope.settings.blinkRatio.value)
-        ConstantsFactory.saveUser("blinkZero", $scope.settings.blinkZero.value)
+        ConstantsFactory.saveUser("blinkRatio", ConstantsFactory.user.blinkRatio)
+        ConstantsFactory.saveUser("blinkZero", ConstantsFactory.user.blinkZero)
     }
 
 

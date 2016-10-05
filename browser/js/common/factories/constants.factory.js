@@ -1,75 +1,19 @@
 core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Session) {
     let obj = {};
 
-    let guest = {
-        blinkZero: {
-            label: 'Blink Zero',
-            value: 42,
-            number: true
-        },
-        blinkRatio: {
-            label: 'Blink Ratio',
-            value: 0.78,
-            number: true
-        },
-        cursorDelay: {
-            label: 'Cursor Delay',
-            value: 750,
-            number: true
-        },
-        blinkActive: {
-            label: 'Blink Active',
-            value: true,
-            number: false
-        },
-        // doubleBlink: {
-        //     label: 'Double Blink Function',
-        //     value: false,
-        //     number: false
-        // },
-        webcamActive: {
-            label: 'Webcam Status',
-            value: true,
-            number: false
-        }
-    }
+
+    obj.guestSettings = {
+        blinkZero: 42,
+        blinkRatio: 0.78,
+        cursorDelay: 750,
+        blinkActive: true
+    } 
 
 
     if (Session.user) {
-        obj.settings = {
-            blinkZero: {
-                label: 'Blink Zero',
-                value: user.blinkZero,
-                number: true
-            },
-            blinkRatio: {
-                label: 'Blink Ratio',
-                value: user.blinkRatio,
-                number: true
-            },
-            cursorDelay: {
-                label: 'Cursor Delay',
-                value: user.cursorDelay,
-                number: true
-            },
-            blinkActive: {
-                label: 'Blink Active',
-                value: user.blinkActive,
-                number: false
-            },
-            // doubleBlink: {
-            //     label: 'Double Blink Function',
-            //     value: user.doubleBlink,
-            //     number: false
-            // },
-            webcamActive: {
-                label: 'Webcam Status',
-                value: user.webcamActive,
-                number: false
-            }
-        }
+        obj.user = Session.user;
     } else {
-        obj.settings = guest;
+        obj.user = obj.guestSettings;
     }
 
 
@@ -78,67 +22,30 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
 
     obj.setUser = (user) => {
         if (user) {
-            obj.settings = {
-                blinkZero: {
-                    label: 'Blink Zero',
-                    value: user.blinkZero,
-                    number: true
-                },
-                blinkRatio: {
-                    label: 'Blink Ratio',
-                    value: user.blinkRatio,
-                    number: true
-                },
-                cursorDelay: {
-                    label: 'Cursor Delay',
-                    value: user.cursorDelay,
-                    number: true
-                },
-                blinkActive: {
-                    label: 'Blink Active',
-                    value: user.blinkActive,
-                    number: false
-                },
-                // doubleBlink: {
-                //     label: 'Double Blink Function',
-                //     value: user.doubleBlink,
-                //     number: false
-                // },
-                webcamActive: {
-                    label: 'Webcam Status',
-                    value: user.webcamActive,
-                    number: false
-                }
-            }
+            obj.user = user;
         } else {
-            obj.settings = guest;
+            obj.user = obj.guestSettings;
         }
-
-        $rootScope.settings = obj.settings;
-
+        $rootScope.user = obj.user;
     }
 
     obj.getUser = () => {
-        if (Session.user) {
-            return Session.user
-        } else {
-            return guest
-        }
+        console.log("user", obj.user);
+        return obj.user
     }
 
 
 
     obj.setBlink = (ratio, zero) => {
         if (Session.user) {
-            let user = Session.user;
-            user.blinkZero = zero;
-            user.blinkRatio = ratio;
+            obj.blinkZero = zero;
+            obj.blinkRatio = ratio;
             $http.put('/api/users/update', user).then(res => {
                 obj.setUser(res.data);
             })
         } else {
-            guest.blinkZero.value = zero;
-            guest.blinkRatio.value = ratio;
+            obj.user.blinkZero = zero;
+            obj.user.blinkRatio = ratio;
             obj.setUser(false);
         }
 
@@ -147,20 +54,46 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
 
     obj.saveUser = (key, value) => {
         if (!Session.user) {
-            guest[key].value = value;
+            obj.user[key] = value;
         } else {
-            let user = Session.user;
+            let user = obj.user;
             user[key] = value;
             $http.put('/api/users/update', user).then(res => {
                 obj.setUser(res.data);
+                obj.user = res.data;
             })
         }
 
     }
 
-    obj.toggleTracking = () => {
-        Session.user.blinkActive = !Session.user.blinkActive
-        return Session.user.blinkActive
+    obj.adjustValue = (add, key) => {
+
+        if(add) {
+            obj.user[key] += (obj.user[key] * .02);
+        }
+        else {
+            obj.user[key] -= (obj.user[key] * .02);
+        }
+
+        if(obj.user[key] < 1) {
+            obj.user[key] = (obj.user[key].toFixed(3)) / 1;
+        }
+        else if(obj.user[key] < 100) {
+            obj.user[key] = (obj.user[key].toFixed(3)) / 1;
+        }
+        else {
+            obj.user[key] = Math.floor(obj.user[key])
+        }
+
+        console.log(obj.user[key]);
+        
+        obj.saveUser(key, obj.user[key])
+    }
+
+    obj.toggleTracking = (value) => {
+        // obj.user.blinkActive = value;
+        console.log("Tracking", obj.user.blinkActive);
+        return obj.user.blinkActive
     }
 
 

@@ -141,7 +141,6 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
         let positions = TrackingFactory.getPositions();
         if (positions) {
             calibrateObj.closedCalibration(PositionFactory.getBlinkValue(positions));
-            console.log("running");
         }
         if (!calibrateObj.closedCalibrationComplete && ActionFactory.isActive('calibrate')) {
             frameId = requestAnimationFrame(calibrateObj.runClosedCalibration);

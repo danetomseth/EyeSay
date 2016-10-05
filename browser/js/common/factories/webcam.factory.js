@@ -29,6 +29,9 @@ core.factory('WebcamFactory', function($rootScope, $state) {
         },
         endWebcam: () => {
             $rootScope.videoStream.getVideoTracks()[0].stop();
-        }
+        },
+        restartWebcam: () => {
+          $rootScope.videoStream.getVideoTracks()[0].start();  
+        } 
     }
 });
