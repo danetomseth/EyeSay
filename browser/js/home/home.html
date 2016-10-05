@@ -6,14 +6,14 @@
     <div class="bl-home-text">
         <h2>"A low-cost assisted communication web-app for people suffering from locked-in syndrome"</h2>
     </div>
-    <div class="bl-home-box" ng-if="!loggedIn">
-        <div ui-sref="signup">
+    <div class="bl-home-box" >
+        <div ui-sref="signup" ng-if="!loggedIn">
             <h2>Signup</h2>
             <p>Create account to store blink profile settings</p>
         </div>
         <div ui-sref="calibrate">
             <h2>Calibrate</h2>
-            <p>Continue as a guest</p>
+            <p>Continue as a guest</p ng-if="!loggedIn">
         </div>
     </div>
 
