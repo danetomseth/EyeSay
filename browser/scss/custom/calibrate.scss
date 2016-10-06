@@ -47,12 +47,21 @@
 	text-align: center;
 }
 
+.bl-blink-box {
+	height: 200px;
+	width: 250px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 18px;
+}
+
 .box-wrap {
 	height:250px;
 	position: relative;
 	text-align: center;
-    padding-left: 75px;
-    padding-right: 75px;
+	padding-left: 75px;
+	padding-right: 75px;
 	p {
 		font-size: 2em;
 		font-family: $keyboard;
@@ -77,41 +86,41 @@ md-progress-circular {
 
 
 md-progress-circular {
-  path {
-    stroke: nth($blue, 1) !important;
-  }
+	path {
+		stroke: nth($blue, 1) !important;
+	}
 
-  &.md-warn {
-    path {
-      stroke: nth($blue, 1) !important;
-    }
-  }
+	&.md-warn {
+		path {
+			stroke: nth($blue, 1) !important;
+		}
+	}
 
-  &.md-accent {
-    path {
-      stroke: nth($blue, 1) !important;
-    }
-  }
+	&.md-accent {
+		path {
+			stroke: nth($blue, 1) !important;
+		}
+	}
 }
 
 
 
 md-progress-circular.md-default-theme {
-  path {
-    stroke: nth($blue, 1) !important;
-  }
+	path {
+		stroke: nth($blue, 1) !important;
+	}
 
-  &.md-warn {
-    path {
-      stroke: nth($blue, 1) !important;
-    }
-  }
+	&.md-warn {
+		path {
+			stroke: nth($blue, 1) !important;
+		}
+	}
 
-  &.md-accent {
-    path {
-      stroke: nth($blue, 1) !important;
-    }
-  }
+	&.md-accent {
+		path {
+			stroke: nth($blue, 1) !important;
+		}
+	}
 }
 
 

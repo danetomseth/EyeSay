@@ -1,4 +1,4 @@
-core.controller('HomeCtrl', function($scope, $timeout, Session) {
+core.controller('HomeCtrl', function($scope, $rootScope, $timeout, Session, StateFactory) {
 	let run = () => {
 		if(Session.user) {
 			$scope.loggedIn = true;			
@@ -10,20 +10,25 @@ core.controller('HomeCtrl', function($scope, $timeout, Session) {
 
 	run();
 
-	$scope.currentTab = 1;
-
-
 
 	let startHome = () => {
+		$scope.currentTab = 0;
 		$timeout(function() {
-			$scope.currentTab= 1;
-		}, 5000);
+			$scope.currentTab = 1;
+		}, 6000);
+	}
+	if(!StateFactory.lastState) {
+		startHome();
+	}
+	else {
+		$scope.currentTab = 1;
 	}
 
-	startHome();
+	$scope.calibrateTip = false;
+	$scope.accountTip = false;
 
+	$scope.toggleShow = () => {
+		$scope.show = !$scope.show;
+	}
 	
-
-
-
 });

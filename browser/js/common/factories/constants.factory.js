@@ -30,7 +30,6 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
     }
 
     obj.getUser = () => {
-        console.log("user", obj.user);
         return obj.user
     }
 
@@ -67,7 +66,6 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
     }
 
     obj.adjustValue = (add, key) => {
-
         if(add) {
             obj.user[key] += (obj.user[key] * .02);
         }
@@ -85,14 +83,11 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
             obj.user[key] = Math.floor(obj.user[key])
         }
 
-        console.log(obj.user[key]);
-        
         obj.saveUser(key, obj.user[key])
     }
 
     obj.toggleTracking = (value) => {
         // obj.user.blinkActive = value;
-        console.log("Tracking", obj.user.blinkActive);
         return obj.user.blinkActive
     }
 

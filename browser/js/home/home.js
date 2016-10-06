@@ -4,12 +4,11 @@ core.config(function($stateProvider) {
         templateUrl: 'js/home/home.html',
         controller: 'HomeCtrl',
         onEnter: ($rootScope) => {
-        	$rootScope.isHome = true;
+            $rootScope.isHome = true;
         },
         onExit: ($rootScope) => {
-        	$rootScope.isHome = false;
+            $rootScope.isHome = false;
         }
     });
 
 });
-

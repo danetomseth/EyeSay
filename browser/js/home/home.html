@@ -1,13 +1,10 @@
 <div class="bl-home" ng-if="currentTab === 0">
     <div class="bl-header">
-                <h1>Welcome</h1>
-            </div>
+        <h1>Welcome</h1>
+    </div>
     <div class="bl-home-video">
         <video loop="true" autoplay="true" name="Blink Home" src="assets/eye-video.mov"></video>
-        
     </div>
-    <div class="bl-home-content" layout="column"  layout-align="center center">
-        </div>
 </div>
 
 
@@ -16,32 +13,35 @@
 
 
 
-<div flex layout="column" layout-align="center center" ng-if="currentTab === 1" class="bl-home-card">
+<div flex layout="column" layout-align="start center" ng-if="currentTab === 1" class="bl-home-card">
     <md-toolbar layout="row" class="md-primary bl-toolbar-lg">
         <div class="md-toolbar-tools bl-vw-100">
           <h2>What is Blink?</h2>
       </div>
   </md-toolbar>
   <div class="bl-description bl-vw-80">
-     <h2>Blink is a low-cost assisted communication web-app for people suffering from locked-in syndrome</h2>
+     <h2>Blink is a low-cost assisted communication web-app for people living with locked-in syndrome</h2>
      <h2>The project was inspired by a Ted Talk and developed as a part of a capstone at Fullstack Academy</h2>
      <h2>This is the beta website that is simply a proof of concept. The fully functional webapp can be navigated without over touching the mouse or keyboard.</h2>
+ </div>
+ <div layout="row" layout-align="center" layout-padding>
+    <md-button class="md-raised md-primary" ng-mouseover="accountTip = true" ng-mouseleave="accountTip = false" ui-sref="signup">Create Account
+    </md-button>
+    <md-button class="md-raised md-primary" ng-mouseover="calibrateTip = true" ng-mouseleave="calibrateTip = false" ui-sref="calibrate">Calibrate</md-button>
+</div>
+<div layout="row" layout-align="center" layout-padding style="height: 100px">
+    <div class="animate-show" ng-show="calibrateTip">
+         <p>Continue as guest and calibrate blink profile<p>
+    </div>
+
+    <div class="animate-show" ng-show="accountTip">
+         Create account to store blink profile settings
+    </div>
   </div>
-  <div class="bl-home-text">
-        <h2>Give Blink A Try</h2>
-    </div>
-    <div class="bl-home-box">
-        <div ui-sref="signup" ng-if="!loggedIn">
-            <h2>Signup</h2>
-            <p>Create account to store blink profile settings</p>
-        </div>
-        <div ui-sref="calibrate">
-            <h2>Calibrate</h2>
-            <p>Continue as a guest</p ng-if="!loggedIn">
-        </div>
-    </div>
+    
 </div>
 
+</div>
 
 
 

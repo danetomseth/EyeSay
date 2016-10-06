@@ -31,5 +31,48 @@
 }
 
 
+.bl-button-tip button {
+  position: fixed;
+}
+
+.bl-button-tip p {
+  display: none;
+  position: fixed;
+}
+
+
+.bl-button-tip:hover p {
+  display: inline-block;
+  left: -50px;
+  // top: -50px;
+
+}
+
+.animate-show {
+  line-height: 50px;
+  opacity: 1;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+.animate-show p {
+  
+  }
+
+// .animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+//   transition: all linear 0.5s;
+// }
+
+.animate-show.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.animate-show.ng-hide {
+  line-height: 0;
+  opacity: 0;
+}
+
+
 
 
