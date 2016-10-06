@@ -14,13 +14,6 @@ core.controller('SettingsCtrl', function($scope, $rootScope, SettingsFactory, Se
     }
 
 
-    $scope.toggleTracking = () => {
-        // console.log("val", $scope.user.blinkActive);
-        // ConstantsFactory.saveUser('blinkActive', $scope.user.blinkActive)
-    }
-
-    $scope.saveUser
-
     $scope.scopeText = "message";
 
     $scope.sharedScope = () => {

@@ -1,4 +1,4 @@
-core.factory('WebcamFactory', function($rootScope, $state) {
+core.factory('WebcamFactory', function($rootScope, $state, DialogFactory) {
 
     // Subscribe to event.
     $rootScope.trackingInit = false;
@@ -9,8 +9,10 @@ core.factory('WebcamFactory', function($rootScope, $state) {
 
     let errorCallback = function(e) {
         console.log('Error connecting to source!', e);
-        $state.reload();
+        DialogFactory.webcamFail();
+        //$state.reload();
     };
+
     $rootScope.videoActive = false;
     return {
         startWebcam: (videoElem) => {
@@ -25,6 +27,9 @@ core.factory('WebcamFactory', function($rootScope, $state) {
                     videoElem.src = window.URL.createObjectURL($rootScope.videoStream);
                 }, errorCallback);
 
+            }
+            else {
+                console.log("can't get user media");
             }
         },
         endWebcam: () => {

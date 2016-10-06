@@ -66,6 +66,19 @@ core.factory('DialogFactory', function($http, $mdDialog) {
         });
     }
 
+    let webcamFail = () => {
+         var parentEl = angular.element(document.body);
+        $mdDialog.show({
+            parent: parentEl,
+            controller: ($scope) => {
+                $scope.closeDialog = () => {
+                    $mdDialog.hide();
+                }
+            },
+            templateUrl: 'js/common/factories/webcam-fail.html'
+        });
+    }
+
 
 
     let openInstructions = () => {
@@ -126,7 +139,8 @@ core.factory('DialogFactory', function($http, $mdDialog) {
         },
         noConvergance: () => {
             noConvergance();
-        }
+        },
+        webcamFail: webcamFail
 
     }
 

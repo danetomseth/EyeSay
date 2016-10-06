@@ -50,7 +50,7 @@ core.directive('blSidebarWebcam', function(TimerFactory, $rootScope, WebcamFacto
                 ctx.strokeStyle = "rgba(130,255,50, 0.5)";
                 ctx.strokeRect(middleX, middleY, canvasWidth, canvasHeight);
 
-                // TrackingFactory.startTracking(canvas, video, [middleX, middleY, canvasWidth, canvasHeight]);
+                TrackingFactory.startTracking(canvas, video, [middleX, middleY, canvasWidth, canvasHeight]);
 
 
             });
