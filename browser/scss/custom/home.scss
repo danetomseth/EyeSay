@@ -18,9 +18,27 @@
 
 .bl-home-card {
     box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
-    margin: 15px 50px;
+    margin: 0px 50px;
+    margin-top: 100px;
     padding: 0px;
-    min-height: 600px;
+    // min-height: 600px;
+}
+
+
+.bl-home-tip {
+    height: 100px;
+}
+
+.bl-video-btn {
+    z-index: 2 !important;
+    position: absolute;
+    margin: 0 auto;
+    bottom: 0;
+    width: 100%;
+}
+
+.bl-video-btn button {
+    z-index: 2 !important;
 }
 
 .bl-toolbar-lg {
@@ -78,7 +96,7 @@
     margin:0px;
     opacity: 0.5;
     background: white;
-
+    z-index: 1;
 }
 
 

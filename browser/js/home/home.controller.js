@@ -14,7 +14,7 @@ core.controller('HomeCtrl', function($scope, $rootScope, $timeout, Session, Stat
 	let startHome = () => {
 		$scope.currentTab = 0;
 		$timeout(function() {
-			$scope.currentTab = 1;
+			// $scope.currentTab = 1;
 		}, 6000);
 	}
 	if(!StateFactory.lastState) {
@@ -27,8 +27,8 @@ core.controller('HomeCtrl', function($scope, $rootScope, $timeout, Session, Stat
 	$scope.calibrateTip = false;
 	$scope.accountTip = false;
 
-	$scope.toggleShow = () => {
-		$scope.show = !$scope.show;
+	$scope.skip = () => {
+		$scope.currentTab = 1;
 	}
 	
 });

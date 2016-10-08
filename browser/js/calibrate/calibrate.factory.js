@@ -8,11 +8,11 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
     let count = 0;
     let frameId = 0;
 
-    let calibrateObj = {};
-    calibrateObj.currentValue = 0;
-    calibrateObj.blinkCounts = [0, 0];
+    let service = {};
+    service.currentValue = 0;
+    service.blinkCounts = [0, 0];
 
-    calibrateObj.blinkStatus = [{
+    service.blinkStatus = [{
         'opacity': '0.3'
     }, {
         'opacity': '0.3'
@@ -20,21 +20,21 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
         'opacity': '0.3'
     }];
 
-    calibrateObj.calibrationSet = false;
-    calibrateObj.startCalibration = false;
+    service.calibrationSet = false;
+    service.startCalibration = false;
 
-    calibrateObj.openCalibrationComplete = false;
-    calibrateObj.openCount = 0;
+    service.openCalibrationComplete = false;
+    service.openCount = 0;
 
-    calibrateObj.closedCalibrationComplete = false;
-    calibrateObj.closedCount = 0;
+    service.closedCalibrationComplete = false;
+    service.closedCount = 0;
 
 
     let resetCalValues = () => {
-        calibrateObj.openCalibrationComplete = false;
-        calibrateObj.openCount = 0;
-        calibrateObj.closedCalibrationComplete = false;
-        calibrateObj.closedCount = 0;
+        service.openCalibrationComplete = false;
+        service.openCount = 0;
+        service.closedCalibrationComplete = false;
+        service.closedCount = 0;
         maxVals = [];
         minVals = [];
         maxSum = 0;
@@ -65,20 +65,42 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
     }
 
 
-    calibrateObj.openCalibration = (total) => {
+    // service.openCalibration = (total) => {
+    //     count++;
+    //     if (maxVals.length < 50) {
+    //         service.openCount = (maxVals.length / 50) * 100;
+    //     } else {
+    //         service.openCount = 100
+    //     }
+    //     if (maxVals.length > 50) {
+    //         count = 0;
+    //         service.setOpenValue();
+    //     }
+    //     //starting the array - with a little buffer
+    //     if (count > 40 && count < 50) {
+    //         maxVals.push(total) * 1.3;
+    //     }
+    //     if (count > 50) {
+    //         if (total) {
+    //             avgMax(total);
+    //         }
+    //     }
+    // }
+
+    service.openCalibration = (total) => {
         count++;
-        if (maxVals.length < 50) {
-            calibrateObj.openCount = (maxVals.length / 50) * 100;
+        if (maxVals.length < 100) {
+            service.openCount = (maxVals.length / 100) * 100;
         } else {
-            calibrateObj.openCount = 100
+            service.openCount = 100
         }
-        if (maxVals.length > 50) {
+        if (maxVals.length > 100) {
             count = 0;
-            calibrateObj.setOpenValue();
+            service.setOpenValue();
         }
         //starting the array - with a little buffer
         if (count > 40 && count < 50) {
-            maxVals.push(total);
+            maxVals.push(total) * 1.3;
         }
         if (count > 50) {
             if (total) {
@@ -87,21 +109,21 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
         }
     }
 
-    calibrateObj.closedCalibration = (total) => {
+    service.closedCalibration = (total) => {
         count++;
         if (minVals.length < 50) {
-            calibrateObj.closedCount = (minVals.length / 50) * 100;
+            service.closedCount = (minVals.length / 50) * 100;
         }
         else {
-            calibrateObj.closedCount = 100
+            service.closedCount = 100
         }
         
         if (minVals.length > 50) {
-            calibrateObj.setClosedValue();
+            service.setClosedValue();
         }
         //starting the array - with a little buffer
         if (count > 40 && count < 50) {
-            minVals.push(total);
+            minVals.push(total) * 0.7;
         }
         if (count > 50) {
             if (total) {
@@ -110,49 +132,49 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
         }
     }
 
-    calibrateObj.setOpenValue = () => {
+    service.setOpenValue = () => {
         maxVals.forEach(function(val) {
             maxSum += val;
         })
         maxSum = maxSum / maxVals.length;
-        calibrateObj.openCalibrationComplete = true;
+        service.openCalibrationComplete = true;
     }
 
-    calibrateObj.setClosedValue = () => {
+    service.setClosedValue = () => {
         minVals.forEach(function(val) {
             minSum += val;
         })
         minSum = minSum / minVals.length;
-        calibrateObj.closedCalibrationComplete = true;
+        service.closedCalibrationComplete = true;
         setValues();
     }
 
-    calibrateObj.runOpenCalibration = () => {
+    service.runOpenCalibration = () => {
         let positions = TrackingFactory.getPositions();
         if (positions) {
-            calibrateObj.openCalibration(PositionFactory.getBlinkValue(positions));
+            service.openCalibration(PositionFactory.getBlinkValue(positions));
         }
-        if (!calibrateObj.openCalibrationComplete && ActionFactory.isActive('calibrate')) {
-            frameId = requestAnimationFrame(calibrateObj.runOpenCalibration);
+        if (!service.openCalibrationComplete && ActionFactory.isActive('calibrate')) {
+            frameId = requestAnimationFrame(service.runOpenCalibration);
         }
     }
 
-    calibrateObj.runClosedCalibration = () => {
+    service.runClosedCalibration = () => {
         let positions = TrackingFactory.getPositions();
         if (positions) {
-            calibrateObj.closedCalibration(PositionFactory.getBlinkValue(positions));
+            service.closedCalibration(PositionFactory.getBlinkValue(positions));
         }
-        if (!calibrateObj.closedCalibrationComplete && ActionFactory.isActive('calibrate')) {
-            frameId = requestAnimationFrame(calibrateObj.runClosedCalibration);
+        if (!service.closedCalibrationComplete && ActionFactory.isActive('calibrate')) {
+            frameId = requestAnimationFrame(service.runClosedCalibration);
         }
     }
 
 
-    calibrateObj.reset = () => {
-        calibrateObj.openCalibrationComplete = false;
-        calibrateObj.openCount = 0;
-        calibrateObj.closedCalibrationComplete = false;
-        calibrateObj.closedCount = 0;
+    service.reset = () => {
+        service.openCalibrationComplete = false;
+        service.openCount = 0;
+        service.closedCalibrationComplete = false;
+        service.closedCount = 0;
         maxVals = [];
         minVals = [];
         maxSum = 0;
@@ -166,9 +188,9 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
         blinkZero = maxSum.toFixed(2);
         blinkRatio = (minSum / maxSum).toFixed(2);
         ConstantsFactory.setBlink(blinkRatio, blinkZero);
-        calibrateObj.calibrationSet = true;
+        service.calibrationSet = true;
         // resetCalValues();
     }
 
-    return calibrateObj;
+    return service;
 });
