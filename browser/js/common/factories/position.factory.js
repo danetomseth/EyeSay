@@ -34,17 +34,7 @@ core.factory('PositionFactory', function(ConstantsFactory) {
                     return 'singleBlink'
                     // return checkDoubleBlink() // use this to activate double blink function 
                 }
-            } else if (change < ConstantsFactory.settings.blinkRatio.value * 1.1 && change > ConstantsFactory.settings.blinkRatio.value) {
-                // console.log('almost', (change / ConstantsFactory.settings.blinkRatio.value).toFixed(2));
             }
-            // if (change < ConstantsFactory.blinkRatio) {
-            //     let blinkDt = Date.now() - lastBlinkTime;
-            //     lastBlinkTime = Date.now();
-            //     if(blinkDt < 250) {return false} // debounce
-            //     return (blinkDt <= 750) ? "doubleBlink" : "singleBlink"
-            // } else {
-            //     return false;
-            // }
         },
         getBlinkValue: (positions) => { // used in calibrate.js only
             diffZeroL = (positions[69][1] + positions[31][1] + positions[70][1]) - (positions[68][1] + positions[29][1] + positions[67][1]);
