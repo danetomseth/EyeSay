@@ -1,0 +1,28 @@
+
+.bl-large-webcam-box {
+    position: relative;
+    border: 1px solid nth($background, 4);
+    margin: 0 auto;
+    width: 500px;
+    overflow: hidden;
+}
+
+.bl-large-webcam {
+    // position: absolute;
+    // width: 600px;
+    // height: 450px;
+    //top: -75px;
+    //left: -40%;
+}
+
+.bl-large-canvas {
+    // height:450px;
+    // width: 600px;
+    position: absolute;
+    z-index: 10;
+    top: 0px;
+    left: 0px;
+}
+
+
+

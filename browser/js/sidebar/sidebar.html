@@ -12,17 +12,17 @@
  </div>
  <div flex="50">
   <div class="web-box">
-       <bl-sidebar-webcam ng-style="webcamDir" id="webcam-directive" ng-show="showWebcam"></bl-sidebar-webcam>
+       <bl-sidebar-webcam ng-style="webcamDir" id="webcam-directive" ng-show="user.blinkActive"></bl-sidebar-webcam>
        <div layout="column" layout-align="center start" class="bl-sidebar-actions">
-        <div class="bl-welcome" ng-show="loggedIn">Welcome, {{username}}!</div>
+        <div class="bl-welcome" ng-show="username">Welcome, {{username}}!</div>
         
         <div class="bl-sidebar-btn">
          <md-button ng-show="loggedIn" ui-sref="logout" class="md-primary  md-raised">Logout</md-button>
          <md-button ng-hide="loggedIn" ui-sref="login" class="md-primary md-raised">Login</md-button>
         </div>
         <div>
-         <md-switch ng-model="$root.settings.blinkActive.value" ng-change="toggleTracking()"  class="md-accent bl-switch" aria-label="$root.settings.blinkActive.label">
-            <md-tooltip ng-hide="$root.settings.blinkActive.value">
+         <md-switch ng-model="user.blinkActive" ng-change="toggleTracking()"  class="md-accent bl-switch" aria-label="$root.settings.blinkActive.label">
+            <md-tooltip ng-hide="user.blinkActive">
             Toggle status of blink detection
             </md-tooltip>
             <span class="bl-label">Tracking</span>

@@ -37,16 +37,15 @@
 
       ga('create', 'UA-85190980-1', 'auto');
       ga('send', 'pageview');
-
   </script>
 </head>
 <body ng-app="BlinkApp" layout="column">
-    <div layout="row" id="page-content" ng-if="$root.isChrome">
+    <div layout="row" id="page-content" ng-if="$root.isChrome" layout-align="start stretch">
         <div flex="20" flex-gt-sm="15" id="bl-sidebar" hide-xs>
             <bl-sidebar id="sidebar-container"></bl-sidebar>
         </div>
-        <div flex id="bl-overflow">
-            <div class="bl-header">
+        <div flex id="bl-overflow" layout="column">
+            <div flex="10" class="bl-header" ng-if="!$root.isHome">
                 <h1>Blink</h1>
             </div>
             <div flex id="main-content" ui-view></div>

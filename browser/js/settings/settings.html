@@ -3,23 +3,50 @@
 </div>
 
 
+
 <md-content class="md-padding" layout-padding layout="column" layout-align="center">
 	<md-card class="bl-vw-80">
 		<md-card-content>
 			<div layout="column" class="bl-dialog-list">
-				<div layout="row" ng-repeat="(key, setting)  in settings" class="bl-setting-item" layout-align="start center">
+				<div layout="row" class="bl-setting-item" layout-align="start center">
 					<div flex="40">
-						{{setting.label}}: {{setting.value}}
+						Average Eye Area: {{user.blinkZero}}
 					</div>
 					<div flex="30">
-						<md-icon ng-if="setting.number" md-font-set="material-icons" ng-click="adjustValue(true, setting, key)"> add </md-icon>
-						<md-icon ng-if="setting.number" md-font-set="material-icons" ng-click="adjustValue(false, setting, key)"> remove </md-icon>
-						<md-checkbox ng-if="!setting.number" ng-click="toggle(key, setting.value)" class="md-secondary bl-no-margin bl-checkbox" ng-model="setting.value"></md-checkbox>
+						<md-icon md-font-set="material-icons" ng-click="adjustValue(true,'blinkZero')"> add </md-icon>
+						<md-icon md-font-set="material-icons" ng-click="adjustValue(false, 'blinkZero')"> remove </md-icon>
+					</div>
+				</div>
+				<div layout="row" class="bl-setting-item" layout-align="start center">
+					<div flex="40">
+						Blink Threshold: {{user.blinkRatio}}
+					</div>
+					<div flex="30">
+						<md-icon md-font-set="material-icons" ng-click="adjustValue(true, 'blinkRatio')"> add </md-icon>
+						<md-icon md-font-set="material-icons" ng-click="adjustValue(false, 'blinkRatio')"> remove </md-icon>
+					</div>
+				</div>
+				<div layout="row" class="bl-setting-item" layout-align="start center">
+					<div flex="40">
+						Cursor Iteration Time: {{user.cursorDelay}}
+					</div>
+					<div flex="30">
+						<md-icon md-font-set="material-icons" ng-click="adjustValue(true, 'cursorDelay')"> add </md-icon>
+						<md-icon md-font-set="material-icons" ng-click="adjustValue(false, 'cursorDelay')"> remove </md-icon>
+					</div>
+				</div>
+				<div layout="row" class="bl-setting-item" layout-align="start center">
+					<div flex="40">
+						Webcam Tracking: {{user.blinkActive}}
+					</div>
+					<div flex="30">
+						<md-checkbox ng-click="toggleTracking()" class="md-secondary bl-no-margin bl-checkbox" ng-model="user.blinkActive"></md-checkbox>
 					</div>
 				</div>
 			</div>
 		</md-card-content>
 	</md-card>
+
 </md-content>
 
 

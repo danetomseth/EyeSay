@@ -4,7 +4,7 @@ core.config(function($stateProvider) {
         controller: 'SettingsCtrl',
         templateUrl: 'js/settings/settings.html',
         onEnter: (ConstantsFactory, Session) => {
-        	ConstantsFactory.setUser(Session.user);
+        	// ConstantsFactory.setUser(Session.user);
         }
     });
 });

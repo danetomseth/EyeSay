@@ -10,13 +10,15 @@
 				<div class="bl-tutorial-text">
 					<p>The box will change colors when a blink is detected</p>
 				</div>
-				<div flex="50" class="blink-box" ng-style="activeBlink">
-					<p ng-style="activeText">{{blinkText}}</p>
+				<div flex="50" class="bl-blink-box" md-whiteframe="4" ng-class="{'bl-highlight-box': blinkDetected}" layout-padding>
+					<div>
+						<p ng-style="activeText">{{blinkText}}</p>
+					</div>
 				</div>
 				<div layout="row" layout-padding>
 					<md-button ng-click="adjustBlink(false)" class="md-warn bl-border">-5%
 						<md-tooltip>
-						Decrease the sensitivity of blink detection by 5%
+						<b>Decrease</b> the sensitivity of blink detection by 5%
 						</md-tooltip>
 					</md-button>
 					<div class="bl-spacer-w"></div>
@@ -24,7 +26,7 @@
 					<md-button ng-click="adjustBlink(false)" class="md-primary bl-border">+5%
 
 						<md-tooltip>
-						Increase the sensitivity of blink detection by 5%
+						<b>Increase</b> the sensitivity of blink detection by 5%
 						</md-tooltip>
 					</md-button>
 				</div>

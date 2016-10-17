@@ -2,7 +2,7 @@
 
 core.factory('TimerFactory', function($rootScope, Session, $state, PositionFactory, TrackingFactory, ActionFactory, ConstantsFactory) {
 
-    let iterationTime = ConstantsFactory.settings.cursorDelay.value; //used directly down below (32)
+    let iterationTime = ConstantsFactory.user.cursorDelay; //used directly down below (32)
     let startTime = 0;
     let currentTimestamp
     let frameId = 0;
@@ -16,15 +16,14 @@ core.factory('TimerFactory', function($rootScope, Session, $state, PositionFacto
     function loop (timestamp){
         currentTimestamp = timestamp;
         // Always draw the face on the tracker
-        if(!ConstantsFactory.settings.blinkActive.value) {
+        if(!ConstantsFactory.user.blinkActive) {
             frameId = requestAnimationFrame(loop);
-            return
         }
 
         TrackingFactory.drawLoop();
 
 
-        if (timestamp - startTime > ConstantsFactory.settings.cursorDelay.value){
+        if (timestamp - startTime > ConstantsFactory.user.cursorDelay){
             $rootScope.$emit("iterate")
             startTime = timestamp
         }
@@ -42,11 +41,13 @@ core.factory('TimerFactory', function($rootScope, Session, $state, PositionFacto
                 $rootScope.$emit(blink) // emits "doubleBlink" or "singleBlink"
             }
         }
-
-
         // loop again
         frameId = requestAnimationFrame(loop);
     };
+
+    $rootScope.$on("trackerInitialized", () => {
+        loop();
+    });
 
     $rootScope.$on('resumeBlink', function() {
         if(trackingStopped) {
@@ -59,6 +60,7 @@ core.factory('TimerFactory', function($rootScope, Session, $state, PositionFacto
         trackingStopped = true;
         cancelAnimationFrame(frameId);
     });
+
 
 
     return {
