@@ -1,5 +1,5 @@
 // Analysis of tracker positions
-core.factory('PositionFactory', function(ConstantsFactory) {
+core.factory('PositionFactory', function($rootScope) {
     let diffZeroL = 0;
     let diffZeroR = 0;
     let lastBlinkTime;
@@ -9,7 +9,7 @@ core.factory('PositionFactory', function(ConstantsFactory) {
         if (blinkDt < 125) {
             return false
         } else {
-            if (blinkDt <= 320 && ConstantsFactory.user.doubleBlink) {
+            if (blinkDt <= 320 && $rootScope.user.doubleBlink) {
                 return 'doubleBlink';
             } else {
                 return 'singleBlink'
@@ -23,9 +23,9 @@ core.factory('PositionFactory', function(ConstantsFactory) {
             var diffL = (positions[69][1] + positions[31][1] + positions[70][1]) - (positions[68][1] + positions[29][1] + positions[67][1]);
             var diffR = (positions[69][1] + positions[31][1] + positions[70][1]) - (positions[68][1] + positions[29][1] + positions[67][1]);
 
-            change = ((diffL + diffR) / ConstantsFactory.user.blinkZero);
+            change = ((diffL + diffR) / $rootScope.user.blinkZero);
 
-            if (change < ConstantsFactory.user.blinkRatio) {
+            if (change < $rootScope.user.blinkRatio) {
                 let blinkDt = Date.now() - lastBlinkTime;
                 lastBlinkTime = Date.now();
                 if (blinkDt < 150) {
@@ -34,10 +34,10 @@ core.factory('PositionFactory', function(ConstantsFactory) {
                     return 'singleBlink'
                     // return checkDoubleBlink() // use this to activate double blink function 
                 }
-            } else if (change < ConstantsFactory.user.blinkRatio * 1.1 && change > ConstantsFactory.user.blinkRatio) {
-                // console.log('almost', (change / ConstantsFactory.settings.blinkRatio.value).toFixed(2));
+            } else if (change < $rootScope.user.blinkRatio * 1.1 && change > $rootScope.user.blinkRatio) {
+                // console.log('almost', (change / ettings.blinkRatio.value).toFixed(2));
             }
-            // if (change < ConstantsFactory.blinkRatio) {
+            // if (change < linkRatio) {
             //     let blinkDt = Date.now() - lastBlinkTime;
             //     lastBlinkTime = Date.now();
             //     if(blinkDt < 250) {return false} // debounce

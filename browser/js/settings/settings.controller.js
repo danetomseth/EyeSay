@@ -9,22 +9,10 @@ core.controller('SettingsCtrl', function($scope, $rootScope, SettingsFactory, Se
     }
 
 
-    $scope.saveValues = () => {
-        ConstantsFactory.setValues($scope.user);
-    }
+    // $scope.saveValues = () => {
+    //     ConstantsFactory.setValues($scope.user);
+    // }
 
-
-    $scope.scopeText = "message";
-
-    $scope.sharedScope = () => {
-        DialogFactory.sharedScope($scope)
-    }
-
-    $scope.$watch(() => {
-                return ConstantsFactory.user
-            }, (newVal) => {
-                    $scope.user= newVal;
-            })
 
 
 });
