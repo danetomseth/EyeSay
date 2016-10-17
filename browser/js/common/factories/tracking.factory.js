@@ -1,6 +1,6 @@
 'use strict';
 
-core.factory('TrackingFactory', function($rootScope, DialogFactory, TimerFactory) {
+core.factory('TrackingFactory', function($rootScope, DialogFactory) {
     let canvas;
     let context;
     let tracker;
@@ -22,15 +22,9 @@ core.factory('TrackingFactory', function($rootScope, DialogFactory, TimerFactory
 
         setTimeout(function() {
             tracker.setResponseMode("blend", ["raw", "sobel"]);
-            // if (boundingBox) {
-            //     tracker.start(video, boundingBox);
-            // } else {
-            //     tracker.start(video);
-            // }
             boundingBox ? tracker.start(video, boundingBox) : tracker.start(video);
-            TimerFactor.start();
+            $rootScope.$broadcast("trackerInitialized");
         }, 2000);
-
     };
 
     trackObj.startSidebar = () => {

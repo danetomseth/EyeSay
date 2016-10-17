@@ -76,6 +76,12 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
         $rootScope.$emit("nextTab");
     }
 
+
+    $scope.goto = (step) => {
+        console.log("going to: ", step);
+        $scope[step] = true;
+    }
+
     $scope.tictac = true;
 
 

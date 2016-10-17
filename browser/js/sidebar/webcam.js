@@ -1,4 +1,4 @@
-core.directive('blSidebarWebcam', function(TimerFactory, $rootScope, WebcamFactory, TrackingFactory) {
+core.directive('blSidebarWebcam', function($rootScope, WebcamFactory, TrackingFactory, TimerFactory) {
     return {
         restrict: 'E',
         templateUrl: 'js/sidebar/webcam.html',
@@ -47,8 +47,11 @@ core.directive('blSidebarWebcam', function(TimerFactory, $rootScope, WebcamFacto
                 let canvasHeight = ((containerWidth / 3) * .75) * 2.5;
                 ctx.strokeStyle = "rgba(130,255,50, 0.5)";
                 ctx.strokeRect(middleX, middleY, canvasWidth, canvasHeight);
-                TrackingFactory.startTracking(canvas, video, [middleX, middleY, canvasWidth, canvasHeight]);
-
+                // TrackingFactory.startTracking(canvas, video, [middleX, middleY, canvasWidth, canvasHeight]);
+                TrackingFactory.startSidebar();
+                setTimeout(function() {
+                    // TimerFactory.start();
+                }, 2000);
             });
             // start all our things
 

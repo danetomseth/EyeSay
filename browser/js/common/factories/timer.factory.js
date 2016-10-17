@@ -41,11 +41,13 @@ core.factory('TimerFactory', function($rootScope, Session, $state, PositionFacto
                 $rootScope.$emit(blink) // emits "doubleBlink" or "singleBlink"
             }
         }
-
-
         // loop again
         frameId = requestAnimationFrame(loop);
     };
+
+    $rootScope.$on("trackerInitialized", () => {
+        loop();
+    });
 
     $rootScope.$on('resumeBlink', function() {
         if(trackingStopped) {
@@ -58,6 +60,7 @@ core.factory('TimerFactory', function($rootScope, Session, $state, PositionFacto
         trackingStopped = true;
         cancelAnimationFrame(frameId);
     });
+
 
 
     return {
