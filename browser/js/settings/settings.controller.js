@@ -1,39 +1,18 @@
-core.controller('SettingsCtrl', function($scope, SettingsFactory, Session, ConstantsFactory, DialogFactory) {
+core.controller('SettingsCtrl', function($scope, $rootScope, SettingsFactory, Session, ConstantsFactory, DialogFactory, WebcamFactory) {
    
-
-
-    $scope.settings = ConstantsFactory.settings;
-    $scope.options = ConstantsFactory.options;
+    $scope.user = ConstantsFactory.user;
 
 
 
-    $scope.adjustValue = (add, property, key) => {
-        console.log("before", $scope.settings[key].value);
-        if(add) {
-            $scope.settings[key].value += ($scope.settings[key].value * .01);
-        }
-        else {
-            $scope.settings[key].value -= ($scope.settings[key].value * .01);
-        }
-
-        if($scope.settings[key].value < 1) {
-            $scope.settings[key].value = ($scope.settings[key].value.toFixed(3)) / 1;
-        }
-        else {
-            $scope.settings[key].value = Math.floor($scope.settings[key].value)
-        }
-        ConstantsFactory.saveUser(key, $scope.settings[key].value)
+     $scope.adjustValue = (add, key) => {
+        ConstantsFactory.adjustValue(add, key);
     }
 
 
     $scope.saveValues = () => {
-        ConstantsFactory.setValues($scope.settings);
+        ConstantsFactory.setValues($scope.user);
     }
 
-
-    $scope.toggle = (key, value) => {
-        ConstantsFactory.saveUser(key, value);
-    }
 
     $scope.scopeText = "message";
 
@@ -41,5 +20,11 @@ core.controller('SettingsCtrl', function($scope, SettingsFactory, Session, Const
         DialogFactory.sharedScope($scope)
     }
 
-    
+    $scope.$watch(() => {
+                return ConstantsFactory.user
+            }, (newVal) => {
+                    $scope.user= newVal;
+            })
+
+
 });

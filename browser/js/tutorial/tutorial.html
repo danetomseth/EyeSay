@@ -1,33 +1,46 @@
-<div class="bl-page-title">
+<div layout="column" flex class="bl-vh-100">
+
+<div class="bl-page-title" flex="initial">
     <h1>Tutorial</h1>
 </div>
 
-<div ng-cloak id="tutorialContainer flexCenter">
-	<md-content>
-		<md-tabs id="centerTabs" md-dynamic-height md-border-bottom md-selected="selectedTab" md-autoselect>
-			<md-tab label="One">
-				<bl-tutorial-one></bl-tutorial-one>	
-			</md-tab>
-			<md-tab label="Two">
-				<bl-tutorial-two></bl-tutorial-two>
-			</md-tab>
-			<md-tab label="Three">
-				<bl-tutorial-three></bl-tutorial-three>
-			</md-tab>
-			<md-tab label="Four">
-				<bl-tutorial-four></bl-tutorial-four>
-			</md-tab>
-			<md-tab label="Five">
-				<bl-tutorial-five ng-if="selectedTab === 4"></bl-tutorial-five>
-			</md-tab>
-			<md-tab label="Six">
-				<md-content layout="row" layout-align="center" class="md-padding">
-					<md-button class="md-primary" ui-sref="type">Let's Try Typing!</md-button>
-				</md-content>
-			</md-tab>
-		</md-tabs>
-	</md-content>
+<div ng-cloak id="tutorialContainer"  flex>
+	<md-tabs class="bl-vh-100 bl-tabs" md-border-bottom md-selected="selectedTab" md-autoselect>
+		<md-tab  label="One">
+			<div layout="row" layout-align="start stretch">
+				<bl-tutorial-one class="bl-block" layout-padding flex-grow></bl-tutorial-one>
+			</div>	
+		</md-tab>
+		<md-tab label="Two">
+			<div layout="row" layout-align="start stretch">
+				<bl-tutorial-two class="bl-block bl-vh-100"></bl-tutorial-two>
+			</div>
+		</md-tab>
+		<md-tab label="Three">
+			<div layout="row" layout-align="start stretch">
+			<bl-tutorial-three class="bl-block bl-vh-100"></bl-tutorial-three>
+			</div>
+		</md-tab>
+		<md-tab label="Four">
+			<div layout="row" layout-align="start stretch">
+			<bl-tutorial-four class="bl-block bl-vh-100"></bl-tutorial-four>
+			</div>
+		</md-tab>
+		<md-tab label="Five">
+			<bl-tutorial-five ng-if="selectedTab === 4"></bl-tutorial-five>
+		</md-tab>
+		<md-tab label="Six">
+			<md-content layout="row" layout-align="center" class="md-padding">
+				<md-button class="md-primary" ui-sref="type">Let's Try Typing!</md-button>
+			</md-content>
+		</md-tab>
+	</md-tabs>
 </div>
+
+
+</div>
+
+
 
 
 

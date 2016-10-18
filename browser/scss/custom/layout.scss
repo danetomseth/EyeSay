@@ -1,6 +1,13 @@
 #main-content {
 	// padding: 10px;
+	// height: 100%;
+}
+
+
+#page-content {
 	height: 100%;
+	// max-width: 1024px;
+	// margin: 0 auto;
 }
 
 #bl-overflow {
@@ -89,9 +96,7 @@
 }
 
 
-#page-content {
-	height: 100%;
-}
+
 
 
 
@@ -165,14 +170,6 @@
 
 
 
-.bl-vh-100 {
-	height: 100%;
-}
-
-
-.bl-vw-100 {
-	width: 100%;
-}
 
 
 .bl-headline {
@@ -208,47 +205,3 @@
 
 
 
-.bl-vw-90 {
-    width: 90%;
-}
-
-.bl-vw-80 {
-    width: 80%;
-}
-
-.bl-vw-70 {
-    width: 70%;
-}
-
-.bl-vw-60 {
-    width: 60%;
-}
-
-.bl-vw-50 {
-    width: 50%;
-}
-
-
-.bl-vh-100 {
-    height: 100%;
-}
-
-.bl-vh-90 {
-    height: 90%;
-}
-
-.bl-vh-80 {
-    height: 80%;
-}
-
-.bl-vh-70 {
-    height: 70%;
-}
-
-.bl-vh-60 {
-    height: 60%;
-}
-
-.bl-vh-50 {
-    height: 50%;
-}

@@ -9,7 +9,7 @@ core.factory('PositionFactory', function(ConstantsFactory) {
         if (blinkDt < 125) {
             return false
         } else {
-            if (blinkDt <= 320 && ConstantsFactory.settings.doubleBlink.value) {
+            if (blinkDt <= 320 && ConstantsFactory.user.doubleBlink) {
                 return 'doubleBlink';
             } else {
                 return 'singleBlink'
@@ -23,9 +23,9 @@ core.factory('PositionFactory', function(ConstantsFactory) {
             var diffL = (positions[69][1] + positions[31][1] + positions[70][1]) - (positions[68][1] + positions[29][1] + positions[67][1]);
             var diffR = (positions[69][1] + positions[31][1] + positions[70][1]) - (positions[68][1] + positions[29][1] + positions[67][1]);
 
-            change = ((diffL + diffR) / ConstantsFactory.settings.blinkZero.value);
+            change = ((diffL + diffR) / ConstantsFactory.user.blinkZero);
 
-            if (change < ConstantsFactory.settings.blinkRatio.value) {
+            if (change < ConstantsFactory.user.blinkRatio) {
                 let blinkDt = Date.now() - lastBlinkTime;
                 lastBlinkTime = Date.now();
                 if (blinkDt < 150) {
@@ -34,7 +34,7 @@ core.factory('PositionFactory', function(ConstantsFactory) {
                     return 'singleBlink'
                     // return checkDoubleBlink() // use this to activate double blink function 
                 }
-            }
+            } 
         },
         getBlinkValue: (positions) => { // used in calibrate.js only
             diffZeroL = (positions[69][1] + positions[31][1] + positions[70][1]) - (positions[68][1] + positions[29][1] + positions[67][1]);
