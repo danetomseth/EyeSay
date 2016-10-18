@@ -1,4 +1,4 @@
-<md-content class="md-padding">
+<md-content class="md-padding" ng-hide="switchView">
 	<md-card class="md-padding" id="flexColRow">
 		<div>
 			<span class="text-center tutorial-title">Blink To Fill</span>
@@ -11,3 +11,27 @@
 		</div>
 	</md-card>
 </md-content>
+
+
+<div layout="row" flex>
+<div flex="10"></div>
+<div ng-show="switchView" layout="column" layout-margin layout-padding layout-align="start center" class="" flex>
+	<div class="bl-card-title" flex="nogrow">Blink To Fill The Progress Bar</div>
+	<div class="blink-progress">
+			<md-progress-linear style="height: 20px" md-mode="determinate" value="{{blinkFill}}"></md-progress-linear>
+		</div>
+	<div>
+			<h2 class="md-title text-center card-text">Count: {{10 - blinkCount}}</h2>
+		</div>
+</div>
+<div flex="10"></div>
+</div>
+
+
+
+
+
+
+<div class="bl-text-center">
+	<md-button class="md-primary" ng-click="switchView = !switchView">Switch</md-button>
+</div>

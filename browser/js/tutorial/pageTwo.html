@@ -1,4 +1,4 @@
-<md-content class="md-padding">
+<md-content class="md-padding" ng-hide="switchView">
 	<md-card>
 		<md-card-content>
 			<md-card-title>
@@ -18,15 +18,15 @@
 				<div layout="row" layout-padding>
 					<md-button ng-click="adjustBlink(false)" class="md-warn bl-border">-5%
 						<md-tooltip>
-						<b>Decrease</b> the sensitivity of blink detection by 5%
+							<b>Decrease</b> the sensitivity of blink detection by 5%
 						</md-tooltip>
 					</md-button>
 					<div class="bl-spacer-w"></div>
 					<div class="bl-spacer-w"></div>
-					<md-button ng-click="adjustBlink(false)" class="md-primary bl-border">+5%
+					<md-button ng-click="adjustBlink(true)" class="md-primary bl-border">+5%
 
 						<md-tooltip>
-						<b>Increase</b> the sensitivity of blink detection by 5%
+							<b>Increase</b> the sensitivity of blink detection by 5%
 						</md-tooltip>
 					</md-button>
 				</div>
@@ -37,3 +37,54 @@
 		</md-card-content>
 	</md-card>
 </md-content>
+
+
+
+
+<div layout="row" layout-align="center start" ng-show="switchView">
+	<div flex="20"></div>
+
+	<div layout="column" layout-margin layout-padding layout-align="start center" class="bl-card-info" flex>
+		<div class="bl-card-title" flex="nogrow">Test Blink Profile</div>
+		<div>
+			<p class="text-center" style="font-size: 22px; margin-bottom: 20px;"><b>Check the calibration settings by periodically blinking</b></p>
+			<p>The sensitivity is correct if the box lights up each time you blink normally</p>
+			<p>You can fine-tune the sensitivity manually using the adjustment buttons</p>
+			<p style=" margin-bottom: 20px;">If you can't find the appropriate sensitivity quickly, try calibrating again</p>
+		</div>
+		<div bl-size="300x250" class="bl-center" md-whiteframe="4" ng-class="{'bl-highlight-box': blinkDetected}" layout-padding>
+			<div>
+				<p ng-style="activeText">{{blinkText}}</p>
+			</div>
+		</div>
+		<div layout="row" layout-padding>
+			<md-button ng-click="adjustBlink(false)" class="md-warn bl-border">-5%
+				<md-tooltip>
+					<b>Decrease</b> the sensitivity of blink detection by 5%
+				</md-tooltip>
+			</md-button>
+			<div class="bl-spacer-w"></div>
+			<div class="bl-spacer-w"></div>
+			<md-button ng-click="adjustBlink(true)" class="md-primary bl-border">+5%
+
+				<md-tooltip>
+					<b>Increase</b> the sensitivity of blink detection by 5%
+				</md-tooltip>
+			</md-button>
+		</div>
+		<div layout="row" layout-padding>
+			<md-button ui-sref="calibrate" class="md-primary md-raised">Re-calibrate</md-button>
+			<md-button ng-click="nextTab()" class="md-accent md-raised">Proceed</md-button>
+		</div>
+
+
+	</div>
+
+	<div flex="20"></div>
+</div>
+
+
+
+<div class="bl-text-center">
+	<md-button class="md-primary" ng-click="switchView = !switchView">Switch</md-button>
+</div>

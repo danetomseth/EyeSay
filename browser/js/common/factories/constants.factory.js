@@ -87,9 +87,12 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
 
     obj.adjustValue = (add, key) => {
         if(add) {
+            console.log("adding");
             obj.user[key] += (obj.user[key] * .02);
         }
         else {
+            console.log("subtract");
+
             obj.user[key] -= (obj.user[key] * .02);
         }
 
@@ -122,7 +125,7 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
             $rootScope.user[key] = Math.floor($rootScope.user[key])
         }
 
-        obj.saveUser(key, obj.user[key])
+        obj.saveUser(key, $rootScope.user[key])
     }
 
     obj.toggleTracking = (value) => {

@@ -1,7 +1,20 @@
+<div layout="column" layout-align="start center" layout-margin ng-show="switchView">
+	<div class="bl-content-title">
+		<h1 class="bl-text-center">Have you completed initial calibration?</h1>
+	</div>
+	<div layout="row" class="bl-vw-100" layout-align="center" flex="20">
+		<div flex="10" class="bl-text-center">
+			<md-button class="md-raised md-accent" ng-click="startTutorial()">Yes
+			</md-button>
+		</div>
+		<div flex="10" class="bl-text-center">
+			<md-button ui-sref="calibrate" class="md-primary md-raised">No</md-button>
+		</div>
+	</div>
+</div>
 
 
-
-<div layout="column" layout-margin> 
+<div layout="column" layout-margin ng-hide="switchView"> 
 	<div class="bl-card-info bl-card-title bl-center" flex="20">
 		Have you completed initial calibration?
 	</div>
@@ -13,3 +26,7 @@
 	<div  flex>
 	</div>
 </div> 
+
+<div class="bl-text-center">
+<md-button class="md-primary" ng-click="switchView = !switchView">Switch</md-button>
+</div>
