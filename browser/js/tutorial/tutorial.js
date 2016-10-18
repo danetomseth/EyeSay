@@ -17,6 +17,9 @@ core.config(function($stateProvider) {
 
 core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $interval, $timeout, ConstantsFactory, DialogFactory, StateFactory) {
 
+    // $scope.selectedTab = 1;
+    $scope.switchView = true;
+
     $scope.user = ConstantsFactory.getUser();
     $scope.blinkDetected = false;
     let currentTest;
@@ -24,12 +27,6 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
 
     $scope.blinkText = "Waiting for a blink...."
 
-    let setVariables = () => {
-        $scope.selectedTab = 0;
-        $scope.blinkCount = 0;
-        $scope.blinkFill = 0;
-        currentTest = null;
-    }
 
     $rootScope.$on('nextTab', function() {
         $scope.selectedTab++;
@@ -59,6 +56,7 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
     }
 
     $scope.adjustBlink = (add) => {
+        console.log("Value: ", add);
         ConstantsFactory.adjustValue(add, 'blinkRatio');
     }
 
@@ -119,7 +117,7 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
 
     if (StateFactory.lastState === 'calibrate') {
         console.log("last state", StateFactory.lastState);
-        $scope.startTest();
+        $scope.selectedTab = 1;
     } else {
         console.log("no last state", StateFactory.lastState);
     }

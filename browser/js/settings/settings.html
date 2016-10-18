@@ -10,7 +10,7 @@
 			<div layout="column" class="bl-dialog-list">
 				<div layout="row" class="bl-setting-item" layout-align="start center">
 					<div flex="40">
-						Average Eye Area: {{user.blinkZero}}
+						Average Eye Area: {{$root.user.blinkZero}}
 					</div>
 					<div flex="30">
 						<md-icon md-font-set="material-icons" ng-click="adjustValue(true,'blinkZero')"> add </md-icon>
@@ -19,7 +19,7 @@
 				</div>
 				<div layout="row" class="bl-setting-item" layout-align="start center">
 					<div flex="40">
-						Blink Threshold: {{user.blinkRatio}}
+						Blink Threshold: {{$root.user.blinkRatio}}
 					</div>
 					<div flex="30">
 						<md-icon md-font-set="material-icons" ng-click="adjustValue(true, 'blinkRatio')"> add </md-icon>
@@ -28,7 +28,7 @@
 				</div>
 				<div layout="row" class="bl-setting-item" layout-align="start center">
 					<div flex="40">
-						Cursor Iteration Time: {{user.cursorDelay}}
+						Cursor Iteration Time: {{$root.user.cursorDelay}}
 					</div>
 					<div flex="30">
 						<md-icon md-font-set="material-icons" ng-click="adjustValue(true, 'cursorDelay')"> add </md-icon>
@@ -37,7 +37,7 @@
 				</div>
 				<div layout="row" class="bl-setting-item" layout-align="start center">
 					<div flex="40">
-						Webcam Tracking: {{user.blinkActive}}
+						Webcam Tracking: {{$root.user.blinkActive}}
 					</div>
 					<div flex="30">
 						<md-checkbox ng-click="toggleTracking()" class="md-secondary bl-no-margin bl-checkbox" ng-model="user.blinkActive"></md-checkbox>

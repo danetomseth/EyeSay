@@ -1,8 +1,8 @@
 //this sets all of timer dependent functions to the same intervals to clear on state change
 
-core.factory('TimerFactory', function($rootScope, Session, $state, PositionFactory, TrackingFactory, ActionFactory, ConstantsFactory) {
+core.factory('TimerFactory', function($rootScope, Session, $state, PositionFactory, TrackingFactory, ActionFactory) {
 
-    let iterationTime = ConstantsFactory.user.cursorDelay; //used directly down below (32)
+    let iterationTime = $rootScope.user.cursorDelay; //used directly down below (32)
     let startTime = 0;
     let currentTimestamp
     let frameId = 0;
@@ -16,14 +16,15 @@ core.factory('TimerFactory', function($rootScope, Session, $state, PositionFacto
     function loop (timestamp){
         currentTimestamp = timestamp;
         // Always draw the face on the tracker
-        if(!ConstantsFactory.user.blinkActive) {
+        if(!$rootScope.user.blinkActive) {
             frameId = requestAnimationFrame(loop);
+            return
         }
 
         TrackingFactory.drawLoop();
 
 
-        if (timestamp - startTime > ConstantsFactory.user.cursorDelay){
+        if (timestamp - startTime > $rootScope.user.cursorDelay){
             $rootScope.$emit("iterate")
             startTime = timestamp
         }

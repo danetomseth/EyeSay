@@ -4,14 +4,12 @@ core.directive("blTutorialOne", ($rootScope) => {
 		scope: {},
 		templateUrl: 'js/tutorial/pageOne.html',
 		link: (scope, elem, attr) => {
-			scope.calibrate = () => {
-				// $rootScope.emit("nextTab");
-				console.log("calibrate");
-			}
 
 			scope.startTutorial = () => {
 				$rootScope.$emit("nextTab");	
 			}
+
+			scope.switchView = true;
 		}
 
 	}

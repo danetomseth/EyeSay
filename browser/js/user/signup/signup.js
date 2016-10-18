@@ -18,6 +18,6 @@ core.controller('SignupCtrl', function($state, $scope, AuthService, SidebarFacto
         $scope.user.blinkRatio = 0.68;
 
         AuthService.signup($scope.user)
-        .then((user) => $state.go('home'))
+        .then((user) => $state.go('calibrate'))
     }
 });

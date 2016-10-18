@@ -1,9 +1,63 @@
+.bl-text-center {
+    text-align: center;
+}
+
+.bl-description h2 {
+    margin: 1em 0 0.5em 0;
+    font-weight: 700;
+    font-size: 2em;
+}
+
+.bl-description p {
+    margin: 0 0 1em 0;
+}
+
+.bl-description {
+    // width: 80%;
+    text-align: justify;
+    margin: 5px 0px;
+}
+
+.bl-description h2 {
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.bl-article {
+    text-align: justify;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.bl-article h2 {
+    color: rgb(55, 55, 55);
+    font-size: 1.5em;
+
+}
+
+.bl-article p {
+    margin-bottom: 30px;
+    margin-left: 20px;
+}
+
+
 .bl-title {
 	font-size: 4em;
     font-weight: bold;
     font-family: $keyboard;
     text-align: center; 
     // padding-bottom: 10px;
+}
+
+
+.bl-content-title {
+    padding: 50px 0 20px 0;
+}
+
+.bl-content-title h1 {
+    font-weight: 700;
+    color: rgb(45, 45, 45);
+    font-size: 4em;
 }
 
 
@@ -38,7 +92,7 @@
 }
 
 .bl-about-text {
-    
+
 }
 
 .bl-about-text p {

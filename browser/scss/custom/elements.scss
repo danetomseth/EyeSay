@@ -15,11 +15,27 @@
 }
 
 
+.bl-divider {
+	border-top: 1px solid grey;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	height: 10px;
+	margin-bottom: 0px;
+	width: 90%;
+}
+
 .bl-card-info {
 	box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
 	// margin: 15px 50px;
 	// padding: 30px 20px !important;
 }
+
+
+.bl-card-info p {
+	font-size: 18px;
+	// text-align: justify;
+	}
 
 
 .bl-card-title {
@@ -34,11 +50,25 @@
 
 
 
+.bl-toolbar {
+	background: $primary;
+	color: white;
+}
+
+.bl-toolbar h1 {
+	color: white;
+}
+
+
+
+
+
+
 
 .bl-tabs md-tab {
 	// height: 100%;
 }
 
 md-tab-content div {
-	height: 100% !important;	
+	// height: 100% !important;	
 }

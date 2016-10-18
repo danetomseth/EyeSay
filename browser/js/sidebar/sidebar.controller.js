@@ -7,6 +7,7 @@ core.controller('SidebarCtrl', function($scope, $state, $rootScope, Session, Aut
         $scope.username = false;
     }
     $scope.trackingStatus = $scope.user.blinkActive;
+    
     $scope.logOut = function() {
         return AuthService.logout()
             .then(function() {
@@ -38,9 +39,7 @@ core.controller('SidebarCtrl', function($scope, $state, $rootScope, Session, Aut
 
 
     $scope.toggleTracking = (val) => {
-        console.log("toggled", $scope.user.blinkActive);
-        console.log("factory", ConstantsFactory.user.blinkActive);
-        // ConstantsFactory.saveUser('blinkActive', $scope.user.blinkActive)
+        
     }
 
 

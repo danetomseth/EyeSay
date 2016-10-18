@@ -49,10 +49,9 @@
 }
 
 .animate-show {
-  line-height: 100px;
   opacity: 1;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 
@@ -60,19 +59,23 @@
   
   }
 
-// .animate-show.ng-hide-add, .animate-show.ng-hide-remove {
-//   transition: all linear 0.5s;
-// }
-
-.animate-show.ng-hide-remove {
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
   transition: all linear 0.5s;
 }
 
+// .animate-show.ng-hide-remove {
+//   transition: all linear 2s;
+// }
+
 .animate-show.ng-hide {
-  line-height: 0;
   opacity: 0;
 }
 
+
+.animate-show.ng-show {
+  line-height: 0;
+  opacity: 0;
+}
 
 
 
