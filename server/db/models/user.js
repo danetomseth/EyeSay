@@ -66,6 +66,10 @@ var schema = new mongoose.Schema({
     webcamActive: {
         type: Boolean,
         default: true
+    },
+    calibrated: {
+        type: Boolean,
+        default: false
     }
 });
 

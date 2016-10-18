@@ -2,17 +2,22 @@
 	<h1>Calibration</h1>
 </div>
 <md-content layout-padding>
-	<div id="calibrate-overlay" flex layout="column" layout-align="center center" ng-if="!calibrateActive" class="calibrate-step bl-card" md-whiteframe="8">
+	<div id="calibrate-overlay" flex layout="column" layout-align="center center" ng-if="!calibrateActive" class="calibrate-step " layout-padding>
 		<div class="bl-message bl-vw-100">
 			<div>
-				<h2>The following actions are required to calibrate your blink profile<h2>
+				<h2>The following actions are required to calibrate your blink profile</h2>
 			</div>
 			<div>
 				<p>To accurately detect your blinks, the app needs to calculate the average area of your eye when open, and the threshold to register a blink. This "blink profile" is unique to each user.</p>
 			</div>
 			<div>
-				<md-button class="md-raised md-accent" ng-click="start()">Start</md-button>
+				<p>The goal is to establish your unique blink zero and blink ratio to accurately detect blinks. The figure below is a graphical representation of the calibration process.</p> 
+				<p>The app watches for the area of your eye to fall below the red line, registering a blink.</p>
 			</div>
+		</div>
+		<div><img src="/assets/daneGraph.png" width="700" height="auto" alt=""></div>
+		<div>
+			<md-button class="md-raised md-accent" ng-click="start()">Start</md-button>
 		</div>
 	</div>
 

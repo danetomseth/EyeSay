@@ -119,7 +119,7 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
 
     if (StateFactory.lastState === 'calibrate') {
         console.log("last state", StateFactory.lastState);
-        $scope.startTest();
+        $scope.selectedTab = 1;
     } else {
         console.log("no last state", StateFactory.lastState);
     }

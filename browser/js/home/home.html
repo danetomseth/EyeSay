@@ -1,87 +1,65 @@
 <div class="bl-home" ng-if="currentTab === 0">
-  <div class="bl-header">
+  <!-- <div class="bl-header">
     <h1>Welcome</h1>
-  </div>
+  </div> -->
   <div class="bl-home-video">
     <video loop="true" autoplay="true" name="Blink Home" src="assets/eye-video.mov"></video>
   </div>
-  <div class="bl-video-btn" layout="row" layout-align="center">
+ <!--  <div class="bl-video-btn" layout="row" layout-align="center">
     <md-button class="md-primary md-raised" ng-click="skip()">Skip</md-button>
+  </div> -->
+</div>
+
+
+
+
+
+
+
+
+
+<div layout="column" layout-align="start" ng-if="currentTab === 1" layout-margin>
+  <div class="bl-content-title">
+    <h1 class="bl-text-center">Welcome to Blink</h1>
+  </div>
+<div layout="row" class="bl-vw-100" layout-align="center">
+  <div flex="15" class="bl-text-center">
+    <md-button class="md-raised md-primary" ng-mouseover="accountTip = true" ng-mouseleave="accountTip = false" ui-sref="signup">Signup
+    </md-button>
+  </div>
+  <div flex="5">
+  </div>
+  <div flex="15" class="bl-text-center">
+    <md-button class="md-raised md-primary" ng-mouseover="calibrateTip = true" ng-mouseleave="calibrateTip = false" ui-sref="calibrate">Calibrate</md-button>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-<div layout="column" layout-align="start center" ng-if="currentTab === 1" class="bl-home-card">
-  <md-toolbar layout="row" class="md-primary bl-toolbar-lg">
-    <div class="md-toolbar-tools bl-vw-100">
-      <h2>What is Blink?</h2>
-    </div>
-  </md-toolbar>
-  <div class="bl-description bl-vw-80">
-   <h2>Blink is a low-cost assisted communication web-app for people living with locked-in syndrome</h2>
-   <h2>The application was developed by Dane Tomseth, Justin Isaf, and Iris Chang while attending Fullstack Academy</h2>
-   <h2>This is the beta website that is simply a proof of concept. The fully functional webapp can be navigated without over touching the mouse or keyboard.</h2>
- </div>
- <div layout="row" layout-align="center" layout-padding class="bl-home-tip">
-  <div class="animate-show" ng-show="calibrateTip">
-    Continue as guest and calibrate blink profile
+ <div layout="row" layout-align="center" class="bl-vw-100 bl-text-center">
+ <div flex="15" >
+    <p class="animate-show" ng-show="accountTip">Create account to store blink calibration</p>
   </div>
-  <div class="animate-show" ng-show="accountTip">
-   Create account to store blink profile settings
+  <div flex="5"></div>
+  <div flex="15" bl-size="200x60">
+   <p ng-show="calibrateTip" class="animate-show">Continue as a guest</p>
  </div>
 </div>
- <div layout="row" layout-align="center" layout-padding>
-  <md-button class="md-raised md-primary" ng-mouseover="accountTip = true" ng-mouseleave="accountTip = false" ui-sref="signup">Create Account
-  </md-button>
-  <md-button class="md-raised md-primary" ng-mouseover="calibrateTip = true" ng-mouseleave="calibrateTip = false" ui-sref="calibrate">Calibrate</md-button>
+  <div class="bl-divider"></div>
+
+  <div class="bl-article" flex-offset="15">
+    <h2>What is it?</h2>
+    <p>Blink is a low-cost assisted communication web-app for people living with locked-in syndrome. dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim</p>
+    <h2>Who Created Blink?</h2>
+    <p>The application was developed by Dane Tomseth, Justin Isaf, and Iris Chang while attending Fullstack Academy. sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim</p>
+    <h2>Is this the final product?</h2>
+    <p>This is the beta website that is simply a proof of concept. The fully functional webapp can be navigated without over touching the mouse or keyboard. dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim</p>
+  </div>
+
+
+
 </div>
 
 
-</div>
 
 
 
 
-
-
-
-<!-- <div layout="column" show-xs show-sm layout-align="center start" layout-padding>
-    <div>
-        <h2>The window size is too small!</h2>
-
-    </div>
-    <div>
-        <h4>If on a computer, please enlarge window</h4>
-        <h4>Note: The app is not currently compatiable with mobile devices</h4>    
-    </div>
-
-
-  </div> -->
-
-
-
-<!-- <div class="bl-home-content" layout="column"  layout-align="center center" ng-if="currentTab === 0">
-    <div class="bl-home-text">
-        <h2>"A low-cost assisted communication web-app for people suffering from locked-in syndrome"</h2>
-    </div>
-    <div class="bl-home-box">
-        <div ui-sref="signup" ng-if="!loggedIn">
-            <h2>Signup</h2>
-            <p>Create account to store blink profile settings</p>
-        </div>
-        <div ui-sref="calibrate">
-            <h2>Calibrate</h2>
-            <p>Continue as a guest</p ng-if="!loggedIn">
-        </div>
-    </div>
-
-
-  </div> -->
 
