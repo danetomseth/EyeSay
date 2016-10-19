@@ -20,17 +20,7 @@
     height: 100px;
 }
 
-.bl-video-btn {
-    z-index: 2 !important;
-    position: absolute;
-    margin: 0 auto;
-    bottom: 0;
-    width: 100%;
-}
 
-.bl-video-btn button {
-    z-index: 2 !important;
-}
 
 .bl-toolbar-lg {
     color: white;
@@ -44,17 +34,6 @@
 
 
 
-
-// .bl-home {
-//     // position: relative;
-//     margin: 0px;
-//     height: 100%;
-//     // background-image: url('/assets/eye6.png');
-//     background-repeat: no-repeat;
-//     background-size: cover;
-//     padding-bottom: 100px;
-//     // background-position: center 15%;
-// }
 
 .bl-home {
  position: relative;
@@ -74,20 +53,35 @@
     position: absolute;
     z-index: 1;
     width: 100%;
-    height: auto;
-    
+    height: 100%;
     padding: 0px;
     margin: 0px;
+    top: 0;
+    left: 0;
+    overflow: hidden;
 }
 
 .bl-home-video video {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 110%;
     padding: 0px;
     margin:0px;
     opacity: 0.5;
     background: white;
     z-index: 1;
+}
+
+.bl-video-btn {
+    z-index: 2 !important;
+    position: relative;
+    margin: 0 auto;
+    // width: 75%;
+    top: 75%;
+    left: 0;
+}
+
+.bl-video-btn button {
+    z-index: 2 !important;
 }
 
 

@@ -5,9 +5,9 @@
   <div class="bl-home-video">
     <video loop="true" autoplay="true" name="Blink Home" src="assets/eye-video.mov"></video>
   </div>
- <!--  <div class="bl-video-btn" layout="row" layout-align="center">
+  <div class="bl-video-btn" layout="row" layout-align="center">
     <md-button class="md-primary md-raised" ng-click="skip()">Skip</md-button>
-  </div> -->
+  </div>
 </div>
 
 
@@ -15,10 +15,9 @@
 
 
 
-<div layout="row" flex ng-if="currentTab === 1">
-<div flex="10"></div>
+<!-- <div layout="row" flex ng-if="currentTab === 1"> -->
 
-<div layout="column" layout-align="start"  layout-margin layout-padding>
+<div layout="column" layout-align="start" flex  layout-margin ng-if="currentTab === 1">
   <div flex="5"></div>  
   <div class="bl-content-title">
     <h1 class="bl-text-center">Welcome</h1>
@@ -34,14 +33,15 @@
     <md-button class="md-raised md-primary" ng-mouseover="calibrateTip = true" ng-mouseleave="calibrateTip = false" ui-sref="calibrate">Calibrate</md-button>
   </div>
 </div>
- <div layout="row" layout-align="center" class="bl-vw-100 bl-text-center">
- <div flex="15" >
+ <div layout="row" layout-align="center" class="bl-vw-100 bl-text-center" bl-size="x40">
+ <!-- <div flex="15" >
     <p class="animate-show" ng-show="accountTip">Create account to store blink calibration</p>
   </div>
   <div flex="5"></div>
-  <div flex="15" bl-size="200x60">
+  <div flex="15" >
    <p ng-show="calibrateTip" class="animate-show">Continue as a guest</p>
- </div>
+ </div> -->
+  <div flex><p class="animate-show" ng-show="accountTip">Create account to store blink calibration</p></div>
 </div>
   <div class="bl-divider"></div>
 
@@ -62,7 +62,7 @@
 
 
 <div flex="10"></div>
-</div>
+<!-- </div> -->
 
 
 
