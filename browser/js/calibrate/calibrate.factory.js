@@ -91,8 +91,13 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
     }
 
     service.closedCalibration = (total) => {
+        let dataPoint = {};
+        dataPoint.x = count;
+        dataPoint.y = total;
+        blinkProfile.push(dataPoint);
+        
         count++;
-        blinkProfile.push(total);
+        
         if (minVals.length < 50) {
             service.closedCount = (minVals.length / 50) * 100;
         }

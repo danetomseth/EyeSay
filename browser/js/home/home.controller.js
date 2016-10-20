@@ -16,10 +16,10 @@ core.controller('HomeCtrl', function($scope, $rootScope, $timeout, Session, Stat
 		// return;
 		$scope.currentTab = 0;
 		$timeout(function() {
-			// $scope.currentTab = 1;
+			$scope.currentTab = 1;
 		}, 5000);
 	}
-	if(!StateFactory.lastState) {
+	if(!StateFactory.lastState && !$scope.loggedIn) {
 		startHome();
 	}
 	else {

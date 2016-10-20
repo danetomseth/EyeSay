@@ -3,6 +3,9 @@
 
 <head>
     <base href="/" />
+    <link rel="icon" 
+      type="image/png" 
+      href="/assets/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blink</title>
     <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
@@ -13,7 +16,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
     rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/angular-material/angular-material.min.css">
-    <link src="/angular-material-icons/angular-material-icons.css"></link>
+    <link rel="stylesheet" type="text/css" src="/angular-material-icons/angular-material-icons.css"></link>
+    <script src="/chart.js/dist/Chart.min.js"></script>
     <script src="/lodash/index.js"></script>
     <script src="/angular/angular.min.js"></script>
     <script src="/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
@@ -47,7 +51,7 @@
         <div flex id="bl-overflow" layout="column">
             <!-- <div flex="10" class="bl-header" ng-if="!$root.isHome"> -->
             <div flex="10" class="bl-header">
-                <h1>Blink</h1>
+                <h1>EYEsee</h1>
             </div>
             <div flex id="main-content" ui-view></div>
         </div>

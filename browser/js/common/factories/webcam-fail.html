@@ -5,9 +5,12 @@
       <span>There was a problem connecting to your webcam</span>
     </div>
   </md-toolbar>
-  <md-list flex>
-    <md-list-item>Try this</md-list-item>
- </md-list>
+  <div layout="row" layout-align="center">
+    <div flex="25"></div>
+        <div flex="50">The app will re-attempt to establist connection.</div>
+    <div flex="25"></div>
+
+  </div>
  <md-dialog-actions layout="row" layout-align="center" layout-padding> 
    <md-button ng-click="closeDialog()" class="md-accent md-raised"> 
      Okay 

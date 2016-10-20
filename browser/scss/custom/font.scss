@@ -1,3 +1,18 @@
+p {
+    font-family: "katarine-web",sans-serif;
+}
+
+h2 {
+    letter-spacing: .01em;
+    font-weight: bold;
+    text-transform: none;
+    font-family: "katarine-web",sans-serif;
+}
+
+.bl-left {
+    text-align: left;
+}
+
 .bl-text-center {
     text-align: center;
 }
@@ -35,11 +50,25 @@
 
 }
 
-.bl-article p {
-    margin-bottom: 30px;
-    margin-left: 20px;
+
+.bl-font-large p:first-child {
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 0px;
 }
 
+.bl-article p {
+    margin-bottom: 10px;
+    padding-left: 20px;
+}
+
+.bl-article ul {
+
+}
+
+.bl-article li {
+        
+}
 
 .bl-title {
 	font-size: 4em;
@@ -157,6 +186,13 @@
 }
 
 .bl-dialog-list {
+    font-size: 18px;
+}
+
+
+.bl-action-list {
+    // border: 2px solid rgba(50,50,50,1);
+    padding: 10px;
     font-size: 18px;
 }
 

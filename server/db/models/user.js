@@ -70,6 +70,10 @@ var schema = new mongoose.Schema({
     calibrated: {
         type: Boolean,
         default: false
+    },
+    blinkProfile: {
+        type: Array,
+        default: []
     }
 });
 
@@ -99,6 +103,7 @@ schema.methods.update = (user, updatedUser) => {
     user.blinkRatio = updatedUser.blinkRatio;
     user.doubleBlink = updatedUser.doubleBlink;
     user.blinkActive = updatedUser.blinkActive;
+    user.blinkProfile = updatedUser.blinkProfile;
 
     return user.save();
 }

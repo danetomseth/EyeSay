@@ -1,4 +1,4 @@
-core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Session) {
+core.factory('ConstantsFactory', function($rootScope, $http, Session) {
     let obj = {};
 
 
@@ -12,19 +12,14 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
     }
 
 
-    if (Session.user) {
-        $rootScope.user = Session.user;
-    } else {
-        $rootScope.user = guestSettings;
-    }
-
 
     let saveUser = () => {
-        $http.put('/api/users/update', $rootScope.user).then(res => {
-            $rootScope.user = res.data;
-        })
+        if (Session.user) {
+            $http.put('/api/users/update', $rootScope.user).then(res => {
+                $rootScope.user = res.data;
+            })
+        }
     }
-
 
 
     obj.setUser = (user) => {
@@ -41,13 +36,11 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
         $rootScope.user.blinkRatio = ratio;
         $rootScope.user.calibrated = true;
         $rootScope.user.blinkProfile = profile;
-        if (Session.user) {
-            saveUser()
-        }
+        saveUser()
     }
 
 
-    
+
 
     obj.adjustValue = (add, key) => {
         if (add) {
@@ -64,9 +57,7 @@ core.factory('ConstantsFactory', function($rootScope, $http, SettingsFactory, Se
             $rootScope.user[key] = Math.floor($rootScope.user[key])
         }
 
-        if (Session.user) {
-            saveUser()
-        }
+        saveUser()
     }
 
     obj.toggleTracking = (value) => {

@@ -7,12 +7,12 @@
 	<div>
 		<h2>Calibrating Your Blink Profile</h2>
 	</div>
-	<div id="calibrate-overlay" flex layout="row" layout-align="center center"  class="calibrate-step " layout-padding layout-margin>
+	<div id="calibrate-overlay" flex layout="row" class="calibrate-step " layout-padding layout-margin>
 		
 		<div flex="50">
 			<img src="/assets/daneGraph.png" height="auto" alt="" class="bl-vw-100">
 		</div>
-		<div class="bl-message" flex>
+		<div class="bl-right-message" layout="column" flex layout-align="start start">
 			<div>
 				<p>To accurately detect your blinks, the app needs to calculate the average area of your eye when open, and the threshold to register a blink. This "blink profile" is unique to each user.</p>
 			</div>
@@ -21,11 +21,14 @@
 				<p>The app watches for the area of your eye to fall below the red line, registering a blink.</p>
 			</div>
 			<div>
-				<md-button class="md-raised md-primary" ng-click="start()">Begin</md-button>
-				<md-button class="md-raised md-primary" ng-hide="showInstructions" ng-click="show()">More Instructions</md-button>
-				<md-button class="md-raised md-warn" ng-show="showInstructions" ng-click="show()">Hide Instructions</md-button>
+				<md-button class="md-primary" ng-hide="showInstructions" ng-click="show()">Click Here For More Instructions</md-button>
+				<md-button class="md-warn" ng-show="showInstructions" ng-click="show()">Hide Instructions</md-button>
 			</div>
+			
 		</div>
+	</div>
+	<div class="bl-text-center bl-vw-100">
+				<md-button class="md-raised md-primary" ng-click="start()">Begin</md-button>
 	</div>
 	<div layout="column" flex>
 		<div ng-show="showInstructions" layout="row" layout-padding layout-margin layout-align="center start">
