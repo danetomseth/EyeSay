@@ -24,6 +24,14 @@ core.controller('CalibrateCtrl', function($scope, $mdDialog, CalibrateFactory, $
     }
 
 
+    $scope.showInstructions = false;
+
+    $scope.show = () => {
+        console.log("switch");
+        $scope.showInstructions = !$scope.showInstructions
+    }
+
+
 
     $scope.start = () => {
         if (TrackingFactory.convergence() > 50) {

@@ -2,7 +2,8 @@
 
 core.factory('TimerFactory', function($rootScope, Session, $state, PositionFactory, TrackingFactory, ActionFactory) {
 
-    let iterationTime = $rootScope.user.cursorDelay; //used directly down below (32)
+    // let iterationTime = $rootScope.user.cursorDelay; //used directly down below (32)
+    let iterationTime = 750
     let startTime = 0;
     let currentTimestamp
     let frameId = 0;

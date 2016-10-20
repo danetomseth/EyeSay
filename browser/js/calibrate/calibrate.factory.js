@@ -29,6 +29,8 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
     service.closedCalibrationComplete = false;
     service.closedCount = 0;
 
+    let blinkProfile = [];
+
 
     let resetCalValues = () => {
         service.openCalibrationComplete = false;
@@ -65,27 +67,6 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
     }
 
 
-    // service.openCalibration = (total) => {
-    //     count++;
-    //     if (maxVals.length < 50) {
-    //         service.openCount = (maxVals.length / 50) * 100;
-    //     } else {
-    //         service.openCount = 100
-    //     }
-    //     if (maxVals.length > 50) {
-    //         count = 0;
-    //         service.setOpenValue();
-    //     }
-    //     //starting the array - with a little buffer
-    //     if (count > 40 && count < 50) {
-    //         maxVals.push(total) * 1.3;
-    //     }
-    //     if (count > 50) {
-    //         if (total) {
-    //             avgMax(total);
-    //         }
-    //     }
-    // }
 
     service.openCalibration = (total) => {
         count++;
@@ -110,7 +91,13 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
     }
 
     service.closedCalibration = (total) => {
+        let dataPoint = {};
+        dataPoint.x = count;
+        dataPoint.y = total;
+        blinkProfile.push(dataPoint);
+        
         count++;
+        
         if (minVals.length < 50) {
             service.closedCount = (minVals.length / 50) * 100;
         }
@@ -187,7 +174,7 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
     let setValues = function() {
         blinkZero = maxSum.toFixed(2);
         blinkRatio = (minSum / maxSum).toFixed(2);
-        ConstantsFactory.setBlink(blinkRatio, blinkZero);
+        ConstantsFactory.setBlink(blinkRatio, blinkZero, blinkProfile);
         service.calibrationSet = true;
         // resetCalValues();
     }

@@ -12,14 +12,14 @@ core.controller('HomeCtrl', function($scope, $rootScope, $timeout, Session, Stat
 
 
 	let startHome = () => {
-		$scope.currentTab = 1;
-		return;
+		// $scope.currentTab = 1;
+		// return;
 		$scope.currentTab = 0;
 		$timeout(function() {
 			$scope.currentTab = 1;
 		}, 5000);
 	}
-	if(!StateFactory.lastState) {
+	if(!StateFactory.lastState && !$scope.loggedIn) {
 		startHome();
 	}
 	else {

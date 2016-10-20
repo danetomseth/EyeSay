@@ -27,23 +27,15 @@ app.config(function($urlRouterProvider, $locationProvider, $mdThemingProvider, $
 });
 
 // This app.run is for controlling access to specific states.
-app.run(function($rootScope, AuthService, $state, Session) {
+app.run(function($rootScope, AuthService, $state, Session, ConstantsFactory) {
     $rootScope.isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
      //initially sets caregiver to false
     // The given state requires an authenticated user.
     AuthService.getLoggedInUser().then(function(user) {
-
-
+            ConstantsFactory.setUser(user);
             // If a user is retrieved, then renavigate to the destination
             // (the second time, AuthService.isAuthenticated() will work)
             // otherwise, if no user is logged in, go to "login" state.
-            if (user) {
-                let threshold = {
-                    ratio: user.blinkRatio,
-                    zero: user.blinkZero
-                }
-                $rootScope.$emit("userThreshold", threshold);
-            } 
         });
 
     
@@ -73,6 +65,7 @@ app.run(function($rootScope, AuthService, $state, Session) {
         event.preventDefault();
 
         AuthService.getLoggedInUser().then(function(user) {
+            debugger;
             // If a user is retrieved, then renavigate to the destination
             // (the second time, AuthService.isAuthenticated() will work)
             // otherwise, if no user is logged in, go to "login" state.

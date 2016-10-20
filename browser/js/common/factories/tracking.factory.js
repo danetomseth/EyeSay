@@ -4,6 +4,9 @@ core.factory('TrackingFactory', function($rootScope, DialogFactory) {
     let canvas;
     let context;
     let tracker;
+    let ctx;
+    let video;
+    let trackingBox = [0, 0, 0, 0]; // middleX, middleY, containerWidth, containerHeight
     $rootScope.trackerInitialized = false;
 
     let trackObj = {};
@@ -20,28 +23,29 @@ core.factory('TrackingFactory', function($rootScope, DialogFactory) {
         //helps remove the error when tracker first loads
         // Avoids cannot get response model on point XX
 
+
         setTimeout(function() {
             tracker.setResponseMode("blend", ["raw", "sobel"]);
             boundingBox ? tracker.start(video, boundingBox) : tracker.start(video);
             $rootScope.$broadcast("trackerInitialized");
-        }, 2000);
+        }, 500);
     };
 
     trackObj.startSidebar = () => {
         let containerWidth = angular.element(document.getElementById('sidebar-webcam-container'))[0].clientWidth
         let boundingBox = document.getElementById("canvas-overlay");
-        let ctx = boundingBox.getContext("2d");
-        let video = document.getElementById('sidebar-webcam');
-        let canvas = document.getElementById("sidebar-canvas");
-        let middleX = containerWidth - (containerWidth / 4);
-        let middleY = (containerWidth * .75) - ((containerWidth / 3.1));
-        let canvasWidth = (containerWidth / 4) * 2;
-        let canvasHeight = ((containerWidth / 3) * .75) * 2.5;
+        ctx = boundingBox.getContext("2d");
+        video = document.getElementById('sidebar-webcam');
+        canvas = document.getElementById("sidebar-canvas");
+        trackingBox[0] = containerWidth - (containerWidth / 4);
+        trackingBox[1] = (containerWidth * .75) - ((containerWidth / 3.1));
+        trackingBox[2] = (containerWidth / 4) * 2;
+        trackingBox[3] = ((containerWidth / 3) * .75) * 2.5;
 
         ctx.strokeStyle = "rgba(130,255,50, 0.5)";
-        ctx.strokeRect(middleX, middleY, canvasWidth, canvasHeight);
+        ctx.strokeRect(trackingBox[0], trackingBox[1], trackingBox[2], trackingBox[3]);
 
-        trackObj.startTracking(canvas, video, [middleX, middleY, canvasWidth, canvasHeight]);
+        trackObj.startTracking(canvas, video, trackingBox);
     }
 
     trackObj.drawLoop = () => {
@@ -61,6 +65,12 @@ core.factory('TrackingFactory', function($rootScope, DialogFactory) {
             return true;
         } else return false
     }
+
+
+
+    $rootScope.$on("WebcamInitialized", () => {
+        trackObj.startSidebar()
+    })
 
     return trackObj;
 });

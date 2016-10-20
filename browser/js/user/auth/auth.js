@@ -84,11 +84,9 @@
             .then((res) => {
                 if(res.data.user){ // if we get a logged in user back, then log them in
                     onSuccessfulLogin(res)
-                    ConstantsFactory.setUser(res.data.user);
                     // $state.go('type');
                 } 
                 else {
-                    console.log("In pre-built would go to calibrate");
                     // $state.go('calibrate');
                 }
             })

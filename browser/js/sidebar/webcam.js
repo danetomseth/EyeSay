@@ -1,4 +1,4 @@
-core.directive('blSidebarWebcam', function($rootScope, WebcamFactory, TrackingFactory, TimerFactory) {
+core.directive('blSidebarWebcam', function($rootScope, WebcamFactory) {
     return {
         restrict: 'E',
         templateUrl: 'js/sidebar/webcam.html',
@@ -15,7 +15,7 @@ core.directive('blSidebarWebcam', function($rootScope, WebcamFactory, TrackingFa
 
 
             let video = document.getElementById('sidebar-webcam');
-            let canvas = document.getElementById("sidebar-canvas");
+            // let canvas = document.getElementById("sidebar-canvas");
 
             scope.webcamCss = {
                 'top': positionSetHeight,
@@ -31,27 +31,10 @@ core.directive('blSidebarWebcam', function($rootScope, WebcamFactory, TrackingFa
                 'height': containerWidth * .75 + 'px'
             }
 
-            WebcamFactory.startWebcam(video);
-
-            $rootScope.videoActive = true;
 
 
-
-            //All of this logic is to set bounding box canvas
             scope.$watch('$viewContentLoaded', function() {
-                let boundingBox = document.getElementById("canvas-overlay");
-                let ctx = boundingBox.getContext("2d");
-                let middleX = containerWidth - (containerWidth / 4);
-                let middleY = (containerWidth * .75) - ((containerWidth / 3.1));
-                let canvasWidth = (containerWidth / 4) * 2;
-                let canvasHeight = ((containerWidth / 3) * .75) * 2.5;
-                ctx.strokeStyle = "rgba(130,255,50, 0.5)";
-                ctx.strokeRect(middleX, middleY, canvasWidth, canvasHeight);
-                // TrackingFactory.startTracking(canvas, video, [middleX, middleY, canvasWidth, canvasHeight]);
-                TrackingFactory.startSidebar();
-                setTimeout(function() {
-                    // TimerFactory.start();
-                }, 2000);
+                WebcamFactory.startWebcam(video);
             });
             // start all our things
 

@@ -5,9 +5,9 @@
   <div class="bl-home-video">
     <video loop="true" autoplay="true" name="Blink Home" src="assets/eye-video.mov"></video>
   </div>
- <!--  <div class="bl-video-btn" layout="row" layout-align="center">
+  <div class="bl-video-btn" layout="row" layout-align="center">
     <md-button class="md-primary md-raised" ng-click="skip()">Skip</md-button>
-  </div> -->
+  </div>
 </div>
 
 
@@ -15,17 +15,28 @@
 
 
 
-<div layout="row" flex ng-if="currentTab === 1">
-<div flex="10"></div>
+<!-- <div layout="row" flex ng-if="currentTab === 1"> -->
 
-<div layout="column" layout-align="start"  layout-margin layout-padding>
+<div layout="column" layout-align="start" flex  layout-margin ng-if="currentTab === 1">
   <div flex="5"></div>  
+  <div>
+    <span class="md-display-3">Online eye-tracking application for assistive communication</span>
+
+  </div>
   <div class="bl-content-title">
-    <h1 class="bl-text-center">Welcome</h1>
+
+    <h1 class="bl-text-center" ng-show="!loggedIn">Online eye-tracking application for assistive communication</h1>
+    <h1 class="bl-text-center" ng-show="loggedIn">Welcome Back, {{$root.user.firstName}}!</h1>
+  </div>
+  <div>
+    <p>The only free communication device that allows individuals living with locked in syndrome or severe spinal cord injuries to communicate and engage with the world around them.</p>
+
   </div>
 <div layout="row" class="bl-vw-100" layout-align="center">
   <div flex="15" class="bl-text-center">
-    <md-button class="md-raised md-primary" ng-mouseover="accountTip = true" ng-mouseleave="accountTip = false" ui-sref="signup">Signup
+    <md-button ng-show="!loggedIn" class="md-raised md-primary" ng-mouseover="accountTip = true" ng-mouseleave="accountTip = false" ui-sref="signup">Signup
+    </md-button>
+    <md-button ng-show="loggedIn" class="md-raised md-primary" ng-mouseover="accountTip = true" ng-mouseleave="accountTip = false" ui-sref="type">Type
     </md-button>
   </div>
   <div flex="5">
@@ -34,35 +45,16 @@
     <md-button class="md-raised md-primary" ng-mouseover="calibrateTip = true" ng-mouseleave="calibrateTip = false" ui-sref="calibrate">Calibrate</md-button>
   </div>
 </div>
- <div layout="row" layout-align="center" class="bl-vw-100 bl-text-center">
- <div flex="15" >
-    <p class="animate-show" ng-show="accountTip">Create account to store blink calibration</p>
-  </div>
-  <div flex="5"></div>
-  <div flex="15" bl-size="200x60">
-   <p ng-show="calibrateTip" class="animate-show">Continue as a guest</p>
- </div>
+ <div layout="row" layout-align="center" class="bl-vw-100 bl-text-center" bl-size="x40">
+  <div flex><p class="animate-show" ng-show="accountTip">Create account to store blink calibration</p><p ng-show="calibrateTip" class="animate-show">Continue as a guest</p></div>
 </div>
   <div class="bl-divider"></div>
-
-  <div class="bl-article" flex-offset="15">
-    <h2>What is it?</h2>
-    <p>Blink is a low-cost assisted communication web-app for people living with locked-in syndrome. dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim</p>
-    <h2>Who Created Blink?</h2>
-    <p>The application was developed by Dane Tomseth, Justin Isaf, and Iris Chang while attending Fullstack Academy. sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim</p>
-    <h2>What Technologies?</h2>
-    <p>The application was developed by Dane Tomseth, Justin Isaf, and Iris Chang while attending Fullstack Academy. sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim</p>
-    <h2>Is this the final product?</h2>
-    <p>This is the beta website that is simply a proof of concept. The fully functional webapp can be navigated without over touching the mouse or keyboard. dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim</p>
-  </div>
-
-
 
 </div>
 
 
 <div flex="10"></div>
-</div>
+<!-- </div> -->
 
 
 

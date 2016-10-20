@@ -1,12 +1,18 @@
 <div class="bl-page-title">
 	<h1>Calibration</h1>
 </div>
-<md-content layout-padding>
-	<div id="calibrate-overlay" flex layout="column" layout-align="center center" ng-if="!calibrateActive" class="calibrate-step " layout-padding>
-		<div class="bl-message bl-vw-100">
-			<div>
-				<h2>The following actions are required to calibrate your blink profile</h2>
-			</div>
+
+<!-- <md-subheader>Calibration</md-subheader> -->
+<div layout="column" flex layout-align="start center" ng-if="!calibrateActive">
+	<div>
+		<h2>Calibrating Your Blink Profile</h2>
+	</div>
+	<div id="calibrate-overlay" flex layout="row" class="calibrate-step " layout-padding layout-margin>
+		
+		<div flex="50">
+			<img src="/assets/daneGraph.png" height="auto" alt="" class="bl-vw-100">
+		</div>
+		<div class="bl-right-message" layout="column" flex layout-align="start start">
 			<div>
 				<p>To accurately detect your blinks, the app needs to calculate the average area of your eye when open, and the threshold to register a blink. This "blink profile" is unique to each user.</p>
 			</div>
@@ -14,71 +20,106 @@
 				<p>The goal is to establish your unique blink zero and blink ratio to accurately detect blinks. The figure below is a graphical representation of the calibration process.</p> 
 				<p>The app watches for the area of your eye to fall below the red line, registering a blink.</p>
 			</div>
+			<div>
+				<md-button class="md-primary" ng-hide="showInstructions" ng-click="show()">Click Here For More Instructions</md-button>
+				<md-button class="md-warn" ng-show="showInstructions" ng-click="show()">Hide Instructions</md-button>
+			</div>
+			
 		</div>
-		<div><img src="/assets/daneGraph.png" width="700" height="auto" alt=""></div>
+	</div>
+	<div class="bl-text-center bl-vw-100">
+				<md-button class="md-raised md-primary" ng-click="start()">Begin</md-button>
+	</div>
+	<div layout="column" flex>
+		<div ng-show="showInstructions" layout="row" layout-padding layout-margin layout-align="center start">
+			<div flex="30" md-whiteframe="4dp" class="bl-center">
+				<img src="/assets/findTracking.gif" height="auto" alt="" class="bl-vw-100">
+			</div>
+			<div class="bl-message" flex>
+				<div class="bl-vw-100">
+					<h3>Aquire Tracking</h3>
+				</div>
+				<div class="bl-indent">
+					<p>The goal is to establish your unique blink zero and blink ratio to accurately detect blinks. The figure below is a graphical representation of the calibration process.</p> 
+					<p>The app watches for the area of your eye to fall below the red line, registering a blink.</p>
+				</div>
+			</div>
+		</div>
+		<div ng-show="showInstructions" layout="row" layout-padding layout-margin layout-align="center start">
+			<div flex="30" md-whiteframe="4dp" class="bl-center">
+				<img src="/assets/findTracking.gif" height="auto" alt="" class="bl-vw-100">
+			</div>
+			<div class="bl-message" flex>
+				<div class="bl-vw-100">
+					<h3>How To Blink</h3>
+				</div>
+				<div class="bl-indent">
+					<p>The goal is to establish your unique blink zero and blink ratio to accurately detect blinks. The figure below is a graphical representation of the calibration process.</p> 
+					<p>The app watches for the area of your eye to fall below the red line, registering a blink.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- Open calibration -->
+<div flex layout="column" layout-align="center center" ng-show="calibrating.open" class="calibrate-step bl-card">
+	<div class="text-center bl-message bl-vw-80">
+		<h2 ng-show="success">GREAT!!!</h2>
+		<h2 ng-hide="success">Maintain a normal gaze with eyes open</h2>
+		<h2 ng-hide="success">Hold until progress meter fills</h2>
+		<div class="bl-cal-progress" ng-hide="success">
+			<round-progress
+			max="100"
+			current="openCount"
+			color="#2196FD"
+			bgcolor="#eaeaea"
+			radius="150"
+			stroke="30"
+			responsive="false"
+			duration="0"
+			animation="linearEase"
+			animation-delay="0"></round-progress>
+		</div>
+
 		<div>
-			<md-button class="md-raised md-accent" ng-click="start()">Start</md-button>
+			{{openCount.toFixed(0)}}% Complete
 		</div>
 	</div>
 
 
+</div>
 
-	<!-- Open calibration -->
-	<div flex layout="column" layout-align="center center" ng-show="calibrating.open" class="calibrate-step bl-card">
-		<div class="text-center bl-message bl-vw-80">
-			<h2 ng-show="success">GREAT!!!</h2>
-			<h2 ng-hide="success">Maintain a normal gaze with eyes open</h2>
-			<h2 ng-hide="success">Hold until progress meter fills</h2>
-			<div class="bl-cal-progress" ng-hide="success">
-				<round-progress
-				max="100"
-				current="openCount"
-				color="#2196FD"
-				bgcolor="#eaeaea"
-				radius="150"
-				stroke="30"
-				responsive="false"
-				duration="0"
-				animation="linearEase"
-				animation-delay="0"></round-progress>
-			</div>
 
-			<div>
-				{{openCount.toFixed(0)}}% Complete
-			</div>
+
+
+<!-- Closed calibration -->
+<div flex layout="column" layout-align="center center" ng-show="calibrating.closed" class="calibrate-step bl-card">
+	<div class="text-center bl-message bl-vw-80">
+		<h2>Blink naturally every 2 seconds</h2>
+		<h2>Repeat until progress meter fills</h2>
+		<div class="bl-cal-progress">
+			<round-progress
+			max="100"
+			current="closedCount"
+			color="#2196FD"
+			bgcolor="#eaeaea"
+			radius="150"
+			stroke="30"
+			responsive="false"
+			duration="50"
+			animation="linearEase"
+			animation-delay="0"></round-progress>
 		</div>
-
-
-	</div>
-	
-
-
-
-	<!-- Closed calibration -->
-	<div flex layout="column" layout-align="center center" ng-show="calibrating.closed" class="calibrate-step bl-card">
-		<div class="text-center bl-message bl-vw-80">
-			<h2>Blink naturally every 2 seconds</h2>
-			<h2>Repeat until progress meter fills</h2>
-			<div class="bl-cal-progress">
-				<round-progress
-				max="100"
-				current="closedCount"
-				color="#2196FD"
-				bgcolor="#eaeaea"
-				radius="150"
-				stroke="30"
-				responsive="false"
-				duration="50"
-				animation="linearEase"
-				animation-delay="0"></round-progress>
-			</div>
-			<div>
-				{{closedCount.toFixed(0)}}% Complete
-			</div>
+		<div>
+			{{closedCount.toFixed(0)}}% Complete
 		</div>
 	</div>
+</div>
 
-</md-content>
+
 
 
 

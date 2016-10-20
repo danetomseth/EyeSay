@@ -20,7 +20,6 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
     // $scope.selectedTab = 1;
     $scope.switchView = true;
 
-    $scope.user = ConstantsFactory.getUser();
     $scope.blinkDetected = false;
     let currentTest;
     $scope.blinkCount = 0;
@@ -56,7 +55,6 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
     }
 
     $scope.adjustBlink = (add) => {
-        console.log("Value: ", add);
         ConstantsFactory.adjustValue(add, 'blinkRatio');
     }
 
@@ -76,7 +74,6 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
 
 
     $scope.goto = (step) => {
-        console.log("going to: ", step);
         $scope[step] = true;
     }
 
