@@ -1,7 +1,4 @@
 <div class="bl-home" ng-if="currentTab === 0">
-  <!-- <div class="bl-header">
-    <h1>Welcome</h1>
-  </div> -->
   <div class="bl-home-video">
     <video loop="true" autoplay="true" name="Blink Home" src="assets/eye-video.mov"></video>
   </div>
@@ -11,47 +8,46 @@
 </div>
 
 
-
-
-
-
-<!-- <div layout="row" flex ng-if="currentTab === 1"> -->
-
 <div layout="column" layout-align="start" flex  layout-margin ng-if="currentTab === 1">
   <div flex="5"></div>  
-  <div>
-    <span class="md-display-3">Online eye-tracking application for assistive communication</span>
-
+  <div layout-align="center" layout="row">
+    <h1 class="md-display-3" flex="initial">Online Eye-Tracking Assistive Communication</h1>
   </div>
-  <div class="bl-content-title">
-
-    <h1 class="bl-text-center" ng-show="!loggedIn">Online eye-tracking application for assistive communication</h1>
-    <h1 class="bl-text-center" ng-show="loggedIn">Welcome Back, {{$root.user.firstName}}!</h1>
+  <div layout-align="center" layout="row">
+    <h1 class="md-display-1" flex="initial">The first and only online assistive communication</h1>
   </div>
-  <div>
-    <p>The only free communication device that allows individuals living with locked in syndrome or severe spinal cord injuries to communicate and engage with the world around them.</p>
-
+  <md-divider md-inset></md-divider> 
+  <div layout="row" layout-margin layout-padding layout-align="center">
+    <div flex></div>
+    <div flex="70" layout="column" flex-offset="15" layout-margin>
+    <span class="md-headline">Free eye-tracking device that allows individuals living with locked in syndrome or severe spinal cord injuries to communicate and engage with the world around them.</span>
+    </div>
+    <div flex></div>
+    
   </div>
-<div layout="row" class="bl-vw-100" layout-align="center">
-  <div flex="15" class="bl-text-center">
-    <md-button ng-show="!loggedIn" class="md-raised md-primary" ng-mouseover="accountTip = true" ng-mouseleave="accountTip = false" ui-sref="signup">Signup
-    </md-button>
-    <md-button ng-show="loggedIn" class="md-raised md-primary" ng-mouseover="accountTip = true" ng-mouseleave="accountTip = false" ui-sref="type">Type
-    </md-button>
-  </div>
-  <div flex="5">
-  </div>
-  <div flex="15" class="bl-text-center">
-    <md-button class="md-raised md-primary" ng-mouseover="calibrateTip = true" ng-mouseleave="calibrateTip = false" ui-sref="calibrate">Calibrate</md-button>
-  </div>
+   <div flex layout="row" layout-margin layout-padding layout-align="center">
+      <div flex="20" md-whiteframe="1dp" bl-grow="60"  layout="column" layout-align="start center">
+          <div>
+          <md-button class="md-primary" ui-sref="signup">Signup</md-button>
+          </div>
+          <p class="md-subhead">Create an account to store your settings</p>
+      </div>
+      <div flex="20" md-whiteframe="1dp" bl-grow="60"  layout="column" layout-align="start center">
+          <div>
+          <md-button class="md-primary" ui-sref="calibrate">Calibrate</md-button>
+          </div>
+          <p class="md-subhead">Proceed to the automatic calibration to determine you blink profile</p>
+      </div>
+      <div flex="20" md-whiteframe="1dp" bl-grow="60" layout="column" layout-align="start center">
+          <div>
+          <md-button class="md-primary" ui-sref="type">Type</md-button>
+          </div>
+          <div>
+          <p class="md-subhead">Already Calibrated? Try typing with blink!</p>
+          </div>
+      </div>
+    </div>
 </div>
- <div layout="row" layout-align="center" class="bl-vw-100 bl-text-center" bl-size="x40">
-  <div flex><p class="animate-show" ng-show="accountTip">Create account to store blink calibration</p><p ng-show="calibrateTip" class="animate-show">Continue as a guest</p></div>
-</div>
-  <div class="bl-divider"></div>
-
-</div>
-
 
 <div flex="10"></div>
 <!-- </div> -->

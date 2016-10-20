@@ -1,6 +1,7 @@
 //this sets all of timer dependent functions to the same intervals to clear on state change
 
 core.factory('TimerFactory', function($rootScope, Session, $state, PositionFactory, TrackingFactory, ActionFactory) {
+    let service = {};
 
     // let iterationTime = $rootScope.user.cursorDelay; //used directly down below (32)
     let iterationTime = 750
@@ -9,12 +10,12 @@ core.factory('TimerFactory', function($rootScope, Session, $state, PositionFacto
     let frameId = 0;
     let trackingStopped = false;
 
-    function resetBlinkTime () {
+    service.resetBlinkTime = () => {
         startTime = currentTimestamp;
     }
   
 
-    function loop (timestamp){
+    let loop = (timestamp) => {
         currentTimestamp = timestamp;
         // Always draw the face on the tracker
         if(!$rootScope.user.blinkActive) {
@@ -47,9 +48,13 @@ core.factory('TimerFactory', function($rootScope, Session, $state, PositionFacto
         frameId = requestAnimationFrame(loop);
     };
 
-    $rootScope.$on("trackerInitialized", () => {
-        loop();
-    });
+
+    service.resetBlinkTime = () => {
+        startTime = currentTimestamp;
+    }
+
+    service.start = loop;
+
 
     $rootScope.$on('resumeBlink', function() {
         if(trackingStopped) {
@@ -63,11 +68,6 @@ core.factory('TimerFactory', function($rootScope, Session, $state, PositionFacto
         cancelAnimationFrame(frameId);
     });
 
-
-
-    return {
-        start: loop,
-        resetBlinkTime: resetBlinkTime
-    }
+    return service
 
 });

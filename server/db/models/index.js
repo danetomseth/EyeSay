@@ -4,3 +4,4 @@
 require('./user');
 require('./thread');
 require('./post');
+require('./data')

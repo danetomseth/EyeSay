@@ -15,8 +15,7 @@ core.factory('WebcamFactory', function($rootScope, $state, $timeout, DialogFacto
         $timeout(() => {
             retryWebcam()
         }, 1000)
-        DialogFactory.webcamFail();
-        //$state.reload();
+        // DialogFactory.webcamFail();
     };
 
     $rootScope.videoActive = false;

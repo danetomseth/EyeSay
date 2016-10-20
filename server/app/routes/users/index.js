@@ -52,17 +52,11 @@ router.put('/update', (req, res) => { // edit one
     });
 
 // must be user or admin
-router.put('/:id?', ensure.authenticated, ensure.selfOrAdmin, (req, res) => { // edit one
-    if (req.body.blinkZero) {req.session.calibrate = req.body}
-    if (!req.user) {return res.send("no user found")}
-    let userId = req.params.id || req.user._id
-    User.findById(req.user._id)
+router.put('/update/:id', ensure.authenticated, ensure.selfOrAdmin, (req, res) => { // edit one
+    User.findById(req.params.id)
         .then(user => {
-            for (let key in req.body) { // doesn't require sending the whole object back and forth
-                user[key] = req.body[key]
-            }
-            // user = req.body // requires sending the whole object, but maybe less risky than overwriting the whole object?
-            return user.save()
+            console.log('user', user);
+            return user.update(user, req.body);
         })
-        .then(newUser => res.send(newUser))
+        .then(updatedUser => res.send(updatedUser))
 });
