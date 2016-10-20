@@ -1,5 +1,7 @@
-core.factory('ConstantsFactory', function($rootScope, $http, Session) {
+core.factory('ConstantsFactory', function($rootScope, $http, Session, AUTH_EVENTS) {
     let obj = {};
+
+
 
 
     let guestSettings = {
@@ -14,18 +16,40 @@ core.factory('ConstantsFactory', function($rootScope, $http, Session) {
 
 
     let saveUser = () => {
+        
         if (Session.user) {
-            $http.put('/api/users/update', $rootScope.user).then(res => {
+            $http.put('/api/users/update/' + Session.user._id, $rootScope.user).then(res => {
                 $rootScope.user = res.data;
             })
         }
+
+       
+    }
+
+
+    obj.saveCalibration = (blinkRatio, blinkZero, blinkProfile) => {
+        let blinkData = {
+            blinkRatio: blinkRatio,
+            blinkZero: blinkZero,
+            blinkProfile: blinkProfile,
+            userId: 'guest'
+        }
+        if(Session.user) {
+             blinkData.userId = Session.user._id;
+        }
+
+         $http.post('/api/blinkdata/', blinkData).then(res => {
+            console.log("post response", res.data);
+        })
     }
 
 
     obj.setUser = (user) => {
+        console.log("logging out", user);
         if (user) {
             $rootScope.user = user;
         } else {
+            console.log("setting as guest");
             $rootScope.user = guestSettings;
         }
     }

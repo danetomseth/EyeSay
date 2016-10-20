@@ -92,9 +92,11 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
 
     service.closedCalibration = (total) => {
         let dataPoint = {};
-        dataPoint.x = count;
+        dataPoint.x = blinkProfile.length + 1;
         dataPoint.y = total;
-        blinkProfile.push(dataPoint);
+        if(count >= 50) {
+            blinkProfile.push(dataPoint);
+        }
         
         count++;
         
@@ -175,6 +177,7 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
         blinkZero = maxSum.toFixed(2);
         blinkRatio = (minSum / maxSum).toFixed(2);
         ConstantsFactory.setBlink(blinkRatio, blinkZero, blinkProfile);
+        ConstantsFactory.saveCalibration(blinkRatio, blinkZero, blinkProfile);
         service.calibrationSet = true;
         // resetCalValues();
     }

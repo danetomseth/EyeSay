@@ -1,6 +1,6 @@
 #blink-chart {
 	width: 100% !important;
-	height: auto !important;
+	height: 500px !important;
 	margin-left: 30px;
 	margin-bottom: 20px;
 	margin-right: 20px;
@@ -174,6 +174,27 @@
 
 .bl-about-content {
 	padding: 30px;
+}
+
+
+.bl-arrow-headline {
+	background-image: url('/assets/double-arrow.png');
+	background-size: auto 40px;
+	background-position: left top;
+	background-repeat: no-repeat;
+	padding-left: 40px;
+	height: 40px;
+}
+
+.bl-arrow-headline-sm {
+	background-image: url('/assets/double-arrow.png');
+	background-size: auto 25px;
+	background-position: left center;
+	background-repeat: no-repeat;
+	padding-left: 20px;
+	padding-bottom: 5px;
+	height: 30px;
+	margin-bottom: 10px !important;
 }
 
 

@@ -13,7 +13,7 @@ core.config(function($stateProvider) {
 
 
 
-core.controller('CalibrateCtrl', function($scope, $mdDialog, CalibrateFactory, $state, $rootScope, ActionFactory, DialogFactory, TrackingFactory, $interval, $timeout) {
+core.controller('CalibrateCtrl', function($scope, CalibrateFactory, $state, $rootScope, ActionFactory, DialogFactory, TrackingFactory, $interval, $timeout, SettingsFactory) {
 
     $scope.calibrateActive = false;
     $scope.success = false;
@@ -27,7 +27,6 @@ core.controller('CalibrateCtrl', function($scope, $mdDialog, CalibrateFactory, $
     $scope.showInstructions = false;
 
     $scope.show = () => {
-        console.log("switch");
         $scope.showInstructions = !$scope.showInstructions
     }
 
@@ -63,15 +62,22 @@ core.controller('CalibrateCtrl', function($scope, $mdDialog, CalibrateFactory, $
         if (newVal === true) {
             $scope.openCalibrationComplete = CalibrateFactory.openCalibrationComplete;
             $scope.success = true;
-            $timeout(() => {
-                $scope.success = false;
-                $scope.calibrating.open = false;
-                $scope.calibrating.closed = CalibrateFactory.openCalibrationComplete;
-                DialogFactory.closedInstructions();
-            }, 1000);
+            // $timeout(() => {
+            //     $scope.success = false;
+            //     $scope.calibrating.open = false;
+            //     $scope.calibrating.closed = CalibrateFactory.openCalibrationComplete;
+            //     DialogFactory.closedInstructions();
+            // }, 3000);
 
         }
     });
+
+    $scope.gotoClosed = () => {
+        $scope.success = false;
+        $scope.calibrating.open = false;
+        $scope.calibrating.closed = CalibrateFactory.openCalibrationComplete;
+        DialogFactory.closedInstructions();
+    }
 
 
     $scope.$watch(function() {
@@ -86,16 +92,25 @@ core.controller('CalibrateCtrl', function($scope, $mdDialog, CalibrateFactory, $
         return CalibrateFactory.closedCalibrationComplete
     }, function(newVal, oldVal) {
         if (newVal === true) {
-            let action = () => {
-                $state.go("tutorial");
-            }
-            let message = {
-                title: "Calibration Complete",
-                listContent: ["Proceed to tuorial"]
-            }
-            DialogFactory.promptMessage(message, action)
+            // let action = () => {
+            //     $state.go("tutorial");
+            // }
+            // let message = {
+            //     title: "Calibration Complete",
+            //     listContent: ["Proceed to tuorial"]
+            // }
+            // DialogFactory.promptMessage(message, action)
+            $scope.calibrating.closed = false;
+            $scope.calibrationComplete = true;
+            SettingsFactory.createGraph();
         }
     });
+
+
+    $scope.leaveCalibration = () => {
+        $scope.calibrationComplete = false;
+        $state.go("tutorial");
+    }
 
 
 

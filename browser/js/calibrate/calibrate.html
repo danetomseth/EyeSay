@@ -5,11 +5,11 @@
 <!-- <md-subheader>Calibration</md-subheader> -->
 <div layout="column" flex layout-align="start center" ng-if="!calibrateActive">
 	<div>
-		<h2>Calibrating Your Blink Profile</h2>
+		<h2 class="md-display-1">Calibrating Your Blink Profile</h2>
 	</div>
 	<div id="calibrate-overlay" flex layout="row" class="calibrate-step " layout-padding layout-margin>
 		
-		<div flex="50">
+		<div flex="40">
 			<img src="/assets/daneGraph.png" height="auto" alt="" class="bl-vw-100">
 		</div>
 		<div class="bl-right-message" layout="column" flex layout-align="start start">
@@ -19,29 +19,32 @@
 			<div>
 				<p>The goal is to establish your unique blink zero and blink ratio to accurately detect blinks. The figure below is a graphical representation of the calibration process.</p> 
 				<p>The app watches for the area of your eye to fall below the red line, registering a blink.</p>
+				
 			</div>
-			<div>
+			<div layout="row" layout-align="start end" class="bl-vw-100">
+				<div class="md-title">New User?</div>
 				<md-button class="md-primary" ng-hide="showInstructions" ng-click="show()">Click Here For More Instructions</md-button>
 				<md-button class="md-warn" ng-show="showInstructions" ng-click="show()">Hide Instructions</md-button>
+				<div class="md-title">OR</div>
+				<md-button class="md-raised md-primary" ng-click="start()">Begin</md-button>
 			</div>
 			
 		</div>
 	</div>
-	<div class="bl-text-center bl-vw-100">
-				<md-button class="md-raised md-primary" ng-click="start()">Begin</md-button>
-	</div>
-	<div layout="column" flex>
+	
+	<div layout="column" flex md-whiteframe="1dp" layout-margin>
 		<div ng-show="showInstructions" layout="row" layout-padding layout-margin layout-align="center start">
 			<div flex="30" md-whiteframe="4dp" class="bl-center">
 				<img src="/assets/findTracking.gif" height="auto" alt="" class="bl-vw-100">
 			</div>
-			<div class="bl-message" flex>
-				<div class="bl-vw-100">
-					<h3>Aquire Tracking</h3>
+			<div class="bl-message" flex layout="row">
+				<div class="bl-vw-100 bl-arrow-headline">
+					<span class="md-display-1">Aquire Tracking</span>
 				</div>
-				<div class="bl-indent">
-					<p>The goal is to establish your unique blink zero and blink ratio to accurately detect blinks. The figure below is a graphical representation of the calibration process.</p> 
-					<p>The app watches for the area of your eye to fall below the red line, registering a blink.</p>
+				<div class="bl-indent md-body-1 bl-vw-90">
+					<p>Before starting, make sure the green tacking model is closely fitted to your face.</p>
+					<p>Make sure your face in centered in the green box and your head is level with your computer.</p> 
+					<p>If you're having trouble, try moving slowly towards, then away from your webcam.</p>
 				</div>
 			</div>
 		</div>
@@ -50,12 +53,12 @@
 				<img src="/assets/findTracking.gif" height="auto" alt="" class="bl-vw-100">
 			</div>
 			<div class="bl-message" flex>
-				<div class="bl-vw-100">
-					<h3>How To Blink</h3>
+				<div class="bl-vw-100 bl-arrow-headline">
+					<span class="md-display-1">How To Blink</span>
 				</div>
-				<div class="bl-indent">
-					<p>The goal is to establish your unique blink zero and blink ratio to accurately detect blinks. The figure below is a graphical representation of the calibration process.</p> 
-					<p>The app watches for the area of your eye to fall below the red line, registering a blink.</p>
+				<div class="bl-indent md-body-1 bl-vw-90">
+					<p>EYEsee is sensitive enough to detect sublte blinks.</p> 
+					<p>Blink normally while calibrating and typing. There is no need to over-express the blink action.</p>
 				</div>
 			</div>
 		</div>
@@ -67,9 +70,10 @@
 <!-- Open calibration -->
 <div flex layout="column" layout-align="center center" ng-show="calibrating.open" class="calibrate-step bl-card">
 	<div class="text-center bl-message bl-vw-80">
-		<h2 ng-show="success">GREAT!!!</h2>
-		<h2 ng-hide="success">Maintain a normal gaze with eyes open</h2>
-		<h2 ng-hide="success">Hold until progress meter fills</h2>
+		<h2 ng-show="success" class="md-display-1">Open Eye Calibration Complete!</h2>
+		<div ng-show="success"><md-button class="md-primary-md-raised" ng-click="gotoClosed()">Next</md-button></div>
+		<h2 ng-hide="success" class="md-title">Maintain a normal gaze with eyes open</h2>
+		<h2 ng-hide="success" class="md-title">Hold until progress meter fills</h2>
 		<div class="bl-cal-progress" ng-hide="success">
 			<round-progress
 			max="100"
@@ -84,8 +88,8 @@
 			animation-delay="0"></round-progress>
 		</div>
 
-		<div>
-			{{openCount.toFixed(0)}}% Complete
+		<div ng-hide="success">
+			<span class="md-title">{{openCount.toFixed(0)}}% Complete</span>
 		</div>
 	</div>
 
@@ -98,8 +102,7 @@
 <!-- Closed calibration -->
 <div flex layout="column" layout-align="center center" ng-show="calibrating.closed" class="calibrate-step bl-card">
 	<div class="text-center bl-message bl-vw-80">
-		<h2>Blink naturally every 2 seconds</h2>
-		<h2>Repeat until progress meter fills</h2>
+		<h2 class="md-title">Blink naturally every 2 seconds</h2>
 		<div class="bl-cal-progress">
 			<round-progress
 			max="100"
@@ -113,9 +116,22 @@
 			animation="linearEase"
 			animation-delay="0"></round-progress>
 		</div>
-		<div>
+		<div class="md-title">
 			{{closedCount.toFixed(0)}}% Complete
 		</div>
+	</div>
+</div>
+
+
+
+<div flex layout="column" flex layout-padding layout-align="center center" ng-show="calibrationComplete">
+	<div class="md-display-1">Calibration Complete!</div>
+	<div class="md-headline">Here are the results of your calibration</div>
+	<div flex class="bl-center bl-vw-80"> 
+		<canvas id="blink-chart"></canvas>
+	</div>
+	<div>
+		<md-button class="md-primary" ng-click="leaveCalibration()">Proceed To Tutorial</md-button>
 	</div>
 </div>
 

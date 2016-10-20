@@ -48,7 +48,7 @@
         ]);
     });
 
-    app.service('AuthService', function ($http, Session, $rootScope, AUTH_EVENTS, $q, $state, ConstantsFactory) {
+    app.service('AuthService', function ($http, Session, $rootScope, AUTH_EVENTS, $q, $state) {
 
         function onSuccessfulLogin(response) {
             var data = response.data;
