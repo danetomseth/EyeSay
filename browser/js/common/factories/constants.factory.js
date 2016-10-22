@@ -1,4 +1,4 @@
-core.factory('ConstantsFactory', function($rootScope, $http, Session, AUTH_EVENTS) {
+core.factory('ConstantsFactory', function($rootScope, $http, Session, AUTH_EVENTS, ErrorFactory) {
     let obj = {};
 
 
@@ -13,14 +13,24 @@ core.factory('ConstantsFactory', function($rootScope, $http, Session, AUTH_EVENT
         blinkProfile: []
     }
 
+    let saveSuccess = (res) => {
+        console.log("res");
+        $rootScope.user = res.data;
+    }
+
+    let saveFailed = (res) => {
+        var err = new Error('Error Updating User')
+        ErrorFactory.error(err.message, err)
+            .then(res => {
+            })
+    }
 
 
     let saveUser = () => {
-        
         if (Session.user) {
-            $http.put('/api/users/update/' + Session.user._id, $rootScope.user).then(res => {
-                $rootScope.user = res.data;
-            })
+            
+            $http.put('/api/users/update/' + Session.user._id, $rootScope.user).then(saveSuccess, saveFailed)
+           
         }
 
        
@@ -38,18 +48,14 @@ core.factory('ConstantsFactory', function($rootScope, $http, Session, AUTH_EVENT
              blinkData.userId = Session.user._id;
         }
 
-         $http.post('/api/blinkdata/', blinkData).then(res => {
-            console.log("post response", res.data);
-        })
+         $http.post('/api/blinkdata/', blinkData).then(saveSuccess, saveFailed)
     }
 
 
     obj.setUser = (user) => {
-        console.log("logging out", user);
         if (user) {
             $rootScope.user = user;
         } else {
-            console.log("setting as guest");
             $rootScope.user = guestSettings;
         }
     }

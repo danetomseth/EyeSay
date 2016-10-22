@@ -1,4 +1,4 @@
-core.controller('SettingsCtrl', function($scope, $rootScope, SettingsFactory, Session, ConstantsFactory, DialogFactory, WebcamFactory) {
+core.controller('SettingsCtrl', function($scope, $rootScope, SettingsFactory, Session, ConstantsFactory, DialogFactory, AuthService) {
 
     let checkForProfile = () => {
         console.log($rootScope.user.blinkProfile);
@@ -7,7 +7,6 @@ core.controller('SettingsCtrl', function($scope, $rootScope, SettingsFactory, Se
 
     (function() {
         if($rootScope.user.blinkProfile.length) {
-            console.log("create graph");
             $scope.profileSet = true;
             SettingsFactory.createGraph();
         }
@@ -18,6 +17,8 @@ core.controller('SettingsCtrl', function($scope, $rootScope, SettingsFactory, Se
     $scope.adjustValue = (add, key) => {
         ConstantsFactory.adjustValue(add, key);
     }
+
+  
 
 
 });

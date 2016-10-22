@@ -45,20 +45,22 @@
   </script>
 </head>
 <body ng-app="BlinkApp" layout="column">
-    <div layout="row" id="page-content" ng-if="$root.isChrome" layout-align="start stretch">
+    <div layout="row" id="page-content" layout-align="start stretch">
         <div flex="20" flex-gt-sm="15" id="bl-sidebar" hide-xs>
             <bl-sidebar id="sidebar-container"></bl-sidebar>
         </div>
-        <div flex id="bl-overflow" layout="column">
-            <!-- <div flex="10" class="bl-header" ng-if="!$root.isHome"> -->
-            <div flex="10" class="bl-header">
-                <h1>EYEsee</h1>
+        <div flex id="bl-overflow bl-parent" layout="column">
+            <div flex="10" class="bl-header" ng-if="!$root.isHome" ng-hide="!$root.isChrome">
+                <h1 class="bl-heading-1">EYESEE</h1>
             </div>
-            <div flex id="main-content" ui-view></div>
+            <!-- <div flex="10" class="bl-header">
+                <h1 class="bl-heading-1">EYESEE</h1>
+            </div> -->
+            <div flex id="main-content" ui-view ng-cloak></div>
         </div>
     </div>
-    <div ng-if="!$root.isChrome">
+    <!-- <div ng-if="!$root.isChrome">
         <bl-browser class="bl-browser-support"></bl-browser>
-    </div>
+    </div> -->
 </body>
 </html>

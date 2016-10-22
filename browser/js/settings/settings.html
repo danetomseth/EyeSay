@@ -1,115 +1,120 @@
-<div class="bl-page-title">
-	<h1>Settings</h1>
-</div>
 
-
-
-
-
-<div layout="column" flex layout-padding layout-align="start center">
-	<div flex class="bl-center bl-vw-80" ng-show="profileSet"> 
+<h3 class="p-title p-title-no-margin">
+	<span>Blink Profile</span>
+</h3>
+<div layout-padding>
+<div layout="row" flex layout-padding>
+	<div flex class="bl-center" ng-show="profileSet">
+		<h2 class="md-headline">Blink Profile</h2> 
 		<canvas id="blink-chart"></canvas>
 	</div>
-	<div layout="column" layout-align="center start" class="bl-vw-80" layout-margin md-whiteframe="4dp">
-			<p class="md-title">Tracking Settings</p>
-			<md-divider class="bl-vw-100"></md-divider>
-			<div layout="row" class="bl-vw-100" layout-padding>
-				<div flex="40" layout="column">
-					<section layout="row" class="bl-vw-100" layout-align="space-between">
-						<div class="bl-fab-label md-headline">
-							Eye Zero: {{$root.user.blinkZero}}
-						</div>
-
-						<div>
-							<md-button class="md-fab md-mini md-primary" aria-label="add" ng-click="adjustValue(true,'blinkZero')">
-								<md-icon md-font-set="material-icons">add</md-icon>
-							</md-button>
-							<md-button class="md-fab md-mini md-warn" aria-label="remove" ng-click="adjustValue(false,'blinkZero')">
-								<md-icon md-font-set="material-icons">remove</md-icon>
-							</md-button>
-						</div>
-
-					</section>
-
-					<section layout="row" class="bl-vw-100" layout-align="space-between">
-						<div class="bl-fab-label md-headline">
-							Blink Ratio: {{$root.user.blinkRatio}}
-						</div>
-
-						<div>
-							<md-button class="md-fab md-mini md-primary" aria-label="add" ng-click="adjustValue(true,'blinkRatio')">
-								<md-icon md-font-set="material-icons">add</md-icon>
-							</md-button>
-							<md-button class="md-fab md-mini md-warn" aria-label="remove" ng-click="adjustValue(false,'blinkRatio')">
-								<md-icon md-font-set="material-icons">remove</md-icon>
-							</md-button>
-						</div>
-
-					</section>
-
-					<section layout="row" class="bl-vw-100" layout-align="space-between">
-						<div class="bl-fab-label md-headline">
-							Cursor Speed: {{$root.user.cursorDelay}}
-						</div>
-
-						<div>
-							<md-button class="md-fab md-mini md-primary" aria-label="add" ng-click="adjustValue(true,'cursorDelay')">
-								<md-icon md-font-set="material-icons">add</md-icon>
-							</md-button>
-							<md-button class="md-fab md-mini md-warn" aria-label="remove" ng-click="adjustValue(false,'cursorDelay')">
-								<md-icon md-font-set="material-icons">remove</md-icon>
-							</md-button>
-						</div>
-
-					</section>
-
-					<section layout="row" class="bl-vw-100" layout-align="space-between">
-						<div class="bl-fab-label md-headline">
-							Webcam Tracking
-						</div>
-
-						<div class="bl-center" bl-size="116x">
-							<md-checkbox ng-click="toggleTracking()" aria-label="Webcam Status" class="md-primary bl-no-margin bl-checkbox" ng-model="$root.user.blinkActive"></md-checkbox>
-						</div>
-
-					</section>
-				</div>
-				<div flex="5"></div>
-				<div layout="column" flex>
-					<div class="bl-setting-label" flex>
-						<div class="bl-vw-100 bl-arrow-headline-sm">
-							<span class="md-title">Eye Zero</span>
-						</div>
-						<div class="bl-indent md-body-1 bl-vw-90">
-							<p>The average measured area of your open eye.</p> 
-						</div>
-					</div>
-					<md-divider></md-divider>
-					<div class="bl-setting-label" flex>
-						<div class="bl-vw-100 bl-arrow-headline-sm">
-							<span class="md-title">Blink Ratio</span>
-						</div>
-						<div class="bl-indent md-body-1 bl-vw-90">
-							<p>When the measured eye area drops below Eye Zero * Blink Ratio, the application registers a Blink</p> 
-						</div>
-					</div>
-					<md-divider></md-divider>
-					<div class="bl-setting-label" flex>
-						<div class="bl-vw-100 bl-arrow-headline-sm">
-							<span class="md-title">Cursor Speed</span>
-						</div>
-						<div class="bl-indent md-body-1 bl-vw-90">
-							<p>Sets how fast the cursor highlight will move in the typing interface</p> 
-						</div>
-					</div>
-				</div>
+	<div flex class="bl-center" ng-show="!profileSet" md-whiteframe="4dp">
+		<h2 class="md-headline">Blink Profile Graph</h2>
+		<h2 class="md-title">It looks like you haven't calibrated yet!</h2> 
+	</div>
+	<div layout="column" layout-margin layout-padding flex="40">
+		<div class="icon-box icon-box-left" >
+			<i class="icon-alt font-secondary glyph-icon fa-cog" ></i>
+			<div class="icon-wrapper">
+				<h5 class="icon-title ">Blink Threshold</h5>
+				<p class="icon-content ">Your Eye Zero * Blink Ratio. When the current area of your eye drops below this value, A blink is detected.</p>
+			</div>
+		</div>
+		<div class="icon-box icon-box-left" >
+			<i class="icon-alt font-secondary glyph-icon fa-percent" ></i>
+			<div class="icon-wrapper">
+				<h5 class="icon-title ">Blink Ratio</h5>
+				<p class="icon-content ">The ratio between your Eye Zero and average blink values</p>
+			</div>
+		</div>
+		<div class="icon-box icon-box-left" >
+			<i class="icon-alt font-secondary glyph-icon fa-eye" ></i>
+			<div class="icon-wrapper">
+				<h5 class="icon-title ">Eye Zero</h5>
+				<p class="icon-content ">The average measured area of your open eye.</p>
 
 			</div>
 
+		</div>
 	</div>
-	
-	
 </div>
+
+<h3 class="p-title p-title-no-margin">
+	<span>Adjust Settings</span>
+</h3>
+
+<div layout="row" flex layout-padding layout-margin layout-align="space-between">
+	<span flex="10"></span>
+	<div flex="30" layout="column" layout-padding layout-margin>
+		<div layout="column" bl-size="x120"  layout-align="space-between center" layout-padding md-whiteframe="1dp">
+			<div class="md-headline" flex>
+				<b>Eye Zero:</b> {{$root.user.blinkZero}}
+			</div>
+
+			<div>
+				
+				<button class="bl-icon-btn" aria-label="add" ng-click="adjustValue(true,'blinkZero')">
+					<i class="icon-alt bl-icon-primary glyph-icon fa-plus" ></i>
+				</button>
+				<button class="bl-icon-btn" aria-label="remove" ng-click="adjustValue(false,'blinkZero')">
+					<i class="icon-alt bl-icon-warn glyph-icon fa-minus" ></i>
+				</button>
+			</div>
+
+		</div>
+
+		<div layout="column" bl-size="x120"  layout-align="space-between center" layout-padding md-whiteframe="1dp">
+			<div class="md-headline" flex>
+				<b>Blink Ratio:</b> {{$root.user.blinkRatio}}
+			</div>
+
+			<div>
+				<button class="bl-icon-btn" aria-label="add" ng-click="adjustValue(true,'blinkRatio')">
+					<i class="icon-alt bl-icon-primary glyph-icon fa-plus" ></i>
+				</button>
+				<button class="bl-icon-btn" aria-label="remove" ng-click="adjustValue(false,'blinkRatio')">
+					<i class="icon-alt bl-icon-warn glyph-icon fa-minus" ></i>
+				</button>
+			</div>
+
+		</div>
+	</div>
+	<div flex="30" layout="column" layout-padding layout-margin>
+
+		<div layout="column" bl-size="x120"  layout-align="space-between center" layout-padding md-whiteframe="1dp">
+			<div class="md-headline" flex>
+				<b>Cursor Speed:</b> {{$root.user.cursorDelay}}
+			</div>
+
+			<div>
+				<button class="bl-icon-btn" aria-label="add" ng-click="adjustValue(true,'cursorDelay')">
+					<i class="icon-alt bl-icon-primary glyph-icon fa-plus" ></i>
+				</button>
+				<button class="bl-icon-btn" aria-label="remove" ng-click="adjustValue(false,'cursorDelay')">
+					<i class="icon-alt bl-icon-warn glyph-icon fa-minus" ></i>
+				</button>
+			</div>
+
+		</div>
+
+		<div layout="column" bl-size="x120"  layout-align="space-between center" layout-padding md-whiteframe="1dp">
+			<div class="md-headline" flex>
+				<b>Webcam Tracking</b>
+			</div>
+
+			<div class="bl-center" bl-size="116x">
+				<md-checkbox ng-click="toggleTracking()" aria-label="Webcam Status" class="md-primary bl-no-margin bl-checkbox" ng-model="$root.user.blinkActive"></md-checkbox>
+			</div>
+
+		</div>
+	</div>
+	<span flex="10"></span>
+</div>
+</div>
+
+<div bl-size="x200" class="bl-vw-100"></div>
+
+
 
 
 

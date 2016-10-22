@@ -1,7 +1,12 @@
 'use strict';
 const core = angular.module('core', ['ui.router', 'ngAnimate', 'ngMaterial', 'ngMdIcons', 'angular-svg-round-progressbar'])
 
+
+
+
 window.app = angular.module('BlinkApp', ['blinkAuth', 'core']);
+
+
 
 
 
@@ -27,10 +32,14 @@ app.config(function($urlRouterProvider, $locationProvider, $mdThemingProvider, $
 });
 
 // This app.run is for controlling access to specific states.
-app.run(function($rootScope, AuthService, $state, Session, ConstantsFactory) {
+app.run(function($rootScope, AuthService, $state, Session, ConstantsFactory, ErrorFactory) {
     $rootScope.isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-     //initially sets caregiver to false
+
+    if(!$rootScope.isChrome) {
+        ErrorFactory.browserError();
+    }
     // The given state requires an authenticated user.
+
     AuthService.getLoggedInUser().then(function(user) {
             ConstantsFactory.setUser(user);
             // If a user is retrieved, then renavigate to the destination
@@ -64,20 +73,20 @@ app.run(function($rootScope, AuthService, $state, Session, ConstantsFactory) {
         // Cancel navigating to new state.
         event.preventDefault();
 
-        AuthService.getLoggedInUser().then(function(user) {
-            debugger;
-            // If a user is retrieved, then renavigate to the destination
-            // (the second time, AuthService.isAuthenticated() will work)
-            // otherwise, if no user is logged in, go to "login" state.
+        // AuthService.getLoggedInUser().then(function(user) {
+        //     debugger;
+        //     // If a user is retrieved, then renavigate to the destination
+        //     // (the second time, AuthService.isAuthenticated() will work)
+        //     // otherwise, if no user is logged in, go to "login" state.
 
-            if (user) {
-                $state.go(toState.name, toParams);
-            } else {
-                $state.go('login');
-            }
+        //     if (user) {
+        //         $state.go(toState.name, toParams);
+        //     } else {
+        //         $state.go('login');
+        //     }
 
 
-        });
+        // });
 
     });
 

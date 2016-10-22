@@ -37,6 +37,23 @@ app.get('/*', function (req, res) {
     res.sendFile(app.get('indexHTMLPath'));
 });
 
+
+function errorHandler(err, req, res, next) {
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(500)
+  res.send(err);
+}
+
+//router.use(clientErrorHandler);
+
+// Make sure this is after all of
+// the registered routes!
+
+
+app.use(errorHandler);
+
 // Error catching endware.
 app.use(function (err, req, res, next) {
     console.error(err)

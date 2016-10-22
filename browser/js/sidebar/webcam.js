@@ -1,4 +1,4 @@
-core.directive('blSidebarWebcam', function($rootScope, WebcamFactory) {
+core.directive('blSidebarWebcam', function($rootScope, WebcamFactory, $timeout) {
     return {
         restrict: 'E',
         templateUrl: 'js/sidebar/webcam.html',
@@ -34,7 +34,10 @@ core.directive('blSidebarWebcam', function($rootScope, WebcamFactory) {
 
 
             scope.$watch('$viewContentLoaded', function() {
-                WebcamFactory.startWebcam(video);
+                if($rootScope.isChrome) {
+                    WebcamFactory.startWebcam(video);
+                }
+                
             });
             // start all our things
 

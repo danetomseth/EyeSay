@@ -1,4 +1,4 @@
-app.config(function($stateProvider) {
+core.config(function($stateProvider) {
 
     $stateProvider.state('login', {
         url: '/login',
@@ -9,7 +9,7 @@ app.config(function($stateProvider) {
 });
 
 
-app.config(function($stateProvider) {
+core.config(function($stateProvider) {
 
     $stateProvider.state('logout', {
         url: '/logout',
@@ -22,7 +22,7 @@ app.config(function($stateProvider) {
 
 });
 
-app.controller('LoginCtrl', function($scope, AuthService, $state, Session, ConstantsFactory) {
+app.controller('LoginCtrl', function($scope, AuthService, $state, Session, ConstantsFactory, ErrorFactory) {
 
     $scope.login = {};
     $scope.error = null;
@@ -34,11 +34,27 @@ app.controller('LoginCtrl', function($scope, AuthService, $state, Session, Const
         AuthService.login(loginInfo).then(function() {
             ConstantsFactory.setUser(Session.user);
             $state.go('calibrate');
-        }).catch(function() {
-            $scope.error = 'Invalid login credentials.';
+        }).catch(function(ex) {
+            // let error = new Error
+            ErrorFactory.error(ex.message, ex)
+            .then(res => {
+                $scope.login = {};
+            })
+            
         });
 
     };
+
+    $scope.throwError = () => {
+        try {
+            throw new Error("Triggered Exception");
+        } catch(ex) {
+            ErrorFactory.error(ex.message, ex)
+            .then(res => {
+                $scope.login = {};
+            })
+        }
+    }
 
 
 });

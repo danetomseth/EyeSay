@@ -7,7 +7,7 @@ core.config(function($stateProvider){
 });
 
 
-core.controller('SignupCtrl', function($state, $scope, AuthService, SidebarFactory){
+core.controller('SignupCtrl', function($state, $scope, Session, AuthService, SidebarFactory, ErrorFactory){
     $scope.signup = {};
     $scope.user = {};
     $scope.error = null;
@@ -18,6 +18,14 @@ core.controller('SignupCtrl', function($state, $scope, AuthService, SidebarFacto
         $scope.user.blinkRatio = 0.68;
 
         AuthService.signup($scope.user)
-        .then((user) => $state.go('calibrate'))
+        .then((user) => {
+            $state.go('calibrate')
+        })
+        .catch(function(ex) {
+            // let error = new Error
+            ErrorFactory.error(ex.message, ex)
+            .then(res => {
+            })
+        });
     }
 });
