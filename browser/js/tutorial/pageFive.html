@@ -1,24 +1,28 @@
-<md-content class="md-padding">
-	<md-card>
-		<div layout="column" class="tictac-board">
-			<div layout="row" flex class="text-center board-row">
-				<div flex="33" class="tictac-box" ng-class="{'box-highlight': currentBox === 0, 'player-color': gameBoard[0] === 'X'}"><div>{{gameBoard[0]}}</div></div>
-				<div flex="33" class="tictac-box" ng-class="{'box-highlight': currentBox === 1, 'player-color': gameBoard[1] === 'X'}"><div>{{gameBoard[1]}}</div></div>
-				<div flex="33" class="tictac-box" ng-class="{'box-highlight': currentBox === 2, 'player-color': gameBoard[2] === 'X'}"><div>{{gameBoard[2]}}</div></div>
+	<div class="bl-tic-tac">
+		<div layout="column" class="tictac-board" layout-align="start center" ng-class="{'bl-blur': computerChoosing}">
+			<div class="bl-action-title">
+				<h3 class="bl-text-center">Tic-Tac-Toe</h3>
 			</div>
-			<div layout="row" flex class="text-center board-row">
-				<div flex="33" class="tictac-box" ng-class="{'box-highlight': currentBox === 3, 'player-color': gameBoard[3] === 'X'}"><div>{{gameBoard[3]}}</div></div>
-				<div flex="33" class="tictac-box" ng-class="{'box-highlight': currentBox === 4, 'player-color': gameBoard[4] === 'X'}"><div>{{gameBoard[4]}}</div></div>
-				<div flex="33" class="tictac-box" ng-class="{'box-highlight': currentBox === 5, 'player-color': gameBoard[5] === 'X'}"><div>{{gameBoard[5]}}</div></div>
+			<div layout="row" flex class="text-center board-row" layout-margin layout-align="center">
+				<div  class="tictac-box" ng-class="{'box-selected': currentBox === 0, 'player-color': gameBoard[0] === 'X', 'computer-color': gameBoard[0] === 'O'}"><div>{{gameBoard[0]}}</div></div>
+				<div  class="tictac-box" ng-class="{'box-selected': currentBox === 1, 'player-color': gameBoard[1] === 'X', 'computer-color': gameBoard[1] === 'O'}"><div>{{gameBoard[1]}}</div></div>
+				<div  class="tictac-box" ng-class="{'box-selected': currentBox === 2, 'player-color': gameBoard[2] === 'X', 'computer-color': gameBoard[2] === 'O'}"><div>{{gameBoard[2]}}</div></div>
 			</div>
-			<div layout="row" flex class="text-center board-row">
-				<div flex="33" class="tictac-box" ng-class="{'box-highlight': currentBox === 6, 'player-color': gameBoard[6] === 'X'}"><div>{{gameBoard[6]}}</div></div>
-				<div flex="33" class="tictac-box" ng-class="{'box-highlight': currentBox === 7, 'player-color': gameBoard[7] === 'X'}"><div>{{gameBoard[7]}}</div></div>
-				<div flex="33" class="tictac-box" ng-class="{'box-highlight': currentBox === 8, 'player-color': gameBoard[8] === 'X'}"><div>{{gameBoard[8]}}</div></div>
+			<div layout="row" flex class="text-center board-row" layout-margin layout-align="center">
+				<div  class="tictac-box" ng-class="{'box-selected': currentBox === 3, 'player-color': gameBoard[3] === 'X', 'computer-color': gameBoard[3] === 'O'}"><div>{{gameBoard[3]}}</div></div>
+				<div  class="tictac-box" ng-class="{'box-selected': currentBox === 4, 'player-color': gameBoard[4] === 'X', 'computer-color': gameBoard[4] === 'O'}"><div>{{gameBoard[4]}}</div></div>
+				<div  class="tictac-box" ng-class="{'box-selected': currentBox === 5, 'player-color': gameBoard[5] === 'X', 'computer-color': gameBoard[5] === 'O'}"><div>{{gameBoard[5]}}</div></div>
+			</div>
+			<div layout="row" flex class="text-center board-row" layout-margin layout-align="center">
+				<div  class="tictac-box" ng-class="{'box-selected': currentBox === 6, 'player-color': gameBoard[6] === 'X', 'computer-color': gameBoard[6] === 'O'}"><div>{{gameBoard[6]}}</div></div>
+				<div  class="tictac-box" ng-class="{'box-selected': currentBox === 7, 'player-color': gameBoard[7] === 'X', 'computer-color': gameBoard[7] === 'O'}"><div>{{gameBoard[7]}}</div></div>
+				<div  class="tictac-box" ng-class="{'box-selected': currentBox === 8, 'player-color': gameBoard[8] === 'X', 'computer-color': gameBoard[8] === 'O'}"><div>{{gameBoard[8]}}</div></div>
 			</div>
 		</div>
-	</md-card>
-	<md-button class="md-raised" ng-click="run()">RUN</md-button>
-</md-content>
+		<div class="bl-computer-delay" ng-show="computerChoosing">
+			<img src="assets/ring.gif" alt="HTML5 Icon" style="width:64px;height:64px;">
+		</div>
+	</div>
+
 
 

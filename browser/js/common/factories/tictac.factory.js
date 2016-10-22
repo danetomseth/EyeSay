@@ -4,6 +4,7 @@ core.factory('TicTacFactory', function($state, $timeout, $interval, DialogFactor
     tic.currentBox = null;
     tic.gameBoard = ["", "", "", "", "", "", "", "", ""] //initial board state
     tic.gameFinished = false;
+    tic.computerChoosing = false;
 
     let availableChoices = [0, 1, 2, 3, 4, 5, 6, 7, 8]; // squares computer can still choose
 
@@ -19,13 +20,11 @@ core.factory('TicTacFactory', function($state, $timeout, $interval, DialogFactor
 
     let debounce = () => {
         boxDelay = false;
+        tic.computerChoosing = true;
         $interval.cancel(boxInterval);
         tic.currentBox = null;
-        $timeout(() => {
-            boxDelay = true;
-            tic.moveBox();
-            changeBox();
-        }, 1000)
+
+
     }
 
 
@@ -62,25 +61,37 @@ core.factory('TicTacFactory', function($state, $timeout, $interval, DialogFactor
             tic.finishGame();
             return
         }
+        debounce();
         tic.computerChoice();
         if (tic.checkForWin("O")) {
             tic.finishGame("O");
             return
         };
-        debounce();
     }
 
 
 
     tic.computerChoice = () => {
-        let randomDelay = Math.floor(Math.random() * 300) + 250;
+        let randomDelay = Math.floor(Math.random() * 300) + 500;
         $timeout(() => {
             let randNum = Math.floor(Math.random() * (availableChoices.length))
             let randChoice = availableChoices[randNum];
             tic.gameBoard[randChoice] = "O";
             availableChoices.splice(randNum, 1);
+            
         }, randomDelay);
 
+        $timeout(() => {
+            tic.computerChoosing = false;
+            if (tic.checkForWin("O")) {
+                console.log("computer won");
+                tic.finishGame("O");
+            } else {
+                boxDelay = true;
+                tic.moveBox();
+                changeBox();
+            }
+        }, 1500)
     }
 
 
@@ -150,12 +161,12 @@ core.factory('TicTacFactory', function($state, $timeout, $interval, DialogFactor
         }
         if (player === "X") {
             message.title = "You win!!!"
-            DialogFactory.promptMessage(message, action);
+                DialogFactory.promptMessage(message, action);
         } else if (player === "O") {
             message.title = "You lost :("
-            DialogFactory.promptMessage(message, action);
+                DialogFactory.promptMessage(message, action);
         } else {
-           DialogFactory.promptMessage(message, action);
+            DialogFactory.promptMessage(message, action);
         }
     }
 

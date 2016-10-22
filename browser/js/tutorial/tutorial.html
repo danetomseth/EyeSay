@@ -1,14 +1,12 @@
 <div layout="column" flex class="bl-vh-100">
 
-<h3 class="p-title p-title-no-margin">
-  <span>Tutorial</span>
-</h3>
+
 
 <div ng-cloak id="tutorialContainer"  flex>
 	<md-tabs class="bl-vh-100 bl-tabs" md-border-bottom md-selected="selectedTab" md-autoselect>
 		<md-tab  label="One">
-			<div layout="row" layout-align="start start">
-				<bl-tutorial-one class="bl-block" layout-padding flex></bl-tutorial-one>
+			<div layout="row" class="bl-parent" layout-align="start start">
+				<bl-tutorial-one class="bl-block bl-parent" layout-padding flex></bl-tutorial-one>
 			</div>	
 		</md-tab>
 		<md-tab label="Two">

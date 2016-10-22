@@ -41,7 +41,6 @@ app.run(function($rootScope, AuthService, $state, Session, ConstantsFactory, Err
     // The given state requires an authenticated user.
 
     AuthService.getLoggedInUser().then(function(user) {
-            ConstantsFactory.setUser(user);
             // If a user is retrieved, then renavigate to the destination
             // (the second time, AuthService.isAuthenticated() will work)
             // otherwise, if no user is logged in, go to "login" state.

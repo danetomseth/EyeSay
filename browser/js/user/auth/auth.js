@@ -48,11 +48,11 @@
         ]);
     });
 
-    app.service('AuthService', function ($http, Session, $rootScope, AUTH_EVENTS, $q, $state) {
+    app.service('AuthService', function ($http, Session, $rootScope, AUTH_EVENTS, $q, $state, ConstantsFactory) {
 
         function onSuccessfulLogin(response) {
-            console.log("success login res", response.data);
             var data = response.data;
+            ConstantsFactory.setUser(data.user);
             Session.create(data.id, data.user);
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
             return data.user;
@@ -83,7 +83,6 @@
             // If it returns a 401 response, we catch it and instead resolve to null.
             return $http.get('/session')
             .then((res) => {
-                console.log('session res', res);
                 if(res.data.user){ // if we get a logged in user back, then log them in
                     onSuccessfulLogin(res)
                     // $state.go('type');

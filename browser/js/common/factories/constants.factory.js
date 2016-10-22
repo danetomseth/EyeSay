@@ -53,6 +53,7 @@ core.factory('ConstantsFactory', function($rootScope, $http, Session, AUTH_EVENT
 
 
     obj.setUser = (user) => {
+        console.log("setting user", user);
         if (user) {
             $rootScope.user = user;
         } else {

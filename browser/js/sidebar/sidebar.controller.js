@@ -8,9 +8,7 @@ core.controller('SidebarCtrl', function($scope, $state, $rootScope, Session, Aut
 
     let setUser = function() {
         $scope.loggedIn = Session.user ? true : false;
-        AuthService.getLoggedInUser().then(user => {
-            ConstantsFactory.setUser(user);
-        })
+        
     };
 
 

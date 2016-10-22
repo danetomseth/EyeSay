@@ -3,4 +3,4 @@ core.factory("UserSettings", ($http, $rootScope, AuthService, AUTH_EVENTS) => {
 
 
 	return service;
-})
+});
