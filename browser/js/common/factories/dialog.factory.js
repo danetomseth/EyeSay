@@ -8,7 +8,7 @@ core.factory('DialogFactory', function($http, $mdDialog) {
             controller: 'TutorialCtrl',
             scope: '=',
             title: "Hello",
-            templateUrl: 'js/common/factories/dialog.html'
+            templateUrl: 'js/common/templates/dialog.html'
         });
     }
 
@@ -22,7 +22,7 @@ core.factory('DialogFactory', function($http, $mdDialog) {
                 }
             },
             title: "Hello",
-            templateUrl: 'js/common/factories/hint.html'
+            templateUrl: 'js/common/templates/hint.html'
         });
     }
 
@@ -75,7 +75,7 @@ core.factory('DialogFactory', function($http, $mdDialog) {
                     $mdDialog.hide();
                 }
             },
-            templateUrl: 'js/common/factories/webcam-fail.html'
+            templateUrl: 'js/common/templates/webcam-fail.html'
         });
     }
 
@@ -125,7 +125,7 @@ core.factory('DialogFactory', function($http, $mdDialog) {
                         $mdDialog.hide();
                     }
                 },
-                templateUrl: 'js/common/factories/custom-message.html'
+                templateUrl: 'js/common/templates/custom-message.html'
             });
         },
         checkTracking: () => {

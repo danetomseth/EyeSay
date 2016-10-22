@@ -34,7 +34,6 @@ core.directive('blSidebarWebcam', function($rootScope, WebcamFactory, $timeout) 
 
 
             scope.$watch('$viewContentLoaded', function() {
-                console.log("is chrome", $rootScope.isChrome);
                 if($rootScope.isChrome) {
                     WebcamFactory.startWebcam(video);
                 }

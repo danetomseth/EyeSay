@@ -155,7 +155,7 @@ core.factory('TicTacFactory', function($state, $timeout, $interval, DialogFactor
             message.title = "You lost :("
             DialogFactory.promptMessage(message, action);
         } else {
-            DialogFactory.promptMessage(message, action);
+           DialogFactory.promptMessage(message, action);
         }
     }
 
