@@ -1,4 +1,4 @@
-core.factory('WebcamFactory', function($rootScope, $state, $timeout, DialogFactory) {
+core.factory('WebcamFactory', function($rootScope, $state, $timeout, DialogFactory, ErrorFactory) {
 
     // Subscribe to event.
     $rootScope.trackingInit = false;
@@ -13,15 +13,15 @@ core.factory('WebcamFactory', function($rootScope, $state, $timeout, DialogFacto
     let errorCallback = function(e) {
         console.log('Error connecting to source!', e);
         $timeout(() => {
-            retryWebcam()
-        }, 1000)
-        // DialogFactory.webcamFail();
+                console.log("retrying");
+                retryWebcam()
+            }, 1000)
+            // DialogFactory.webcamFail();
     };
 
     $rootScope.videoActive = false;
 
     let retryWebcam = () => {
-
         if (Modernizr.getusermedia) {
             var gUM = Modernizr.prefixed('getUserMedia', navigator);
             gUM({
@@ -32,14 +32,25 @@ core.factory('WebcamFactory', function($rootScope, $state, $timeout, DialogFacto
                 currentVideo.src = window.URL.createObjectURL($rootScope.videoStream);
                 $rootScope.$broadcast("WebcamInitialized");
             }, errorCallback);
-
         }
     }
 
 
+  
+
+
+    let userMediaError = () => {
+        let message = "Error Connecting To Your Webcam";
+        ErrorFactory.clientError(message);
+    }
+
+
+
+
+
     return {
         startWebcam: (videoElem) => {
-            //starts webcam
+           
             currentVideo = videoElem
             if (Modernizr.getusermedia) {
                 var gUM = Modernizr.prefixed('getUserMedia', navigator);
@@ -54,7 +65,7 @@ core.factory('WebcamFactory', function($rootScope, $state, $timeout, DialogFacto
                 }, errorCallback);
 
             } else {
-                console.log("can't get user media");
+                userMediaError();
             }
         },
         endWebcam: () => {

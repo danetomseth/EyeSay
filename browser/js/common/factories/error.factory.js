@@ -13,10 +13,19 @@ core.factory('ErrorFactory', function($log, $mdBottomSheet) {
     }
 
 
+    function browserError() {
+
+    }
+
+
 
     service.error = (exception, cause) => {
         $log.warn(exception, cause);
     	return displayError(exception);
+    }
+
+    service.clientError = (message) => {
+        displayError(message);
     }
 
     service.invalid = (exception, cause) => {
@@ -25,6 +34,13 @@ core.factory('ErrorFactory', function($log, $mdBottomSheet) {
 
     service.invalidLogin = (exemption, cause) => {
         $log.warn(exception, cause);
+    }
+
+    service.browserError = () => {
+        $mdBottomSheet.show({
+            templateUrl: 'js/common/templates/browser-error.html',
+            clickOutsideToClose: true,
+        })
     }
 
     return service;

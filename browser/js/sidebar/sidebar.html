@@ -8,28 +8,32 @@
           </div>
         </div>
       </div>
-   </div>
- </div>
- <div flex="50">
-  <div class="web-box">
-       <bl-sidebar-webcam ng-style="webcamDir" id="webcam-directive" ng-show="$root.user.blinkActive"></bl-sidebar-webcam>
-       <div layout="column" layout-align="center start" class="bl-sidebar-actions">
-        
+    </div>
+  </div>
+  <div flex="50">
+    <div class="web-box">
+      <div ng-show="webcamError" layout="column" layout-align="center center"  class="bl-webcam-error">
+        <i class="fa fa-low-vision fa-5x" aria-hidden="true"></i>
+      </div>
+      <bl-sidebar-webcam ng-show="!webcamError" ng-style="webcamDir" id="webcam-directive" ng-show="$root.user.blinkActive"></bl-sidebar-webcam>
+
+      <div layout="column" layout-align="center start" class="bl-sidebar-actions">
+
         <div class="bl-sidebar-btn">
          <md-button ng-show="loggedIn" ui-sref="logout" class="md-warn  md-raised">Logout</md-button>
          <md-button ng-show="!loggedIn" ui-sref="login" class="md-primary md-raised">Login</md-button>
-        </div>
-        <div>
-         <md-switch ng-model="$root.user.blinkActive" ng-change="toggleTracking()"  class="md-accent bl-switch" aria-label="Tracking Active">
-            <md-tooltip ng-hide="$root.user.blinkActive">
-            Toggle status of blink detection
-            </md-tooltip>
-            <span class="bl-label">Tracking</span>
-         </md-switch>
-        </div>
        </div>
-     </div>
- </div>
+       <div>
+         <md-switch ng-model="$root.user.blinkActive" ng-change="toggleTracking()"  class="md-accent bl-switch" aria-label="Tracking Active">
+          <md-tooltip ng-hide="$root.user.blinkActive">
+            Toggle status of blink detection
+          </md-tooltip>
+          <span class="bl-label">Tracking</span>
+        </md-switch>
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>
 

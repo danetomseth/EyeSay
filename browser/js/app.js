@@ -32,9 +32,12 @@ app.config(function($urlRouterProvider, $locationProvider, $mdThemingProvider, $
 });
 
 // This app.run is for controlling access to specific states.
-app.run(function($rootScope, AuthService, $state, Session, ConstantsFactory) {
+app.run(function($rootScope, AuthService, $state, Session, ConstantsFactory, ErrorFactory) {
     $rootScope.isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-     //initially sets caregiver to false
+
+    if(!$rootScope.isChrome) {
+        ErrorFactory.browserError();
+    }
     // The given state requires an authenticated user.
 
     AuthService.getLoggedInUser().then(function(user) {

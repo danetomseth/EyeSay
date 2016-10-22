@@ -24,7 +24,5 @@ core.controller('WebcamCtrl', function($scope, WebcamFactory, TrackingFactory) {
     });
 
 
-    $scope.startSidebar = () => {
-    	TrackingFactory.startSidebar();
-    }
+    
 });

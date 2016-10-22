@@ -1,59 +1,57 @@
-<div class="bl-home" ng-if="currentTab === 0">
-  <div class="bl-home-video">
-    <video loop="true" autoplay="true" name="Blink Home" src="assets/eye-video.mov"></video>
-  </div>
-  <div class="bl-video-btn" layout="row" layout-align="center">
-    <md-button class="md-primary md-raised" ng-click="skip()">Skip</md-button>
-  </div>
-</div>
 
 
-<div layout="column" layout-align="start" flex  layout-margin ng-if="currentTab === 1">
-  <div flex="5"></div>  
-  <div layout-align="center" layout="row">
-    <h1 class="md-display-3" flex="initial">Online Eye-Tracking Assistive Communication</h1>
-  </div>
-  <div layout-align="center" layout="row">
-    <h1 class="md-display-1" flex="initial">The first and only online assistive communication</h1>
-  </div>
-  <md-divider md-inset></md-divider> 
-  <div layout="row" layout-margin layout-padding layout-align="center">
-    <div flex></div>
-    <div flex="70" layout="column" flex-offset="15" layout-margin>
-    <span class="md-headline">Free eye-tracking device that allows individuals living with locked in syndrome or severe spinal cord injuries to communicate and engage with the world around them.</span>
+
+
+
+<div layout="column" class="bl-vh-100 bl-parent" flex ng-cloak layout-align="start">
+
+
+
+<div class="hero-box bg-blue font-inverse bl-hero" flex="50" layout="column" layout-align="center">
+    <div class="container">
+        <h1 class="bl-heading-1">EYESEE</h1>
+        <h1 class="hero-heading bl-font-white">Online Eye-Tracking Assistive Communication</h1>
+        
     </div>
-    <div flex></div>
-    
-  </div>
-   <div flex layout="row" layout-margin layout-padding layout-align="center">
-      <div flex="20" md-whiteframe="1dp" bl-grow="60"  layout="column" layout-align="start center">
-          <div>
-          <md-button class="md-primary" ui-sref="signup">Signup</md-button>
-          </div>
-          <p class="md-subhead">Create an account to store your settings</p>
-      </div>
-      <div flex="20" md-whiteframe="1dp" bl-grow="60"  layout="column" layout-align="start center">
-          <div>
-          <md-button class="md-primary" ui-sref="calibrate">Calibrate</md-button>
-          </div>
-          <p class="md-subhead">Proceed to the automatic calibration to determine you blink profile</p>
-      </div>
-      <div flex="20" md-whiteframe="1dp" bl-grow="60" layout="column" layout-align="start center">
-          <div>
-          <md-button class="md-primary" ui-sref="type">Type</md-button>
-          </div>
-          <div>
-          <p class="md-subhead">Already Calibrated? Try typing with blink!</p>
-          </div>
-      </div>
-    </div>
+    <div class="hero-pattern pattern-bg-1"></div>
 </div>
+<span flex="5"></span>
 
-<div flex="10"></div>
-<!-- </div> -->
+<div layout="row" layout-margin layout-align="center">
+
+    <div flex="20">
+        <div class="icon-box icon-box-offset-large icon-boxed icon-border ">
+            <i class="icon-large glyph-icon bg-primary  icon-user"></i>
+            <h3 class="icon-title">Create Account</h3>
+            <p class="icon-content bl-home-icon" >
+                Store your blink calibration settings for your next visit
+            </p>
+            <md-button class="md-primary md-hue-2 md-raised" ui-sref="signup">Go</md-button>
+        </div>
+    </div>
+    <span flex="5"></span>
+    <div flex="20">
+        <div class="icon-box icon-box-offset-large icon-boxed icon-border">
+            <i class="icon-large glyph-icon bg-primary icon-cog"></i>
+            <h3 class="icon-title">Calibrate</h3>
+            <p class="icon-content bl-home-icon">Use the automatic calibration method to set your enique blink profile</p>
+            <md-button class="md-primary md-hue-2 md-raised" ui-sref="calibrate">Go</md-button>
+        </div>
+    </div>
+    <span flex="5"></span>
+    <div flex="20">
+        <div class="icon-box icon-box-offset-large icon-boxed icon-border">
+            <i class="icon-large glyph-icon bg-primary icon-question-circle"></i>
+            <h3 class="icon-title">About</h3>
+            <p class="icon-content bl-home-icon">Learn more about the developers of blink and how it was created</p>
+            <md-button class="md-primary md-hue-2 md-raised" ui-sref="about">Go</md-button>
+        </div>
+    </div>
+
+
+</div>
+<span flex></span>
 
 
 
-
-
-
+</div>

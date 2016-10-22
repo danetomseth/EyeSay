@@ -22,6 +22,8 @@ core.controller('SidebarCtrl', function($scope, $state, $rootScope, Session, Aut
             });
     }
 
+    $scope.webcamError = false;
+
 
 
 
@@ -29,6 +31,9 @@ core.controller('SidebarCtrl', function($scope, $state, $rootScope, Session, Aut
     $scope.$on('$viewContentLoaded',
         function() {
             $scope.currentState = $state.current.name;
+            if(!$rootScope.isChrome) {
+                $scope.webcamError = true;
+            }
         });
 
     $rootScope.$on(AUTH_EVENTS.loginSuccess, setUser);
