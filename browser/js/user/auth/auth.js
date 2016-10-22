@@ -51,6 +51,7 @@
     app.service('AuthService', function ($http, Session, $rootScope, AUTH_EVENTS, $q, $state) {
 
         function onSuccessfulLogin(response) {
+            console.log("success login res", response.data);
             var data = response.data;
             Session.create(data.id, data.user);
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
@@ -82,6 +83,7 @@
             // If it returns a 401 response, we catch it and instead resolve to null.
             return $http.get('/session')
             .then((res) => {
+                console.log('session res', res);
                 if(res.data.user){ // if we get a logged in user back, then log them in
                     onSuccessfulLogin(res)
                     // $state.go('type');
@@ -90,7 +92,9 @@
                     // $state.go('calibrate');
                 }
             })
-            .catch(function () {
+            .catch(function (err) {
+                //goes here if 404 from session
+
                 return null;
             });
 
@@ -100,7 +104,7 @@
             return $http.post('/signup', userInfo)
             .then(onSuccessfulLogin)
             .catch(function(err){
-                return $q.reject({ message: 'There was an error signing up:' + err})
+                return $q.reject({ message: 'Email Already Exists'})
             })
         }
 

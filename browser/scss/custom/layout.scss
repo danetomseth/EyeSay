@@ -4,6 +4,18 @@
 	overflow: scroll;
 }
 
+.bl-parent {
+	// -webkit-flex: 1 0 auto !important;
+ //    -ms-flex: 1 0 auto !important;
+ //    flex: 1 0 auto !important;
+ //    -webkit-flex-wrap: nowrap !important;
+ //    -ms-flex-wrap: nowrap !important;
+ //    flex-wrap: nowrap !important;
+ //    display: block !important;
+    min-height: 100vh !important;
+}
+
+
 
 #page-content {
 	height: 100%;

@@ -7,7 +7,6 @@ var User = mongoose.model('User');
 module.exports = function (app) {
 
     var signupStrategyFn = function(req, user, email, done) {
-        console.log(3, req.body, user)
         user = req.body
         User.findOne({email: user.email})
         .then(returnedUser => {
@@ -18,7 +17,6 @@ module.exports = function (app) {
                 // otherwise create user
                 return User.create(user)
                 .then(newUser => {
-                    console.log(4, newUser)
                     return done(null, newUser)
                 })
             }
@@ -35,11 +33,10 @@ module.exports = function (app) {
             if (err) return next(err);
 
             if (!user) {
-                var error = new Error('Something went horribly wrong');
+                var error = new Error('User Already Exists!');
                 error.status = 401;
                 return next(error);
             }
-
             res.status(200).send({
                 user: user.sanitize()
             });

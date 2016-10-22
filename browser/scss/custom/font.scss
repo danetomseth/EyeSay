@@ -6,7 +6,60 @@ h2 {
     letter-spacing: .01em;
     font-weight: bold;
     text-transform: none;
-    font-family: "katarine-web",sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+
+.bl-icon-primary {
+    color: $bl-primary;
+}
+
+.bl-icon-warn {
+    color: $bl-warn;
+}
+
+.bl-icon-btn {
+    background-color: transparent;
+    height: 40px;
+    width: 40px;
+    margin-left: 20px;
+    font-size: 20px;
+    border-radius: 20px;
+    border: 1px solid grey;
+    line-height: 20px;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+}
+
+.bl-icon-btn i:hover {
+    cursor: pointer !important;
+}
+
+.bl-icon-btn:hover {
+    cursor: pointer !important;
+    background: rgba(0,0,0,0.1)
+}
+
+.bl-heading-1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    font-size: 65px;
+    color: white;
+    margin-bottom: 20px;
+    margin-top: 0px;
+}
+
+.font-secondary {
+    color: #00bca4;
+}
+
+.bl-font-white {
+    color: white;
 }
 
 .bl-left {

@@ -5,26 +5,35 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const ensure = require('../../configure/authentication/ensure');
 
-// router.param('id', function(req, res, next, id) {
-//     User.findById(id).exec()
-//         .then(function(user) {
-//             if (!user) throw new Error(404);
-//             req.requestedUser = user;
-//             next();
-//         })
-//         .catch(next);
-// });
+router.use(ensure.authenticated);
 
 // must be logged in
-router.get('/', ensure.authenticated, (req, res) => { // get all
-    User.find({})
-        .then(users => res.send(users))
-});
+// router.get('/', ensure.authenticated, (req, res, next) => { // get all
+//     console.log("getting all users");
+//     User.find({})
+//         .then(users => res.send(users))
+// });
+
+let checkValidId = (id, next) => {
+    try {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new Error("Invalid User Id");
+        }
+    } catch (err) {
+        console.log("caught Error");
+        next(err)
+    }
+}
 
 // no auth
-router.post('/', (req, res) => { // create new
+router.post('/', (req, res, next) => { // create new
     User.create(req.body)
-        .then(newUser => res.send(newUser))
+        .then((newUser, err) => {
+            if(err) {
+                return next(err);
+            }
+            res.send(newUser)
+    }) 
 });
 
 // must be logged in
@@ -49,14 +58,23 @@ router.put('/update', (req, res) => { // edit one
             return user.update(user, req.body);
         })
         .then(updatedUser => res.send(updatedUser))
-    });
+});
 
 // must be user or admin
-router.put('/update/:id', ensure.authenticated, ensure.selfOrAdmin, (req, res) => { // edit one
+router.put('/update/:id', ensure.authenticated, ensure.selfOrAdmin, (req, res, next) => { // edit one
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        let err = new Error("Invalid User Id");
+        return next(err)
+    }
     User.findById(req.params.id)
-        .then(user => {
-            console.log('user', user);
+        .then(function(user, err) {
+            if (err) {
+                return next(err)
+            }
             return user.update(user, req.body);
         })
-        .then(updatedUser => res.send(updatedUser))
+        .then(updatedUser => {
+            res.json(updatedUser)
+        })
+
 });
