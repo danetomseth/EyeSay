@@ -23,6 +23,10 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
     $scope.blinkDetected = false;
     let currentTest;
     $scope.blinkCount = 0;
+    $scope.tictac = true;
+
+    // $scope.selectedTab = 4;
+
 
     $scope.blinkText = "Waiting for a blink...."
 
@@ -77,7 +81,6 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
         $scope[step] = true;
     }
 
-    $scope.tictac = true;
 
 
     let styleDelay = () => {
@@ -113,10 +116,7 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
     });
 
     if (StateFactory.lastState === 'calibrate') {
-        console.log("last state", StateFactory.lastState);
         $scope.selectedTab = 1;
-    } else {
-        console.log("no last state", StateFactory.lastState);
-    }
+    } 
 
 })

@@ -32,7 +32,6 @@ app.controller('LoginCtrl', function($scope, AuthService, $state, Session, Const
         $scope.error = null;
 
         AuthService.login(loginInfo).then(function() {
-            ConstantsFactory.setUser(Session.user);
             $state.go('calibrate');
         }).catch(function(ex) {
             // let error = new Error

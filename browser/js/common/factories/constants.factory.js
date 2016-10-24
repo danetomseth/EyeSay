@@ -28,12 +28,8 @@ core.factory('ConstantsFactory', function($rootScope, $http, Session, AUTH_EVENT
 
     let saveUser = () => {
         if (Session.user) {
-            
             $http.put('/api/users/update/' + Session.user._id, $rootScope.user).then(saveSuccess, saveFailed)
-           
         }
-
-       
     }
 
 
@@ -93,6 +89,7 @@ core.factory('ConstantsFactory', function($rootScope, $http, Session, AUTH_EVENT
     obj.toggleTracking = (value) => {
         return obj.user.blinkActive
     }
+    obj.setUser();
 
 
     return obj;

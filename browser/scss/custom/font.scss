@@ -36,6 +36,22 @@ h2 {
     direction: ltr;
 }
 
+
+.bl-action-title {
+    text-transform: uppercase;
+    margin: 0;
+    
+    font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+.bl-action-title h3 {
+    font-size: 30px;
+    font-weight: 300;
+    color: $primary;
+
+    }
+
 .bl-icon-btn i:hover {
     cursor: pointer !important;
 }

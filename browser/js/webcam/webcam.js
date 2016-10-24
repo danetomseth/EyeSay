@@ -4,10 +4,8 @@ core.config(function($stateProvider) {
         controller: 'WebcamCtrl',
         templateUrl: 'js/webcam/webcam.html',
         onEnter: (ConstantsFactory, Session) => {
-            // ConstantsFactory.setUser(Session.user);
         },
         onExit: (TrackingFactory, WebcamFactory) => {
-        	// TrackingFactory.startSidebar();
         }
     });
 });

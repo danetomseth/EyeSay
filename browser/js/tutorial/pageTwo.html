@@ -1,90 +1,70 @@
-<md-content class="md-padding" ng-hide="switchView">
-	<md-card>
-		<md-card-content>
-			<md-card-title>
-				<md-card-title-text>
-					<span class="text-center bl-title-sm">Blink Sensitivity</span>
-				</md-card-title-text>
-			</md-card-title>
-			<div layout="column" layout-align="center center">
-				<div class="bl-tutorial-text">
-					<p>The box will change colors when a blink is detected</p>
-				</div>
-				<div flex="50" class="bl-blink-box" md-whiteframe="4" ng-class="{'bl-highlight-box': blinkDetected}" layout-padding>
+
+
+<div layout="row" layout-align="center start" >
+	<div layout="column" layout-margin layout-padding layout-align="start center" class="bl-card-info" flex>
+		<div class="bl-action-title">
+			<h3 class="bl-text-center">Test Blink Calibration</h3>
+		</div>
+		<div layout="row" class="bl-vw-100" layout-margin layout-padding layout-align="center">
+			<div layout="column">
+				<div ng-cloak bl-size="300x250" class="bl-center" md-whiteframe="4" layout-padding ng-class="{'bl-hide-elem': blinkDetected}">
 					<div>
-						<p ng-style="activeText">{{blinkText}}</p>
+						<h3 class="md-title">Waiting</h3>
+						<img src="assets/loading.gif" alt="HTML5 Icon" style="width:48px;height:48px;">
 					</div>
 				</div>
-				<div layout="row" layout-padding>
+				<div ng-cloak  bl-size="300x250" class="bl-center bl-blink-detected" md-whiteframe="4" ng-class="{'bl-hide-elem': !blinkDetected}" layout-padding>
+					<div>
+						<h2 class="md-display-1 bl-white">Blink!!</h2>
+						<i class="fa fa-thumbs-up fa-4x bl-white" aria-hidden="true"></i>
+					</div>
+				</div>
+				<div layout="row" layout-padding layout-align="center">
 					<md-button ng-click="adjustBlink(false)" class="md-warn bl-border">-5%
 						<md-tooltip>
 							<b>Decrease</b> the sensitivity of blink detection by 5%
 						</md-tooltip>
 					</md-button>
-					<div class="bl-spacer-w"></div>
-					<div class="bl-spacer-w"></div>
 					<md-button ng-click="adjustBlink(true)" class="md-primary bl-border">+5%
-
 						<md-tooltip>
 							<b>Increase</b> the sensitivity of blink detection by 5%
 						</md-tooltip>
 					</md-button>
 				</div>
-				<div layout="row" layout-padding>
-					<md-button ng-click="nextTab()" class="md-accent md-raised">Next</md-button>
+			</div>
+			<span flex="5"></span>
+			<!-- <div>
+				<div>
+					<p>Periodically Blink To Test Blink Sesitivity</p>
+					<p>The box will react when a blick is dectected</p>
+					<p>If blink detection is weak, increase the sesitivity using the buttons to the left</p>
+					<p>If false blinks are detected, decrease the sensitivity</p>
+					<p style=" margin-bottom: 20px;"><i>If you can't find the appropriate sensitivity quickly, try calibrating again</i></p>
 				</div>
-			</div>
-		</md-card-content>
-	</md-card>
-</md-content>
 
 
+				<div layout="row" layout-padding layout-align="center">
+					<md-button ui-sref="calibrate" class="md-primary md-raised">Re-calibrate</md-button>
+					<md-button ng-click="nextTab()" class="md-accent md-raised">Proceed</md-button>
+				</div>
+			</div> -->
+			<div layout="column" layout-margin layout-padding flex="40">
+				<div class="icon-box icon-box-left" >
+					<i class="icon-alt font-secondary glyph-icon fa-cog" ></i>
+					<div class="icon-wrapper">
+						<h5 class="icon-title ">Blink Threshold</h5>
+						<p class="icon-content ">Your Eye Zero * Blink Ratio. When the current area of your eye drops below this value, A blink is detected.</p>
+					</div>
+				</div>
+				<div layout="row" layout-padding layout-align="center">
+					<md-button ui-sref="calibrate" class="md-primary md-raised">Re-calibrate</md-button>
+					<md-button ng-click="nextTab()" class="md-accent md-raised">Proceed</md-button>
+				</div>
 
-
-<div layout="row" layout-align="center start" ng-show="switchView">
-	<div flex="20"></div>
-
-	<div layout="column" layout-margin layout-padding layout-align="start center" class="bl-card-info" flex>
-		<div class="bl-card-title" flex="nogrow">Test Blink Profile</div>
-		<div>
-			<p class="text-center" style="font-size: 22px; margin-bottom: 20px;"><b>Check the calibration settings by periodically blinking</b></p>
-			<p>The sensitivity is correct if the box lights up each time you blink normally</p>
-			<p>You can fine-tune the sensitivity manually using the adjustment buttons</p>
-			<p style=" margin-bottom: 20px;">If you can't find the appropriate sensitivity quickly, try calibrating again</p>
-		</div>
-		<div bl-size="300x250" class="bl-center" md-whiteframe="4" ng-class="{'bl-highlight-box': blinkDetected}" layout-padding>
-			<div>
-				<p ng-style="activeText">{{blinkText}}</p>
 			</div>
 		</div>
-		<div layout="row" layout-padding>
-			<md-button ng-click="adjustBlink(false)" class="md-warn bl-border">-5%
-				<md-tooltip>
-					<b>Decrease</b> the sensitivity of blink detection by 5%
-				</md-tooltip>
-			</md-button>
-			<div class="bl-spacer-w"></div>
-			<div class="bl-spacer-w"></div>
-			<md-button ng-click="adjustBlink(true)" class="md-primary bl-border">+5%
-
-				<md-tooltip>
-					<b>Increase</b> the sensitivity of blink detection by 5%
-				</md-tooltip>
-			</md-button>
-		</div>
-		<div layout="row" layout-padding>
-			<md-button ui-sref="calibrate" class="md-primary md-raised">Re-calibrate</md-button>
-			<md-button ng-click="nextTab()" class="md-accent md-raised">Proceed</md-button>
-		</div>
-
-
 	</div>
 
-	<div flex="20"></div>
 </div>
 
 
-
-<div class="bl-text-center">
-	<md-button class="md-primary" ng-click="switchView = !switchView">Switch</md-button>
-</div>
