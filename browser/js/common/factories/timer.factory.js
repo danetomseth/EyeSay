@@ -13,11 +13,12 @@ core.factory('TimerFactory', function($rootScope, Session, $state, PositionFacto
     service.resetBlinkTime = () => {
         startTime = currentTimestamp;
     }
-  
+
 
     let loop = (timestamp) => {
         currentTimestamp = timestamp;
         // Always draw the face on the tracker
+
         if(!$rootScope.user.blinkActive) {
             frameId = requestAnimationFrame(loop);
             return

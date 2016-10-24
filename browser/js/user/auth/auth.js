@@ -118,6 +118,7 @@
         this.logout = function () {
             return $http.get('/logout').then(function () {
                 Session.destroy();
+                ConstantsFactory.setUser();
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
             });
         };
