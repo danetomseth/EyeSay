@@ -92,12 +92,11 @@
 
 
 .bl-right-message {
-    font-size: 1.5em;
+    // font-size: 1.5em;
 }
 
 
 .bl-right-message h2 {
-    font-weight: bold;
     text-align: center;
 }
 
@@ -240,7 +239,14 @@
 
 
 
+bl-graph {
+	display: block;
+	width: 100%;
+}
 
+.bl-graph-box {
+	min-width: 800px; 
+}
 
 
 

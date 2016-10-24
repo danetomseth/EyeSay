@@ -9,6 +9,7 @@ core.factory('SidebarFactory', function($state) {
         { label: 'Type', state: 'type'},
         { label: 'Calibrate', state: 'calibrate'},
         { label: 'Settings', state: 'settings'},
+        {label: 'Instructions', state: 'instructions'},
         { label: 'About', state: 'about'}
     ];
 

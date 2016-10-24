@@ -1,24 +1,33 @@
 <div layout="column" layout-margin>
-    <div flex="20" id="input-box">
-        <form>
-            <span ng-show="speaking" id="speaker-icon" class="glyphicon glyphicon-volume-up pull-right "></span>
-            <md-input-container class="md-block text-container">
-                <label>Message</label>
-                <textarea name="Text" rows="5" ng-model="wordInput" class="text-area"  flex="100">
-                </textarea>
-            </md-input-container>
-        </form>
+
+    <div id="input-box" layout="row">
+        <!-- <span ng-show="speaking" id="speaker-icon" class="glyphicon glyphicon-volume-up pull-right "></span> -->
+    <div flex="85">
+        <md-input-container class="md-block text-container">
+        <label>Message</label>
+        <textarea name="Text" ng-model="wordInput" class="text-area"  flex="100">
+        </textarea>
+        </md-input-container>
         
+    </div>    
+    <div layout="column" layout-align="start end">
         <md-button class="md-primary" style="float: right" ui-sref="calibrate">Re-Calibrate</md-button>
         <md-button class="md-primary" style="float: right" ng-click="restart()">Restart
             <md-tooltip>
-                        Clear the type input and start again
-                        </md-tooltip>
+                Clear the type input and start again
+            </md-tooltip>
         </md-button> 
     </div>
+
+    </div> 
+
+    
     <div flex id="keyboard">
         <div flex layout="row" layout-align="center" ng-repeat="(key, val) in keyboard" class="keyboard-row">
             <div flex="20" class="mg-whiteframe-2md row-box" ng-repeat="letter in keyboard[key]['letters']" ng-class=" {'highlight-item': (letter ===   keyboard[key]['letters'][scopeValue[1]] && {{key}} === scopeValue[0]), 'highlight-row': {{key}} === scopeValue[0], 'selected-item': ($index === selected[1] && {{key}} === selected[0])}">{{letter}}</div>
         </div>
     </div>
 </div>
+
+
+

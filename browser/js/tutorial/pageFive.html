@@ -1,28 +1,38 @@
-	<div class="bl-tic-tac">
-		<div layout="column" class="tictac-board" layout-align="start center" ng-class="{'bl-blur': computerChoosing}">
+	<div class="bl-tic-tac" >
+		<div layout="column" class="tictac-board" layout-align="start center" ng-class="{'bl-blur': computerChoosing}" >
+			
+			<div layout="row" flex layout-align="start" class="bl-vw-100" layout-padding layout-margin>
+				<div flex="30">
+					<h3 class="md-headline">Instructions</h3>
+					<p>The highlighted box is the current selection</p>
+					<p>Blink when you want to place your letter on the current box</p>
+				</div>
+
+			<div md-whiteframe="4dp" layout="column" layout-align="start center">
 			<div class="bl-action-title">
 				<h3 class="bl-text-center">Tic-Tac-Toe</h3>
 			</div>
-			<div layout="row" flex class="text-center board-row" layout-margin layout-align="center">
-				<div  class="tictac-box" ng-class="{'box-selected': currentBox === 0, 'player-color': gameBoard[0] === 'X', 'computer-color': gameBoard[0] === 'O'}"><div>{{gameBoard[0]}}</div></div>
-				<div  class="tictac-box" ng-class="{'box-selected': currentBox === 1, 'player-color': gameBoard[1] === 'X', 'computer-color': gameBoard[1] === 'O'}"><div>{{gameBoard[1]}}</div></div>
-				<div  class="tictac-box" ng-class="{'box-selected': currentBox === 2, 'player-color': gameBoard[2] === 'X', 'computer-color': gameBoard[2] === 'O'}"><div>{{gameBoard[2]}}</div></div>
-			</div>
-			<div layout="row" flex class="text-center board-row" layout-margin layout-align="center">
-				<div  class="tictac-box" ng-class="{'box-selected': currentBox === 3, 'player-color': gameBoard[3] === 'X', 'computer-color': gameBoard[3] === 'O'}"><div>{{gameBoard[3]}}</div></div>
-				<div  class="tictac-box" ng-class="{'box-selected': currentBox === 4, 'player-color': gameBoard[4] === 'X', 'computer-color': gameBoard[4] === 'O'}"><div>{{gameBoard[4]}}</div></div>
-				<div  class="tictac-box" ng-class="{'box-selected': currentBox === 5, 'player-color': gameBoard[5] === 'X', 'computer-color': gameBoard[5] === 'O'}"><div>{{gameBoard[5]}}</div></div>
-			</div>
-			<div layout="row" flex class="text-center board-row" layout-margin layout-align="center">
-				<div  class="tictac-box" ng-class="{'box-selected': currentBox === 6, 'player-color': gameBoard[6] === 'X', 'computer-color': gameBoard[6] === 'O'}"><div>{{gameBoard[6]}}</div></div>
-				<div  class="tictac-box" ng-class="{'box-selected': currentBox === 7, 'player-color': gameBoard[7] === 'X', 'computer-color': gameBoard[7] === 'O'}"><div>{{gameBoard[7]}}</div></div>
-				<div  class="tictac-box" ng-class="{'box-selected': currentBox === 8, 'player-color': gameBoard[8] === 'X', 'computer-color': gameBoard[8] === 'O'}"><div>{{gameBoard[8]}}</div></div>
+				<div layout="row" flex class="text-center board-row" layout-margin layout-align="center">
+					<div  class="tictac-box" ng-class="{'box-selected': currentBox === 0, 'player-color': gameBoard[0] === 'X', 'computer-color': gameBoard[0] === 'O'}"><div>{{gameBoard[0]}}</div></div>
+					<div  class="tictac-box" ng-class="{'box-selected': currentBox === 1, 'player-color': gameBoard[1] === 'X', 'computer-color': gameBoard[1] === 'O'}"><div>{{gameBoard[1]}}</div></div>
+					<div  class="tictac-box" ng-class="{'box-selected': currentBox === 2, 'player-color': gameBoard[2] === 'X', 'computer-color': gameBoard[2] === 'O'}"><div>{{gameBoard[2]}}</div></div>
+				</div>
+				<div layout="row" flex class="text-center board-row" layout-margin layout-align="center">
+					<div  class="tictac-box" ng-class="{'box-selected': currentBox === 3, 'player-color': gameBoard[3] === 'X', 'computer-color': gameBoard[3] === 'O'}"><div>{{gameBoard[3]}}</div></div>
+					<div  class="tictac-box" ng-class="{'box-selected': currentBox === 4, 'player-color': gameBoard[4] === 'X', 'computer-color': gameBoard[4] === 'O'}"><div>{{gameBoard[4]}}</div></div>
+					<div  class="tictac-box" ng-class="{'box-selected': currentBox === 5, 'player-color': gameBoard[5] === 'X', 'computer-color': gameBoard[5] === 'O'}"><div>{{gameBoard[5]}}</div></div>
+				</div>
+				<div layout="row" flex class="text-center board-row" layout-margin layout-align="center">
+					<div  class="tictac-box" ng-class="{'box-selected': currentBox === 6, 'player-color': gameBoard[6] === 'X', 'computer-color': gameBoard[6] === 'O'}"><div>{{gameBoard[6]}}</div></div>
+					<div  class="tictac-box" ng-class="{'box-selected': currentBox === 7, 'player-color': gameBoard[7] === 'X', 'computer-color': gameBoard[7] === 'O'}"><div>{{gameBoard[7]}}</div></div>
+					<div  class="tictac-box" ng-class="{'box-selected': currentBox === 8, 'player-color': gameBoard[8] === 'X', 'computer-color': gameBoard[8] === 'O'}"><div>{{gameBoard[8]}}</div></div>
+				</div>
 			</div>
 		</div>
 		<div class="bl-computer-delay" ng-show="computerChoosing">
 			<img src="assets/ring.gif" alt="HTML5 Icon" style="width:64px;height:64px;">
 		</div>
 	</div>
-
+</div>
 
 

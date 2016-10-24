@@ -14,7 +14,6 @@ core.factory('ConstantsFactory', function($rootScope, $http, Session, AUTH_EVENT
     }
 
     let saveSuccess = (res) => {
-        console.log("res");
         $rootScope.user = res.data;
     }
 

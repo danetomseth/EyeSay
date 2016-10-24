@@ -28,6 +28,7 @@ core.factory('TrackingFactory', function($rootScope, DialogFactory) {
             tracker.setResponseMode("blend", ["raw", "sobel"]);
             boundingBox ? tracker.start(video, boundingBox) : tracker.start(video);
             $rootScope.$broadcast("trackerInitialized");
+            $rootScope.trackerInitialized = true;
         }, 500);
     };
 

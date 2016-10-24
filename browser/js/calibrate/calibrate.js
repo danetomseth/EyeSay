@@ -102,7 +102,7 @@ core.controller('CalibrateCtrl', function($scope, CalibrateFactory, $state, $roo
             // DialogFactory.promptMessage(message, action)
             $scope.calibrating.closed = false;
             $scope.calibrationComplete = true;
-            SettingsFactory.createGraph();
+            // SettingsFactory.createGraph();
         }
     });
 
@@ -112,7 +112,9 @@ core.controller('CalibrateCtrl', function($scope, CalibrateFactory, $state, $roo
         $state.go("tutorial");
     }
 
-
+    $scope.showGraph = () => {
+        $scope.calibrationComplete = true;
+    }
 
 
 

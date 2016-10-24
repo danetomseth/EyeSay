@@ -1,32 +1,44 @@
-<div class="bl-page-title">
-	<h1>Calibration</h1>
-</div>
 
+<div ng-if="!calibrateActive">
+		<h3 class="p-title p-title-no-margin">
+			<span>Calibration</span>
+		</h3>
+	</div>
 <!-- <md-subheader>Calibration</md-subheader> -->
 <div layout="column" flex layout-align="start center" ng-if="!calibrateActive">
-	<div>
-		<h2 class="md-display-1">Calibrating Your Blink Profile</h2>
-	</div>
-	<div id="calibrate-overlay" flex layout="row" class="calibrate-step " layout-padding layout-margin>
+	
+	<div id="calibrate-overlay" flex layout="row" class="calibrate-step " layout-padding layout-margin md-whiteframe="4dp">
 		
-		<div flex="40">
+		
+		
+	
+		<div flex="40" class="bl-center" layout-padding>
+			<h2 class="md-title">Example Calibration Graph</h2> 	 
 			<img src="/assets/daneGraph.png" height="auto" alt="" class="bl-vw-100">
 		</div>
+			<div flex="5">
+		</div>
 		<div class="bl-right-message" layout="column" flex layout-align="start start">
+			<h2 class="md-headline">Calibration Process</h2>
 			<div>
-				<p>To accurately detect your blinks, the app needs to calculate the average area of your eye when open, and the threshold to register a blink. This "blink profile" is unique to each user.</p>
+				<p class="md-body-1">To accurately detect your blinks, the app needs to calculate the average area of your eye when open, and the threshold to register a blink. This "blink profile" is unique to each user.</p>
 			</div>
 			<div>
-				<p>The goal is to establish your unique blink zero and blink ratio to accurately detect blinks. The figure below is a graphical representation of the calibration process.</p> 
-				<p>The app watches for the area of your eye to fall below the red line, registering a blink.</p>
+				<p class="md-body-1">The goal is to establish your unique blink zero and blink ratio to accurately detect blinks. The figure below is a graphical representation of the calibration process.</p> 
+				<p class="md-body-1">The app watches for the area of your eye to fall below the red line, registering a blink.</p>
 				
 			</div>
-			<div layout="row" layout-align="start end" class="bl-vw-100">
-				<div class="md-title">New User?</div>
+			<div layout="column" layout-align="center" class="bl-vw-100">
+				<div layout="row" layout-align="start end">
+				<div class="md-subhead">New User?</div>
 				<md-button class="md-primary" ng-hide="showInstructions" ng-click="show()">Click Here For More Instructions</md-button>
 				<md-button class="md-warn" ng-show="showInstructions" ng-click="show()">Hide Instructions</md-button>
-				<div class="md-title">OR</div>
-				<md-button class="md-raised md-primary" ng-click="start()">Begin</md-button>
+
+				</div>
+				<div layout="row" layout-align="start end">
+				<div class="md-subhead">OR....</div>
+				<md-button class="md-primary" ng-click="start()">Begin</md-button>
+				</div>
 			</div>
 			
 		</div>
@@ -71,9 +83,11 @@
 <div flex layout="column" layout-align="center center" ng-show="calibrating.open" class="calibrate-step bl-card">
 	<div class="text-center bl-message bl-vw-80">
 		<h2 ng-show="success" class="md-display-1">Open Eye Calibration Complete!</h2>
-		<div ng-show="success"><md-button class="md-primary-md-raised" ng-click="gotoClosed()">Next</md-button></div>
-		<h2 ng-hide="success" class="md-title">Maintain a normal gaze with eyes open</h2>
-		<h2 ng-hide="success" class="md-title">Hold until progress meter fills</h2>
+		<div ng-show="success">
+			<md-button class="md-primary md-raised" ng-click="gotoClosed()">Next</md-button>
+		</div>
+		<h2 ng-hide="success" class="md-display-1">Keep Eyes Open</h2>
+		<h2 ng-hide="success" class="md-headline">Slowly Increase Open Area of Eye</h2>
 		<div class="bl-cal-progress" ng-hide="success">
 			<round-progress
 			max="100"
@@ -89,7 +103,7 @@
 		</div>
 
 		<div ng-hide="success">
-			<span class="md-title">{{openCount.toFixed(0)}}% Complete</span>
+			<span class="md-headline">{{openCount.toFixed(0)}}% Complete</span>
 		</div>
 	</div>
 
@@ -102,7 +116,7 @@
 <!-- Closed calibration -->
 <div flex layout="column" layout-align="center center" ng-show="calibrating.closed" class="calibrate-step bl-card">
 	<div class="text-center bl-message bl-vw-80">
-		<h2 class="md-title">Blink naturally every 2 seconds</h2>
+		<h2 class="md-display-1">Blink naturally every 2 seconds</h2>
 		<div class="bl-cal-progress">
 			<round-progress
 			max="100"
@@ -116,7 +130,7 @@
 			animation="linearEase"
 			animation-delay="0"></round-progress>
 		</div>
-		<div class="md-title">
+		<div class="md-headline">
 			{{closedCount.toFixed(0)}}% Complete
 		</div>
 	</div>
@@ -124,16 +138,37 @@
 
 
 
-<div flex layout="column" flex layout-padding layout-align="center center" ng-show="calibrationComplete">
-	<div class="md-display-1">Calibration Complete!</div>
-	<div class="md-headline">Here are the results of your calibration</div>
-	<div flex class="bl-center bl-vw-80"> 
-		<canvas id="blink-chart"></canvas>
-	</div>
+<div flex layout="column" layout-padding layout="center center" ng-if="calibrationComplete">
 	<div>
-		<md-button class="md-primary" ng-click="leaveCalibration()">Proceed To Tutorial</md-button>
+		<h3 class="p-title p-title-no-margin">
+			<span>Calibration Results</span>
+		</h3>
+	</div>
+	<div layout="row">
+		<div flex class="bl-center" md-whiteframe="4dp" layout-padding>
+			<h2 class="md-headline">Live Tracking Data</h2> 	 
+			<bl-graph></bl-graph>
+		</div>
+		<div layout="column" layout-margin layout-padding flex>
+			<div class="icon-box icon-box-left" >
+				<i class="icon-alt font-secondary glyph-icon fa-cog" ></i>
+				<div class="icon-wrapper">
+					<h5 class="icon-title ">Confirm Settings</h5>
+					<ul class="icon-content ">
+						<li>When you eye is open, make sure the current eye reading is above the threshold line.</li>
+						<li>Try blinking and watch the eye reading drop. Make sure it drops below the threshold line, then rises back above when your eyes are open.</li>
+					</ul>
+				</div>
+			</div>
+			<div layout="row" layout-padding layout-align="center">
+				<md-button ui-sref="tutorial" class="md-primary">Tutorial</md-button>
+				<md-button ui-sref="calibrate" class="md-warn">Re-calibrate</md-button>
+			</div>
+
+		</div>
 	</div>
 </div>
+
 
 
 
