@@ -3,6 +3,7 @@ core.factory('PositionFactory', function($rootScope) {
     let diffZeroL = 0;
     let diffZeroR = 0;
     let lastBlinkTime;
+    let prevDiff;
 
 
     let checkDoubleBlink = (blinkDt) => {
@@ -38,9 +39,15 @@ core.factory('PositionFactory', function($rootScope) {
 
         },
         getBlinkValue: (positions) => { // used in calibrate.js only
-            diffZeroL = (positions[69][1] + positions[31][1] + positions[70][1]) - (positions[68][1] + positions[29][1] + positions[67][1]);
-            diffZeroR = (positions[66][1] + positions[26][1] + positions[65][1]) - (positions[63][1] + positions[24][1] + positions[64][1]);
-            return diffZeroL + diffZeroR;
+            if(positions) {
+                diffZeroL = (positions[69][1] + positions[31][1] + positions[70][1]) - (positions[68][1] + positions[29][1] + positions[67][1]);
+                diffZeroR = (positions[66][1] + positions[26][1] + positions[65][1]) - (positions[63][1] + positions[24][1] + positions[64][1]);
+                prevDiff = diffZeroL + diffZeroR
+                return diffZeroL + diffZeroR;
+            }
+            else {
+                return prevDiff
+            }
         }
     }
 });

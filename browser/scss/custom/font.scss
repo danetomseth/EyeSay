@@ -231,12 +231,10 @@ h2 {
 
 
 .bl-message h2 {
-    font-weight: bold;
     text-align: center;
 }
 
 .bl-message h3 {
-    font-weight: bold;
     text-align: left;
     font-size: 20px;
     margin-top: 0px;
@@ -267,4 +265,18 @@ h2 {
     font-size: 18px;
 }
 
+
+.bl-content-box {
+
+}
+
+.bl-content-box h4 {
+    margin-top: 5px;
+}
+
+
+.bl-content-box p {
+    padding-left: 15px;
+    line-height: 1.4em;
+}
 

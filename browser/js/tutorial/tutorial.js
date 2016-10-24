@@ -114,6 +114,7 @@ core.controller('TutorialCtrl', function($scope, $rootScope, ActionFactory, $int
             styleDelay()
         }
     });
+    console.log("StateFactory: ", StateFactory.lastState);
 
     if (StateFactory.lastState === 'calibrate') {
         $scope.selectedTab = 1;
