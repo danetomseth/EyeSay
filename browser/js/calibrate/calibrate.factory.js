@@ -175,7 +175,7 @@ core.factory('CalibrateFactory', function($rootScope, $state, ConstantsFactory, 
     //once calibration arrays are full, set values
     let setValues = function() {
         blinkZero = maxSum.toFixed(2);
-        blinkRatio = (minSum / maxSum).toFixed(2);
+        blinkRatio = ((minSum / maxSum) * 0.9).toFixed(2);
         ConstantsFactory.setBlink(blinkRatio, blinkZero, blinkProfile);
         ConstantsFactory.saveCalibration(blinkRatio, blinkZero, blinkProfile);
         service.calibrationSet = true;
