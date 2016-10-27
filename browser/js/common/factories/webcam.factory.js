@@ -57,6 +57,7 @@ core.factory('WebcamFactory', function($rootScope, $state, $timeout, DialogFacto
                 gUM({
                     video: true
                 }, function(stream) {
+                    console.log("webcam started");
                     $rootScope.videoStream = stream;
                     videoStream = stream;
                     $rootScope.videoActive = true;

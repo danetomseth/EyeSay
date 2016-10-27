@@ -6,6 +6,22 @@
 	margin-right: 20px;
 }
 
+#live-data canvas {
+	// min-width: 300px !important;
+	// min-height: 250px;
+}
+
+.graph-container {
+	width: 550px;
+	height: 300px;
+	display: block;
+}
+
+
+#live-data {
+	display: block;
+}
+
 .bl-webcam-error {
 	min-height: 200px;
 	background: #d3d3d3;
@@ -260,4 +276,9 @@ bl-graph {
 
 md-tab-content div {
 	// height: 100% !important;	
+}
+
+
+.a-130 {
+	width: 100%;
 }

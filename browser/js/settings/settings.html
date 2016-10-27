@@ -112,6 +112,37 @@
 </div>
 </div>
 
+<div flex layout="column" layout-padding layout="center center">
+	<div>
+		<h3 class="p-title p-title-no-margin">
+			<span>View Live Tracking</span>
+		</h3>
+	</div>
+	<div layout="row">
+		<div flex class="bl-center" md-whiteframe="4dp" layout-padding>
+			<h2 class="md-headline">Live Tracking Data</h2> 	 
+			<bl-graph ng-cloak></bl-graph>
+		</div>
+		<div layout="column" layout-margin layout-padding flex>
+			<div class="icon-box icon-box-left" >
+				<i class="icon-alt font-secondary glyph-icon fa-cog" ></i>
+				<div class="icon-wrapper">
+					<h5 class="icon-title ">Practice</h5>
+					<ul class="icon-content ">
+						<li>When you eye is open, make sure the current eye reading is above the threshold line.</li>
+						<li>Try blinking and watch the eye reading drop. Make sure it drops below the threshold line, then rises back above when your eyes are open.</li>
+					</ul>
+				</div>
+			</div>
+			<div layout="row" layout-padding layout-align="center">
+				<md-button ui-sref="tutorial" class="md-primary">Tutorial</md-button>
+				<md-button ui-sref="calibrate" class="md-warn">Re-calibrate</md-button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
 <div bl-size="x200" class="bl-vw-100"></div>
 
 

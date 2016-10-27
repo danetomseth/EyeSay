@@ -5,7 +5,7 @@ core.controller('GraphCtrl', function($scope, $rootScope, PositionFactory, Track
     var data = []
     let totalPoints = 300;
     let thresholdLine = [];
-    var updateInterval = 15;
+    var updateInterval = 30;
 
 
     let userThreshold = ($rootScope.user.blinkZero * $rootScope.user.blinkRatio);
@@ -69,6 +69,7 @@ core.controller('GraphCtrl', function($scope, $rootScope, PositionFactory, Track
     // Set up the control widget
     function update() {
         if ($rootScope.trackerInitialized) {
+            console.log("updating");
             plot.setData([{
                 label: "Current Eye Area",
                 data: getRandomData()
@@ -140,7 +141,6 @@ core.controller('GraphCtrl', function($scope, $rootScope, PositionFactory, Track
             //secondary rgb(105,240,174)
         });
         update();
-
     }
 
 
@@ -159,7 +159,13 @@ core.controller('GraphCtrl', function($scope, $rootScope, PositionFactory, Track
             setTimeout(waitForPositions, 500)
         }
     }
-    waitForPositions();
+
+            waitForPositions();
+
+
+    $scope.$on('$viewContentLoaded',
+        function() {
+        });
 
 
 

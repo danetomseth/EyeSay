@@ -4,8 +4,10 @@ body {
 }
 
 $bl-primary: rgb(33,150,243);
-$bl-accent: rgb(105,240,174);
-$bl-warn : rgb(255,87,34);
+// $bl-accent: rgb(105,240,174);
+
+$bl-accent: rgb(104, 204, 144);
+$bl-warn : #F5403A;
   
 
 .bl-white {
@@ -35,8 +37,8 @@ $bl-warn : rgb(255,87,34);
 }
 
 .bl-accent {
-	color: rgba(0,0,0,0.87);
-	background-color: rgb(105,240,174);
+	color: white !important;
+	background-color: $bl-accent !important;
 }
 
 .bl-warn {
@@ -59,4 +61,29 @@ $bl-warn : rgb(255,87,34);
 
 .shadeC {
 	background: rgba(0, 0, 75, 0.8);
+}
+
+.font-secondary {
+	color: $bl-accent !important;
+}
+
+.font-primary {
+	color: $bl-primary !important;
+}
+
+
+button.md-accent {
+    background-color: $bl-accent !important;
+    color: white !important;
+}
+
+
+.md-button.md-warn.md-raised {
+    background-color: $bl-warn !important;
+    color: white !important;
+}
+
+
+.md-warn button {
+	color: white !important;
 }

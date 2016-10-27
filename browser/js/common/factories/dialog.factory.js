@@ -2,7 +2,7 @@ core.factory('DialogFactory', function($http, $mdDialog) {
 
 
     let showDialog = () => {
-        var parentEl = angular.element(document.querySelector('#tutorialContainer'));
+        var parentEl = angular.element(document.querySelector('#main-content'));
         $mdDialog.show({
             parent: parentEl,
             controller: 'TutorialCtrl',
@@ -13,7 +13,7 @@ core.factory('DialogFactory', function($http, $mdDialog) {
     }
 
     let showHint = (scope) => {
-        var parentEl = angular.element(document.querySelector('#tutorialContainer'));
+        var parentEl = angular.element(document.querySelector('#main-content'));
         $mdDialog.show({
             parent: parentEl,
             controller: ($scope) => {
@@ -27,7 +27,7 @@ core.factory('DialogFactory', function($http, $mdDialog) {
     }
 
     let checkTracking = () => {
-        var parentEl = angular.element(document.body);
+        var parentEl = angular.element(document.querySelector('#main-content'));
         $mdDialog.show({
             parent: parentEl,
             controller: ($scope) => {
@@ -40,7 +40,7 @@ core.factory('DialogFactory', function($http, $mdDialog) {
     }
 
     let noConvergance = () => {
-        var parentEl = angular.element(document.body);
+        var parentEl = angular.element(document.querySelector('#main-content'));
         $mdDialog.show({
             parent: parentEl,
             focusOnOpen: true,
@@ -53,7 +53,7 @@ core.factory('DialogFactory', function($http, $mdDialog) {
         });
     }
     let closedInstructions = () => {
-        var parentEl = angular.element(document.body);
+        var parentEl = angular.element(document.querySelector('#main-content'));
         $mdDialog.show({
             parent: parentEl,
             controller: ($scope, CalibrateFactory) => {
@@ -62,12 +62,12 @@ core.factory('DialogFactory', function($http, $mdDialog) {
                     CalibrateFactory.runClosedCalibration();
                 }
             },
-            templateUrl: 'js/calibrate/closedInstructions.html'
+            templateUrl: 'js/common/templates/closed-instructions.html'
         });
     }
 
     let webcamFail = () => {
-         var parentEl = angular.element(document.body);
+         var parentEl = angular.element(document.querySelector('#main-content'));
         $mdDialog.show({
             parent: parentEl,
             controller: ($scope) => {
@@ -82,7 +82,7 @@ core.factory('DialogFactory', function($http, $mdDialog) {
 
 
     let openInstructions = () => {
-        var parentEl = angular.element(document.body);
+        var parentEl = angular.element(document.querySelector('#main-content'));
         $mdDialog.show({
             parent: parentEl,
             controller: ($scope, CalibrateFactory) => {
@@ -91,7 +91,7 @@ core.factory('DialogFactory', function($http, $mdDialog) {
                     CalibrateFactory.runOpenCalibration();
                 }
             },
-            templateUrl: 'js/calibrate/openInstructions.html'
+            templateUrl: 'js/common/templates/open-instructions.html'
         });
     }
 

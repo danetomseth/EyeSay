@@ -4,6 +4,7 @@ core.factory('PositionFactory', function($rootScope) {
     let diffZeroR = 0;
     let lastBlinkTime;
     let prevDiff;
+    let service = {};
 
 
     let checkDoubleBlink = (blinkDt) => {
@@ -18,11 +19,14 @@ core.factory('PositionFactory', function($rootScope) {
         }
     }
 
-    return {
-        blinkCompare: (positions) => { // only used in TimerFactory - which is used everywhere
+    service.eyeValue = 0;
+
+
+    service.blinkCompare = (positions) => { // only used in TimerFactory - which is used everywhere
             let change = 0
             var diffL = (positions[69][1] + positions[31][1] + positions[70][1]) - (positions[68][1] + positions[29][1] + positions[67][1]);
             var diffR = (positions[69][1] + positions[31][1] + positions[70][1]) - (positions[68][1] + positions[29][1] + positions[67][1]);
+            service.eyeValue = (diffL + diffR);
 
             change = ((diffL + diffR) / $rootScope.user.blinkZero);
 
@@ -38,16 +42,19 @@ core.factory('PositionFactory', function($rootScope) {
             }
 
         },
-        getBlinkValue: (positions) => { // used in calibrate.js only
+        service.getBlinkValue = (positions) => { // used in calibrate.js only
             if(positions) {
                 diffZeroL = (positions[69][1] + positions[31][1] + positions[70][1]) - (positions[68][1] + positions[29][1] + positions[67][1]);
                 diffZeroR = (positions[66][1] + positions[26][1] + positions[65][1]) - (positions[63][1] + positions[24][1] + positions[64][1]);
                 prevDiff = diffZeroL + diffZeroR
+                service.eyeValue = (diffZeroL + diffZeroR);
                 return diffZeroL + diffZeroR;
             }
             else {
                 return prevDiff
             }
         }
-    }
+
+
+    return service
 });
