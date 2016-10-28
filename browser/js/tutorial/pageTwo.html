@@ -9,7 +9,7 @@
 			<div layout="column">
 				<div ng-cloak bl-size="300x250" class="bl-center" md-whiteframe="4" layout-padding ng-class="{'bl-hide-elem': blinkDetected}">
 					<div>
-						<h3 class="md-title">Waiting</h3>
+						<h3 class="md-headline">Waiting...</h3>
 						<img src="assets/loading.gif" alt="HTML5 Icon" style="width:48px;height:48px;">
 					</div>
 				</div>
@@ -33,32 +33,22 @@
 				</div>
 			</div>
 			<span flex="5"></span>
-			<!-- <div>
-				<div>
-					<p>Periodically Blink To Test Blink Sesitivity</p>
-					<p>The box will react when a blick is dectected</p>
-					<p>If blink detection is weak, increase the sesitivity using the buttons to the left</p>
-					<p>If false blinks are detected, decrease the sensitivity</p>
-					<p style=" margin-bottom: 20px;"><i>If you can't find the appropriate sensitivity quickly, try calibrating again</i></p>
-				</div>
-
-
-				<div layout="row" layout-padding layout-align="center">
-					<md-button ui-sref="calibrate" class="md-primary md-raised">Re-calibrate</md-button>
-					<md-button ng-click="nextTab()" class="md-accent md-raised">Proceed</md-button>
-				</div>
-			</div> -->
+			
 			<div layout="column" layout-margin layout-padding flex="40">
 				<div class="icon-box icon-box-left" >
-					<i class="icon-alt font-secondary glyph-icon fa-cog" ></i>
+					<i class="font-secondary glyph-icon fa-question-circle fa-3x" ></i>
 					<div class="icon-wrapper">
 						<h5 class="icon-title ">Blink Threshold</h5>
 						<p class="icon-content ">Your Eye Zero * Blink Ratio. When the current area of your eye drops below this value, A blink is detected.</p>
 					</div>
 				</div>
 				<div layout="row" layout-padding layout-align="center">
-					<md-button ui-sref="calibrate" class="md-primary md-raised">Re-calibrate</md-button>
-					<md-button ng-click="nextTab()" class="md-accent md-raised">Proceed</md-button>
+					<div>
+						<md-button ui-sref="calibrate" class="md-primary md-raised">Re-calibrate</md-button>
+					</div>
+					<div>
+						<md-button ng-click="nextTab()" class="md-primary md-raised">Proceed</md-button>
+					</div>
 				</div>
 
 			</div>

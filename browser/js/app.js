@@ -25,9 +25,51 @@ app.config(function($urlRouterProvider, $locationProvider, $mdThemingProvider, $
         window.location.reload();
     });
 
+
+     var customAccent = {
+        '50': '#277446',
+        '100': '#2e8751',
+        '200': '#349a5d',
+        '300': '#3aad68',
+        '400': '#42bf74',
+        '500': '#55c682',
+        '600': '#7bd29e',
+        '700': '#8ed9ac',
+        '800': '#a1dfba',
+        '900': '#b4e6c8',
+        'A100': '#7bd29e',
+        'A200': '#68cc90',
+        'A400': '#55c682',
+        'A700': '#c7ecd6'
+    };
+    $mdThemingProvider
+        .definePalette('customAccent', 
+                        customAccent);
+
+      var customWarn = {
+        '50': '#fbb6b3',
+        '100': '#fa9e9b',
+        '200': '#f98783',
+        '300': '#f76f6b',
+        '400': '#f65852',
+        '500': '#F5403A',
+        '600': '#f42822',
+        '700': '#f0130c',
+        '800': '#d8120b',
+        '900': '#bf100a',
+        'A100': '#fccdcc',
+        'A200': '#fee5e4',
+        'A400': '#fffcfc',
+        'A700': '#a70e08'
+    };
+    $mdThemingProvider
+        .definePalette('customWarn', 
+                        customWarn);
+
     $mdThemingProvider.theme('default')
     .primaryPalette('blue')
-    .accentPalette('green')
+    .accentPalette('customAccent')
+    .warnPalette('customWarn')
 
 });
 

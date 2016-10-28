@@ -12,15 +12,11 @@ core.config(function($stateProvider) {
 
 
 core.controller('WebcamCtrl', function($scope, WebcamFactory, TrackingFactory) {
-    let video = document.getElementById('webcam');
-    let canvas = document.getElementById('large-canvas');
-
-    // WebcamFactory.startWebcam(video);
-
-    $scope.$watch('$viewContentLoaded', function() {
-        // TrackingFactory.startTracking(canvas, video);
-    });
-
+    $scope.showSwitch = false;
+    $scope.show = () => {
+        $scope.showSwitch = true;
+        $("[name='my-checkbox']").bootstrapSwitch();
+    }
 
     
 });

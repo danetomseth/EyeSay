@@ -4014,14 +4014,19 @@ numeric.inv = function inv(x) {
     var A = numeric.clone(x), Ai, Aj;
     var I = numeric.identity(m), Ii, Ij;
     var i,j,k,x;
+    
     for(j=0;j<n;++j) {
         var i0 = -1;
         var v0 = -1;
         for(i=j;i!==m;++i) { k = abs(A[i][j]); if(k>v0) { i0 = i; v0 = k; } }
         Aj = A[i0]; A[i0] = A[j]; A[j] = Aj;
         Ij = I[i0]; I[i0] = I[j]; I[j] = Ij;
-        x = Aj[j];
-        for(k=j;k!==n;++k)    Aj[k] /= x;
+        if(Aj) {
+            // console.log(Aj);
+            x = Aj[j];
+            // debugger;
+            for(k=j;k!==n;++k)    Aj[k] /= x;
+        }
         for(k=n-1;k!==-1;--k) Ij[k] /= x;
         for(i=m-1;i!==-1;--i) {
             if(i!==j) {

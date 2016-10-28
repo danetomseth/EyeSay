@@ -6,6 +6,31 @@
 	margin-right: 20px;
 }
 
+#live-data canvas {
+	// min-width: 300px !important;
+	// min-height: 250px;
+}
+
+.graph-container {
+	// width: 550px;
+	// height: 300px;
+	display: block;
+}
+
+
+.bl-graph-wrapper {
+	min-width: 750px !important;
+}
+
+.bl-graph-legend p {
+	padding-bottom: 10px;
+}
+
+
+#live-data {
+	display: block;
+}
+
 .bl-webcam-error {
 	min-height: 200px;
 	background: #d3d3d3;
@@ -233,8 +258,37 @@
 }
 
 
+.bl-toggle-btn {
+	float: right;
+	position: relative;
+	right: 13px;
+	top: 13px;
+}
 
 
+.bl-toggle-btn i {
+	margin-left: 5px;
+}
+
+.bl-49 {
+	margin: 0 auto !important;
+	width: 375px !important;
+}
+
+
+.bl-toggle {
+	float: right;
+}
+
+.bl-toggle-btn {
+	margin: 2px 0px;
+}
+
+
+.bl-pull-left {
+	float: left;
+	height: 100%;
+}
 
 
 
@@ -248,11 +302,56 @@ bl-graph {
 	min-width: 800px; 
 }
 
+.nav-tabs {
+	width: 180px;
+	margin-right: 0px !important;
+}
+
+.ui-23 .tab-content {
+	margin-top: 0px;
+}
+.ui-23 .tab-content i {
+	padding-right: 20px;
+}
+
+.ui-23 .tab-content p {
+	line-height: 20px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+}
+
+.ui-23 h3 {
+    font-size: 18px;
+    line-height: 30px;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.tab-pane div {
+	// margin-left: 10px;
+
+}
+
+.tab-pane h2 {
+	border-bottom: 1px solid #d3d3d3;
+}
+
+
+.bl-23 {
+	max-width: 100% !important;
+}
+
+
+.ui-23 .nav-tabs > li > a {
+	background: $bl-primary;
+	border-top: 2px solid #fff;
+}
 
 
 
-
-
+.ui-23 .nav-tabs > li.active > a {
+	background: $bl-accent;
+}
 
 .bl-tabs md-tab {
 	// height: 100%;
@@ -260,4 +359,9 @@ bl-graph {
 
 md-tab-content div {
 	// height: 100% !important;	
+}
+
+
+.a-130 {
+	width: 100%;
 }

@@ -1,4 +1,72 @@
-<div layout="column" flex layout-align="center" layout-margin>
+<div>
+		<h3 class="p-title p-title-no-margin">
+			<span>Tips and Tricks</span>
+		</h3>
+	</div>
+<div class="container" ng-hide="switch">
+	<!-- UI X -->
+	<div class="ui-23 bl-23">
+
+		<div layout="row" layout-padding>
+			<div flex="20">
+				<!-- Nav One -->
+				<div class="ui-nav-one">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" role="tablist">
+						<li class="active"><a href="#block-one"  data-toggle="tab"><i class="fa fa-cog"></i><span>Calibration</span></a></li>
+						<li><a href="#block-two" data-toggle="tab"><i class="fa fa-keyboard-o"></i><span>Typing</span></a></li>
+						<li><a href="#block-three"  data-toggle="tab"><i class="fa fa-video-camera"></i><span>Webcam</span></a></li>
+						<li><a href="#block-four"  data-toggle="tab"><i class="fa fa-eye"></i><span>Tracking</span></a></li>
+					</ul>
+				</div>
+			</div>
+			<div flex="75">
+				<!-- Tab Content -->
+				<div class="tab-content">
+					<!-- Tab Pane -->
+					<div role="tabpanel" class="tab-pane fade in active" id="block-one">
+						<!-- Heading -->
+						<h2><i class="fa fa-cog bl-primary-text"></i>Calibration</h2>
+						<div>
+						<!-- Para -->
+						<p>While calibrating, have face pointing towards webcam. Do not over express*** blinks. After calibration, keep head the same distance from webcam.</p>
+						</div>
+					</div>
+					<!-- Tab Pane -->
+					<div role="tabpanel" class="tab-pane fade" id="block-two">
+						<!-- Heading -->
+						<h2><i class="fa fa-keyboard-o bl-primary-text"></i>Typing</h2>
+						<div>
+						<h3>Selecting Letters</h3>
+						<h3>1. Blink To Select A Row</h3>
+						<h3>2. Blink Again To Select A Letter</h3>
+						<p>Whatever area is shaded is the current selection</p>
+						<h3><b>The Timing Takes practice</b></h3>
+						</div>
+					</div>
+					<!-- Tab Pane -->
+					<div role="tabpanel" class="tab-pane fade" id="block-three">
+						<h2><i class="fa fa-video-camera bl-primary-text"></i>Webcam</h2>
+						<h3>Fitting Tracking To Face</h3>
+						<p>Make sure your face in centered in the green box and your head is level with your computer. If you're having trouble, try moving slowly towards, then away from your webcam.</p> 
+						<h3>Keep Face Inside Green Tracking Box</h3>
+						<p>Tracking is only active within the webcam green box overlay</p>
+						<h3>Remain Still</h3>
+						<p>Eye will Work best if you stay still after completing calibration</p>
+					</div>
+					<!-- Tab Pane -->
+					<div role="tabpanel" class="tab-pane fade" id="block-four">
+						<h2><i class="fa fa-eye bl-primary-text"></i>Tracking</h2>
+						<p>Curabitur imperdiet, ligula vitae dignissim venenatis, nisl lorem vulputate neque, id dictum quam magna ut leo. Donec at augue velit. Ut sit amet sem ex. Proin lectus ex, porttitor ut vulputate a, ultrices vel ipsum. Integer vitae sagittis massa. Maecenas porta magna nec libero convallis facilisis. Nam sagittis eros quis nulla.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div><!-- /UI X -->
+</div><!-- /Container -->
+
+<div layout="column" flex layout-align="center" layout-margin ng-show="switch">
 	<div>
 		<h3 class="p-title p-title-no-margin">
 			<span>Tips and Tricks</span>
@@ -13,13 +81,13 @@
 				<div  layout="row" layout-padding layout-margin layout-align="center start">
 					
 					<div flex class="bl-content-box">
-							<h4>Fitting Tracking To Face</h4>
-							<p>Make sure your face in centered in the green box and your head is level with your computer.</p> 
-							<p>If you're having trouble, try moving slowly towards, then away from your webcam.</p>
-							<h4>Keep Face Inside Green Tracking Box</h4>
-							<p>Tracking is only active within the webcam green box overlay</p>
-							<h4>Remain Still</h4>
-							<p>Eye will Work best if you stay still after completing calibration</p>
+						<h4>Fitting Tracking To Face</h4>
+						<p>Make sure your face in centered in the green box and your head is level with your computer.</p> 
+						<p>If you're having trouble, try moving slowly towards, then away from your webcam.</p>
+						<h4>Keep Face Inside Green Tracking Box</h4>
+						<p>Tracking is only active within the webcam green box overlay</p>
+						<h4>Remain Still</h4>
+						<p>Eye will Work best if you stay still after completing calibration</p>
 					</div>
 					<div flex="30" md-whiteframe="4dp" class="bl-center">
 						<img src="/assets/findTracking.gif" height="auto" alt="" class="bl-vw-100">
@@ -36,11 +104,11 @@
 			<div class="content-box-wrapper">
 				<div flex class="bl-content-box">
 					<h3>Selecting Letters</h3>
-						<p>1. Blink To Select A Row</p>
-						<p>3. Blink Again To Select A Letter</p>
-						<p>Whatever area is shaded is the current selection</p>
+					<p>1. Blink To Select A Row</p>
+					<p>3. Blink Again To Select A Letter</p>
+					<p>Whatever area is shaded is the current selection</p>
 					<h4>The Timing Takes Practice</h4>
-					</div>
+				</div>
 			</div>
 		</div>
 		<div flex="5"></div>
@@ -51,11 +119,11 @@
 			<div class="content-box-wrapper">
 				<div flex class="bl-content-box">
 					<h3>Selecting Letters</h3>
-						<p>1. Blink To Select A Row</p>
-						<p>3. Blink Again To Select A Letter</p>
-						<p>Whatever area is shaded is the current selection</p>
+					<p>1. Blink To Select A Row</p>
+					<p>3. Blink Again To Select A Letter</p>
+					<p>Whatever area is shaded is the current selection</p>
 					<h4>The Timing Takes Practice</h4>
-					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -67,10 +135,13 @@
 </div>
 
 
+<md-button class="md-primary" ng-click="switchTab()">Switch</md-button>
 
 
 
-<div flex layout="column" layout-padding layout="center center">
+
+
+<!-- <div flex layout="column" layout-padding layout="center center">
 	<div>
 		<h3 class="p-title p-title-no-margin">
 			<span>View Live Tracking</span>
@@ -79,7 +150,7 @@
 	<div layout="row">
 		<div flex class="bl-center" md-whiteframe="4dp" layout-padding>
 			<h2 class="md-headline">Live Tracking Data</h2> 	 
-			<bl-graph></bl-graph>
+			<bl-graph ng-cloak></bl-graph>
 		</div>
 		<div layout="column" layout-margin layout-padding flex>
 			<div class="icon-box icon-box-left" >
@@ -99,7 +170,7 @@
 
 		</div>
 	</div>
-</div>
+</div> -->
 
 
 

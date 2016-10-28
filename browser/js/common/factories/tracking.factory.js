@@ -1,6 +1,6 @@
 'use strict';
 
-core.factory('TrackingFactory', function($rootScope, DialogFactory) {
+core.factory('TrackingFactory', function($rootScope, DialogFactory, $interval) {
     let canvas;
     let context;
     let tracker;
@@ -11,6 +11,7 @@ core.factory('TrackingFactory', function($rootScope, DialogFactory) {
 
     let trackObj = {};
 
+
     trackObj.startTracking = (canvasElem, video, boundingBox) => {
         //new tracker
         tracker = new clm.tracker({
@@ -20,16 +21,18 @@ core.factory('TrackingFactory', function($rootScope, DialogFactory) {
         tracker.init(pModel);
         canvas = canvasElem;
         context = canvas.getContext("2d");
+
+
         //helps remove the error when tracker first loads
         // Avoids cannot get response model on point XX
 
-
         setTimeout(function() {
             tracker.setResponseMode("blend", ["raw", "sobel"]);
+            console.log(tracker.start(video, boundingBox));
             boundingBox ? tracker.start(video, boundingBox) : tracker.start(video);
             $rootScope.$broadcast("trackerInitialized");
             $rootScope.trackerInitialized = true;
-        }, 500);
+        }, 1500);
     };
 
     trackObj.startSidebar = () => {
@@ -38,12 +41,16 @@ core.factory('TrackingFactory', function($rootScope, DialogFactory) {
         ctx = boundingBox.getContext("2d");
         video = document.getElementById('sidebar-webcam');
         canvas = document.getElementById("sidebar-canvas");
-        trackingBox[0] = containerWidth - (containerWidth / 4);
-        trackingBox[1] = (containerWidth * .75) - ((containerWidth / 3.1));
-        trackingBox[2] = (containerWidth / 4) * 2;
-        trackingBox[3] = ((containerWidth / 3) * .75) * 2.5;
+        trackingBox[0] = containerWidth - (containerWidth / 3);
+        trackingBox[1] = (containerWidth * .75) - ((containerWidth / 3));
+        trackingBox[2] = (containerWidth / 4) * 2.6;
+        trackingBox[3] = ((containerWidth / 3) * .75) * 2.75;
+        ctx.lineWidth=3;
 
-        ctx.strokeStyle = "rgba(130,255,50, 0.5)";
+        
+        ctx.strokeStyle = "#2196f3";
+
+        //['x upper left', 'y upper left', 'width', 'height']
         ctx.strokeRect(trackingBox[0], trackingBox[1], trackingBox[2], trackingBox[3]);
 
         trackObj.startTracking(canvas, video, trackingBox);
