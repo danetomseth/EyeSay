@@ -16,6 +16,10 @@ core.controller('InstructionsCtrl', function($scope, $rootScope, PositionFactory
       $scope.showGraph = () => {
         $scope.calibrationComplete = true;
     }
+    $scope.switch = false;
+    $scope.switchTab = () => {
+        $scope.switch = !$scope.switch;
+    }
 
 
 

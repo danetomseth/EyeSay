@@ -41,12 +41,16 @@ core.factory('TrackingFactory', function($rootScope, DialogFactory, $interval) {
         ctx = boundingBox.getContext("2d");
         video = document.getElementById('sidebar-webcam');
         canvas = document.getElementById("sidebar-canvas");
-        trackingBox[0] = containerWidth - (containerWidth / 4);
-        trackingBox[1] = (containerWidth * .75) - ((containerWidth / 3.1));
-        trackingBox[2] = (containerWidth / 4) * 2;
-        trackingBox[3] = ((containerWidth / 3) * .75) * 2.5;
+        trackingBox[0] = containerWidth - (containerWidth / 3);
+        trackingBox[1] = (containerWidth * .75) - ((containerWidth / 3));
+        trackingBox[2] = (containerWidth / 4) * 2.6;
+        trackingBox[3] = ((containerWidth / 3) * .75) * 2.75;
         ctx.lineWidth=3;
+
+        
         ctx.strokeStyle = "#2196f3";
+
+        //['x upper left', 'y upper left', 'width', 'height']
         ctx.strokeRect(trackingBox[0], trackingBox[1], trackingBox[2], trackingBox[3]);
 
         trackObj.startTracking(canvas, video, trackingBox);

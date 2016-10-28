@@ -35,7 +35,7 @@ core.factory('DialogFactory', function($http, $mdDialog) {
                     $mdDialog.hide();
                 }
             },
-            templateUrl: 'js/calibrate/dialog.html'
+            templateUrl: 'js/common/templates/check-tracking.html'
         });
     }
 
@@ -49,7 +49,7 @@ core.factory('DialogFactory', function($http, $mdDialog) {
                     $mdDialog.hide();
                 }
             },
-            templateUrl: 'js/calibrate/dialog.html'
+            templateUrl: 'js/common/templates/check-tracking.html'
         });
     }
     let closedInstructions = () => {

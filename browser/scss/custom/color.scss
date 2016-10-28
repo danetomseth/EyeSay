@@ -3,10 +3,15 @@ body {
   	// font-size: 18px;
 }
 
+md-content.md-default-theme, md-content {
+	background: #fff !important;
+}
 $bl-primary: rgb(33,150,243);
 // $bl-accent: rgb(105,240,174);
 
-$bl-accent: rgb(104, 204, 144);
+// $bl-accent: rgb(104, 204, 144); light-green
+
+$bl-accent: rgb(104,204,144);
 $bl-warn : #F5403A;
   
 
@@ -24,16 +29,24 @@ $bl-warn : #F5403A;
 	background-color: rgb(33,150,243);
 }
 
+.bl-grey {
+	color: #888 !important;
+}
+
 
 
 
 .bl-primary-text {
-	color: rgb(33,150,243);
+	color: $bl-primary;
 }
 
 
 .bl-accent-text {
 	color: rgb(105,240,174);
+}
+
+.bl-warn-text {
+	color: $bl-warn;
 }
 
 .bl-accent {

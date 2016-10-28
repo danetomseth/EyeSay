@@ -19,6 +19,7 @@ core.controller('SettingsCtrl', function($scope, $rootScope, SettingsFactory, Se
     }
 
   
+  
 
 
 });

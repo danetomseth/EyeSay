@@ -1,28 +1,26 @@
-
-<!-- <div class="content-box bl-graph-box">
-    <h3 class="content-box-header bg-default">
-        <i class="glyph-icon icon-cog"></i>
-        Live Tracking Data
-        <span class="header-buttons-separator">
-            <a href="#" class="icon-separator">
-                <i class="glyph-icon icon-question"></i>
-            </a>
-        </span>
-    </h3>
-    <div class="content-box-wrapper">
-        <div id="live-data" style="width: 600px; height: 250px; padding: 0px; position: relative;"></div>
-    </div>
-</div> -->
-
-
-    <!-- <div>
-        <h3 class="content-box-header bg-default">
-            <i class="glyph-icon icon-cog"></i>
-            Live Tracking Data
-        </h3>
+<!-- 
+<div class="graph-container bl-center" layout="row">
+        <div id="live-data" style="width: 500px; height: 250px; padding: 0px; position: relative;" ng-show="graphReady"></div>
+        <img src="assets/ring.gif" alt="HTML5 Icon" style="width:64px;height:64px;" ng-if="!graphReady">
     </div> -->
-    <div class="graph-container">
-        <div id="live-data" style="width: 450px; height: 250px; padding: 0px; position: relative;"></div>
+
+
+
+
+
+    <div layout="row" layout-margin class="bl-vw-100" ng-show="graphReady">   
+        <div class="bl-graph-legend">
+            <i class="fa fa-percent bl-primary-text fa-2x"></i>
+            <p>Blink Zero</p>
+            <i class="fa fa-video-camera bl-warn-text fa-2x"></i>
+            <p>Live Data</p>
+        </div>
+        <div flex>
+           <div class="graph-container bl-center" layout="row">
+            <div id="live-data" style="width: 500px; height: 250px; padding: 0px; position: relative;" ></div>
     </div>
+        </div>
+    </div>
+    <img src="assets/ring.gif" alt="HTML5 Icon" style="width:64px;height:64px;" ng-if="!graphReady">
 
 

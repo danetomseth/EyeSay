@@ -12,8 +12,11 @@ core.config(function($stateProvider) {
 
 
 core.controller('WebcamCtrl', function($scope, WebcamFactory, TrackingFactory) {
-  
-
+    $scope.showSwitch = false;
+    $scope.show = () => {
+        $scope.showSwitch = true;
+        $("[name='my-checkbox']").bootstrapSwitch();
+    }
 
     
 });

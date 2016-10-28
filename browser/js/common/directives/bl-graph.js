@@ -8,6 +8,7 @@ core.directive('blGraph', ($rootScope, PositionFactory, TrackingFactory) => {
             let thresholdLine = [];
             var updateInterval = 30;
             let drawingActive;
+            scope.graphReady = false;
 
 
             let userThreshold = ($rootScope.user.blinkZero * $rootScope.user.blinkRatio);
@@ -63,7 +64,7 @@ core.directive('blGraph', ($rootScope, PositionFactory, TrackingFactory) => {
             let getThreshold = () => {
                 var res = [];
                 for (var i = 0; i < data.length; ++i) {
-                    res.push([i, userThreshold]);
+                    res.push([i, ($rootScope.user.blinkZero * $rootScope.user.blinkRatio)]);
                 }
 
                 return res;
