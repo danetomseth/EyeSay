@@ -62,13 +62,6 @@ core.controller('CalibrateCtrl', function($scope, CalibrateFactory, $state, $roo
         if (newVal === true) {
             $scope.openCalibrationComplete = CalibrateFactory.openCalibrationComplete;
             $scope.success = true;
-            // $timeout(() => {
-            //     $scope.success = false;
-            //     $scope.calibrating.open = false;
-            //     $scope.calibrating.closed = CalibrateFactory.openCalibrationComplete;
-            //     DialogFactory.closedInstructions();
-            // }, 3000);
-
         }
     });
 
@@ -106,6 +99,12 @@ core.controller('CalibrateCtrl', function($scope, CalibrateFactory, $state, $roo
         }
     });
 
+     let styleDelay = () => {
+        $timeout(() => {
+            $scope.blinkDetected = false;
+        }, 500)
+    }
+
 
     $scope.leaveCalibration = () => {
         $scope.calibrationComplete = false;
@@ -115,6 +114,15 @@ core.controller('CalibrateCtrl', function($scope, CalibrateFactory, $state, $roo
     $scope.showGraph = () => {
         $scope.calibrationComplete = true;
     }
+
+
+    $rootScope.$on('singleBlink', () => {
+        if (ActionFactory.isActive('calibrate')) {
+            $scope.blinkDetected = true;
+            console.log("blink!!");
+            styleDelay()
+        }
+    });
 
 
 

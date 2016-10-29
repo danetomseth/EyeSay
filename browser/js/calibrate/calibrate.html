@@ -1,49 +1,22 @@
 
+
+<!-- <md-subheader>Calibration</md-subheader> -->
 <div ng-if="!calibrateActive">
 	<h3 class="p-title p-title-no-margin">
 		<span>Calibration</span>
 	</h3>
 </div>
-<!-- <md-subheader>Calibration</md-subheader> -->
 <div layout="column" flex layout-align="start center" ng-if="!calibrateActive">
 	
-	<div id="calibrate-overlay" flex layout="row" class="calibrate-step " layout-align="start" layout-padding layout-margin>
+	<div id="calibrate-overlay" flex layout="row" class="calibrate-step " layout-align="start" layout-padding>
 		
 		
 		
-
-		
-		
-		<!-- <div class="bl-right-message" layout="column" flex layout-align="start start">
-			<h2 class="md-headline">Calibration Process</h2>
-			<div>
-				<p class="md-body-1">To accurately detect your blinks, the app needs to calculate the average area of your eye when open, and the threshold to register a blink. This "blink profile" is unique to each user.</p>
-			</div>
-			<div>
-				<p class="md-body-1">The goal is to establish your unique blink zero and blink ratio to accurately detect blinks. The figure below is a graphical representation of the calibration process.</p> 
-				<p class="md-body-1">The app watches for the area of your eye to fall below the red line, registering a blink.</p>
-				
-			</div>
-			<div layout="column" layout-align="center" class="bl-vw-100">
-				<div layout="row" layout-align="start end">
-					<div class="md-subhead">New User?</div>
-					<md-button class="md-primary" ng-hide="showInstructions" ng-click="show()">Click Here For More Instructions</md-button>
-					<md-button class="md-warn" ng-show="showInstructions" ng-click="show()">Hide Instructions</md-button>
-
-				</div>
-				<div layout="row" layout-align="start end">
-					<div class="md-subhead">OR....</div>
-					<md-button class="md-primary" ng-click="start()">Begin</md-button>
-				</div>
-			</div>
-			
-		</div> -->
-
 
 
 		<div class="ui-152">
 			<!-- Main heading -->
-			<h4 class="md-title">Calibration Process</h4>
+			<!-- <h4 class="md-title">Calibration Process</h4> -->
 			<!-- Border -->
 			<div class="bor"></div>
 			<!-- UI Item -->
@@ -52,8 +25,8 @@
 				<a href="#"><i class="fa fa-question"></i></a>
 				<!-- Content -->
 				<div class="content">
-					<h3>What is it?</h3>
-					<p>To accurately detect your blinks, the app needs to calculate the average area of your eye when open, and the threshold to register a blink. This "blink profile" is unique to each user. An example blink profile is displayed on the right.</p>
+					<h3>What is Calibration?</h3>
+					<p>To accurately detect your blinks, the app will calculate the average area of your eye when open and closed to register a blink. This "blink profile" is unique to each user. An example blink profile is displayed on the right.</p>
 				</div>
 			</div>
 			<!-- UI Item -->
@@ -62,7 +35,7 @@
 				<a href="#"><i class="fa fa-eye"></i></a>
 				<!-- Content -->
 				<div class="content">
-					<h3>Calibrate Open Eye Zero</h3>
+					<h3>Calibrate Open Eye</h3>
 					<p>The first step will measure the average area of your open eye. This value will be set as "Eye Zero"</p>
 				</div>
 			</div>
@@ -73,7 +46,7 @@
 				<!-- Content -->
 				<div class="content">
 					<h3>Calibrate Blink</h3>
-					<p>The second step will measure the minimum values of your eye area while you are blinking. The application will compare this with your eye zero to establish a threshold of blink detection</p>
+					<p>Measure the eye area during a blink to compare to open eye, establishing the threshold of blink detection</p>
 				</div>
 			</div>
 			<!-- UI Item -->
@@ -83,7 +56,7 @@
 				<!-- Content -->
 				<div class="content">
 					<h3>Check calibration</h3>
-					<p>Finally, you will have the opportunity to view the live tracking data and measured eye area. You can try blinking to see if the eye area drops below the calibrated blink threshold line.</p>
+					<p>View the live tracking data of your personalized eye measurements and test-drive the app</p>
 				</div>
 			</div>
 		</div>
@@ -91,16 +64,16 @@
 		<div flex  layout-padding bl-size="400x">
 			<h2 class="md-title text-center bl-grey">Example Calibration Graph</h2> 	 
 			<img src="/assets/blink-profile.png" height="auto" alt="" class="bl-vw-100">
-				<div>
-					<h2 class="md-subhead text-center"><span ng-hide="showInstructions">New User?</span> <md-button class="md-primary" ng-hide="showInstructions" ng-click="show()">Click Here For More Instructions</md-button><md-button class="md-warn" ng-show="showInstructions" ng-click="show()">Hide Instructions</md-button></h2>
-					
-					
+			<div>
+				<h2 class="md-subhead text-center"><span ng-hide="showInstructions">New User?</span> <md-button class="md-primary" ng-hide="showInstructions" ng-click="show()">Click Here For More Instructions</md-button><md-button class="md-warn" ng-show="showInstructions" ng-click="show()">Hide Instructions</md-button></h2>
 
-				</div>
-				<div>
-					<h2 class="md-subhead text-center">OR.... <md-button class="md-primary md-raised" ng-click="start()">Begin</md-button></h2>
-					
-				</div>
+
+
+			</div>
+			<div>
+				<h2 class="md-subhead text-center"><md-button class="md-primary md-raised" ng-click="start()">Begin</md-button></h2>
+
+			</div>
 		</div>
 
 
@@ -209,6 +182,23 @@
 		<div flex class="bl-center" md-whiteframe="4dp" layout-padding bl-size="600x">
 			<h2 class="md-headline">Live Tracking Data</h2> 	 
 			<bl-graph></bl-graph>
+		<!-- 	<div class="bl-vw-100" bl-size="x100" ng-class="{'box-selected': blinkDetected}">
+				<p>Blink???</p>
+			</div> -->
+			<div layout="row" layout-align="center">
+			<div ng-cloak bl-size="300x100" class="bl-center" md-whiteframe="4" layout-padding ng-class="{'bl-hide-elem': blinkDetected}">
+					<div>
+						<h3 class="md-headline">Waiting...</h3>
+						<img src="assets/loading.gif" alt="HTML5 Icon" style="width:48px;height:48px;">
+					</div>
+				</div>
+				<div ng-cloak  bl-size="300x100" class="bl-center bl-blink-detected" md-whiteframe="4" ng-class="{'bl-hide-elem': !blinkDetected}" layout-padding>
+					<div>
+						<h2 class="md-display-1 bl-white">Blink Detected</h2>
+						<i class="fa fa-thumbs-up fa-2x bl-white" aria-hidden="true"></i>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div layout="column" layout-margin layout-padding flex>
 			<div class="icon-box icon-box-left" >
@@ -216,8 +206,10 @@
 				<div class="icon-wrapper">
 					<h5 class="icon-title ">Confirm Settings</h5>
 					<ul class="icon-content ">
-						<li>When you eye is open, make sure the current eye reading is above the threshold line.</li>
-						<li>Try blinking and watch the eye reading drop. Make sure it drops below the threshold line, then rises back above when your eyes are open.</li>
+						<li>With eyes open, make sure the current eye reading <span class="bl-text-primary">(blue line)</span> is above the red threshold line</li>
+						<li>Blink and watch the <span class="bl-text-primary">blue line</span> drop</li>
+						<li>Note: If blinks aren't being detected, re-calibrate</li>
+						<!-- <li>making sure it drops below the red threshold line.</li> -->
 					</ul>
 				</div>
 			</div>

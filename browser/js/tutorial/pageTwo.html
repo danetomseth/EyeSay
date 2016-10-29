@@ -3,19 +3,19 @@
 <div layout="row" layout-align="center start" >
 	<div layout="column" layout-margin layout-padding layout-align="start center" class="bl-card-info" flex>
 		<div class="bl-action-title">
-			<h3 class="bl-text-center">Test Blink Calibration</h3>
+			<h3 class="bl-text-center">Test Your Blink Calibration</h3>
 		</div>
 		<div layout="row" class="bl-vw-100" layout-margin layout-padding layout-align="center">
 			<div layout="column">
 				<div ng-cloak bl-size="300x250" class="bl-center" md-whiteframe="4" layout-padding ng-class="{'bl-hide-elem': blinkDetected}">
 					<div>
-						<h3 class="md-headline">Waiting...</h3>
+						<h3 class="md-headline">Blink</h3>
 						<img src="assets/loading.gif" alt="HTML5 Icon" style="width:48px;height:48px;">
 					</div>
 				</div>
 				<div ng-cloak  bl-size="300x250" class="bl-center bl-blink-detected" md-whiteframe="4" ng-class="{'bl-hide-elem': !blinkDetected}" layout-padding>
 					<div>
-						<h2 class="md-display-1 bl-white">Blink!!</h2>
+						<h2 class="md-headline bl-white">Blink Registered</h2>
 						<i class="fa fa-thumbs-up fa-4x bl-white" aria-hidden="true"></i>
 					</div>
 				</div>
@@ -38,14 +38,14 @@
 				<div class="icon-box icon-box-left" >
 					<i class="font-secondary glyph-icon fa-question-circle fa-3x" ></i>
 					<div class="icon-wrapper">
-						<h5 class="icon-title ">Blink Threshold</h5>
-						<p class="icon-content ">Your Eye Zero * Blink Ratio. When the current area of your eye drops below this value, A blink is detected.</p>
+						<h5 class="icon-title ">Adjusting Sensitivity</h5>
+						<p class="icon-content ">Use the buttons below the blick box to increase or decrease blink detection sensitivity</p>
 					</div>
 				</div>
 				<div layout="row" layout-padding layout-align="center">
-					<div>
+					<!-- <div>
 						<md-button ui-sref="calibrate" class="md-primary md-raised">Re-calibrate</md-button>
-					</div>
+					</div> -->
 					<div>
 						<md-button ng-click="nextTab()" class="md-primary md-raised">Proceed</md-button>
 					</div>
