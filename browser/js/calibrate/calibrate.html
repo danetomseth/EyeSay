@@ -36,7 +36,7 @@
 				<!-- Content -->
 				<div class="content">
 					<h3>Calibrate Open Eye</h3>
-					<p>The first step will measure the average area of your open eye. This value will be set as "Eye Zero"</p>
+					<p>The first step will measure the average area of your open eye.</p>
 				</div>
 			</div>
 			<!-- UI Item -->
@@ -63,7 +63,7 @@
 
 		<div flex  layout-padding bl-size="400x">
 			<h2 class="md-title text-center bl-grey">Example Calibration Graph</h2> 	 
-			<img src="/assets/blink-profile.png" height="auto" alt="" class="bl-vw-100">
+			<img src="/assets/graph-example.png" height="auto" alt="" class="bl-vw-100">
 			<div>
 				<h2 class="md-subhead text-center"><span ng-hide="showInstructions">New User?</span> <md-button class="md-primary" ng-hide="showInstructions" ng-click="show()">Click Here For More Instructions</md-button><md-button class="md-warn" ng-show="showInstructions" ng-click="show()">Hide Instructions</md-button></h2>
 
@@ -172,19 +172,16 @@
 
 
 
-<div flex layout="column" layout-padding layout="center center" ng-if="calibrationComplete">
+<div flex layout="column" layout-padding ng-if="calibrationComplete">
 	<div>
 		<h3 class="p-title p-title-no-margin">
 			<span>Calibration Results</span>
 		</h3>
 	</div>
 	<div layout="row">
-		<div flex class="bl-center" md-whiteframe="4dp" layout-padding bl-size="600x">
+		<div flex class="bl-center bl-graph-wrapper" md-whiteframe="4dp" layout-padding bl-size="600x">
 			<h2 class="md-headline">Live Tracking Data</h2> 	 
 			<bl-graph></bl-graph>
-		<!-- 	<div class="bl-vw-100" bl-size="x100" ng-class="{'box-selected': blinkDetected}">
-				<p>Blink???</p>
-			</div> -->
 			<div layout="row" layout-align="center">
 			<div ng-cloak bl-size="300x100" class="bl-center" md-whiteframe="4" layout-padding ng-class="{'bl-hide-elem': blinkDetected}">
 					<div>

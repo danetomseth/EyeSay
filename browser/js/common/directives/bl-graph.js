@@ -113,7 +113,7 @@ core.directive('blGraph', ($rootScope, PositionFactory, TrackingFactory) => {
                         shadowSize: 0 // Drawing is faster without shadows
                     },
                     legend: {
-                        show: true,
+                        show: false,
                         position: "nw",
                         margin: 5,
                         backgroundColor: '#FFF',

@@ -1,4 +1,5 @@
 core.factory('DialogFactory', function($http, $mdDialog) {
+    // let container = angular.element(document.querySelector('#dialog'))[0];
 
 
     let showDialog = () => {

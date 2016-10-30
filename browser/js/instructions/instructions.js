@@ -8,13 +8,18 @@ core.config(function($stateProvider) {
 
 
 
-core.controller('InstructionsCtrl', function($scope, $rootScope, PositionFactory, TrackingFactory) {
+core.controller('InstructionsCtrl', function($scope, $rootScope, DialogFactory) {
 
 
    
     $scope.switch = false;
     $scope.switchTab = () => {
         $scope.switch = !$scope.switch;
+    }
+
+
+    $scope.show = () => {
+        DialogFactory.hint();
     }
 
 
