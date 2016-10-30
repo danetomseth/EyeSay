@@ -1,9 +1,5 @@
 core.controller('HomeCtrl', function($scope, $rootScope, Session, ErrorFactory) {
 	
-	let browserError = () => {
-		
-	}
-
 
 	let run = () => {
 		$scope.loggedIn = (Session.user) ? true : false;
