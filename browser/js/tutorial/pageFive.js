@@ -9,7 +9,7 @@ core.directive("blTutorialFive", ($rootScope, ActionFactory, $timeout, $interval
 
             let message = {
                     title: "Tic-Tac-Toe",
-                    listContent: ["1. The goal is to beat the computer", "2. The highlighted box is the current selection", "3. Blink to select the current box"]
+                    listContent: ["1. The goal is to practice blink selection", "2. The highlighted box is the current selection", "3. Blink to put your letter in the highlighted box"]
                 }
             DialogFactory.promptMessage(message, startGame) //initial prompt message to start game
 

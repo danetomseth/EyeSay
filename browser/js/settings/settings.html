@@ -1,141 +1,127 @@
 
 
-	<div flex layout="column" layout-padding layout="">
-		<div>
-			<h3 class="p-title p-title-no-margin">
-				<span>Adjust Settings</span>
-			</h3>
-		</div>
-		<div layout="row">
-			<div flex class="bl-center bl-graph-wrapper" md-whiteframe="4dp" layout-padding>
-
-				<h2 class="md-headline">Live Tracking Data</h2>
-				<!-- <div layout="row" layout-margin class="bl-vw-100"> 	 
-					<div>
-	            		<i class="fa fa-percent bl-primary-text fa-2x"></i>
-	            		<p>Blink Zero</p>
-	        		    <i class="fa fa-video-camera bl-warn-text fa-2x"></i>
-	        		    <p>Live Data</p>
-			        </div>
-			        <div flex>
-						<bl-graph ng-cloak></bl-graph>
-					</div>
-				</div> -->
-				<bl-graph ng-cloak></bl-graph>
-			</div>
-			<div layout-margin flex>
-				<div class="ui-49 bl-49">
-					<!-- Heading -->
-					<div class="ui-head">
-						<h2>Quick Settings</h2>
-					</div>
-					<!-- Items -->
-					<div class="ui-list">
-						<ul class="list-unstyled">
-							<li class="clearfix">
-								<!-- Heading -->
-								<span class="bl-pull-left">
-									<h3><i class="fa fa-eye"></i> Blink Zero <span>{{$root.user.blinkZero}}</span></h3>
-								</span>
-								<!-- Toggle switch -->
-								<div class="bl-toggle-btn">
-									<i class="icon-alt bl-icon-primary glyph-icon fa-plus fa-2x" ng-click="adjustValue(true,'blinkZero')"></i>
-									<i class="icon-alt bl-icon-warn glyph-icon fa-minus fa-2x" ng-click="adjustValue(false,'blinkZero')"></i>
-								</div>
-
-							</li>
-							<li class="clearfix">
-								<!-- Heading -->
-
-								<span class="bl-pull-left">
-									<h3><i class="fa fa-percent"></i> Blink Ratio <span>{{$root.user.blinkRatio}}</span></h3>
-								</span>
-								<!-- Toggle switch -->
-								<div class="bl-toggle-btn">
-									<i class="icon-alt bl-icon-primary glyph-icon fa-plus fa-2x" ng-click="adjustValue(true,'blinkRatio')"></i>
-									<i class="icon-alt bl-icon-warn glyph-icon fa-minus fa-2x" ng-click="adjustValue(false,'blinkRatio')"></i>
-								</div>
-							</li>
-							<li class="clearfix">
-								<!-- Heading -->
-								<span class="bl-pull-left">
-									<h3><i class="fa fa-i-cursor"></i> Cursor Speed <span>{{$root.user.cursorDelay}}</span></h3>
-								</span>
-								<!-- Toggle switch -->
-								<div class="bl-toggle-btn">
-									<i class="icon-alt bl-icon-primary glyph-icon fa-plus fa-2x" ng-click="adjustValue(true,'cursorDelay')"></i>
-									<i class="icon-alt bl-icon-warn glyph-icon fa-minus fa-2x" ng-click="adjustValue(false,'cursorDelay')"></i>
-								</div>
-
-							</li>
-							<li class="clearfix">
-								<!-- Heading -->
-								<span class="bl-pull-left">
-									<h3><i class="fa fa-video-camera"></i> Webcam <span>Turn webcam feed on or off</span></h3>
-								</span>
-								<!-- Toggle switch -->
-								<div class="bl-toggle">
-									<md-switch ng-model="$root.user.blinkActive" aria-label="Switch 1">
-									</md-switch>
-								</div>
-							</li>
-
-						</ul>
-					</div>
-					<!-- Foot -->
-					<div class="ui-foot clearfix">
-						Last Calibration Date: 
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div flex layout="column" layout-padding layout="">
+	<div>
 		<h3 class="p-title p-title-no-margin">
-		<span>Blink Profile</span>
-	</h3>
-	
-	<div layout-padding>
-		<div layout="row" flex layout-padding>
-			<div flex class="bl-center" ng-show="profileSet">
-				<h2 class="md-headline">Blink Profile</h2> 
-				<canvas id="blink-chart"></canvas>
-			</div>
-			<div flex class="bl-center" ng-show="!profileSet" md-whiteframe="4dp">
-				<h2 class="md-headline">Blink Profile Graph</h2>
-				<h2 class="md-title">It looks like you haven't calibrated yet!</h2> 
-			</div>
-			<div layout="column" layout-margin layout-padding flex="40">
-				<div class="icon-box icon-box-left" >
-					<i class="icon-alt font-secondary glyph-icon fa-cog" ></i>
-					<div class="icon-wrapper">
-						<h5 class="icon-title ">Blink Threshold</h5>
-						<p class="icon-content ">Your Eye Zero * Blink Ratio. When the current area of your eye drops below this value, A blink is detected.</p>
-					</div>
-				</div>
-				<div class="icon-box icon-box-left" >
-					<i class="icon-alt font-secondary glyph-icon fa-percent" ></i>
-					<div class="icon-wrapper">
-						<h5 class="icon-title ">Blink Ratio</h5>
-						<p class="icon-content ">The ratio between your Eye Zero and average blink values</p>
-					</div>
-				</div>
-				<div class="icon-box icon-box-left" >
-					<i class="icon-alt font-secondary glyph-icon fa-eye" ></i>
-					<div class="icon-wrapper">
-						<h5 class="icon-title ">Eye Zero</h5>
-						<p class="icon-content ">The average measured area of your open eye.</p>
+			<span>Adjust Settings</span>
+		</h3>
+	</div>
+	<div layout="row">
+		<div flex class="bl-center bl-graph-wrapper" md-whiteframe="4dp" layout-padding>
 
-					</div>
-
+			<h2 class="md-headline">Live Tracking Data</h2>
+			<bl-graph ng-cloak></bl-graph>
+		</div>
+		<div layout-margin flex>
+			<div class="ui-49 bl-49">
+				<!-- Heading -->
+				<div class="ui-head">
+					<h2>Quick Settings</h2>
 				</div>
+				<!-- Items -->
+				<div class="ui-list">
+					<ul class="list-unstyled">
+						<li class="clearfix">
+							<!-- Heading -->
+							<span class="bl-pull-left">
+							<h3><i class="fa fa-eye"></i> Blink Sensitivity <span>{{$root.user.blinkZero}}</span></h3>
+							</span>
+							<!-- Toggle switch -->
+							<div class="bl-toggle-btn">
+								<i class="icon-alt bl-icon-primary glyph-icon fa-plus fa-2x" ng-click="adjustValue(true,'blinkZero')"></i>
+								<i class="icon-alt bl-icon-warn glyph-icon fa-minus fa-2x" ng-click="adjustValue(false,'blinkZero')"></i>
+							</div>
+							<md-tooltip>Increase or decrease how easily app detects blicks</md-tooltip>
+						</li>
+<!-- 						<li class="clearfix">
+							<span class="bl-pull-left">
+								<h3><i class="fa fa-percent"></i> Blink Ratio <span>{{$root.user.blinkRatio}}</span></h3>
+							</span>
+							<div class="bl-toggle-btn">
+								<i class="icon-alt bl-icon-primary glyph-icon fa-plus fa-2x" ng-click="adjustValue(true,'blinkRatio')"></i>
+								<i class="icon-alt bl-icon-warn glyph-icon fa-minus fa-2x" ng-click="adjustValue(false,'blinkRatio')"></i>
+							</div>
+						</li>
+ -->						<li class="clearfix">
+							<!-- Heading -->
+							<span class="bl-pull-left">
+								<h3><i class="fa fa-i-cursor"></i> Cursor Speed <span>{{$root.user.cursorDelay}}</span></h3>
+							</span>
+							<!-- Toggle switch -->
+							<div class="bl-toggle-btn">
+								<i class="icon-alt bl-icon-primary glyph-icon fa-plus fa-2x" ng-click="adjustValue(true,'cursorDelay')"></i>
+								<i class="icon-alt bl-icon-warn glyph-icon fa-minus fa-2x" ng-click="adjustValue(false,'cursorDelay')"></i>
+							</div>
+							<md-tooltip>How quickly the highled boxes move while typing</md-tooltip>
+						</li>
+						<li class="clearfix">
+							<!-- Heading -->
+							<span class="bl-pull-left">
+								<h3><i class="fa fa-video-camera"></i> Webcam <span>Turn webcam feed on or off</span></h3>
+							</span>
+							<!-- Toggle switch -->
+							<div class="bl-toggle">
+								<md-switch ng-model="$root.user.blinkActive" aria-label="Switch 1">
+								</md-switch>
+							</div>
+						</li>
+
+					</ul>
+				</div>
+				<!-- Foot -->
+				<!-- <div class="ui-foot clearfix">
+					Last Calibration Date: 
+				</div> -->
 			</div>
 		</div>
+	</div>
+</div>
+<h3 class="p-title p-title-no-margin">
+	<span>Blink Profile</span>
+</h3>
 
-		
+<div layout-padding>
+	<div layout="row" flex layout-padding>
+		<div flex class="bl-center" ng-show="profileSet">
+			<h2 class="md-headline">Blink Profile</h2> 
+			<canvas id="blink-chart"></canvas>
+		</div>
+		<div flex class="bl-center" ng-show="!profileSet" md-whiteframe="4dp">
+			<h2 class="md-headline">Blink Profile Graph</h2>
+			<h2 class="md-title">It looks like you haven't calibrated yet!</h2> 
+		</div>
+		<div layout="column" layout-margin layout-padding flex="40">
+			<div class="icon-box icon-box-left" >
+				<i class="icon-alt font-secondary glyph-icon fa-cog" ></i>
+				<div class="icon-wrapper">
+					<h5 class="icon-title ">Blink Sensitivity</h5>
+					<p class="icon-content ">How easily the application can detect when you are blinking. Too sensitive means the app detects blinks when your eyes are open, and not sesitive enough when you blink and nothing happens.</p>
+				</div>
+			</div>
+			<!-- <div class="icon-box icon-box-left" >
+				<i class="icon-alt font-secondary glyph-icon fa-percent" ></i>
+				<div class="icon-wrapper">
+					<h5 class="icon-title ">Blink Ratio</h5>
+					<p class="icon-content ">The ratio between your Eye Zero and average blink values</p>
+				</div>
+			</div> -->
+			<div class="icon-box icon-box-left" >
+				<i class="icon-alt font-secondary glyph-icon fa-eye" ></i>
+				<div class="icon-wrapper">
+					<h5 class="icon-title ">Eye Zero</h5>
+					<p class="icon-content ">The average measured area of your open eye.</p>
 
+				</div>
+
+			</div>
+		</div>
 	</div>
 
-	<div bl-size="x200" class="bl-vw-100"></div>
+
+
+</div>
+
+<div bl-size="x200" class="bl-vw-100"></div>
 
 <!-- 
 <h3 class="p-title p-title-no-margin">

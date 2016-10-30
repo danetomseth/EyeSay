@@ -26,6 +26,10 @@
 	padding-bottom: 10px;
 }
 
+.bl-graph-lengend {
+	border: 1px solid #d3d3d3;
+}
+
 
 #live-data {
 	display: block;
@@ -364,4 +368,18 @@ md-tab-content div {
 
 .a-130 {
 	width: 100%;
+}
+
+.ui-152 p {
+	font-size: 16px;
+	margin-left: 5px;
+}
+
+.ui-152 {
+	margin: 0px 0px;
+}
+
+.ui-152 .ui-item .content h3 {
+	font-size: 18px;
+	color: rgba(0, 0, 0, 0.6);
 }

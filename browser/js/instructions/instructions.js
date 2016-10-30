@@ -8,17 +8,18 @@ core.config(function($stateProvider) {
 
 
 
-core.controller('InstructionsCtrl', function($scope, $rootScope, PositionFactory, TrackingFactory) {
-    $scope.title = "Instructions";
+core.controller('InstructionsCtrl', function($scope, $rootScope, DialogFactory) {
 
 
-    // let elem = angular.element(document.querySelector('#graph-content'))[0];
-      $scope.showGraph = () => {
-        $scope.calibrationComplete = true;
-    }
+   
     $scope.switch = false;
     $scope.switchTab = () => {
         $scope.switch = !$scope.switch;
+    }
+
+
+    $scope.show = () => {
+        DialogFactory.hint();
     }
 
 

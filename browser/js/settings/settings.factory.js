@@ -5,7 +5,7 @@ core.factory('SettingsFactory', function($rootScope) {
 
     service.createGraph = () => {
         let thresholdData = [];
-        var ctx = document.getElementById("blink-chart");
+        let ctx = document.getElementById("blink-chart");
 
         let chartData = $rootScope.user.blinkProfile;
         if (chartData.length > 200) {
@@ -13,11 +13,6 @@ core.factory('SettingsFactory', function($rootScope) {
             console.log(chartData.length);
         }
 
-        // chartData.forEach((elem) => {
-        // 	let point = elem;
-        // 	point.y = ($rootScope.user.blinkZero * $rootScope.user.blinkRatio);
-        // 	thresholdData.push(point);
-        // })
 
         thresholdData = chartData.map((elem, index) => {
                 let point = {};
@@ -25,8 +20,7 @@ core.factory('SettingsFactory', function($rootScope) {
                 point.y = ($rootScope.user.blinkZero * $rootScope.user.blinkRatio);
                 return point
             })
-            // var myChart = new Chart({})
-        var scatterChart = new Chart(ctx, {
+        let scatterChart = new Chart(ctx, {
             type: 'line',
             data: {
                 datasets: [{

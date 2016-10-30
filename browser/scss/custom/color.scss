@@ -24,6 +24,11 @@ $bl-warn : #F5403A;
 	color: red;
 }
 
+.bl-warn {
+	background: $bl-warn;
+	color: white;
+}
+
 .bl-primary {
 	color: rgb(255,255,255);
 	background-color: rgb(33,150,243);

@@ -1,4 +1,4 @@
-<div>
+<div id="dialog">
 		<h3 class="p-title p-title-no-margin">
 			<span>Tips and Tricks</span>
 		</h3>
@@ -29,8 +29,11 @@
 						<h2><i class="fa fa-cog bl-primary-text"></i>Calibration</h2>
 						<div>
 						<!-- Para -->
-						<p>While calibrating, have face pointing towards webcam. Do not over express*** blinks. After calibration, keep head the same distance from webcam.</p>
+						<!-- <p>While calibrating, have face pointing towards webcam. Do not over express*** blinks. After calibration, keep head the same distance from webcam.</p> -->
 						</div>
+						<h3>Center face in webcam using the green tracking overlay on the left</h3>
+						<p>The tracking data uses various point along the green tracking face to gather eye data</p> 
+						
 					</div>
 					<!-- Tab Pane -->
 					<div role="tabpanel" class="tab-pane fade" id="block-two">
@@ -136,6 +139,9 @@
 
 
 <md-button class="md-primary" ng-click="switchTab()">Switch</md-button>
+
+
+<md-button class="md-primary" ng-click="show()">Show</md-button>
 
 
 

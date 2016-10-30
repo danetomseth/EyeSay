@@ -1,26 +1,23 @@
-<!-- 
-<div class="graph-container bl-center" layout="row">
-        <div id="live-data" style="width: 500px; height: 250px; padding: 0px; position: relative;" ng-show="graphReady"></div>
-        <img src="assets/ring.gif" alt="HTML5 Icon" style="width:64px;height:64px;" ng-if="!graphReady">
-    </div> -->
-
-
-
-
-
-    <div layout="row" layout-margin class="bl-vw-100" ng-show="graphReady">   
-        <div class="bl-graph-legend">
-            <i class="fa fa-percent bl-primary-text fa-2x"></i>
-            <p>Blink Zero</p>
-            <i class="fa fa-video-camera bl-warn-text fa-2x"></i>
-            <p>Live Data</p>
+<div layout="row" layout-margin class="bl-vw-100" ng-show="graphReady">   
+        <div layout="column" class="bl-graph-legend" bl-size="150x" abs="true">
+            <div layout="row" layout-padding layout-align="start center">
+                <div bl-size="20x10" abs="true" class="bl-primary bl-graph-lengend"></div>
+                <p>Current Eye Reading</p>
+                <md-tooltip>Live reading of eye measurement</md-tooltip>
+            </div>
+            
+            <div layout="row" layout-padding layout-align="start center">
+                <div bl-size="20x10" abs="true" class="bl-warn bl-graph-lengend"></div>
+                <p>Blink Detection Line</p>
+                <md-tooltip>When live reading falls below, the app registers a blink</md-tooltip>
+            </div>
         </div>
         <div flex>
-           <div class="graph-container bl-center" layout="row">
+         <div class="graph-container bl-center" layout="row">
             <div id="live-data" style="width: 500px; height: 250px; padding: 0px; position: relative;" ></div>
-    </div>
         </div>
     </div>
-    <img src="assets/ring.gif" alt="HTML5 Icon" style="width:64px;height:64px;" ng-if="!graphReady">
+</div>
+<img src="assets/ring.gif" alt="HTML5 Icon" style="width:64px;height:64px;" ng-if="!graphReady">
 
 

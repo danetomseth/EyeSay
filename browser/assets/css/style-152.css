@@ -24,8 +24,9 @@
 	z-index: 1;
 }
 .ui-152 .ui-item{
-	margin:30px 0px;
-	max-width:500px;
+	/*margin:30px 0px;*/
+	margin-bottom: 30px;
+	max-width:450px;
 }
 .ui-152 .ui-item i{
 	position: relative;
