@@ -11,19 +11,37 @@ router.get('/', (req, res) => {  // get all
 
 // ensure authenticated
 router.post('/', (req, res) => { // create new
-    console.log("posting", req.body);
     BlinkData.create(req.body)
-    .then(data => {
-        console.log("data recorded", data);
+    .then(function(blinkData, err) {
+            if (err) {
+                return next(err)
+            }
+            else {
+                res.send({success: 'true'})
+            };
+        })
+    .catch(e => {
+        console.log("error caught: ", e);
+        next(e);
     })
    
 });
 
 // ensure owner or admin is viewing
-router.get('/:id', (req, res) => { // get one...outside of context of thread
+router.get('/:id', (req, res, next) => { // get one...outside of context of thread
     BlinkData.findById(req.params.id)
-    .then(BlinkData => {
-            res.send(BlinkData)
+    .then(function(blinkData, err) {
+            if (err) {
+                return next(err)
+            }
+            else {
+                console.log("success", blinkData);
+                res.send({success: 'true'})
+            };
+        })
+    .catch(e => {
+        console.log("error caught: ", e);
+        next(e);
     })
 });
 

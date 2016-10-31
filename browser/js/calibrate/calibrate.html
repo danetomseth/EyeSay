@@ -65,9 +65,9 @@
 			<h2 class="md-title text-center bl-grey">Example Calibration Graph</h2> 	 
 			<img src="/assets/graph-example.png" height="auto" alt="" class="bl-vw-100">
 			<div>
-				<h2 class="md-subhead text-center"><span ng-hide="showInstructions">New User?</span> <md-button class="md-primary" ng-hide="showInstructions" ng-click="show()">Click Here For More Instructions</md-button><md-button class="md-warn" ng-show="showInstructions" ng-click="show()">Hide Instructions</md-button></h2>
+			<!-- 	<h2 class="md-subhead text-center"><span ng-hide="showInstructions">New User?</span> <md-button class="md-primary" ng-hide="showInstructions" ng-click="show()">Click Here For More Instructions</md-button><md-button class="md-warn" ng-show="showInstructions" ng-click="show()">Hide Instructions</md-button></h2> -->
 
-
+				<h2 class="md-subhead text-center">New User? <md-button class="md-primary" ng-hide="showInstructions" ui-sref="instructions">Click Here For More Instructions</md-button></h2>
 
 			</div>
 			<div>
@@ -206,7 +206,6 @@
 						<li>With eyes open, make sure the current eye reading <span class="bl-text-primary">(blue line)</span> is above the red threshold line</li>
 						<li>Blink and watch the <span class="bl-text-primary">blue line</span> drop</li>
 						<li>Note: If blinks aren't being detected, re-calibrate</li>
-						<!-- <li>making sure it drops below the red threshold line.</li> -->
 					</ul>
 				</div>
 			</div>

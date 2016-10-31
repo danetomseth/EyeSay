@@ -15,8 +15,7 @@
 					<ul class="nav nav-tabs" role="tablist">
 						<li class="active"><a href="#block-one"  data-toggle="tab"><i class="fa fa-cog"></i><span>Calibration</span></a></li>
 						<li><a href="#block-two" data-toggle="tab"><i class="fa fa-keyboard-o"></i><span>Typing</span></a></li>
-						<li><a href="#block-three"  data-toggle="tab"><i class="fa fa-video-camera"></i><span>Webcam</span></a></li>
-						<li><a href="#block-four"  data-toggle="tab"><i class="fa fa-eye"></i><span>Tracking</span></a></li>
+						<li><a href="#block-three"  data-toggle="tab"><i class="fa fa-eye"></i><span>Tracking</span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -49,18 +48,13 @@
 					</div>
 					<!-- Tab Pane -->
 					<div role="tabpanel" class="tab-pane fade" id="block-three">
-						<h2><i class="fa fa-video-camera bl-primary-text"></i>Webcam</h2>
+						<h2><i class="fa fa-eye bl-primary-text"></i>Tracking</h2>
 						<h3>Fitting Tracking To Face</h3>
 						<p>Make sure your face in centered in the green box and your head is level with your computer. If you're having trouble, try moving slowly towards, then away from your webcam.</p> 
 						<h3>Keep Face Inside Green Tracking Box</h3>
 						<p>Tracking is only active within the webcam green box overlay</p>
 						<h3>Remain Still</h3>
 						<p>Eye will Work best if you stay still after completing calibration</p>
-					</div>
-					<!-- Tab Pane -->
-					<div role="tabpanel" class="tab-pane fade" id="block-four">
-						<h2><i class="fa fa-eye bl-primary-text"></i>Tracking</h2>
-						<p>Curabitur imperdiet, ligula vitae dignissim venenatis, nisl lorem vulputate neque, id dictum quam magna ut leo. Donec at augue velit. Ut sit amet sem ex. Proin lectus ex, porttitor ut vulputate a, ultrices vel ipsum. Integer vitae sagittis massa. Maecenas porta magna nec libero convallis facilisis. Nam sagittis eros quis nulla.</p>
 					</div>
 				</div>
 			</div>
@@ -69,114 +63,11 @@
 </div><!-- /UI X -->
 </div><!-- /Container -->
 
-<div layout="column" flex layout-align="center" layout-margin ng-show="switch">
-	<div>
-		<h3 class="p-title p-title-no-margin">
-			<span>Tips and Tricks</span>
-		</h3>
-	</div>
-	<div layout="row" layout-align="center">
-		<div class="content-box" flex="85">
-			<h3 class="content-box-header bl-primary">
-				Webcam Tracking
-			</h3>
-			<div class="content-box-wrapper">
-				<div  layout="row" layout-padding layout-margin layout-align="center start">
-					
-					<div flex class="bl-content-box">
-						<h4>Fitting Tracking To Face</h4>
-						<p>Make sure your face in centered in the green box and your head is level with your computer.</p> 
-						<p>If you're having trouble, try moving slowly towards, then away from your webcam.</p>
-						<h4>Keep Face Inside Green Tracking Box</h4>
-						<p>Tracking is only active within the webcam green box overlay</p>
-						<h4>Remain Still</h4>
-						<p>Eye will Work best if you stay still after completing calibration</p>
-					</div>
-					<div flex="30" md-whiteframe="4dp" class="bl-center">
-						<img src="/assets/findTracking.gif" height="auto" alt="" class="bl-vw-100">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div layout="row" layout-align="center">
-		<div class="content-box" flex="40">
-			<h3 class="content-box-header bl-primary">
-				Typing
-			</h3>
-			<div class="content-box-wrapper">
-				<div flex class="bl-content-box">
-					<h3>Selecting Letters</h3>
-					<p>1. Blink To Select A Row</p>
-					<p>3. Blink Again To Select A Letter</p>
-					<p>Whatever area is shaded is the current selection</p>
-					<h4>The Timing Takes Practice</h4>
-				</div>
-			</div>
-		</div>
-		<div flex="5"></div>
-		<div class="content-box" flex="40">
-			<h3 class="content-box-header bl-accent">
-				Calibration
-			</h3>
-			<div class="content-box-wrapper">
-				<div flex class="bl-content-box">
-					<h3>Selecting Letters</h3>
-					<p>1. Blink To Select A Row</p>
-					<p>3. Blink Again To Select A Letter</p>
-					<p>Whatever area is shaded is the current selection</p>
-					<h4>The Timing Takes Practice</h4>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	
-
-
-
-</div>
-
-
-<md-button class="md-primary" ng-click="switchTab()">Switch</md-button>
-
-
-<md-button class="md-primary" ng-click="show()">Show</md-button>
 
 
 
 
 
-<!-- <div flex layout="column" layout-padding layout="center center">
-	<div>
-		<h3 class="p-title p-title-no-margin">
-			<span>View Live Tracking</span>
-		</h3>
-	</div>
-	<div layout="row">
-		<div flex class="bl-center" md-whiteframe="4dp" layout-padding>
-			<h2 class="md-headline">Live Tracking Data</h2> 	 
-			<bl-graph ng-cloak></bl-graph>
-		</div>
-		<div layout="column" layout-margin layout-padding flex>
-			<div class="icon-box icon-box-left" >
-				<i class="icon-alt font-secondary glyph-icon fa-cog" ></i>
-				<div class="icon-wrapper">
-					<h5 class="icon-title ">Practice</h5>
-					<ul class="icon-content ">
-						<li>When you eye is open, make sure the current eye reading is above the threshold line.</li>
-						<li>Try blinking and watch the eye reading drop. Make sure it drops below the threshold line, then rises back above when your eyes are open.</li>
-					</ul>
-				</div>
-			</div>
-			<div layout="row" layout-padding layout-align="center">
-				<md-button ui-sref="tutorial" class="md-primary">Tutorial</md-button>
-				<md-button ui-sref="calibrate" class="md-warn">Re-calibrate</md-button>
-			</div>
-
-		</div>
-	</div>
-</div> -->
 
 
 

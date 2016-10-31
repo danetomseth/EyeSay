@@ -13,7 +13,6 @@ core.factory('WebcamFactory', function($rootScope, $state, $timeout, DialogFacto
     let errorCallback = function(e) {
         console.log('Error connecting to source!', e);
         $timeout(() => {
-                console.log("retrying");
                 retryWebcam()
             }, 1000)
             // DialogFactory.webcamFail();
@@ -57,7 +56,6 @@ core.factory('WebcamFactory', function($rootScope, $state, $timeout, DialogFacto
                 gUM({
                     video: true
                 }, function(stream) {
-                    console.log("webcam started");
                     $rootScope.videoStream = stream;
                     videoStream = stream;
                     $rootScope.videoActive = true;

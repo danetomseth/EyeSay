@@ -17,18 +17,15 @@ core.factory('TrackingFactory', function($rootScope, DialogFactory, $interval) {
         tracker = new clm.tracker({
             searchWindow: 5
         });
-        // tracker = new clm.tracker;
         tracker.init(pModel);
         canvas = canvasElem;
         context = canvas.getContext("2d");
 
 
-        //helps remove the error when tracker first loads
         // Avoids cannot get response model on point XX
 
         setTimeout(function() {
             tracker.setResponseMode("blend", ["raw", "sobel"]);
-            console.log(tracker.start(video, boundingBox));
             boundingBox ? tracker.start(video, boundingBox) : tracker.start(video);
             $rootScope.$broadcast("trackerInitialized");
             $rootScope.trackerInitialized = true;

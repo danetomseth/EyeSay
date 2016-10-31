@@ -15,7 +15,6 @@ core.directive('blSidebarWebcam', function($rootScope, WebcamFactory, $timeout) 
 
 
             let video = document.getElementById('sidebar-webcam');
-            // let canvas = document.getElementById("sidebar-canvas");
 
             scope.webcamCss = {
                 'top': positionSetHeight,
@@ -35,7 +34,6 @@ core.directive('blSidebarWebcam', function($rootScope, WebcamFactory, $timeout) 
 
             scope.$watch('$viewContentLoaded', function() {
                 if($rootScope.isChrome) {
-                    console.log("start from sidebar");
                     WebcamFactory.startWebcam(video);
                 }
                 

@@ -3,7 +3,7 @@ core.factory('ErrorFactory', function($log, $mdBottomSheet) {
 
     function displayError(exception) {
         return $mdBottomSheet.show({
-            templateUrl: 'js/common/templates/error-message.html',
+            templateUrl: '/js/common/templates/error-message.html',
             clickOutsideToClose: true,
             locals: {
             	message: exception
