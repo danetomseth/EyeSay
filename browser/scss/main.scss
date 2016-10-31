@@ -29,6 +29,12 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 $darkPrimary: rgb(21,101,192);
 
 
+$bl-primary: rgb(33,150,243);
+
+$bl-accent: rgb(104,204,144);
+$bl-warn : #F5403A;
+
+
 $purple: (
  #853175,
  #59214F,
@@ -141,6 +147,6 @@ md-icon.btn-1 {
 
 
 
-@import 'custom/_main';
 @import 'external/_main';
+@import 'custom/_main';
 

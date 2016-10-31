@@ -20,7 +20,6 @@ let checkValidId = (id, next) => {
             throw new Error("Invalid User Id");
         }
     } catch (err) {
-        console.log("caught Error");
         next(err)
     }
 }
@@ -76,5 +75,9 @@ router.put('/update/:id', ensure.authenticated, ensure.selfOrAdmin, (req, res, n
         .then(updatedUser => {
             res.json(updatedUser)
         })
+        .catch(err => {
+            console.log("error saving!", err);
+            next(err)
+        }) 
 
 });

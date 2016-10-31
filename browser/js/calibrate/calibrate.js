@@ -85,21 +85,12 @@ core.controller('CalibrateCtrl', function($scope, CalibrateFactory, $state, $roo
         return CalibrateFactory.closedCalibrationComplete
     }, function(newVal, oldVal) {
         if (newVal === true) {
-            // let action = () => {
-            //     $state.go("tutorial");
-            // }
-            // let message = {
-            //     title: "Calibration Complete",
-            //     listContent: ["Proceed to tuorial"]
-            // }
-            // DialogFactory.promptMessage(message, action)
             $scope.calibrating.closed = false;
             $scope.calibrationComplete = true;
-            // SettingsFactory.createGraph();
         }
     });
 
-     let styleDelay = () => {
+    let styleDelay = () => {
         $timeout(() => {
             $scope.blinkDetected = false;
         }, 500)
@@ -119,12 +110,16 @@ core.controller('CalibrateCtrl', function($scope, CalibrateFactory, $state, $roo
     $rootScope.$on('singleBlink', () => {
         if (ActionFactory.isActive('calibrate')) {
             $scope.blinkDetected = true;
-            console.log("blink!!");
             styleDelay()
         }
     });
 
-
+    $scope.$on(
+        "$destroy",
+        function handleDestroyEvent() {
+            CalibrateFactory.reset();
+        }
+    );
 
 
 });

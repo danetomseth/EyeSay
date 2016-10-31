@@ -5,6 +5,7 @@ core.factory('TicTacFactory', function($state, $timeout, $interval, DialogFactor
     tic.gameBoard = ["", "", "", "", "", "", "", "", ""] //initial board state
     tic.gameFinished = false;
     tic.computerChoosing = false;
+    tic.choiceAvailable = true;
 
     let availableChoices = [0, 1, 2, 3, 4, 5, 6, 7, 8]; // squares computer can still choose
 
@@ -50,6 +51,7 @@ core.factory('TicTacFactory', function($state, $timeout, $interval, DialogFactor
 
 
     tic.userChoice = () => {
+        tic.choiceAvailable = false;
         tic.gameBoard[tic.currentBox] = "X";
         let elemToSlice = availableChoices.indexOf(tic.currentBox);
         availableChoices.splice(elemToSlice, 1);
@@ -84,9 +86,9 @@ core.factory('TicTacFactory', function($state, $timeout, $interval, DialogFactor
         $timeout(() => {
             tic.computerChoosing = false;
             if (tic.checkForWin("O")) {
-                console.log("computer won");
                 tic.finishGame("O");
             } else {
+                tic.choiceAvailable = true;
                 boxDelay = true;
                 tic.moveBox();
                 changeBox();

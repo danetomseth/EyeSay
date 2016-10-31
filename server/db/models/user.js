@@ -97,7 +97,6 @@ schema.methods.addFriend = function(id) {
 
 
 schema.methods.update = (user, updatedUser) => {
-    console.log('updated', updatedUser);
     user.cursorDelay = updatedUser.cursorDelay;
     user.blinkZero = updatedUser.blinkZero;
     user.blinkRatio = updatedUser.blinkRatio;

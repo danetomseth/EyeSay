@@ -22,18 +22,11 @@ core.directive('blGraph', ($rootScope, PositionFactory, TrackingFactory) => {
                 if (data.length > 0)
                     data = data.slice(1);
 
-                // Do a random walk
-
                 while (data.length < totalPoints) {
                     let y;
-
-                    var prev = data.length > 0 ? data[data.length - 1] : 50;
-
                     if ($rootScope.trackerInitialized) {
                         y = PositionFactory.eyeValue;
-                        // y = PositionFactory.getBlinkValue(TrackingFactory.getPositions());
                     } else {
-                        console.log("waiting on values");
                         y = 50;
                     }
 
@@ -101,14 +94,6 @@ core.directive('blGraph', ($rootScope, PositionFactory, TrackingFactory) => {
                         lines: {
                             show: true,
                             lineWidth: 2
-                                // fill: 0.5,
-                                // fillColor: {
-                                //     colors: [{
-                                //         opacity: 0.5
-                                //     }, {
-                                //         opacity: 0.08
-                                //     }]
-                                // }
                         },
                         shadowSize: 0 // Drawing is faster without shadows
                     },
@@ -140,10 +125,6 @@ core.directive('blGraph', ($rootScope, PositionFactory, TrackingFactory) => {
                     },
                     colors: ['rgb(33,150,243)', '#F5403A']
 
-
-                    //warn rgb(255,87,34)
-                    //primary rgb(33,150,243)
-                    //secondary rgb(105,240,174)
                 });
                 update();
             }

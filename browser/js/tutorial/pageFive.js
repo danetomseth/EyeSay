@@ -43,7 +43,7 @@ core.directive("blTutorialFive", ($rootScope, ActionFactory, $timeout, $interval
 
             $rootScope.$on('singleBlink', () => {
                 if (scope.selectedTab === 4 && !TicTacFactory.gameFinished && ActionFactory.isActive('tutorial')) {
-                    if(scope.currentBox) {
+                    if(TicTacFactory.choiceAvailable) {
                         TicTacFactory.userChoice();
                     }
                 }
