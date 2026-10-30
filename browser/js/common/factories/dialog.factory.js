@@ -1,152 +1,68 @@
-core.factory('DialogFactory', function($http, $mdDialog) {
-    // let container = angular.element(document.querySelector('#dialog'))[0];
+core.factory('DialogFactory', function($mdDialog, $rootScope) {
+    const parent = () => angular.element(document.querySelector('#main-content'));
 
+    const simple = (templateUrl, onClose) => $mdDialog.show({
+        parent: parent(),
+        templateUrl,
+        controller: function($scope) {
+            $scope.closeDialog = () => {
+                $mdDialog.hide();
+                if (onClose) onClose();
+            };
+        },
+    }).catch(angular.noop);
 
-    let showDialog = () => {
-        var parentEl = angular.element(document.querySelector('#main-content'));
-        $mdDialog.show({
-            parent: parentEl,
-            controller: 'TutorialCtrl',
-            scope: '=',
-            title: "Hello",
-            templateUrl: 'js/common/templates/dialog.html'
-        });
-    }
-
-    let showHint = (scope) => {
-        var parentEl = angular.element(document.querySelector('#main-content'));
-        $mdDialog.show({
-            parent: parentEl,
-            controller: ($scope) => {
-                $scope.closeDialog = () => {
-                    $mdDialog.hide();
-                }
+    // Dialogs the person using the app (not just a caregiver) needs to get past
+    // can be dismissed with a blink as well as a click.
+    const blinkDismissable = (options, onClose) => {
+        let closed = false;
+        const close = () => {
+            if (closed) return;
+            closed = true;
+            $mdDialog.hide();
+            if (onClose) onClose();
+        };
+        // Ignore blinks for a moment so the blink that opened it doesn't close it.
+        let armed = false;
+        const armTimer = setTimeout(() => { armed = true; }, 1200);
+        const off = $rootScope.$on('singleBlink', () => { if (armed) close(); });
+        return $mdDialog.show(angular.extend({
+            parent: parent(),
+            onRemoving: () => { off(); clearTimeout(armTimer); closed = true; },
+        }, options, {
+            controller: function($scope) {
+                $scope.closeDialog = close;
+                $scope.blinkToClose = true;
+                if (options.locals) angular.extend($scope, options.locals);
             },
-            title: "Hello",
-            templateUrl: 'js/common/templates/hint.html'
-        });
-    }
-
-    let checkTracking = () => {
-        var parentEl = angular.element(document.querySelector('#main-content'));
-        $mdDialog.show({
-            parent: parentEl,
-            controller: ($scope) => {
-                $scope.closeDialog = () => {
-                    $mdDialog.hide();
-                }
-            },
-            templateUrl: 'js/common/templates/check-tracking.html'
-        });
-    }
-
-    let noConvergance = () => {
-        var parentEl = angular.element(document.querySelector('#main-content'));
-        $mdDialog.show({
-            parent: parentEl,
-            focusOnOpen: true,
-            controller: ($scope, TypeFactory) => {
-                $scope.closeDialog = () => {
-                    $mdDialog.hide();
-                }
-            },
-            templateUrl: 'js/common/templates/check-tracking.html'
-        });
-    }
-    let closedInstructions = () => {
-        var parentEl = angular.element(document.querySelector('#main-content'));
-        $mdDialog.show({
-            parent: parentEl,
-            controller: ($scope, CalibrateFactory) => {
-                $scope.closeDialog = () => {
-                    $mdDialog.hide();
-                    CalibrateFactory.runClosedCalibration();
-                }
-            },
-            templateUrl: 'js/common/templates/closed-instructions.html'
-        });
-    }
-
-    let webcamFail = () => {
-         var parentEl = angular.element(document.querySelector('#main-content'));
-        $mdDialog.show({
-            parent: parentEl,
-            controller: ($scope) => {
-                $scope.closeDialog = () => {
-                    $mdDialog.hide();
-                }
-            },
-            templateUrl: 'js/common/templates/webcam-fail.html'
-        });
-    }
-
-
-
-    let openInstructions = () => {
-        var parentEl = angular.element(document.querySelector('#main-content'));
-        $mdDialog.show({
-            parent: parentEl,
-            controller: ($scope, CalibrateFactory) => {
-                $scope.closeDialog = () => {
-                    $mdDialog.hide();
-                    CalibrateFactory.runOpenCalibration();
-                }
-            },
-            templateUrl: 'js/common/templates/open-instructions.html'
-        });
-    }
-
+        })).catch(angular.noop);
+    };
 
     return {
-        message: () => {
-            showDialog();
-        },
-        hint: () => {
-            showHint();
-        },
-        hide: () => {
-            $mdDialog.hide();
-        },
-        promptMessage: (text, func) => {
-            let parentEl = angular.element(document.querySelector('#main-content'));
-            $mdDialog.show({
-                parent: parentEl,
-                locals: {
-                    dialogTitle: text.title,
-                    dialogList: text.listContent,
-                    action: func
-                },
-                controller: ($scope, dialogList, dialogTitle, action) => {
-                    $scope.title = dialogTitle;
-                    $scope.list = dialogList;
-                    $scope.closeDialog = () => {
-                        if(action) {
-                            action();
-                        };
-                        $mdDialog.hide();
-                    }
-                },
-                templateUrl: 'js/common/templates/custom-message.html'
-            });
-        },
-        checkTracking: () => {
-            checkTracking();
-        },
-        openInstructions: () => {
-            openInstructions();
-        },
-        closedInstructions: () => {
-            closedInstructions();
-        },
-        noConvergance: () => {
-            noConvergance();
-        },
-        webcamFail: webcamFail
-
-    }
-
-
-
+        hide: () => $mdDialog.hide(),
+        hint: () => simple('js/common/templates/hint.html'),
+        checkTracking: () => simple('js/common/templates/check-tracking.html'),
+        noConvergance: () => simple('js/common/templates/check-tracking.html'),
+        openInstructions: (onClose) => simple('js/common/templates/open-instructions.html', onClose),
+        closedInstructions: (onClose) => simple('js/common/templates/closed-instructions.html', onClose),
+        webcamFail: (message, retry) => $mdDialog.show({
+            parent: parent(),
+            templateUrl: 'js/common/templates/webcam-fail.html',
+            locals: { message },
+            controller: function($scope, message) {
+                $scope.message = message;
+                $scope.closeDialog = () => $mdDialog.hide();
+                $scope.retry = () => {
+                    $mdDialog.hide();
+                    if (retry) retry();
+                };
+            },
+        }).catch(angular.noop),
+        // text: { title, listContent: [] }
+        promptMessage: (text, action) => blinkDismissable({
+            templateUrl: 'js/common/templates/custom-message.html',
+            locals: { title: text.title, list: text.listContent },
+        }, action),
+        typeInstructions: (onClose) => blinkDismissable({ templateUrl: 'js/type/dialog.html' }, onClose),
+    };
 });
-
-

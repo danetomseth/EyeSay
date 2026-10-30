@@ -1,4 +1,4 @@
-core.config(function($stateProvider){
+core.config(function($stateProvider) {
     $stateProvider.state('signup', {
         url: '/signup',
         controller: 'SignupCtrl',
@@ -6,26 +6,12 @@ core.config(function($stateProvider){
     });
 });
 
-
-core.controller('SignupCtrl', function($state, $scope, Session, AuthService, SidebarFactory, ErrorFactory){
-    $scope.signup = {};
+core.controller('SignupCtrl', function($state, $scope, AuthService, ErrorFactory) {
     $scope.user = {};
-    $scope.error = null;
 
     $scope.submit = () => {
-        $scope.error = null;
-        $scope.user.blinkZero = 42.00;
-        $scope.user.blinkRatio = 0.68;
-
         AuthService.signup($scope.user)
-        .then((user) => {
-            $state.go('calibrate')
-        })
-        .catch(function(ex) {
-            // let error = new Error
-            ErrorFactory.error(ex.message, ex)
-            .then(res => {
-            })
-        });
-    }
+            .then(() => $state.go('calibrate'))
+            .catch((ex) => ErrorFactory.error(ex.message));
+    };
 });

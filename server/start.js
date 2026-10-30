@@ -1,16 +1,41 @@
-/*
+'use strict';
+const http = require('http');
+const mongoose = require('mongoose');
+const config = require('./config');
+const createApp = require('./app');
 
- ES6 by default! Using http://babeljs.io
+async function main() {
+    let sessionStore;
+    const accounts = Boolean(config.databaseUri);
 
- Our actual application code begins inside of
- server/main.js, but the process should be started
- from this file in order to enable ES6 translation.
+    if (accounts) {
+        await mongoose.connect(config.databaseUri);
+        const { MongoStore } = require('connect-mongo');
+        sessionStore = MongoStore.create({ client: mongoose.connection.getClient(), touchAfter: 24 * 3600 });
+        console.log('MongoDB connected — accounts enabled');
+    } else {
+        console.log('No MONGODB_URI set — running in guest-only mode (settings are saved in the browser)');
+    }
 
- There is no boilerplate ES6 code in our application
- so if you choose not to use any ES6 features, you can
- start your application from main.js.
+    const app = createApp({
+        production: config.production,
+        sessionSecret: config.sessionSecret,
+        accounts,
+        sessionStore,
+    });
 
-*/
+    const server = http.createServer(app);
+    server.listen(config.port, () => console.log(`(Eye)Say listening on http://localhost:${config.port}`));
 
-require('babel-register');
-require('./main');
+    const shutdown = () => {
+        server.close(() => mongoose.disconnect().finally(() => process.exit(0)));
+        setTimeout(() => process.exit(0), 5000).unref();
+    };
+    process.on('SIGTERM', shutdown);
+    process.on('SIGINT', shutdown);
+}
+
+main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+});

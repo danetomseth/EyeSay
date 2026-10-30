@@ -1,55 +1,28 @@
-core.directive("blTutorialFive", ($rootScope, ActionFactory, $timeout, $interval, DialogFactory, TrackingFactory, TicTacFactory, $mdDialog) => {
+core.directive('blTutorialFive', (ActionFactory, DialogFactory, TicTacFactory, onRoot) => {
     return {
         restrict: 'E',
         templateUrl: 'js/tutorial/pageFive.html',
-        link: (scope, elem, attr) => {
-            let startGame = () => {
-                TicTacFactory.startGame();
-            }
+        link: (scope) => {
+            scope.tic = TicTacFactory;
+            TicTacFactory.resetGame();
 
-            let message = {
-                    title: "Tic-Tac-Toe",
-                    listContent: ["1. The goal is to practice blink selection", "2. The highlighted box is the current selection", "3. Blink to put your letter in the highlighted box"]
-                }
-            DialogFactory.promptMessage(message, startGame) //initial prompt message to start game
+            DialogFactory.promptMessage({
+                title: 'Tic-Tac-Toe',
+                listContent: [
+                    '1. The goal is to practice blink selection',
+                    '2. The highlighted box is the current selection',
+                    '3. Blink to put your letter in the highlighted box'
+                ]
+            }, TicTacFactory.startGame);
 
-
-          
-
-            scope.gameBoard = TicTacFactory.gameBoard;
-            scope.computerChoosing = TicTacFactory.computerChoosing;
-
-            scope.$watch(() => {
-                return TicTacFactory.currentBox
-            }, (newVal) => {
-                scope.currentBox = newVal;
-            })
-
-            scope.showLoading = TicTacFactory.computerChoosing;
-
-            scope.$watchCollection('gameBoard', (newVal) => {
-                scope.gameBoard = newVal;
-            })
-
-
-            
-
-            scope.$watch(() => {
-                return TicTacFactory.computerChoosing
-            }, (newVal) => {
-                scope.computerChoosing = newVal;
-            })
-
-
-            $rootScope.$on('singleBlink', () => {
-                if (scope.selectedTab === 4 && !TicTacFactory.gameFinished && ActionFactory.isActive('tutorial')) {
-                    if(TicTacFactory.choiceAvailable) {
-                        TicTacFactory.userChoice();
-                    }
+            onRoot(scope, 'singleBlink', () => {
+                if (scope.selectedTab === 4 && ActionFactory.isActive('tutorial') &&
+                    !TicTacFactory.gameFinished && TicTacFactory.choiceAvailable && TicTacFactory.currentBox !== null) {
+                    TicTacFactory.userChoice();
                 }
             });
 
+            scope.$on('$destroy', TicTacFactory.resetGame);
         }
-
-    }
+    };
 });

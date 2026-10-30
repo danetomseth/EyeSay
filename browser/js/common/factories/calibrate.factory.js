@@ -1,182 +1,91 @@
-core.factory('CalibrateFactory', function($rootScope, $state, $timeout, ConstantsFactory, SettingsFactory, TrackingFactory, PositionFactory, ActionFactory) {
-    let service = {};
-    
-    let blinkZero = 0;
-    let blinkRatio = 0;
-    let maxInit = [];
-    let minInit = [];
-    let maxAvg = 0;
-    let minAvg = 0;
-    
-    let count = 0;
+// Two-phase calibration:
+//   open   – sample eye openness with eyes open → blinkZero (trimmed mean)
+//   closed – user blinks repeatedly; frames well below blinkZero are blink samples
+//            → blinkRatio = mean(blink samples) / blinkZero
+core.factory('CalibrateFactory', function($rootScope, ConstantsFactory, TimerFactory, ActionFactory) {
+    const OPEN_SAMPLES = 101;
+    const OPEN_SAMPLE_MS = 25;
+    const CLOSED_SAMPLES = 100;
+    const CLOSED_WARMUP_FRAMES = 50; // ignore the first frames after the dialog closes
+    const PROFILE_MAX = 400;
 
-    service.currentValue = 0;
-    service.blinkCounts = [0, 0];
-
-    service.blinkStatus = [{
-        'opacity': '0.3'
-    }, {
-        'opacity': '0.3'
-    }, {
-        'opacity': '0.3'
-    }];
-
-    service.calibrationSet = false;
-    service.startCalibration = false;
-
-    service.openCalibrationComplete = false;
-    service.openCount = 0;
-
-    service.closedCalibrationComplete = false;
-    service.closedCount = 0;
-
+    const service = {};
+    let openSamples = [];
+    let closedSamples = [];
     let blinkProfile = [];
+    let maxAvg = 0;
+    let frames = 0;
+    let lastSample = 0;
+    let unsubscribe = null;
 
-
-    let resetCalValues = () => {
-        service.openCalibrationComplete = false;
-        service.openCount = 0;
-        service.closedCalibrationComplete = false;
-        service.closedCount = 0;
-        minInit = [];
-        maxInit = [];
-        maxAvg = 0;
-        minAvg = 0;
-        count = 0;
-    }
-
-
-    let getAvgMax = (arr) => {
-        arr.sort(function compareNumbers(a, b) {
-            return a - b;
-        })
-        let numCount = 0;
-        for (let i = 20; i <= 90; i++) {
-            numCount++;
-            maxAvg += arr[i];
-        }
-
-
-        maxAvg = (maxAvg / numCount);
-    }
-
-    let getAvgMin = (arr) => {
-        arr.sort(function compareNumbers(a, b) {
-            return a - b;
-        })
-        let numCount = 0;
-        for (let i = 20; i <= arr.length - 1; i++) {
-            numCount++;
-            minAvg += arr[i];
-        }
-        minAvg = (minAvg / numCount);
-    }
-
-
-    let checkMin = (total) => {
-        if (total < (maxAvg * 0.92)) {
-            minInit.push(total);
-        }
-    }
-
-
-
-    service.openCalibration = (total) => {
-        count++;
-
-        if (maxInit.length < 100) {
-            service.openCount = (maxInit.length / 100) * 100;
-        } else {
-            service.openCount = 100
-        }
-        if (maxInit.length > 100) {
-            count = 0;
-            service.setOpenValue();
-        }
-
-        maxInit.push(total);
-    }
-
-    service.closedCalibration = (total) => {
-        let dataPoint = {};
-        dataPoint.x = blinkProfile.length + 1;
-        dataPoint.y = total;
-        if (count >= 50) {
-            blinkProfile.push(dataPoint);
-        }
-
-        count++;
-
-
-        checkMin(total);
-        if (minInit.length < 100) {
-            service.closedCount = minInit.length;
-        } else {
-            service.closedCount = 100
-        }
-
-        if (minInit.length >= 100) {
-            count = 0;
-            service.setClosedValue();
-        }
-    }
-
-    service.setOpenValue = () => {
-     
-        service.openCalibrationComplete = true;
-        getAvgMax(maxInit);
-    }
-
-    service.setClosedValue = () => {
-        getAvgMin(minInit);
-        service.closedCalibrationComplete = true;
-        setValues();
-    }
-
-    service.runOpenCalibration = () => {
-        let positions = TrackingFactory.getPositions();
-        if (positions) {
-            service.openCalibration(PositionFactory.getBlinkValue(positions));
-        }
-        if (!service.openCalibrationComplete && ActionFactory.isActive('calibrate')) {
-            $timeout(service.runOpenCalibration, 25);
-        }
-    }
-
-    service.runClosedCalibration = () => {
-        let positions = TrackingFactory.getPositions();
-        if (positions) {
-            service.closedCalibration(PositionFactory.getBlinkValue(positions));
-        }
-        if (!service.closedCalibrationComplete && ActionFactory.isActive('calibrate')) {
-            requestAnimationFrame(service.runClosedCalibration);
-        }
-    }
-
+    const stopSampling = () => {
+        if (unsubscribe) unsubscribe();
+        unsubscribe = null;
+    };
 
     service.reset = () => {
+        stopSampling();
         service.openCalibrationComplete = false;
-        service.openCount = 0;
         service.closedCalibrationComplete = false;
+        service.calibrationSet = false;
+        service.openCount = 0;
         service.closedCount = 0;
-        minInit = [];
-        maxInit = [];
+        openSamples = [];
+        closedSamples = [];
+        blinkProfile = [];
         maxAvg = 0;
-        minAvg = 0;
-        count = 0;
-    }
+        frames = 0;
+        lastSample = 0;
+    };
+    service.reset();
 
+    const sample = (handler) => {
+        stopSampling();
+        $rootScope.user.blinkActive = true; // calibration needs the tracker running
+        unsubscribe = TimerFactory.onFrame((value, now) => {
+            if (!ActionFactory.isActive('calibrate')) {
+                stopSampling();
+                return false;
+            }
+            return handler(value, now);
+        });
+    };
 
-    //once calibration arrays are full, set values
-    let setValues = function() {
+    service.runOpenCalibration = () => {
+        sample((value, now) => {
+            if (now - lastSample < OPEN_SAMPLE_MS) return false;
+            lastSample = now;
+            openSamples.push(value);
+            service.openCount = Math.min(100, Math.round((openSamples.length / OPEN_SAMPLES) * 100));
+            if (openSamples.length >= OPEN_SAMPLES) {
+                stopSampling();
+                maxAvg = EyeSayLib.trimmedMean(openSamples, 0.2, 0.9);
+                service.openCalibrationComplete = true;
+            }
+            return true;
+        });
+    };
 
-        blinkZero = maxAvg.toFixed(2);
-        blinkRatio = (minAvg / maxAvg).toFixed(2);
-        ConstantsFactory.setBlink(blinkRatio, blinkZero, blinkProfile);
-        ConstantsFactory.saveCalibration(blinkRatio, blinkZero, blinkProfile);
-        service.calibrationSet = true;
-        // resetCalValues();
-    }
+    service.runClosedCalibration = () => {
+        frames = 0;
+        sample((value) => {
+            frames++;
+            if (frames < CLOSED_WARMUP_FRAMES) return false;
+            if (blinkProfile.length < PROFILE_MAX) blinkProfile.push({ x: blinkProfile.length + 1, y: value });
+            if (value < maxAvg * 0.92) closedSamples.push(value);
+            service.closedCount = Math.min(CLOSED_SAMPLES, closedSamples.length);
+            if (closedSamples.length >= CLOSED_SAMPLES) {
+                stopSampling();
+                const minAvg = EyeSayLib.trimmedMean(closedSamples, 0.2, 1);
+                const zero = Math.round(maxAvg * 100) / 100;
+                const ratio = Math.round((minAvg / maxAvg) * 100) / 100;
+                ConstantsFactory.setBlink(ratio, zero, blinkProfile);
+                service.closedCalibrationComplete = true;
+                service.calibrationSet = true;
+            }
+            return true;
+        });
+    };
 
     return service;
 });

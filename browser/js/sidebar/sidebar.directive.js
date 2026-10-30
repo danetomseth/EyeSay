@@ -1,36 +1,21 @@
-core.directive('blSidebar', function($rootScope, ActionFactory, SidebarFactory) {
+core.directive('blSidebar', function(ActionFactory, SidebarFactory, onRoot) {
     return {
         restrict: 'E',
-        // scope: {
-        //     control: '='
-        // },
         templateUrl: 'js/sidebar/sidebar.html',
         controller: 'SidebarCtrl',
         link: function(scope) {
-            scope.items = SidebarFactory.getLinks(scope.userLoggedIn);
+            scope.items = SidebarFactory.getLinks();
 
-            var removeUser = function() {
-                $rootScope.user = null;
-                scope.items = SidebarFactory.getLinks(false);
-            };
-
-
-            scope.items = SidebarFactory.getLinks(scope.userLoggedIn);
-            scope.selectedLink; //// WORKING ON THIS
-
-
-
-            $rootScope.$on("iterate", () => {
+            // 'NAV' on the keyboard hands scanning to the sidebar links.
+            onRoot(scope, 'iterate', () => {
+                if (ActionFactory.isActive('nav')) scope.selectedLink = SidebarFactory.moveSelected();
+            });
+            onRoot(scope, 'singleBlink', () => {
                 if (ActionFactory.isActive('nav')) {
-                    scope.selectedLink = SidebarFactory.moveSelected();
-                }
-            })
-
-            $rootScope.$on("singleBlink", () => {
-                if (ActionFactory.isActive('nav')) {
+                    scope.selectedLink = null;
                     SidebarFactory.changeState();
                 }
-            })
+            });
         }
-    }
+    };
 });

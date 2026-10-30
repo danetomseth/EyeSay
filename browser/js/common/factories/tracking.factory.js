@@ -1,81 +1,85 @@
 'use strict';
-
-core.factory('TrackingFactory', function($rootScope, DialogFactory, $interval) {
+// Wraps clmtrackr. The tracker only runs while blink tracking is switched on,
+// since face fitting is by far the most CPU-intensive thing the app does.
+core.factory('TrackingFactory', function($rootScope, $timeout, DialogFactory) {
+    let tracker;
+    let video;
     let canvas;
     let context;
-    let tracker;
-    let ctx;
-    let video;
-    let trackingBox = [0, 0, 0, 0]; // middleX, middleY, containerWidth, containerHeight
+    let box;
+    let running = false;
+
     $rootScope.trackerInitialized = false;
 
-    let trackObj = {};
+    const service = {};
 
+    const run = () => {
+        if (running || !tracker || !video) return;
+        running = true;
+        tracker.start(video, box);
+    };
 
-    trackObj.startTracking = (canvasElem, video, boundingBox) => {
-        //new tracker
-        tracker = new clm.tracker({
-            searchWindow: 5
-        });
-        tracker.init(pModel);
-        canvas = canvasElem;
-        context = canvas.getContext("2d");
+    const halt = () => {
+        if (!running) return;
+        running = false;
+        tracker.stop();
+        tracker.reset();
+        if (context) context.clearRect(0, 0, canvas.width, canvas.height);
+    };
 
+    // videoElem: playing <video>; drawCanvas: face mesh layer; overlay: guide box layer
+    service.init = (videoElem, drawCanvas, overlay) => {
+        video = videoElem;
+        canvas = drawCanvas;
+        context = canvas.getContext('2d');
 
-        // Avoids cannot get response model on point XX
+        // Where to look for the face first: the middle of the visible (cropped) area.
+        const w = video.width;
+        box = [w / 3, w * 0.2083, w * 0.325, w * 0.3438];
+        const ctx = overlay.getContext('2d');
+        ctx.clearRect(0, 0, overlay.width, overlay.height);
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = '#2196f3';
+        ctx.strokeRect(box[0], box[1], box[2], box[3]);
 
-        setTimeout(function() {
-            tracker.setResponseMode("blend", ["raw", "sobel"]);
-            boundingBox ? tracker.start(video, boundingBox) : tracker.start(video);
-            $rootScope.$broadcast("trackerInitialized");
+        if (!tracker) {
+            tracker = new clm.tracker({ searchWindow: 5 });
+            tracker.init(pModel);
+        }
+
+        // clmtrackr needs a moment after init before its response models are ready.
+        $timeout(() => {
+            tracker.setResponseMode('blend', ['raw', 'sobel']);
+            if ($rootScope.user.blinkActive) run();
             $rootScope.trackerInitialized = true;
+            $rootScope.$broadcast('trackerInitialized');
         }, 1500);
     };
 
-    trackObj.startSidebar = () => {
-        let containerWidth = angular.element(document.getElementById('sidebar-webcam-container'))[0].clientWidth
-        let boundingBox = document.getElementById("canvas-overlay");
-        ctx = boundingBox.getContext("2d");
-        video = document.getElementById('sidebar-webcam');
-        canvas = document.getElementById("sidebar-canvas");
-        trackingBox[0] = containerWidth - (containerWidth / 3);
-        trackingBox[1] = (containerWidth * .75) - ((containerWidth / 3));
-        trackingBox[2] = (containerWidth / 4) * 2.6;
-        trackingBox[3] = ((containerWidth / 3) * .75) * 2.75;
-        ctx.lineWidth=3;
+    service.isRunning = () => running;
 
-        
-        ctx.strokeStyle = "#2196f3";
-
-        //['x upper left', 'y upper left', 'width', 'height']
-        ctx.strokeRect(trackingBox[0], trackingBox[1], trackingBox[2], trackingBox[3]);
-
-        trackObj.startTracking(canvas, video, trackingBox);
-    }
-
-    trackObj.drawLoop = () => {
+    service.draw = () => {
         context.clearRect(0, 0, canvas.width, canvas.height);
         tracker.draw(canvas);
     };
-    trackObj.convergence = () => {
-        return tracker.getConvergence();
-    }
 
-    trackObj.getPositions = () => {
-        return tracker.getCurrentPosition();
-    };
-    trackObj.checkTracking = () => {
-        if (tracker.getConvergence() > 75) {
+    service.convergence = () => (tracker && running ? tracker.getConvergence() : Infinity);
+
+    service.getPositions = () => (running ? tracker.getCurrentPosition() : false);
+
+    service.checkTracking = () => {
+        if (service.convergence() > 75) {
             DialogFactory.checkTracking();
             return true;
-        } else return false
-    }
+        }
+        return false;
+    };
 
+    $rootScope.$watch('user.blinkActive', (active) => {
+        if (!$rootScope.trackerInitialized) return;
+        if (active) run();
+        else halt();
+    });
 
-
-    $rootScope.$on("WebcamInitialized", () => {
-        trackObj.startSidebar()
-    })
-
-    return trackObj;
+    return service;
 });

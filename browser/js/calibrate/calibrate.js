@@ -1,125 +1,65 @@
 core.config(function($stateProvider) {
     $stateProvider.state('calibrate', {
         url: '/calibrate',
-        templateUrl: '/js/calibrate/calibrate.html',
+        templateUrl: 'js/calibrate/calibrate.html',
         controller: 'CalibrateCtrl',
-        cache: false,
         onExit: (CalibrateFactory) => {
-            CalibrateFactory.reset()
+            CalibrateFactory.reset();
         }
-    })
+    });
 });
 
+core.controller('CalibrateCtrl', function($scope, $state, $timeout, CalibrateFactory, ActionFactory, DialogFactory, TrackingFactory, onRoot) {
+    CalibrateFactory.reset();
 
-
-
-core.controller('CalibrateCtrl', function($scope, CalibrateFactory, $state, $rootScope, ActionFactory, DialogFactory, TrackingFactory, $interval, $timeout, SettingsFactory) {
-
+    $scope.cal = CalibrateFactory;
     $scope.calibrateActive = false;
-    $scope.success = false;
-    $scope.calibrating = {
-        open: false,
-        closed: false,
-        finished: false
-    }
-
-
+    $scope.calibrating = { open: false, closed: false };
     $scope.showInstructions = false;
 
     $scope.show = () => {
-        $scope.showInstructions = !$scope.showInstructions
-    }
-
-
+        $scope.showInstructions = !$scope.showInstructions;
+    };
 
     $scope.start = () => {
         if (TrackingFactory.convergence() > 50) {
             DialogFactory.noConvergance();
-        } else {
-            $scope.calibrateActive = true;
-            $scope.calibrating.open = true;
-            DialogFactory.openInstructions();
+            return;
         }
-    }
-
-
-
-
-
-    //used for % calibration
-    $scope.$watch(function() {
-        return CalibrateFactory.openCount
-    }, function(newVal, oldVal) {
-        if (typeof newVal !== 'undefined') {
-            $scope.openCount = CalibrateFactory.openCount;
-        }
-    });
-
-
-    $scope.$watch(function() {
-        return CalibrateFactory.openCalibrationComplete
-    }, function(newVal, oldVal) {
-        if (newVal === true) {
-            $scope.openCalibrationComplete = CalibrateFactory.openCalibrationComplete;
-            $scope.success = true;
-        }
-    });
+        $scope.calibrateActive = true;
+        $scope.calibrating.open = true;
+        DialogFactory.openInstructions(CalibrateFactory.runOpenCalibration);
+    };
 
     $scope.gotoClosed = () => {
-        $scope.success = false;
         $scope.calibrating.open = false;
-        $scope.calibrating.closed = CalibrateFactory.openCalibrationComplete;
-        DialogFactory.closedInstructions();
-    }
+        $scope.calibrating.closed = true;
+        DialogFactory.closedInstructions(CalibrateFactory.runClosedCalibration);
+    };
 
-
-    $scope.$watch(function() {
-        return CalibrateFactory.closedCount
-    }, function(newVal, oldVal) {
-        if (typeof newVal !== 'undefined') {
-            $scope.closedCount = CalibrateFactory.closedCount;
-        }
-    });
-
-    $scope.$watch(function() {
-        return CalibrateFactory.closedCalibrationComplete
-    }, function(newVal, oldVal) {
-        if (newVal === true) {
+    $scope.$watch('cal.closedCalibrationComplete', (done) => {
+        if (done) {
             $scope.calibrating.closed = false;
             $scope.calibrationComplete = true;
         }
     });
 
-    let styleDelay = () => {
-        $timeout(() => {
-            $scope.blinkDetected = false;
-        }, 500)
-    }
-
-
     $scope.leaveCalibration = () => {
         $scope.calibrationComplete = false;
-        $state.go("tutorial");
-    }
+        $state.go('tutorial');
+    };
 
     $scope.showGraph = () => {
         $scope.calibrationComplete = true;
-    }
+    };
 
-
-    $rootScope.$on('singleBlink', () => {
-        if (ActionFactory.isActive('calibrate')) {
-            $scope.blinkDetected = true;
-            styleDelay()
-        }
+    let blinkTimer;
+    onRoot($scope, 'singleBlink', () => {
+        if (!ActionFactory.isActive('calibrate')) return;
+        $scope.blinkDetected = true;
+        $timeout.cancel(blinkTimer);
+        blinkTimer = $timeout(() => { $scope.blinkDetected = false; }, 500);
     });
 
-    $scope.$on(
-        "$destroy",
-        function handleDestroyEvent() {
-            CalibrateFactory.reset();
-        }
-    );
-
-
+    $scope.$on('$destroy', () => CalibrateFactory.reset());
 });

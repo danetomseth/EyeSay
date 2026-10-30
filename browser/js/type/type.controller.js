@@ -1,10 +1,4 @@
-core.controller('TypeCtrl', function($scope, $state, ConstantsFactory, $rootScope, TimerFactory) {
-
-    // Key-value pairs for keyboard speed based on user's settings
-
-    $scope.restart = () => {
-    	$state.reload();
-    }
-
-
+core.controller('TypeCtrl', function($scope, TypeFactory) {
+    // Clear the message and start scanning from the top again.
+    $scope.restart = () => TypeFactory.clearInput();
 });

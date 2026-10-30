@@ -22,10 +22,10 @@
 
         <div class="bl-sidebar-btn">
          <md-button ng-show="loggedIn" ui-sref="logout" class="md-warn  md-raised">Logout</md-button>
-         <md-button ng-show="!loggedIn" ui-sref="login" class="md-primary md-raised">Login</md-button>
+         <md-button ng-show="!loggedIn && $root.accountsEnabled" ui-sref="login" class="md-primary md-raised">Login</md-button>
        </div>
        <div>
-         <md-switch ng-model="$root.user.blinkActive" ng-change="toggleTracking()"  class="md-accent bl-switch" aria-label="Tracking Active">
+         <md-switch ng-model="$root.user.blinkActive" ng-change="toggleTracking()" class="md-accent bl-switch" aria-label="Tracking Active">
           <md-tooltip ng-hide="$root.user.blinkActive">
             Toggle status of blink detection
           </md-tooltip>

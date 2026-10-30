@@ -7,23 +7,24 @@
             <span><b>Login</b></span>
         </div>
     </md-toolbar>
-    <form name="userForm">
+    <p class="md-title" layout-padding ng-if="!$root.accountsEnabled">Accounts aren't enabled on this server. Your settings are saved in this browser.</p>
+    <form name="userForm" ng-submit="sendLogin(login)">
       <md-card-content>
        <md-content class="md-no-momentum">
         <md-input-container class="md-icon-float md-block">
           <label>Email</label>
           <md-icon class="material-icons">email</md-icon>
-          <input ng-model="login.email" type="text" required="">
+          <input ng-model="login.email" type="email" autocomplete="username" required>
       </md-input-container>
       <md-input-container class="md-icon-float md-block">
           <label>Password</label>
           <md-icon class="material-icons">lock</md-icon>
-          <input ng-model="login.password" type="password" required="">
+          <input ng-model="login.password" type="password" autocomplete="current-password" required>
       </md-input-container>
   </md-content>
 </md-card-content>
 <md-card-actions layout="row" layout-align="end center">
-  <md-button type="submit" ng-click="sendLogin(login)" class="md-raised md-primary">Login</md-button>
+  <md-button type="submit" class="md-raised md-primary" ng-disabled="!$root.accountsEnabled">Login</md-button>
 </md-card-actions>
 </form>
 </md-card>
