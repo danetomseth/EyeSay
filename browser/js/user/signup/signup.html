@@ -8,36 +8,37 @@
             <span><b>Signup</b></span>
         </div>
     </md-toolbar>
-      <form name="userForm">
+      <p class="md-title" layout-padding ng-if="!$root.accountsEnabled">Accounts aren't enabled on this server. Your settings are saved in this browser.</p>
+      <form name="userForm" ng-submit="submit()">
       <md-card-content>
        <md-content class="md-no-momentum">
         <md-input-container class="md-icon-float md-block">
           <!-- Use floating label instead of placeholder -->
           <label>First Name</label>
           <md-icon class="material-icons">person</md-icon>
-          <input ng-model="user.firstName" type="text">
+          <input ng-model="user.firstName" type="text" autocomplete="given-name" required>
         </md-input-container>
         <md-input-container class="md-icon-float md-block">
           <!-- Use floating label instead of placeholder -->
           <label>Last Name</label>
           <md-icon class="material-icons">person</md-icon>
-          <input ng-model="user.lastName" type="text">
+          <input ng-model="user.lastName" type="text" autocomplete="family-name" required>
         </md-input-container>
         <md-input-container class="md-block md-icon-float">
           <!-- Use floating placeholder instead of label -->
           <md-icon class="material-icons">email</md-icon>
 
-          <input ng-model="user.email" type="email" placeholder="Email (required)" required="">
+          <input ng-model="user.email" type="email" placeholder="Email (required)" autocomplete="email" required>
         </md-input-container>
         <md-input-container md-no-float class="md-block">
           <md-icon class="material-icons">lock</md-icon>
-          <input ng-model="user.password" type="password" placeholder="Password (required)" required="">
+          <input ng-model="user.password" type="password" placeholder="Password (8+ characters)" autocomplete="new-password" minlength="8" required>
         </md-input-container>
 
       </md-content>
     </md-card-content>
     <md-card-actions layout="row" layout-align="end center">
-      <md-button type="submit" ng-click="submit()" class="md-raised md-primary">Submit</md-button>
+      <md-button type="submit" class="md-raised md-primary" ng-disabled="!$root.accountsEnabled">Submit</md-button>
     </md-card-actions>
     </form>
   </md-card>

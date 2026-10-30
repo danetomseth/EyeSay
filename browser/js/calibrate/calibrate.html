@@ -82,7 +82,7 @@
 	<div layout="column" flex md-whiteframe="1dp" layout-margin>
 		<div ng-show="showInstructions" layout="row" layout-padding layout-margin layout-align="center start">
 			<div flex="30" md-whiteframe="4dp" class="bl-center">
-				<img src="/assets/findTracking.gif" height="auto" alt="" class="bl-vw-100">
+				<video ng-if="showInstructions" src="/assets/findTracking.mp4" class="bl-vw-100" autoplay loop muted playsinline aria-label="Fitting the tracking model to a face"></video>
 			</div>
 			<div class="bl-message" flex layout="row">
 				<div class="bl-vw-100 bl-arrow-headline">
@@ -97,7 +97,7 @@
 		</div>
 		<div ng-show="showInstructions" layout="row" layout-padding layout-margin layout-align="center start">
 			<div flex="30" md-whiteframe="4dp" class="bl-center">
-				<img src="/assets/findTracking.gif" height="auto" alt="" class="bl-vw-100">
+				<video ng-if="showInstructions" src="/assets/findTracking.mp4" class="bl-vw-100" autoplay loop muted playsinline aria-label="Fitting the tracking model to a face"></video>
 			</div>
 			<div class="bl-message" flex>
 				<div class="bl-vw-100 bl-arrow-headline">
@@ -117,15 +117,15 @@
 <!-- Open calibration -->
 <div flex layout="column" layout-align="center center" ng-show="calibrating.open" class="calibrate-step bl-card">
 	<div class="text-center bl-message bl-vw-80">
-		<h2 ng-show="success" class="md-display-1">Open Eye Calibration Complete!</h2>
-		<div ng-show="success">
+		<h2 ng-show="cal.openCalibrationComplete" class="md-display-1">Open Eye Calibration Complete!</h2>
+		<div ng-show="cal.openCalibrationComplete">
 			<md-button class="md-primary md-raised" ng-click="gotoClosed()">Next</md-button>
 		</div>
-		<h2 ng-hide="success" class="md-display-1">Keep Eyes Open</h2>
-		<div class="bl-cal-progress" ng-hide="success">
+		<h2 ng-hide="cal.openCalibrationComplete" class="md-display-1">Keep Eyes Open</h2>
+		<div class="bl-cal-progress" ng-hide="cal.openCalibrationComplete">
 			<round-progress
 			max="100"
-			current="openCount"
+			current="cal.openCount"
 			color="#2196FD"
 			bgcolor="#eaeaea"
 			radius="150"
@@ -136,8 +136,8 @@
 			animation-delay="0"></round-progress>
 		</div>
 
-		<div ng-hide="success">
-			<span class="md-headline">{{openCount.toFixed(0)}}% Complete</span>
+		<div ng-hide="cal.openCalibrationComplete">
+			<span class="md-headline">{{cal.openCount | number:0}}% Complete</span>
 		</div>
 	</div>
 
@@ -154,7 +154,7 @@
 		<div class="bl-cal-progress">
 			<round-progress
 			max="100"
-			current="closedCount"
+			current="cal.closedCount"
 			color="#2196FD"
 			bgcolor="#eaeaea"
 			radius="150"
@@ -165,7 +165,7 @@
 			animation-delay="0"></round-progress>
 		</div>
 		<div class="md-headline">
-			{{closedCount.toFixed(0)}}% Complete
+			{{cal.closedCount | number:0}}% Complete
 		</div>
 	</div>
 </div>

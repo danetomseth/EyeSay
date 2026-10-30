@@ -1,276 +1,205 @@
-// Basic iteration and letter select/get
+// Row/column scanning keyboard driven by 'iterate' (advance highlight) and
+// 'singleBlink' (select) events.
+core.factory('TypeFactory', function($rootScope, $timeout, ActionFactory, PredictFactory, SpeechFactory) {
+    const keyboard = {};
 
-core.factory("TypeFactory", function($rootScope, $state, $timeout, ActionFactory, PredictFactory, SpeechFactory) {
+    // The suggestion row is shared by both layouts so predictions survive a layout switch.
+    const suggestions = ["I", "I'M", "CAN", "WE", "HELLO"];
+    const ACTIONS = ['SPACE', 'SAY', 'BACK', 'STOP', 'NAV', 'ALT'];
 
-    let typeReady = false;
+    keyboard.alphabetA = [
+        { row: 0, letters: suggestions },
+        { row: 1, letters: ['A', 'B', 'C', 'D', 'E', 'F'] },
+        { row: 2, letters: ['G', 'H', 'I', 'J', 'K', 'L'] },
+        { row: 3, letters: ['M', 'N', 'O', 'P', 'Q', '.'] },
+        { row: 4, letters: ['R', 'S', 'T', 'U', 'V', '.COM'] },
+        { row: 5, letters: ['W', 'X', 'Y', 'Z', '@', '.ORG'] },
+        { row: 6, letters: ACTIONS },
+    ];
 
-    let keyboard = {};
-    let specialFunction;
-    let debounce = true;
-
-    keyboard.scopeValue = [];
-    keyboard.selectedLetter;
-    keyboard.word = '';
-
-    let currentKeyboard = 'A';
-
-    keyboard.setSpecialFunction = (specialFunc) => {
-        specialFunction = specialFunc
-        keyboard.alphabet[6].letters[3] = specialFunction.text;
-    }
-
-
-    let keyDebounce = () => {
-        debounce = false;
-        $timeout(() => {
-            debounce = true;
-            keyboard.selectedLetter = null;
-        }, 500)
-    }
-
-
-
-    keyboard.alphabetA = [{
-        row: 0,
-        letters: ["I", "I'M", "CAN", "WE", "HELLO"]
-    }, {
-        row: 1,
-        letters: ["A", "B", "C", "D", "E", "F"]
-    }, {
-        row: 2,
-        letters: ["G", "H", "I", "J", "K", "L"]
-    }, {
-        row: 3,
-        letters: ["M", "N", "O", "P", "Q", "."]
-    }, {
-        row: 4,
-        letters: ["R", "S", "T", "U", "V", ".COM"]
-    }, {
-        row: 5,
-        letters: ["W", "X", "Y", "Z", "@", ".ORG"]
-    }, {
-        row: 6,
-        letters: ['SPACE', 'SAY', 'BACK', "PLACEHOLD", 'NAV', "ALT"]
-    }];
-
-    keyboard.alphabetB = [{
-        row: 0,
-        letters: ["I", "I'M", "CAN", "WE", "HELLO"]
-    }, {
-        row: 1,
-        letters: ["A", "I", "W", "S", "L"]
-    }, {
-        row: 2,
-        letters: ["O", "R", "T", "J", "B"]
-    }, {
-        row: 3,
-        letters: ["E", "N", "C", "U", "G"]
-    }, {
-        row: 4,
-        letters: ["H", "Y", "M", "Z", "."]
-    }, {
-        row: 5,
-        letters: ["K", "P", "F", "?", "ALT1"]
-    }, {
-        row: 6,
-        letters: ['D', 'Q', 'V', "X", 'ALT2']
-    },
-    {
-        row: 7,
-        letters: ['SPACE', 'SAY', 'BACK', "PLACEHOLD", 'NAV', "ALT"]
-    }];
+    // Frequency-ordered layout: the most common letters are reached soonest.
+    keyboard.alphabetB = [
+        { row: 0, letters: suggestions },
+        { row: 1, letters: ['A', 'I', 'W', 'S', 'L'] },
+        { row: 2, letters: ['O', 'R', 'T', 'J', 'B'] },
+        { row: 3, letters: ['E', 'N', 'C', 'U', 'G'] },
+        { row: 4, letters: ['H', 'Y', 'M', 'Z', '.'] },
+        { row: 5, letters: ['K', 'P', 'F', '?'] },
+        { row: 6, letters: ['D', 'Q', 'V', 'X'] },
+        { row: 7, letters: ACTIONS },
+    ];
 
     keyboard.alphabet = keyboard.alphabetA;
-
+    keyboard.scopeValue = [];
+    keyboard.selectedLetter = null;
+    keyboard.word = '';
+    keyboard.typeReady = false;
+    keyboard.paused = false;
 
     let rowIndex = 0;
     let letterIndex = 0;
     let returnRow = 0;
     let returnLetter = 0;
-    let phrase = "";
-    let lastState = [];
-    let lastAction;
+    let phrase = '';
     let selectingLetter = false;
+    let debounce = true;
+    const undoStack = [];
 
-    const setUndoState = () => {
-        if (lastState.length > 5) {
-            lastState.shift()
-        }
-        lastState.push(phrase)
-    }
+    const setSuggestions = (words) => {
+        if (words.length) angular.copy(words, suggestions);
+    };
+
+    const pushUndo = () => {
+        if (undoStack.length > 5) undoStack.shift();
+        undoStack.push(phrase);
+    };
+
+    // Briefly ignore blinks after a selection so one long blink can't select twice.
+    const keyDebounce = () => {
+        debounce = false;
+        $timeout(() => {
+            debounce = true;
+            keyboard.selectedLetter = null;
+        }, 500);
+    };
 
     const resetKeyboardPosition = () => {
         letterIndex = 0;
         rowIndex = 0;
         selectingLetter = false;
-    }
+    };
 
     const changeKeyboard = () => {
-        if(currentKeyboard === 'A') {
-            keyboard.alphabet = keyboard.alphabetB
-        }
-        else {
-            keyboard.alphabet = keyboard.alphabetB
-            currentKeyboard = "A"
-        }
+        keyboard.alphabet = keyboard.alphabet === keyboard.alphabetA ? keyboard.alphabetB : keyboard.alphabetA;
         resetKeyboardPosition();
-        $state.reload();
-    }
+        keyboard.scopeValue = [];
+    };
 
-    const predictWords = () => {
-        PredictFactory.nextWords(phrase) // sends whole sentence to the predictor where it is spliced
-        .then(words => {
-            if (words.length > 1) {
-                angular.copy(words, keyboard.alphabet[0].letters)
-            } // if there are suggestions, push them onto the alphabet array
-        });
-        setUndoState();
-        phrase += " "; // add a space that the user asked for
-        return phrase // send the current word back to the user
-    }
+    // Ends the current word: add a space and suggest likely next words.
+    const finishWord = () => {
+        setSuggestions(PredictFactory.nextWords(phrase));
+        pushUndo();
+        phrase += ' ';
+        return phrase;
+    };
 
-
-    let iterateRow = () => {
-        returnRow = rowIndex; // save the row we're at
-        (rowIndex > keyboard.alphabet.length - 2) ? rowIndex = 0 : rowIndex++; // if we're at the last row, go to the first row, otherwise, go to the next row
+    const iterateRow = () => {
+        returnRow = rowIndex;
+        rowIndex = rowIndex >= keyboard.alphabet.length - 1 ? 0 : rowIndex + 1;
         return [returnRow, null];
-    }
+    };
 
-    let iterateLetter = () => {
-        lastAction = 'row'
-        returnLetter = letterIndex; // save the letter we're at
-        // if we're at the end of the line, go to the next row
-        if (letterIndex > keyboard.alphabet[returnRow].letters.length - 2) {
-            letterIndex = 0;
-        }
-        // Otherwise, increment where we are
-        else {
-            letterIndex++;
-        }
+    const iterateLetter = () => {
+        returnLetter = letterIndex;
+        letterIndex = letterIndex >= keyboard.alphabet[returnRow].letters.length - 1 ? 0 : letterIndex + 1;
         return returnLetter;
-    }
+    };
 
-    let selectLetter = () => {
-        lastAction = 'letter';
+    const runAction = (action) => {
+        switch (action) {
+            case 'SPACE':
+                return finishWord();
+            case 'SAY':
+                SpeechFactory.say(phrase);
+                PredictFactory.learn(phrase);
+                pushUndo();
+                phrase = '';
+                return phrase;
+            case 'BACK':
+                pushUndo();
+                phrase = phrase.slice(0, -1);
+                return phrase;
+            case 'STOP':
+                // Pause scanning so the user can rest; the next blink resumes.
+                keyboard.paused = true;
+                keyboard.scopeValue = [];
+                return phrase;
+            case 'NAV':
+                ActionFactory.runEvents('nav');
+                return phrase;
+            case 'ALT':
+                changeKeyboard();
+                return phrase;
+            default:
+                return phrase;
+        }
+    };
+
+    const selectLetter = () => {
         resetKeyboardPosition();
-        if (returnRow === keyboard.alphabet.length - 1) { // if we are in the last row (which is all operations)
-            let action = keyboard.alphabet[returnRow].letters[returnLetter]
-            switch (action) {
-                case 'SPACE':
-                    return predictWords();
-                case 'SAY':
-                    SpeechFactory.say(phrase); // try to pause the scrolling while we speak stuff
-                    setUndoState();
-                    phrase = "";
-                    return phrase;
-                case 'BACK':
-                    setUndoState();
-                    phrase = phrase.slice(0, phrase.length - 1);
-                    return phrase;
-                case 'NAV':
-                    ActionFactory.runEvents('nav');
-                    break;
-                case 'ALT':
-                    changeKeyboard();
-                    break;
-                case specialFunction.text:
-                    console.log("rn the thing");
-                    specialFunction.function();
-                    break;
-                default:
-                    console.log("Error: Action " + action + " not found");
-            }
-        } else if (returnRow === 0) { // if we are on the suggested word row
-            if (phrase.length && phrase[phrase.length - 1] !== " ") { // if the last character isn't a space, replace the whole word
-                setUndoState();
-                phrase = phrase.replace(/[\w!.,'"/\(\)\-]+$/g, keyboard.alphabet[returnRow].letters[returnLetter]) // repace the last word with the full word
+        const key = keyboard.alphabet[returnRow].letters[returnLetter];
+        if (returnRow === keyboard.alphabet.length - 1) {
+            return runAction(key);
+        }
+        pushUndo();
+        if (returnRow === 0) {
+            // Suggestion: replace the partial word being typed, or append a new word.
+            if (phrase.length && phrase[phrase.length - 1] !== ' ') {
+                phrase = phrase.replace(/[^\s]+$/, key);
             } else {
-                setUndoState();
-                phrase += keyboard.alphabet[returnRow].letters[returnLetter]; // adds the word to the sentence
+                phrase += key;
             }
-            return predictWords() // adds a space and updates the predicted words.
-        } else {
-            setUndoState();
-            phrase += keyboard.alphabet[returnRow].letters[returnLetter]; // otherwise, add the letter to the word and auto-suggest
-            let suggest = PredictFactory.completeWord(phrase); // get suggested autocompletes
-            if (suggest.length) {
-                angular.copy(suggest, keyboard.alphabet[0].letters)
-            }; // every time a letter is typed, if we have suggestions, copy them into the object
-            return phrase;
+            return finishWord();
         }
-    }
+        phrase += key;
+        setSuggestions(PredictFactory.completeWord(phrase));
+        return phrase;
+    };
 
-
-    let endOfRow = () => {
-        letterIndex = 0;
-    }
-
-    let getCurrentLetter = () => {
-        return [returnRow, returnLetter];
-    }
-
-    let moveKeyboard = () => {
+    const moveKeyboard = () => {
         if (!selectingLetter) {
-            let arr = iterateRow();
-            angular.copy(arr, keyboard.scopeValue);
-        } else if (selectingLetter) {
-            keyboard.scopeValue[1] = iterateLetter();
-            if (keyboard.scopeValue[1] === 0) {
-                endOfRow();
-                keyboard.scopeValue[1] = null;
-                selectingLetter = false;
-            }
+            keyboard.scopeValue = iterateRow();
+            return;
         }
-    }
+        keyboard.scopeValue = [keyboard.scopeValue[0], iterateLetter()];
+        if (keyboard.scopeValue[1] === 0) {
+            // Went all the way along the row without a selection: back to row scanning.
+            letterIndex = 0;
+            keyboard.scopeValue = [keyboard.scopeValue[0], null];
+            selectingLetter = false;
+        }
+    };
 
-    let selectAction = () => {
+    const selectAction = () => {
+        if (keyboard.paused) {
+            keyboard.paused = false;
+            resetKeyboardPosition();
+            return;
+        }
         if (selectingLetter) {
-            keyboard.selectedLetter = getCurrentLetter();
+            keyboard.selectedLetter = [returnRow, returnLetter];
             keyboard.word = selectLetter();
             selectingLetter = false;
-            keyDebounce(); //starts debounce when a letter is selected
-        } else {
-            //Used to correct the problem of quick selects returning to the same row
-            if(debounce) {
-                keyboard.scopeValue[1] = iterateLetter();
-                selectingLetter = true;
-            }
+            keyDebounce();
+        } else if (debounce) {
+            keyboard.scopeValue = [keyboard.scopeValue[0], iterateLetter()];
+            selectingLetter = true;
         }
-    }
+    };
 
     keyboard.clearInput = () => {
         resetKeyboardPosition();
-        phrase = "";
-        selectingLetter = false;
-        selectingLetter = false;
-    }
-
+        phrase = '';
+        keyboard.word = '';
+    };
 
     keyboard.reset = () => {
-        currentKeyboard = 'A';
-        phrase = "";
-        keyboard.word = '';
-        returnRow = 0;
-        returnLetter = 0;
+        keyboard.alphabet = keyboard.alphabetA;
         keyboard.scopeValue = [];
         keyboard.typeReady = false;
-        resetKeyboardPosition();
-    }
+        keyboard.paused = false;
+        keyboard.clearInput();
+        returnRow = 0;
+        returnLetter = 0;
+    };
 
-    keyboard.typeReady = false;
-
-    $rootScope.$on('singleBlink', (event, data) => {
-        if (ActionFactory.isActive('type') && keyboard.typeReady) {
-            selectAction();
-        }
+    $rootScope.$on('singleBlink', () => {
+        if (ActionFactory.isActive('type') && keyboard.typeReady) selectAction();
     });
 
-
-    $rootScope.$on('iterate', (event, data) => {
-        if (ActionFactory.isActive('type') && keyboard.typeReady) {
-            moveKeyboard();
-        }
-    })
+    $rootScope.$on('iterate', () => {
+        if (ActionFactory.isActive('type') && keyboard.typeReady && !keyboard.paused) moveKeyboard();
+    });
 
     return keyboard;
 });

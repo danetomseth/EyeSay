@@ -1,21 +1,9 @@
 (function () {
-
     'use strict';
 
-    // Hope you didn't forget Angular! Duh-doy.
-    if (!window.angular) throw new Error('I can\'t find Angular!');
+    const auth = angular.module('blinkAuth', []);
 
-    var app = angular.module('blinkAuth', []);
-
-    app.factory('Socket', function () {
-        if (!window.io) throw new Error('socket.io not found!');
-        return window.io(window.location.origin);
-    });
-
-    // AUTH_EVENTS is used throughout our app to
-    // broadcast and listen from and to the $rootScope
-    // for important events about authentication flow.
-    app.constant('AUTH_EVENTS', {
+    auth.constant('AUTH_EVENTS', {
         loginSuccess: 'auth-login-success',
         loginFailed: 'auth-login-failed',
         logoutSuccess: 'auth-logout-success',
@@ -24,8 +12,8 @@
         notAuthorized: 'auth-not-authorized'
     });
 
-    app.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
-        var statusDict = {
+    auth.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
+        const statusDict = {
             401: AUTH_EVENTS.notAuthenticated,
             403: AUTH_EVENTS.notAuthorized,
             419: AUTH_EVENTS.sessionTimeout,
@@ -33,124 +21,77 @@
         };
         return {
             responseError: function (response) {
-                $rootScope.$broadcast(statusDict[response.status], response);
-                return $q.reject(response)
+                if (statusDict[response.status]) $rootScope.$broadcast(statusDict[response.status], response);
+                return $q.reject(response);
             }
         };
     });
 
-    app.config(function ($httpProvider) {
-        $httpProvider.interceptors.push([
-            '$injector',
-            function ($injector) {
-                return $injector.get('AuthInterceptor');
-            }
-        ]);
+    auth.config(function ($httpProvider) {
+        $httpProvider.interceptors.push('AuthInterceptor');
     });
 
-    app.service('AuthService', function ($http, Session, $rootScope, AUTH_EVENTS, $q, $state, ConstantsFactory) {
+    auth.service('AuthService', function ($http, Session, $rootScope, AUTH_EVENTS, $q, ConstantsFactory) {
+        const errorMessage = (fallback) => (res) => $q.reject({
+            message: (res && res.data && res.data.error) || fallback
+        });
 
         function onSuccessfulLogin(response) {
-            var data = response.data;
-            ConstantsFactory.setUser(data.user);
-            Session.create(data.id, data.user);
+            const user = response.data.user;
+            ConstantsFactory.setUser(user);
+            Session.create($rootScope.user);
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-            return data.user;
+            return user;
         }
 
-        // Uses the session factory to see if an
-        // authenticated user is currently registered.
-        this.isAuthenticated = function () {
-            return !!Session.user;
-        };
+        this.isAuthenticated = () => !!Session.user;
 
+        // Resolves to the logged-in user, or null for a guest.
         this.getLoggedInUser = function (fromServer) {
-
-            // If an authenticated session exists, we
-            // return the user attached to that session
-            // with a promise. This ensures that we can
-            // always interface with this method asynchronously.
-
-            // Optionally, if true is given as the fromServer parameter,
-            // then this cached value will not be used.
-
             if (this.isAuthenticated() && fromServer !== true) {
                 return $q.when(Session.user);
             }
-
-            // Make request GET /session.
-            // If it returns a user, call onSuccessfulLogin with the response.
-            // If it returns a 401 response, we catch it and instead resolve to null.
             return $http.get('/session')
-            .then((res) => {
-                if(res.data.user){ // if we get a logged in user back, then log them in
-                    onSuccessfulLogin(res)
-                    // $state.go('type');
-                } 
-                else {
-                    // $state.go('calibrate');
-                }
-            })
-            .catch(function (err) {
-                //goes here if 404 from session
-
-                return null;
-            });
-
+                .then((res) => {
+                    $rootScope.accountsEnabled = !!res.data.accounts;
+                    return res.data.user ? onSuccessfulLogin(res) : null;
+                })
+                .catch(() => null);
         };
 
         this.signup = function (userInfo) {
-            return $http.post('/signup', userInfo)
-            .then(onSuccessfulLogin)
-            .catch(function(err){
-                return $q.reject({ message: 'Email Already Exists'})
-            })
-        }
+            // Bring a guest's calibration along into the new account.
+            const body = angular.extend({}, userInfo, { settings: ConstantsFactory.settings() });
+            return $http.post('/signup', body)
+                .then(onSuccessfulLogin, errorMessage('Could not create your account.'));
+        };
 
         this.login = function (credentials) {
             return $http.post('/login', credentials)
-                .then(onSuccessfulLogin)
-                .catch(function () {
-                    return $q.reject({ message: 'Invalid login credentials.' });
-                });
+                .then(onSuccessfulLogin, errorMessage('Invalid login credentials.'));
         };
 
         this.logout = function () {
-            return $http.get('/logout').then(function () {
+            return $http.post('/logout').finally(() => {
                 Session.destroy();
                 ConstantsFactory.setUser();
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
             });
         };
-
     });
 
-    app.service('Session', function ($rootScope, AUTH_EVENTS) {
+    auth.service('Session', function ($rootScope, AUTH_EVENTS) {
+        const self = this;
 
-        var self = this;
+        $rootScope.$on(AUTH_EVENTS.notAuthenticated, () => self.destroy());
+        $rootScope.$on(AUTH_EVENTS.sessionTimeout, () => self.destroy());
 
-
-        $rootScope.$on(AUTH_EVENTS.notAuthenticated, function () {
-            self.destroy();
-        });
-
-        $rootScope.$on(AUTH_EVENTS.sessionTimeout, function () {
-            self.destroy();
-        });
-
-        this.id = null;
         this.user = null;
-
-        this.create = function (sessionId, user) {
-            this.id = sessionId;
+        this.create = function (user) {
             this.user = user;
         };
-
         this.destroy = function () {
-            this.id = null;
             this.user = null;
         };
-
     });
-
 })();

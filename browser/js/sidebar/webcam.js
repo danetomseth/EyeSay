@@ -1,47 +1,32 @@
-core.directive('blSidebarWebcam', function($rootScope, WebcamFactory, $timeout) {
+// Sidebar webcam preview. The video is rendered at twice the container width and
+// offset so the container shows a zoomed-in crop around the face.
+core.directive('blSidebarWebcam', function($rootScope, WebcamFactory, TrackingFactory) {
     return {
         restrict: 'E',
         templateUrl: 'js/sidebar/webcam.html',
-        link: function(scope) {
+        link: function(scope, element) {
+            const container = element[0].querySelector('#sidebar-webcam-container');
+            const video = element[0].querySelector('#sidebar-webcam');
+            const meshCanvas = element[0].querySelector('#sidebar-canvas');
+            const overlay = element[0].querySelector('#canvas-overlay');
 
-            let containerWidth = angular.element(document.getElementById('sidebar-webcam-container'))[0].clientWidth
+            const width = Math.round(container.clientWidth || element[0].parentElement.clientWidth || 200);
+            const videoWidth = width * 2;
+            const videoHeight = Math.round(videoWidth * 0.75);
 
-            scope.containerHeight = containerWidth * .75 + 'px';
-            scope.videoWidth = (containerWidth * 2) + 'px';
-            scope.videoHeight = (containerWidth * 2) * 0.75 + 'px';
-
-            let positionSetWidth = (containerWidth / -2) + 'px';
-            let positionSetHeight = (containerWidth / -2) * .75 + 'px';
-
-
-            let video = document.getElementById('sidebar-webcam');
-
-            scope.webcamCss = {
-                'top': positionSetHeight,
-                'left': positionSetWidth
-            }
-
-            scope.canvasCss = {
-                'top': positionSetHeight,
-                'left': positionSetWidth
-            }
-
-            scope.webcamDir = {
-                'height': containerWidth * .75 + 'px'
-            }
-
-
-
-            scope.$watch('$viewContentLoaded', function() {
-                if($rootScope.isChrome) {
-                    WebcamFactory.startWebcam(video);
-                }
-                
+            container.style.height = Math.round(width * 0.75) + 'px';
+            [video, meshCanvas, overlay].forEach((el) => {
+                el.width = videoWidth;
+                el.height = videoHeight;
+                el.style.top = Math.round(width * -0.375) + 'px';
+                el.style.left = Math.round(width / -2) + 'px';
             });
-            // start all our things
 
+            scope.$on('WebcamInitialized', () => TrackingFactory.init(video, meshCanvas, overlay));
 
-
+            if ($rootScope.browserSupported) {
+                WebcamFactory.start(video);
+            }
         }
-    }
+    };
 });

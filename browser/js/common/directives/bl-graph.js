@@ -1,162 +1,51 @@
-core.directive('blGraph', ($rootScope, PositionFactory, TrackingFactory) => {
+// Live graph of eye openness against the blink threshold.
+core.directive('blGraph', ($rootScope, TimerFactory, LineChart) => {
+    const POINTS = 300;
     return {
         restrict: 'AE',
         templateUrl: 'js/common/templates/live-graph.html',
-        link: function(scope, element, attr) {
-            var data = []
-            let totalPoints = 300;
-            let thresholdLine = [];
-            var updateInterval = 30;
-            let drawingActive;
-            scope.graphReady = false;
+        link: function(scope, element) {
+            const canvas = element[0].querySelector('canvas');
+            const values = new Array(POINTS).fill(NaN);
+            let head = 0;
+            let frame = null;
 
+            const threshold = () => Number($rootScope.user.blinkZero) * Number($rootScope.user.blinkRatio);
 
-            let userThreshold = ($rootScope.user.blinkZero * $rootScope.user.blinkRatio);
-
-
-            let plot;
-
-            function getRandomData() {
-
-
-                if (data.length > 0)
-                    data = data.slice(1);
-
-                while (data.length < totalPoints) {
-                    let y;
-                    if ($rootScope.trackerInitialized) {
-                        y = PositionFactory.eyeValue;
-                    } else {
-                        y = 50;
-                    }
-
-
-                    if (y < 0) {
-                        y = 0;
-                    } else if (y > 100) {
-                        y = 100;
-                    }
-
-                    data.push(y);
-                }
-
-                // Zip the generated y values with the x values
-
-                var res = [];
-                let resThreshold = [];
-                for (var i = 0; i < data.length; ++i) {
-                    res.push([i, data[i]])
-                    resThreshold.push([i, userThreshold]);
-                }
-                thresholdLine = resThreshold;
-
-                return res;
-            }
-
-
-            let getThreshold = () => {
-                var res = [];
-                for (var i = 0; i < data.length; ++i) {
-                    res.push([i, ($rootScope.user.blinkZero * $rootScope.user.blinkRatio)]);
-                }
-
-                return res;
-            }
-
-            // Set up the control widget
-            function update() {
-                if ($rootScope.trackerInitialized) {
-                    plot.setData([{
-                        label: "Current Eye Area",
-                        data: getRandomData()
-                    }, {
-                        label: "Blink Threshold",
-                        data: getThreshold()
-                    }]);
-                    plot.draw();
-                }
-                if(drawingActive) {
-                	requestAnimationFrame(update);
-                }
-            }
-
-
-            let startGraph = () => {
-                plot = $.plot("#live-data", [{
-                    label: "Current Eye Area",
-                    data: getRandomData()
-                }, {
-                    label: "Blink Threshold",
-                    data: getThreshold()
-                }], {
-
-                    series: {
-                        lines: {
-                            show: true,
-                            lineWidth: 2
-                        },
-                        shadowSize: 0 // Drawing is faster without shadows
-                    },
-                    legend: {
-                        show: false,
-                        position: "nw",
-                        margin: 5,
-                        backgroundColor: '#FFF',
-                        backgroundOpacity: 1
-
-                    },
-                    grid: {
-                        labelMargin: 10,
-                        hoverable: true,
-                        clickable: true,
-                        borderWidth: 1,
-                        borderColor: 'rgb(82, 167, 224)'
-                    },
-                    yaxis: {
-                        min: 10,
-                        max: 50,
-                        tickColor: 'rgba(0, 0, 0, 0.06)',
-                        font: {
-                            color: 'rgba(0, 0, 0, 0.4)'
-                        }
-                    },
-                    xaxis: {
-                        show: false
-                    },
-                    colors: ['rgb(33,150,243)', '#F5403A']
-
+            const render = () => {
+                frame = null;
+                const ordered = values.slice(head).concat(values.slice(0, head)).filter((v) => !Number.isNaN(v));
+                const line = threshold();
+                LineChart.draw(canvas, {
+                    yMin: 10,
+                    yMax: 50,
+                    series: [
+                        { values: ordered, color: 'rgb(33,150,243)' },
+                        { values: ordered.length ? [line, line] : [], color: '#F5403A' },
+                    ],
                 });
-                update();
-            }
+            };
 
+            scope.graphReady = $rootScope.trackerInitialized;
+            const offReady = $rootScope.$on('trackerInitialized', () => { scope.graphReady = true; });
 
-
-
-
-            // Since the axes don't change, we don't need to call plot.setupGrid()
-
-
-            let waitForPositions = () => {
-                if ($rootScope.trackerInitialized) {
+            // Collect a reading every tracked frame; draw at most once per animation frame.
+            const offFrame = TimerFactory.onFrame((value) => {
+                values[head] = value;
+                head = (head + 1) % POINTS;
+                if (!frame) frame = requestAnimationFrame(render);
+                if (!scope.graphReady) {
                     scope.graphReady = true;
-                    drawingActive = true;
-                    startGraph();
-                    return
-                } else {
-                    setTimeout(waitForPositions, 500)
+                    return true;
                 }
-            }
+                return false;
+            });
 
-            waitForPositions();
-
-            scope.$on(
-                "$destroy",
-                function handleDestroyEvent() {
-                	drawingActive = false;
-                }
-            );
-
-
+            scope.$on('$destroy', () => {
+                offFrame();
+                offReady();
+                if (frame) cancelAnimationFrame(frame);
+            });
         }
-    }
+    };
 });

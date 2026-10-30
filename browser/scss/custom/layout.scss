@@ -1,7 +1,6 @@
 #main-content {
-	// padding: 10px;
-	// height: 100%;
-	overflow: scroll;
+	position: relative; // dialogs are attached here; their backdrop needs a positioned parent
+	overflow: auto;
 }
 
 .bl-parent {

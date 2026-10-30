@@ -1,43 +1,17 @@
-core.controller('SidebarCtrl', function($scope, $state, $rootScope, Session, AuthService, AUTH_EVENTS, TimerFactory, ConstantsFactory) {
+core.controller('SidebarCtrl', function($scope, $state, $rootScope, Session, AUTH_EVENTS, TimerFactory, ConstantsFactory, onRoot) {
+    onRoot($scope, 'trackerInitialized', () => TimerFactory.start());
 
-
-    $rootScope.$on("trackerInitialized", () => {
-        TimerFactory.start();
-    });
-
-
-    let setUser = function() {
-        $scope.loggedIn = Session.user ? true : false;
-        
+    const setUser = () => {
+        $scope.loggedIn = !!Session.user;
     };
-
-
-    $scope.logOut = function() {
-        return AuthService.logout()
-            .then(function() {
-                $state.reload();
-                $state.go('home');
-            });
-    }
-
-    $scope.webcamError = false;
-
-
-
-
-
-    $scope.$on('$viewContentLoaded',
-        function() {
-            $scope.currentState = $state.current.name;
-            if(!$rootScope.isChrome) {
-                $scope.webcamError = true;
-            }
-        });
-
-    $rootScope.$on(AUTH_EVENTS.loginSuccess, setUser);
-    $rootScope.$on(AUTH_EVENTS.logoutSuccess, setUser);
-
+    onRoot($scope, AUTH_EVENTS.loginSuccess, setUser);
+    onRoot($scope, AUTH_EVENTS.logoutSuccess, setUser);
     setUser();
 
+    $scope.webcamError = !$rootScope.browserSupported;
+    $scope.toggleTracking = () => ConstantsFactory.save();
 
+    onRoot($scope, '$stateChangeSuccess', (event, toState) => {
+        $scope.currentState = toState.name;
+    });
 });
